@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/x12"
+		android:text="纪检干部培训调查问卷"
+		android:textColor="@color/black_title"
+		android:textSize="@dimen/t18" />
+	
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/x12"
+		android:text="2017-01-01    答题量：1234人"
+		android:textColor="@color/black_hint"
+		android:textSize="@dimen/t14" />
+	
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/x12"
+		android:layout_marginRight="@dimen/x12"
+		android:layout_marginTop="@dimen/x10"
+		android:background="@color/colorAccent"
+		android:padding="@dimen/x5"
+		android:text="单选题"
+		android:textColor="@color/white" />
+	
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/x12"
+		android:layout_marginRight="@dimen/x12"
+		android:padding="@dimen/x5"
+		android:text="中央改进工作作风、密切联系群众八项规定出台后，各地严格执行公务接待制度，严格落实各项节约措施，坚决杜  绝公款浪费现象。我国政府狠杀浪费之风有利于？"
+		android:textColor="@color/gray22"
+		android:textSize="@dimen/t14" />
+	
+	<RadioGroup
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		
+		<RadioButton
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="践行政府宗旨，用手中权力造福人民"
+			android:textColor="@color/gray22" />
+		
+		<RadioButton
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="加强廉政建设，以清廉党风带好民风"
+			android:textColor="@color/gray22" />
+		
+		<RadioButton
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="广泛吸收民智，增强决策公众参与度"
+			android:textColor="@color/gray22" />
+		
+		<RadioButton
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="提升德行操守，树立政府威信"
+			android:textColor="@color/gray22" />
+	</RadioGroup>
+	
+	<Space
+		android:layout_width="wrap_content"
+		android:layout_height="0dp"
+		android:layout_weight="1" />
+	
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_marginBottom="@dimen/x20"
+		android:background="@drawable/bg_btn_answer"
+		android:text="下一题"
+		android:textColor="@color/white"
+		android:textSize="@dimen/t18" />
+	
+	<View style="@style/view_line" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height">
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_font"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_font" />
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_share"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_share" />
+	</LinearLayout>
+</LinearLayout>

@@ -1,6 +1,8 @@
 package com.cmcc.inspection.feature.main;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -31,26 +33,31 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     private RadioButton mRbMain3;
     /** Tab组 */
     private RadioGroup mRgMain;
-
+    
     /** Home页 */
     private MainHomeFragment mMainHomeFragment = new MainHomeFragment();
     /** 是否需要退出 */
     private boolean mIsExit = false;
     /** 是否被遮挡 - */
     private boolean mIsKeepOut = false;
-
+    
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter();
     }
-
+    
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        context.startActivity(starter);
+    }
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,7 +68,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             mIsKeepOut = false;
         }
     }
-
+    
     private void initView() {
         mRbMain0 = (RadioButton) findViewById(R.id.rb_main_0);
         mRbMain1 = (RadioButton) findViewById(R.id.rb_main_1);
@@ -69,11 +76,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         mRbMain3 = (RadioButton) findViewById(R.id.rb_main_3);
         mRgMain = (RadioGroup) findViewById(R.id.rg_main);
         mRgMain.setOnCheckedChangeListener(this);
-
+        
         // 初始化导航
         onCheckedChanged(mRgMain, R.id.rb_main_0);
     }
-
+    
     @Override
     public void onBackPressed() {
         if (mIsExit) {
@@ -82,17 +89,17 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             mIsExit = true;
             ToastUtils.showShortToastSafe("再按一次退出");
             Observable.timer(ENVs.BACK_TO_EXIT_INTERVAL, TimeUnit.SECONDS)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .subscribe(new Action1<Long>() {
-                        @Override
-                        public void call(Long aLong) {
-                            mIsExit = false;
-                        }
-                    });
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        mIsExit = false;
+                    }
+                });
         }
     }
-
+    
     /**
      * 显示指定位置的fragment
      *
@@ -107,7 +114,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 //                hideFragment(mMainMediaFragment);
 //                hideFragment(mMainUserFragment);
                 break;
-
+            
             case 1:
                 // 活动
 //                showFragment(R.id.fl_main_fragment_container, mMainActiveFragment);
@@ -122,7 +129,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 //                hideFragment(mMainActiveFragment);
 //                hideFragment(mMainUserFragment);
                 break;
-
+            
             case 3:
                 // 我的
 //                showFragment(R.id.fl_main_fragment_container, mMainUserFragment);
@@ -134,7 +141,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 break;
         }
     }
-
+    
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {

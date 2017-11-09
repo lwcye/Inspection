@@ -5,10 +5,11 @@
 	<color name="blue">#00f</color>
 	<color name="green">#0f0</color>
 	<color name="transparent">#0000</color>
-
+	<color name="black">#000</color>
+	
 	<color name="black_title">#333333</color>
 	<color name="black_hint">#999999</color>
-	<color name="layout_background_default">#F3F2F0</color>
+	<color name="layout_background_default">#F7F7F7</color>
 
 	<!--灰阶-->
 	<color name="gray0">#FFFFFF</color>

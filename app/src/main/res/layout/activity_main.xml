@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/fl_main_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-    <RadioGroup
-        android:id="@+id/rg_main"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <com.hbln.lib_views.DrawableCenterRadioButton
-            android:id="@+id/rb_main_0"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:checked="true"
-            android:drawableTop="@drawable/icon_main_home"
-            android:gravity="center"
-            android:text="首页"
-            android:textColor="@color/selector_main_tab"/>
-
-        <com.hbln.lib_views.DrawableCenterRadioButton
-            android:id="@+id/rb_main_1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/icon_main_find"
-            android:gravity="center"
-            android:text="发现"
-            android:textColor="@color/selector_main_tab"/>
-
-        <com.hbln.lib_views.DrawableCenterRadioButton
-            android:id="@+id/rb_main_2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/icon_main_message"
-            android:gravity="center"
-            android:text="消息"
-            android:textColor="@color/selector_main_tab"/>
-
-        <com.hbln.lib_views.DrawableCenterRadioButton
-            android:id="@+id/rb_main_3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/icon_main_user"
-            android:gravity="center"
-            android:text="我的"
-            android:textColor="@color/selector_main_tab"/>
-
-    </RadioGroup>
-
-    <View
-        style="@style/view_line"
-        android:layout_above="@id/rg_main"/>
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+	
+	<FrameLayout
+		android:id="@+id/fl_main_fragment_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+	
+	
+	<RadioGroup
+		android:id="@+id/rg_main"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/title_bar_height"
+		android:layout_alignParentBottom="true"
+		android:background="@color/white"
+		android:gravity="bottom"
+		android:orientation="horizontal">
+		
+		<com.hbln.lib_views.DrawableCenterRadioButton
+			android:id="@+id/rb_main_0"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/transparent"
+			android:button="@null"
+			android:checked="true"
+			android:drawableTop="@drawable/icon_main_home"
+			android:gravity="center"
+			android:text="首页"
+			android:textColor="@color/selector_main_tab" />
+		
+		<com.hbln.lib_views.DrawableCenterRadioButton
+			android:id="@+id/rb_main_1"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/transparent"
+			android:button="@null"
+			android:drawableTop="@drawable/icon_main_find"
+			android:gravity="center"
+			android:text="发现"
+			android:textColor="@color/selector_main_tab" />
+		
+		<com.hbln.lib_views.DrawableCenterRadioButton
+			android:id="@+id/rb_main_2"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/transparent"
+			android:button="@null"
+			android:drawableTop="@drawable/icon_main_message"
+			android:gravity="center"
+			android:text="消息"
+			android:textColor="@color/selector_main_tab" />
+		
+		<com.hbln.lib_views.DrawableCenterRadioButton
+			android:id="@+id/rb_main_3"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/transparent"
+			android:button="@null"
+			android:drawableTop="@drawable/icon_main_user"
+			android:gravity="center"
+			android:text="我的"
+			android:textColor="@color/selector_main_tab" />
+	
+	</RadioGroup>
+	
+	<View
+		style="@style/view_line"
+		android:layout_above="@id/rg_main" />
 </RelativeLayout>

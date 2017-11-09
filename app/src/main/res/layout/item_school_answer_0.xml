@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="@dimen/x10">
+	
+	<ImageView
+		android:id="@+id/iv_item_shcool_answer_1"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x185"
+		android:scaleType="centerCrop"
+		android:src="@drawable/img_school_answer_0" />
+	
+	<ImageView
+		android:id="@+id/iv_item_shcool_answer_1_status"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:rotation="330"
+		android:src="@drawable/icon_shchool_answer_normal" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center"
+		android:orientation="vertical">
+		
+		<TextView
+			android:id="@+id/tv_item_shcool_answer_1_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="学习资料"
+			android:textColor="@color/white"
+			android:textSize="@dimen/t26" />
+		
+		<TextView
+			android:id="@+id/tv_item_shcool_answer_1_content"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/x20"
+			android:text="1230参与答题"
+			android:textColor="@color/white"
+			android:textSize="@dimen/t12" />
+	</LinearLayout>
+
+</RelativeLayout>

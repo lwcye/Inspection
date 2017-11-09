@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/img_brand_bg"
+		android:orientation="vertical">
+		
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/x30"
+			android:layout_margin="@dimen/x12"
+			android:background="@color/white"
+			android:drawableRight="@drawable/icon_search"
+			android:hint="请输入内容..."
+			android:paddingRight="@dimen/x10"
+			android:textSize="@dimen/t12" />
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/x130"
+			android:layout_marginTop="@dimen/x210">
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_brand_tab_0"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="#A1A1A1"
+				android:drawablePadding="@dimen/x5"
+				android:drawableTop="@drawable/icon_brand_tab_0"
+				android:gravity="center"
+				
+				android:text="监督执纪\n问责平台"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_brand_tab_1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="#00558E"
+				android:drawablePadding="@dimen/x5"
+				android:drawableTop="@drawable/icon_brand_tab_1"
+				android:gravity="center"
+				android:text="监督责任\n考核"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+			
+			<TextView
+				android:id="@+id/tv_brand_tab_2"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:background="#32CCFE"
+				android:drawableLeft="@drawable/icon_brand_tab_2"
+				android:drawablePadding="@dimen/x5"
+				android:gravity="center"
+				android:padding="@dimen/x10"
+				android:paddingLeft="@dimen/x20"
+				android:text="三清贾汪大数据信息公开平台"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+		</LinearLayout>
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/x130"
+			android:layout_marginTop="@dimen/t10">
+			
+			<TextView
+				android:id="@+id/tv_brand_tab_3"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:background="#32CCFE"
+				android:drawablePadding="@dimen/x5"
+				android:drawableRight="@drawable/icon_brand_tab_0"
+				android:gravity="center|left"
+				android:padding="@dimen/x10"
+				android:text="“守住底线，不忘初心”主题教育会"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_brand_tab_4"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="#FBBF09"
+				android:drawablePadding="@dimen/x5"
+				android:drawableTop="@drawable/icon_brand_tab_1"
+				android:gravity="center"
+				android:text="优化营商\n环境"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+			
+			<TextView
+				android:id="@+id/tv_brand_tab_5"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="#32F0FF"
+				android:drawableLeft="@drawable/icon_brand_tab_2"
+				android:drawablePadding="@dimen/x5"
+				android:gravity="center"
+				android:text="“月月谈”制度"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t14" />
+		</LinearLayout>
+	</LinearLayout>
+
+</LinearLayout>

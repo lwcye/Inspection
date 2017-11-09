@@ -7,6 +7,7 @@
 	<dimen name="margin_small">@dimen/x12</dimen>
 
 	<!-- text -->
+	<dimen name="t8">8sp</dimen>
 	<dimen name="t10">10sp</dimen>
 	<dimen name="t12">12sp</dimen>
 	<dimen name="t13">13sp</dimen>

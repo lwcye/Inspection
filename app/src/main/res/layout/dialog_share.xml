@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/x20"
+		android:paddingLeft="@dimen/x50"
+		android:paddingRight="@dimen/x50"
+		android:paddingTop="@dimen/t20">
+		
+		<TextView
+			android:id="@+id/tv_dialog_share_sina"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:drawablePadding="@dimen/x5"
+			android:drawableTop="@drawable/icon_sina"
+			android:gravity="center"
+			android:text="微博"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<TextView
+			android:id="@+id/tv_dialog_share_weixin"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:drawablePadding="@dimen/x5"
+			android:drawableTop="@drawable/icon_weixin"
+			android:gravity="center"
+			android:text="微信"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<TextView
+			android:id="@+id/tv_dialog_share_weixin_circle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:drawablePadding="@dimen/x5"
+			android:drawableTop="@drawable/icon_weixin_circle"
+			android:gravity="center"
+			android:text="朋友圈"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<TextView
+			android:id="@+id/tv_dialog_share_qq"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:drawablePadding="@dimen/x5"
+			android:drawableTop="@drawable/icon_qq"
+			android:gravity="center"
+			android:text="QQ"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+	</LinearLayout>
+	
+	<View style="@style/view_line" />
+	
+	<Button
+		android:id="@+id/btn_dialog_cancel"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white"
+		android:text="关闭"
+		android:textColor="@color/black_title"
+		android:textSize="@dimen/t18" />
+</LinearLayout>

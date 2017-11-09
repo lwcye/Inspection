@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/view_height"
+				android:gravity="center"
+				android:text="强筋骨、明纪律 铸造执纪铁军"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t18" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/x12"
+				android:layout_marginLeft="@dimen/x12"
+				android:layout_marginRight="@dimen/x12"
+				android:text="2017-01-01    阅读量：1234"
+				android:textColor="@color/black_hint"
+				android:textSize="@dimen/t14" />
+			
+			<View style="@style/view_line" />
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/x12"
+				android:layout_marginRight="@dimen/x12"
+				android:text="\t\t贾汪区纪委以自身监督执纪审查和队伍建设中存在的具体问题为导向，下大力气解决纪检监察干部思想上的困惑、作风上的不足、能力上的欠缺等具体问题，采取“挂图作战”的方式，在全区纪检监察系统内开展素质提升专项行动。
+\n\t\t全覆盖、全方位，提升素质“强筋骨”。贾汪区纪委征地有声的提出要践行“五铁五不怕”精神的，即“铁的忠诚、铁的作风、铁的纪律、铁的手腕、铁的担当，不怕撕破脸皮、不怕威胁恫吓、不怕诬告陷害、不怕打击报复、不怕丢掉选票”，坚定政治立场、全面提升监督执纪工作的能力和水平，为廉洁政治“三清示范区”建设提供坚强保证。为此，该区立足自身在监督执纪审查工作中面临的实际短板，制定“打铁还需自身硬”专项活动“作战图”，制定包含持续深化“三转”、严把纪检监察队伍入口关、畅通监督渠道等二级项目12项，并明确每项子工程的责任科室、项目要求、验收时限等“工程质量”标准，在全区纪检监察系统内吹响了全面提升素质."
+				android:textColor="@color/gray20"
+				android:textSize="@dimen/t16" />
+			
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				
+				<com.hbln.lib_views.DrawableCenterTextView
+					android:id="@+id/tv_school_detail_zan"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:drawableTop="@drawable/icon_zan"
+					android:gravity="center"
+					android:text="当前数量：1234"
+					android:textColor="@color/gray20"
+					android:textSize="@dimen/t14" />
+				
+				<com.hbln.lib_views.DrawableCenterTextView
+					android:id="@+id/tv_school_detail_cai"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:drawableTop="@drawable/icon_cai"
+					android:gravity="center"
+					android:text="当前数量：0"
+					android:textColor="@color/gray20"
+					android:textSize="@dimen/t14" />
+			</LinearLayout>
+		
+		</LinearLayout>
+	</ScrollView>
+	
+	<View style="@style/view_line" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height">
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_font"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_font" />
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_share"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_share" />
+	</LinearLayout>
+</LinearLayout>

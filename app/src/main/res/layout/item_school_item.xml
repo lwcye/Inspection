@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:background="@color/white"
+			  android:orientation="vertical"
+			  android:paddingBottom="@dimen/x10">
+	
+	<ImageView
+		android:id="@+id/iv_item_shcool_item"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x220"
+		android:scaleType="centerCrop"
+		android:src="@drawable/img_shcool_item_img" />
+	
+	<TextView
+		android:id="@+id/tv_item_shcool_item_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/x5"
+		android:text="强筋骨、明纪律 铸造执纪铁军"
+		android:textColor="@color/black_title"
+		android:textSize="@dimen/t18" />
+	
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="right"
+		android:padding="@dimen/x5"
+		android:text="2017-01-01"
+		android:textColor="@color/black_hint"
+		android:textSize="@dimen/t14" />
+</LinearLayout>

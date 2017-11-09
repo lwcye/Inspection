@@ -1,243 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-    <include layout="@layout/title_bar"/>
-
-    <ImageView
-        android:id="@+id/iv_home_top_bg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/img_home_top"/>
-
-    <ImageView
-        android:id="@+id/iv_home_top_emblem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/x10"
-        android:adjustViewBounds="true"
-        android:src="@drawable/img_home_top_emblem"/>
-
-    <TextView
-        android:id="@+id/tv_home_top_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_home_top_emblem"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:shadowColor="@color/black_title"
-        android:shadowDx="5"
-        android:shadowDy="5"
-        android:shadowRadius="10"
-        android:text="纪检监察巡察干部\n监督管理平台"
-        android:textColor="@color/white"
-        android:textSize="@dimen/t26"/>
-
-    <LinearLayout
-        android:id="@+id/ll_user_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_home_top_title"
-        android:layout_centerHorizontal="true">
-
-        <com.hbln.lib_views.CircularImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:src="@drawable/img_home_user_icon"
-            app:civShape="circle"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/x16"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="李刚"
-                    android:textColor="@color/black_title"
-                    android:textSize="@dimen/t18"
-                    android:textStyle="bold"/>
-
-                <com.hbln.lib_views.DrawableCenterTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#169BD5"
-                    android:drawableRight="@drawable/ic_home_user_info_tag"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/x5"
-                    android:paddingLeft="@dimen/x10"
-                    android:paddingRight="@dimen/x10"
-                    android:paddingTop="@dimen/x5"
-                    android:text="第六纪检组"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不忘初心 牢记使命 忠诚担当 接续奋斗"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_phone"
-                android:text="13600000000"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_home_tab_0"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x140"
-        android:layout_below="@id/iv_home_top_bg">
-
-        <com.hbln.lib_views.DrawableCenterTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/img_home_tab_0"
-            android:gravity="center"
-            android:text="工作擂台"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/img_home_tab_1"
-                android:gravity="center"
-                android:text="纪检学堂"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/img_home_tab_2"
-                android:gravity="center"
-                android:text="制度规范"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/img_home_tab_3"
-                android:gravity="center"
-                android:text="品牌创新"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/img_home_tab_4"
-                android:gravity="center"
-                android:text="支部堡垒"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_home_tab_1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
-        android:layout_below="@id/ll_home_tab_0">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/iv_home_tab_5_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/img_home_tab_5"/>
-
-            <TextView
-                android:id="@+id/tv_home_tab_5_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x10"
-                android:layout_toRightOf="@id/iv_home_tab_5_icon"
-                android:text="监督管理"/>
-
-            <TextView
-                android:id="@+id/tv_home_tab_5_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_home_tab_5_title"
-                android:layout_toRightOf="@id/iv_home_tab_5_icon"
-                android:text="强化对纪检干部“八小时之外”监督"
-                android:textSize="@dimen/t10"/>
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/img_home_tab_6"
-            android:gravity="center"
-            android:text="先锋模范"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
-        android:layout_below="@id/ll_home_tab_1">
-
-        <com.hbln.lib_views.DrawableCenterTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/img_home_tab_bottom_0"
-            android:gravity="center"
-            android:text="工作动态"/>
-
-        <com.hbln.lib_views.DrawableCenterTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/img_home_tab_bottom_1"
-            android:gravity="center"
-            android:text="清风讲坛"/>
-
-        <com.hbln.lib_views.DrawableCenterTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/img_home_tab_bottom_2"
-            android:gravity="center"
-            android:text="业务练兵"/>
-
-        <com.hbln.lib_views.DrawableCenterTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/img_home_tab_bottom_3"
-            android:gravity="center"
-            android:text="轨迹追踪"/>
-    </LinearLayout>
+				xmlns:app="http://schemas.android.com/apk/res-auto"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@color/layout_background_default">
+	
+	<include layout="@layout/title_bar" />
+	
+	<ImageView
+		android:id="@+id/iv_home_top_bg"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		android:src="@drawable/img_home_top" />
+	
+	
+	<ImageView
+		android:id="@+id/iv_home_top_emblem"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="@dimen/x10"
+		android:adjustViewBounds="true"
+		android:src="@drawable/img_home_top_emblem" />
+	
+	<TextView
+		android:id="@+id/tv_home_top_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/iv_home_top_emblem"
+		android:layout_centerHorizontal="true"
+		android:gravity="center"
+		android:shadowColor="@color/black_title"
+		android:shadowDx="5"
+		android:shadowDy="5"
+		android:shadowRadius="10"
+		android:text="纪检监察巡察干部\n监督管理平台"
+		android:textColor="@color/white"
+		android:textSize="@dimen/t26" />
+	
+	<LinearLayout
+		android:id="@+id/ll_user_info"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/tv_home_top_title"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="@dimen/x20">
+		
+		<com.hbln.lib_views.CircularImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:src="@drawable/img_home_user_icon"
+			app:civShape="circle" />
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/x16"
+			android:orientation="vertical">
+			
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="李刚"
+					android:textColor="@color/black_title"
+					android:textSize="@dimen/t18"
+					android:textStyle="bold" />
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/x10"
+					android:background="#169BD5"
+					android:drawableRight="@drawable/ic_home_user_info_tag"
+					android:gravity="center"
+					android:paddingBottom="@dimen/x3"
+					android:paddingLeft="@dimen/x10"
+					android:paddingRight="@dimen/x10"
+					android:paddingTop="@dimen/x3"
+					android:text="第六纪检组"
+					android:textColor="@color/white" />
+			</LinearLayout>
+			
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="不忘初心 牢记使命 忠诚担当 接续奋斗"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t14" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:drawableLeft="@drawable/ic_phone"
+				android:text="13600000000"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t14" />
+		</LinearLayout>
+	</LinearLayout>
+	
+	<View
+		android:id="@+id/space_0"
+		style="@style/view_line"
+		android:layout_below="@id/iv_home_top_bg"
+		android:layout_marginTop="@dimen/x10" />
+	
+	<LinearLayout
+		android:id="@+id/ll_home_tab_0"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x140"
+		android:layout_below="@id/space_0"
+		android:layout_marginTop="@dimen/x10"
+		android:background="@color/white">
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_tab_work_arena"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/img_home_tab_0"
+			android:gravity="center"
+			android:text="工作擂台"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t16" />
+		
+		<View style="@style/view_line_vir" />
+		
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:orientation="vertical">
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:drawableLeft="@drawable/img_home_tab_1"
+				android:gravity="center"
+				android:text="纪检学堂"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16" />
+			
+			<View style="@style/view_line" />
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:drawableLeft="@drawable/img_home_tab_2"
+				android:gravity="center"
+				android:text="制度规范"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16" />
+		</LinearLayout>
+		
+		<View style="@style/view_line_vir" />
+		
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:orientation="vertical">
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:drawableLeft="@drawable/img_home_tab_3"
+				android:gravity="center"
+				android:text="品牌创新"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16" />
+			
+			<View style="@style/view_line" />
+			
+			<com.hbln.lib_views.DrawableCenterTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:drawableLeft="@drawable/img_home_tab_4"
+				android:gravity="center"
+				android:text="支部堡垒"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16" />
+		</LinearLayout>
+	</LinearLayout>
+	
+	
+	<LinearLayout
+		android:id="@+id/ll_home_tab_1"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x50"
+		android:layout_below="@id/ll_home_tab_0"
+		android:background="@color/white">
+		
+		<RelativeLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1">
+			
+			<ImageView
+				android:id="@+id/iv_home_tab_5_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_centerVertical="true"
+				android:src="@drawable/img_home_tab_5" />
+			
+			<TextView
+				android:id="@+id/tv_home_tab_5_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/x10"
+				android:layout_toRightOf="@id/iv_home_tab_5_icon"
+				android:text="监督管理"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16" />
+			
+			<TextView
+				android:id="@+id/tv_home_tab_5_info"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/tv_home_tab_5_title"
+				android:layout_toRightOf="@id/iv_home_tab_5_icon"
+				android:text="强化对纪检干部“八小时之外”监督"
+				android:textSize="@dimen/t8" />
+		</RelativeLayout>
+		
+		<View style="@style/view_line_vir" />
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableLeft="@drawable/img_home_tab_6"
+			android:gravity="center"
+			android:text="先锋模范"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t16" />
+	</LinearLayout>
+	
+	<View
+		style="@style/view_line"
+		android:layout_below="@id/ll_home_tab_0" />
+	
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x80"
+		android:layout_below="@id/ll_home_tab_1">
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/img_home_tab_bottom_0"
+			android:gravity="center"
+			android:text="工作动态"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/img_home_tab_bottom_1"
+			android:gravity="center"
+			android:text="清风讲坛"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/img_home_tab_bottom_2"
+			android:gravity="center"
+			android:text="业务练兵"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<com.hbln.lib_views.DrawableCenterTextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:drawableTop="@drawable/img_home_tab_bottom_3"
+			android:gravity="center"
+			android:text="轨迹追踪"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+	</LinearLayout>
+	
+	<View
+		style="@style/view_line"
+		android:layout_below="@id/ll_home_tab_1" />
+	
+	<Space
+		android:id="@+id/space_home"
+		android:layout_width="0dp"
+		android:layout_height="@dimen/x20"
+		android:layout_alignBottom="@id/iv_home_top_bg" />
+	
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignTop="@id/space_home"
+		android:layout_centerVertical="true"
+		android:layout_marginBottom="30dp"
+		android:layout_marginRight="@dimen/x25"
+		android:src="@drawable/icon_home_sign" />
 </RelativeLayout>
