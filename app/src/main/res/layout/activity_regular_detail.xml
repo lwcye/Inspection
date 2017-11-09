@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/view_height"
+				android:gravity="center"
+				android:text="《中国共产党党内监督条例》"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t18" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/x12"
+				android:layout_marginLeft="@dimen/x12"
+				android:layout_marginRight="@dimen/x12"
+				android:text="2017-01-01    阅读量：1234"
+				android:textColor="@color/black_hint"
+				android:textSize="@dimen/t14" />
+			
+			<View style="@style/view_line" />
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/x12"
+				android:layout_marginRight="@dimen/x12"
+				android:text="中国共产党党内监督条例\n
+（2016年10月27日中国共产党第十八届中央委员会第六次全体会议通过）\n
+    \t\t第一章　总　则\n
+    \t\t第一条　为坚持党的领导，加强党的建设，全面从严治党，强化党内监督，保持党的先进性和纯洁性，根据《中国共产党章程》，制定本条例。\n
+    \t\t第二条　党内监督以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，深入贯彻习近平总书记系列重要讲话精神，围绕统筹推进“五位一体”总体布局和协调推进“四个全面”战略布局，尊崇党章，依规治党，坚持党内监督和人民群众监督相结合，增强党在长期执政条件下自我净化、自我完善、自我革新、自我提高能力，确保党始终成为中国特色社会主义事业的坚强领导核心。\n
+    \t\t第三条　党内监督没有禁区、没有例外。信任不能代替监督。各级党组织\n"
+				android:textColor="@color/gray20"
+				android:textSize="@dimen/t16" />
+		</LinearLayout>
+	</ScrollView>
+	
+	<View style="@style/view_line" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height">
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_font"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_font" />
+		
+		<ImageButton
+			android:id="@+id/ib_shaool_detail_share"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:src="@drawable/icon_share" />
+	</LinearLayout>
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.cmcc.inspection.R;
+import com.cmcc.inspection.feature.main.MainActivity;
 import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
@@ -63,6 +64,12 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
     
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
+            .setLeftClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.start(getContext());
+                }
+            })
             .setColor(Color.WHITE, 255)
             .setRightDrawable(R.drawable.icon_work_dynamic, 0, 0, 0)
             .setRightClickListener(new View.OnClickListener() {

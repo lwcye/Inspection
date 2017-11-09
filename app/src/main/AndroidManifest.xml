@@ -65,17 +65,33 @@
 		<activity
 			android:name=".feature.brand.BrandActivity"
 			android:windowSoftInputMode="stateHidden|adjustResize">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
+		
 		</activity>
 		<activity
 			android:name=".feature.brand.branddetail.BrandDetailActivity"
 			android:windowSoftInputMode="stateHidden|adjustResize">
 		
 		</activity>
+		<activity
+			android:name=".feature.regular.RegularActivity"
+			android:windowSoftInputMode="stateHidden|adjustResize">
+		
+		</activity>
+		<activity
+			android:name=".feature.regular.RegularDetailActivity"
+			android:windowSoftInputMode="stateHidden|adjustResize">
+		
+		</activity>
+		<activity
+			android:name=".feature.accout.login.LoginActivity"
+			android:windowSoftInputMode="stateHidden|adjustResize">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".feature.accout.register.RegisterActivity" />
 	</application>
 
 </manifest>
