@@ -20,8 +20,6 @@ import com.cmcc.lib_common.utils.Utils;
  */
 public class BaseApp extends Application {
     private static BaseApp sBaseApp;
-    /** 服务是否存在 */
-    public boolean isKeepLive = false;
     /** 系统偏好设置 */
     private static SPUtils spUtils;
     /** 单列 */

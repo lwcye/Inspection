@@ -54,7 +54,7 @@ ext {
     glideVersion = "3.7.0"
     loggerVersion = "1.15"
     eventbusVersion = "3.0.0"
-    gsonVersion = "2.8.0"
+    gsonVersion = "2.8.2"
     photoViewVersion = "2.0.0"
 
     //需检查升级版本

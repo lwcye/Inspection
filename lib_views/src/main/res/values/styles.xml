@@ -1,0 +1,59 @@
+<resources>
+
+    <style name="cell_linlay">
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/view_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/margin_normal</item>
+        <item name="android:paddingRight">@dimen/margin_normal</item>
+    </style>
+
+    <style name="cell_text_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_title</item>
+        <item name="android:textSize">@dimen/t14</item>
+    </style>
+
+    <style name="cell_text_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/view_height</item>
+        <item name="android:background">@color/layout_background_default</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/margin_normal</item>
+        <item name="android:textColor">@color/black_hint</item>
+        <item name="android:textSize">@dimen/t14</item>
+    </style>
+
+    <style name="cell_text_right">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingLeft">@dimen/x20</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_right</item>
+        <item name="android:textColor">@color/black_title</item>
+        <item name="android:textSize">@dimen/t14</item>
+    </style>
+
+    <style name="view_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/gray4</item>
+    </style>
+
+    <style name="view_line_vir">
+        <item name="android:layout_width">@dimen/x1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/gray2</item>
+    </style>
+
+    <style name="view_line_block">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x10</item>
+        <item name="android:background">@color/gray2</item>
+    </style>
+</resources>

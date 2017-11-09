@@ -1,4 +1,7 @@
-package com.cmcc.lib_common.mvp;
+package com.cmcc.inspection.mvp;
+
+import com.cmcc.lib_common.mvp.BasePresenter;
+import com.cmcc.lib_common.mvp.BaseView;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;

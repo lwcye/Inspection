@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CircularImageView 控件属性  -->
+    <declare-styleable name="CircularImageView">
+        <!-- 形状 -->
+        <attr name="civShape">
+            <!-- 默认 -->
+            <flag name="normal" value="0"/>
+            <!-- 圆形 -->
+            <flag name="circle" value="1"/>
+            <!-- 圆角矩形 -->
+            <flag name="roundRect" value="2"/>
+        </attr>
+        <!-- 注意：以下属性仅对非normal的shape有效 -->
+        <!-- 边框宽度 -->
+        <attr name="civBorder" format="dimension"/>
+        <!-- 边框颜色 -->
+        <attr name="civBorderColor" format="color"/>
+        <!-- 圆角半径(仅对shape为roundRect有效) -->
+        <attr name="civRoundRadius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- CirclePagerIndicator 控件属性  -->
+    <declare-styleable name="CirclePagerIndicator">
+        <!-- 选中颜色 -->
+        <attr name="cpiActiveColor" format="color"/>
+        <!-- 非选中颜色 -->
+        <attr name="cpiInactiveColor" format="color"/>
+        <!-- 圆点半径 -->
+        <attr name="cpiRadius" format="dimension"/>
+        <!-- 间隔 -->
+        <attr name="cpiSpacing" format="dimension"/>
+        <!-- 渐隐时间 -->
+        <attr name="cpiFadeOut" format="integer"/>
+        <!-- 非选中类型 -->
+        <attr name="cpiInactiveType">
+            <flag name="stroke" value="0"/>
+            <flag name="fill" value="1"/>
+        </attr>
+        <!-- 选中类型 -->
+        <attr name="cpiActiveType">
+            <flag name="stroke" value="0"/>
+            <flag name="fill" value="1"/>
+        </attr>
+        <!-- 跳变 -->
+        <attr name="cpiSnap" format="boolean"/>
+    </declare-styleable>
+
+    <!-- SimpleRatingBar 控件属性 -->
+    <declare-styleable name="SimpleRatingBar">
+        <!-- 尺寸值 -->
+        <attr name="srbStarImageSize" format="dimension"/>
+        <!-- 星星间距 -->
+        <attr name="srbStarPadding" format="dimension"/>
+        <!-- 星星总数 -->
+        <attr name="srbStarCount" format="integer"/>
+        <!-- 空白的星星资源文件值 -->
+        <attr name="srbStarEmpty" format="reference"/>
+        <!-- 满星资源文件值 -->
+        <attr name="srbStarFull" format="reference"/>
+        <!-- 半星资源文件值 -->
+        <attr name="srbStarHalf" format="reference"/>
+        <!-- 是否可点击boolean值 -->
+        <attr name="srbClickable" format="boolean"/>
+        <!-- 当前进度float值-->
+        <attr name="srbCurStars" format="float"/>
+        <!-- 每次点击，改变进度方式的值，整星还是半星 -->
+        <attr name="srbStepSize">
+            <enum name="Half" value="0"/>
+            <enum name="Full" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>  

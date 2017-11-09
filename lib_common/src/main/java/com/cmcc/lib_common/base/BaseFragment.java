@@ -38,6 +38,8 @@ import rx.subjects.BehaviorSubject;
 public abstract class BaseFragment extends Fragment implements BaseView, LifecycleProvider<FragmentEvent> {
     /** 生命周期管理 */
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
+    /** 生命周期管理 */
+    public View mView;
 
     @Override
     public String TAG() {
@@ -84,7 +86,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, Lifecyc
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mLifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        mView = View.inflate(getActivity(), getLayoutId(), null);
+        return mView;
     }
 
     @Override
@@ -97,6 +100,12 @@ public abstract class BaseFragment extends Fragment implements BaseView, Lifecyc
      * 初始化数据
      */
     public abstract void initData();
+
+    /**
+     * 初始化数据
+     * @return 布局id
+     */
+    public abstract int getLayoutId();
 
     @CallSuper
     @Override
@@ -187,12 +196,12 @@ public abstract class BaseFragment extends Fragment implements BaseView, Lifecyc
     public void startServiceEx(Intent intent) {
         getActivity().startService(intent);
     }
-    
+
     @Override
     public void showLoading(String message) {
         getBaseActivity().showLoading(message);
     }
-    
+
     @Override
     public void hideLoading() {
         getBaseActivity().hideLoading();

@@ -1,22 +1,28 @@
-package com.cmcc.lib_common.mvp;
+package com.cmcc.inspection.mvp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.cmcc.lib_common.base.BaseFragment;
+import com.cmcc.lib_common.base.BaseActivity;
+import com.cmcc.lib_common.mvp.BaseView;
 
 
 /**
- * MVPPlugin
- * 邮箱 784787081@qq.com
+ * <p>describe</p><br>
+ *
+ * @author - lwc
+ * @date - 2017/10/17 10:04
+ * @note -
+ * -------------------------------------------------------------------------------------------------
+ * @modified -
+ * @date -
+ * @note -
  */
-
-public abstract class MVPBaseFragment<V extends BaseView, T extends BasePresenterImpl<V>> extends BaseFragment implements BaseView {
+public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends BaseActivity implements BaseView {
     public T mPresenter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 创建Presenter
         mPresenter = createPresenter();
@@ -26,7 +32,7 @@ public abstract class MVPBaseFragment<V extends BaseView, T extends BasePresente
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
@@ -40,10 +46,4 @@ public abstract class MVPBaseFragment<V extends BaseView, T extends BasePresente
      * @note 若需要使用MVP模式，则子类需实现此方法
      */
     protected abstract T createPresenter();
-
-    @Override
-    public Context getContext() {
-        return super.getContext();
-    }
-
 }

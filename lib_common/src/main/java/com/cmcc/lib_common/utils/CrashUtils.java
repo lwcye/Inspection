@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 
-import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -149,7 +148,6 @@ public class CrashUtils implements UncaughtExceptionHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                MobclickAgent.reportError(Utils.getContext(), throwable);
                 PrintWriter pw = null;
                 try {
                     pw = new PrintWriter(new FileWriter(fullPath, false));

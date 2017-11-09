@@ -1,3 +1,5 @@
 <resources>
-	<string name="app_name">Inspection</string>
+	<string name="app_name">纪检干部管理</string>
+    <string name="activity_home">首页</string>
+    <string name="activity_main">主界面</string>
 </resources>

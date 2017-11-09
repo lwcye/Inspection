@@ -1,0 +1,25 @@
+<resources>
+	<dimen name="title_bar_height">@dimen/x48</dimen>
+	<dimen name="view_height">@dimen/x45</dimen>
+	
+	<dimen name="margin_large">@dimen/x20</dimen>
+	<dimen name="margin_normal">@dimen/x16</dimen>
+	<dimen name="margin_small">@dimen/x12</dimen>
+
+	<!-- text -->
+	<dimen name="t10">10sp</dimen>
+	<dimen name="t12">12sp</dimen>
+	<dimen name="t13">13sp</dimen>
+	<dimen name="t14">14sp</dimen>
+	<dimen name="t15">15sp</dimen>
+	<dimen name="t16">16sp</dimen>
+	<dimen name="t17">17sp</dimen>
+	<dimen name="t18">18sp</dimen>
+	<dimen name="t19">19sp</dimen>
+	<dimen name="t20">20sp</dimen>
+	<dimen name="t22">22sp</dimen>
+	<dimen name="t23">23sp</dimen>
+	<dimen name="t24">24sp</dimen>
+	<dimen name="t26">26sp</dimen>
+	<dimen name="t36">36sp</dimen>
+</resources>

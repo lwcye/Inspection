@@ -10,6 +10,9 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -47,34 +50,34 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     /** RxJava生命周期管理 */
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     ProgressDialog dialog;
-    
+
     @Override
     public String TAG() {
-        
+
         return getClass().getSimpleName();
     }
-    
+
     @Nonnull
     @Override
     public rx.Observable<ActivityEvent> lifecycle() {
-        
+
         return mLifecycleSubject.asObservable();
     }
-    
+
     @Nonnull
     @Override
     public <T> LifecycleTransformer<T> bindUntilEvent(@Nonnull ActivityEvent event) {
-        
+
         return RxLifecycle.bindUntilEvent(mLifecycleSubject, event);
     }
-    
+
     @Nonnull
     @Override
     public <T> LifecycleTransformer<T> bindToLifecycle() {
-        
+
         return RxLifecycleAndroid.bindActivity(mLifecycleSubject);
     }
-    
+
     @CallSuper
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,35 +85,35 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         mLifecycleSubject.onNext(ActivityEvent.CREATE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
-    
+
     @CallSuper
     @Override
     protected void onStart() {
         super.onStart();
         mLifecycleSubject.onNext(ActivityEvent.START);
     }
-    
+
     @CallSuper
     @Override
     protected void onResume() {
         super.onResume();
         mLifecycleSubject.onNext(ActivityEvent.RESUME);
     }
-    
+
     @CallSuper
     @Override
     protected void onPause() {
         mLifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
     }
-    
+
     @CallSuper
     @Override
     protected void onStop() {
         mLifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
     }
-    
+
     @CallSuper
     @Override
     protected void onDestroy() {
@@ -118,7 +121,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         getWindow().getDecorView().removeCallbacks(null);
         super.onDestroy();
     }
-    
+
     /**
      * 设置返回键
      */
@@ -128,14 +131,14 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
-    
+
     /**
      * 标题返回键
      */
     public void onHomeBackClick() {
         finish();
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -147,13 +150,13 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         onHomeBackClick();
     }
-    
+
     /**
      * 使用调度器
      *
@@ -163,23 +166,23 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
      * observe -> ui。
      */
     public <T> rx.Observable.Transformer<T, T> applySchedulers(final ActivityEvent event) {
-        
+
         return new rx.Observable.Transformer<T, T>() {
             @Override
             public rx.Observable<T> call(rx.Observable<T> observable) {
                 // 若不绑定到View的生命周期，则直接子线程中处理 -> UI线程中回调
                 if (event != null) {
                     return observable.compose(BaseActivity.this.<T>bindUntilEvent(event))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread());
                 }
-                
+
                 return observable.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
+                        .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }
-    
+
     /**
      * 获取Activity
      *
@@ -189,17 +192,17 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public BaseActivity getBaseActivity() {
         return this;
     }
-    
+
     @Override
     public void startActivityEx(Intent intent) {
         startActivity(intent);
     }
-    
+
     @Override
     public void startServiceEx(Intent intent) {
         startService(intent);
     }
-    
+
     @Override
     public void showLoading(String message) {
         if (null == dialog) {
@@ -208,13 +211,13 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         dialog.setMessage(message);
         dialog.show();
     }
-    
+
     @Override
     public void hideLoading() {
         if (null != dialog && dialog.isShowing())
             dialog.cancel();
     }
-    
+
     /**
      * 获取Context
      *
@@ -224,7 +227,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public Context getContext() {
         return this;
     }
-    
+
     /**
      * 通过兼容取Color
      *
@@ -235,7 +238,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public int getCompatColor(@ColorRes int resId) {
         return ContextCompat.getColor(this, resId);
     }
-    
+
     /**
      * 通过兼容器取Drawable
      *
@@ -245,7 +248,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public Drawable getCompatDrawable(@DrawableRes int resId) {
         return ContextCompat.getDrawable(this, resId);
     }
-    
+
     /**
      * 通过根布局在主线程的Handle运行runnable
      *
@@ -254,7 +257,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public void post(Runnable runnable) {
         getWindow().getDecorView().post(runnable);
     }
-    
+
     /**
      * 通过根布局在主线程的Handle运行runnable,delay为延迟
      *
@@ -264,7 +267,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public void postDelayed(Runnable runnable, int delay) {
         getWindow().getDecorView().postDelayed(runnable, delay);
     }
-    
+
     /**
      * 启动Activity(扩展)
      *
@@ -273,7 +276,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public void startActivityEx(Class<?> activityClass) {
         startActivityEx(activityClass, null);
     }
-    
+
     /**
      * 启动Activity(扩展)
      *
@@ -287,7 +290,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         }
         startActivity(intent);
     }
-    
+
     /**
      * 启动Activity并清空在其之上的Activity(扩展)
      *
@@ -296,11 +299,11 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public void startActivityClearTopEx(Class<?> activityClass) {
         startActivityClearTopEx(activityClass, null);
     }
-    
+
     public void startActivityClearTaskEx(Class<?> activityClass) {
         startActivityClearTaskEx(activityClass, null);
     }
-    
+
     /**
      * 启动Activity并清空在其之上的Activity(扩展)
      *
@@ -315,7 +318,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         }
         startActivity(intent);
     }
-    
+
     public void startActivityClearTaskEx(Class<?> activityClass, Bundle data) {
         Intent intent = new Intent(this, activityClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -324,7 +327,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         }
         startActivity(intent);
     }
-    
+
     /**
      * 启动Activity(扩展)
      *
@@ -334,7 +337,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     public void startActivityForResultEx(Class<?> activityClass, int requestCode) {
         startActivityForResultEx(activityClass, requestCode, null);
     }
-    
+
     /**
      * 启动Activity(扩展)
      *
@@ -349,7 +352,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         }
         startActivityForResult(intent, requestCode);
     }
-    
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         boolean ret = super.dispatchTouchEvent(ev);
@@ -358,15 +361,15 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
          */
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             View v = getCurrentFocus();
-            
+
             if (v != null && shouldHideInput(v, ev)) {
                 hideInput(v);
             }
         }
-        
+
         return ret;
     }
-    
+
     /**
      * 是否应该隐藏输入
      *
@@ -376,32 +379,76 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
      */
     private boolean shouldHideInput(View v, MotionEvent event) {
         boolean should = true;
-        
+
         // 仅点击到输入框时，键盘不隐藏
         if (v != null && v instanceof EditText) {
             int[] loc = new int[2];
             v.getLocationOnScreen(loc);
-            
+
             // 焦点控件位置
             int left = loc[0];
             int top = loc[1];
             int right = left + v.getWidth();
             int bottom = top + v.getHeight();
-            
+
             int touchX = (int) event.getRawX();
             int touchY = (int) event.getRawY();
-            
+
             // 是否点击到输入框
             if ((touchX >= left && touchX <= right) &&
-                (touchY >= top && touchY <= bottom)) {
-                
+                    (touchY >= top && touchY <= bottom)) {
+
                 should = false;
             }
         }
-        
+
         return should;
     }
-    
+
+    /**
+     * 显示Fragment
+     *
+     * @param containerId 容器id
+     * @param fragment fragment
+     */
+    protected void showFragment(int containerId, Fragment fragment) {
+        if (fragment == null) {
+
+            return;
+        }
+
+        String tag = fragment.getClass().getSimpleName();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment cache = fm.findFragmentByTag(fragment.getTag());
+        if (cache != null) {
+            ft.show(cache);
+        } else {
+            ft.add(containerId, fragment, tag);
+        }
+        ft.commitAllowingStateLoss();
+    }
+
+    /**
+     * 隐藏fragment
+     *
+     * @param fragment fragment
+     */
+    protected void hideFragment(Fragment fragment) {
+        if (fragment == null) {
+
+            return;
+        }
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment cache = fm.findFragmentByTag(fragment.getTag());
+        if (cache != null) {
+            ft.hide(cache);
+        }
+        ft.commitAllowingStateLoss();
+    }
+
     /**
      * 隐藏键盘
      *
