@@ -3,6 +3,7 @@ package com.cmcc.inspection.feature.brand;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.brand.branddetail.BrandDetailActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
+import com.cmcc.inspection.utils.TitleUtil;
 import com.hbln.lib_views.DrawableCenterTextView;
 
 
@@ -52,6 +54,14 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
     }
     
     private void initView() {
+        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                })
+                .setColor(Color.WHITE, 255);
         mTvBrandTab0 = (DrawableCenterTextView) findViewById(R.id.tv_brand_tab_0);
         mTvBrandTab0.setOnClickListener(this);
         mTvBrandTab1 = (DrawableCenterTextView) findViewById(R.id.tv_brand_tab_1);

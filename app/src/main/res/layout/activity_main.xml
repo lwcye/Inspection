@@ -6,6 +6,7 @@
 	<FrameLayout
 		android:id="@+id/fl_main_fragment_container"
 		android:layout_width="match_parent"
+		android:layout_marginBottom="@dimen/title_bar_height"
 		android:layout_height="match_parent" />
 	
 	

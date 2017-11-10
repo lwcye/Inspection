@@ -139,6 +139,7 @@
 			android:orientation="vertical">
 			
 			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_home_school"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -151,6 +152,7 @@
 			<View style="@style/view_line" />
 			
 			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_home_regular"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -170,6 +172,7 @@
 			android:orientation="vertical">
 			
 			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_home_brand"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -202,6 +205,7 @@
 		android:background="@color/white">
 		
 		<RelativeLayout
+			android:id="@+id/rl_home_inspect"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1">
@@ -236,6 +240,7 @@
 		<View style="@style/view_line_vir" />
 		
 		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_model"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
@@ -257,6 +262,7 @@
 		android:layout_below="@id/ll_home_tab_1">
 		
 		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_work_dynamic"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
@@ -267,6 +273,7 @@
 			android:textSize="@dimen/t14" />
 		
 		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_school_left"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
@@ -277,6 +284,7 @@
 			android:textSize="@dimen/t14" />
 		
 		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_school_right"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"

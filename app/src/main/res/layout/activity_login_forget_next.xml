@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-
+              android:background="@color/layout_background_default"
               android:orientation="vertical"
               android:paddingLeft="@dimen/x16"
               android:paddingRight="@dimen/x16">
@@ -47,9 +47,9 @@
         android:textSize="@dimen/t14"/>
 
     <Space
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/tv_forget_confirm"

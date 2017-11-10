@@ -12,14 +12,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".feature.main.MainActivity"
-            android:label="@string/activity_main"
+            android:label="@string/app_name"
             android:launchMode="singleTask">
 
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".feature.workarena.WorkArenaActivity"
@@ -86,17 +86,16 @@
             android:name=".feature.accout.login.LoginActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".feature.accout.register.RegisterActivity"/>
         <activity android:name=".feature.accout.register.RegisterResultActivity"/>
         <activity android:name=".feature.accout.forgetpsd.ForgetPsdActivity"/>
         <activity android:name=".feature.accout.loginforget.LoginForgetActivity"/>
         <activity android:name=".feature.accout.forgetpsd.ForgetResultActivity"/>
+        <activity android:name=".feature.model.ModelActivity"/>
+        <activity android:name=".feature.model.ModelDetailActivity"/>
+        <activity android:name=".feature.InspectActivity"/>
     </application>
 
 </manifest>

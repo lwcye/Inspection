@@ -3,11 +3,14 @@ package com.cmcc.inspection.feature.brand.branddetail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
+import com.cmcc.inspection.utils.TitleUtil;
 
 
 /**
@@ -29,5 +32,13 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_detail);
+        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                })
+                .setColor(Color.WHITE, 255);
     }
 }

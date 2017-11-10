@@ -15,6 +15,8 @@ import android.widget.RadioGroup;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.main.MainActivity;
+import com.cmcc.inspection.feature.school.answer.AnswerActivity;
+import com.cmcc.inspection.feature.school.schoolitem.SchoolItemActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
@@ -30,58 +32,58 @@ import java.util.List;
  */
 
 public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolPresenter> implements SchoolContract.View, RadioGroup.OnCheckedChangeListener {
-    
+
     /** 清风讲坛 */
     private RadioButton mRbSchool0;
     /** 业务练兵 */
     private RadioButton mRbSchool1;
     private RadioGroup mRgSchool;
     private RecyclerView mRvSchool;
-    
+
     private RUAdapter<Integer> mAdapter_0;
     private RUAdapter<Integer> mAdapter_1;
     private List<Integer> mList_0 = new ArrayList<>();
     private List<Integer> mList_1 = new ArrayList<>();
-    
-    @Override
-    protected SchoolPresenter createPresenter() {
-        return new SchoolPresenter();
-    }
-    
+
     public static void start(Context context) {
         Intent starter = new Intent(context, SchoolActivity.class);
         context.startActivity(starter);
     }
-    
+
+    @Override
+    protected SchoolPresenter createPresenter() {
+        return new SchoolPresenter();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school);
         initView();
     }
-    
+
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.start(getContext());
-                }
-            })
-            .setColor(Color.WHITE, 255)
-            .setTitle("反腐讲习所");
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.start(getContext());
+                    }
+                })
+                .setColor(Color.WHITE, 255)
+                .setTitle("反腐讲习所");
         mRbSchool0 = (RadioButton) findViewById(R.id.rb_school_0);
         mRbSchool1 = (RadioButton) findViewById(R.id.rb_school_1);
         mRgSchool = (RadioGroup) findViewById(R.id.rg_school);
         mRvSchool = (RecyclerView) findViewById(R.id.rv_school);
-        
+
         mRgSchool.setOnCheckedChangeListener(this);
-        
+
         initRecylerView();
-        
-        onCheckedChanged(mRgSchool, R.id.rv_work_in_0);
+
+        onCheckedChanged(mRgSchool, R.id.rb_school_0);
     }
-    
+
     private void initRecylerView() {
         mRvSchool.setLayoutManager(new LinearLayoutManager(getContext()));
         mList_0.add(R.drawable.img_shcool_0);
@@ -96,14 +98,14 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
         mAdapter_0.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                
+                SchoolItemActivity.start(getContext());
             }
         });
-        
+
         mList_1.add(R.drawable.img_school_answer_0);
         mList_1.add(R.drawable.img_school_answer_1);
         mList_1.add(R.drawable.img_school_answer_2);
-        mAdapter_0 = new RUAdapter<Integer>(getContext(), mList_1, R.layout.item_school_answer_0) {
+        mAdapter_1 = new RUAdapter<Integer>(getContext(), mList_1, R.layout.item_school_answer_0) {
             @Override
             protected void onInflateData(RUViewHolder holder, Integer data, int position) {
                 holder.setImageView(R.id.iv_item_shcool_answer_1, data);
@@ -116,14 +118,14 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
                 }
             }
         };
-        mAdapter_0.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
+        mAdapter_1.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                
+                AnswerActivity.start(getContext());
             }
         });
     }
-    
+
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {

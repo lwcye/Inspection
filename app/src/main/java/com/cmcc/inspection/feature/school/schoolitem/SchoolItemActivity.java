@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.cmcc.inspection.R;
+import com.cmcc.inspection.feature.school.schooldetail.SchoolDetailActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
@@ -26,43 +27,43 @@ import java.util.List;
  */
 
 public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View, SchoolItemPresenter> implements SchoolItemContract.View {
-    
+
     private RecyclerView mRvSchoolItem;
     private RUAdapter<String> mAdapter;
     private List<String> mList = new ArrayList<>();
-    
-    @Override
-    protected SchoolItemPresenter createPresenter() {
-        return new SchoolItemPresenter();
-    }
-    
+
     public static void start(Context context) {
         Intent starter = new Intent(context, SchoolItemActivity.class);
         context.startActivity(starter);
     }
-    
+
+    @Override
+    protected SchoolItemPresenter createPresenter() {
+        return new SchoolItemPresenter();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_item);
         initView();
     }
-    
+
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            })
-            .setColor(Color.WHITE, 255)
-            .setTitle("清风纪语");
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                })
+                .setColor(Color.WHITE, 255)
+                .setTitle("清风纪语");
         mRvSchoolItem = (RecyclerView) findViewById(R.id.rv_school_item);
-        
+
         initRecylerView();
     }
-    
+
     private void initRecylerView() {
         mRvSchoolItem.setLayoutManager(new LinearLayoutManager(getContext()));
         mList.add("强筋骨、明纪律 铸造执纪铁军");
@@ -79,7 +80,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         mAdapter.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                
+                SchoolDetailActivity.start(getContext());
             }
         });
         mRvSchoolItem.setAdapter(mAdapter);
