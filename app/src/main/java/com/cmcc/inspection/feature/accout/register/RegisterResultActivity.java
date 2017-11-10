@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.mvp.MVPBaseActivity;
+import com.cmcc.inspection.feature.accout.login.LoginActivity;
 import com.cmcc.inspection.utils.TitleUtil;
+import com.cmcc.lib_common.base.BaseActivity;
 
 
 /**
@@ -19,25 +20,20 @@ import com.cmcc.inspection.utils.TitleUtil;
  * 邮箱 784787081@qq.com
  */
 
-public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, RegisterPresenter> implements RegisterContract.View, View.OnClickListener {
+public class RegisterResultActivity extends BaseActivity implements View.OnClickListener {
     
-    /** 确认 */
+    /** 返回登录界面 */
     private Button mTvRegisterConfirm;
     
-    @Override
-    protected RegisterPresenter createPresenter() {
-        return new RegisterPresenter();
-    }
-    
     public static void start(Context context) {
-        Intent starter = new Intent(context, RegisterActivity.class);
+        Intent starter = new Intent(context, RegisterResultActivity.class);
         context.startActivity(starter);
     }
     
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_result);
         initView();
         
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
@@ -60,7 +56,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_register_confirm:
-                RegisterResultActivity.start(getContext());
+                LoginActivity.start(getContext());
                 finish();
                 break;
         }

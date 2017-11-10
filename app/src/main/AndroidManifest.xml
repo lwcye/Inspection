@@ -84,6 +84,7 @@
 		</activity>
 		<activity
 			android:name=".feature.accout.login.LoginActivity"
+			android:launchMode="singleTask"
 			android:windowSoftInputMode="stateHidden|adjustResize">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -92,6 +93,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".feature.accout.register.RegisterActivity" />
+		<activity android:name=".feature.accout.register.RegisterResultActivity" />
 	</application>
 
 </manifest>
