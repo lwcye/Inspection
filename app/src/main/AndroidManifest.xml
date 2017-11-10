@@ -1,99 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="com.cmcc.inspection">
-	
-	<application
-		android:name=".base.MyApplication"
-		android:allowBackup="true"
-		android:icon="@mipmap/ic_launcher"
-		android:label="@string/app_name"
-		android:roundIcon="@mipmap/ic_launcher_round"
-		android:supportsRtl="true"
-		android:theme="@style/AppTheme">
-		<activity
-			android:name=".feature.main.MainActivity"
-			android:label="@string/activity_main"
-			android:launchMode="singleTask">
-			
-			<!--<intent-filter>-->
-			<!--<action android:name="android.intent.action.MAIN"/>-->
-			
-			<!--<category android:name="android.intent.category.LAUNCHER"/>-->
-			<!--</intent-filter>-->
-		</activity>
-		<activity
-			android:name=".feature.workarena.WorkArenaActivity"
-			android:label="@string/activity_work_arena">
-		</activity>
-		<activity
-			android:name=".feature.workarena.workarenaresult.WorkArenaResultActivity"
-			android:label="@string/activity_work_arena">
-		</activity>
-		<activity
-			android:name=".feature.workarena.workininspection.WorkIninspectionActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.workarena.workinspect.WorkInspectActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.workarena.workdynamic.WorkDynamicActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		
-		<activity android:name=".feature.school.school.SchoolActivity">
-		
-		</activity>
-		<activity
-			android:name=".feature.school.schoolitem.SchoolItemActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		</activity>
-		<activity
-			android:name=".feature.school.schooldetail.SchoolDetailActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.school.answer.AnswerActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.brand.BrandActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.brand.branddetail.BrandDetailActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.regular.RegularActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.regular.RegularDetailActivity"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-		
-		</activity>
-		<activity
-			android:name=".feature.accout.login.LoginActivity"
-			android:launchMode="singleTask"
-			android:windowSoftInputMode="stateHidden|adjustResize">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".feature.accout.register.RegisterActivity" />
-		<activity android:name=".feature.accout.register.RegisterResultActivity" />
-	</application>
+          package="com.cmcc.inspection">
+
+    <application
+        android:name=".base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".feature.main.MainActivity"
+            android:label="@string/activity_main"
+            android:launchMode="singleTask">
+
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".feature.workarena.WorkArenaActivity"
+            android:label="@string/activity_work_arena">
+        </activity>
+        <activity
+            android:name=".feature.workarena.workarenaresult.WorkArenaResultActivity"
+            android:label="@string/activity_work_arena">
+        </activity>
+        <activity
+            android:name=".feature.workarena.workininspection.WorkIninspectionActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.workarena.workinspect.WorkInspectActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.workarena.workdynamic.WorkDynamicActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+
+        <activity android:name=".feature.school.school.SchoolActivity">
+
+        </activity>
+        <activity
+            android:name=".feature.school.schoolitem.SchoolItemActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity
+            android:name=".feature.school.schooldetail.SchoolDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.school.answer.AnswerActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.brand.BrandActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.brand.branddetail.BrandDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.regular.RegularActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.regular.RegularDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+        </activity>
+        <activity
+            android:name=".feature.accout.login.LoginActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".feature.accout.register.RegisterActivity"/>
+        <activity android:name=".feature.accout.register.RegisterResultActivity"/>
+        <activity android:name=".feature.accout.forgetpsd.ForgetPsdActivity"/>
+        <activity android:name=".feature.accout.loginforget.LoginForgetActivity"/>
+        <activity android:name=".feature.accout.forgetpsd.ForgetResultActivity"/>
+    </application>
 
 </manifest>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="姓名"/>
+
+        <TextView
+            style="@style/cell_text_right"
+            android:text="李勇"/>
+    </LinearLayout>
+
+    <View style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="身份证号码"/>
+
+        <TextView
+            style="@style/cell_text_right"
+            android:text="00000000000000000"/>
+    </LinearLayout>
+
+    <View style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="联系方式"/>
+
+        <TextView
+            style="@style/cell_text_right"
+            android:text="00000000000"/>
+    </LinearLayout>
+
+    <View style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="单位及职务"/>
+
+        <TextView
+            style="@style/cell_text_right"
+            android:text="巡查三组--职务"/>
+    </LinearLayout>
+
+    <View style="@style/view_line_block"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="我的试卷"/>
+
+        <TextView
+            style="@style/cell_text_right"/>
+    </LinearLayout>
+
+    <View style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="通讯录"/>
+
+        <TextView
+            style="@style/cell_text_right"/>
+    </LinearLayout>
+
+    <View style="@style/view_line_block"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="修改密码"/>
+
+        <TextView
+            style="@style/cell_text_right"/>
+    </LinearLayout>
+
+    <View style="@style/view_line"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/tv_user_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_height"
+        android:layout_marginBottom="@dimen/x20"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@drawable/bg_btn_answer"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/t18"/>
+</LinearLayout>
