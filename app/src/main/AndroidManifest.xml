@@ -97,6 +97,7 @@
         <activity android:name=".feature.inspect.InspectActivity"/>
         <activity android:name=".feature.fortress.FortressActivity"/>
         <activity android:name=".feature.inspect.trackdetail.InspectTrackDetailActivity"/>
+        <activity android:name=".feature.accout.accountlist.AccountListActivity" />
     </application>
 
 </manifest>
