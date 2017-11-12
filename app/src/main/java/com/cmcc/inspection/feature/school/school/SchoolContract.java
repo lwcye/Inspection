@@ -6,15 +6,15 @@ import com.cmcc.lib_common.mvp.BaseView;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
 public class SchoolContract {
     interface View extends BaseView {
         
     }
-
-    interface  Presenter extends BasePresenter<View> {
+    
+    interface Presenter extends BasePresenter<View> {
         
     }
 }

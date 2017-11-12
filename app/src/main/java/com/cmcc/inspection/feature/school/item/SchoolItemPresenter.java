@@ -1,6 +1,4 @@
-package com.cmcc.inspection.feature.school.schoolitem;
-
-import android.content.Context;
+package com.cmcc.inspection.feature.school.item;
 
 import com.cmcc.inspection.mvp.BasePresenterImpl;
 

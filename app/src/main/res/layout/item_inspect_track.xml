@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="@dimen/x12"
+	android:layout_marginRight="@dimen/x12"
+	android:layout_marginTop="@dimen/x12"
+	android:orientation="vertical"
+	android:paddingLeft="@dimen/x10"
+	app:cardCornerRadius="@dimen/x5"
+	app:cardElevation="@dimen/x5">
+	
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/x10">
+		
+		<ImageView
+			android:id="@+id/iv_item_inspect"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:src="@drawable/icon_inspect_item_0" />
+		
+		<View
+			style="@style/view_line_vir"
+			android:layout_marginLeft="@dimen/x10"
+			android:layout_toRightOf="@id/iv_item_inspect" />
+		
+		<TextView
+			android:id="@+id/tv_item_inspect_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/x20"
+			android:layout_toRightOf="@id/iv_item_inspect"
+			android:text="李鹏浩"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t16"
+			android:textStyle="bold" />
+		
+		<TextView
+			android:id="@+id/tv_item_inspect_loc"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@id/tv_item_inspect_name"
+			android:layout_alignParentBottom="true"
+			android:layout_below="@id/tv_item_inspect_name"
+			android:gravity="bottom"
+			android:text="位置："
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t14" />
+		
+		<TextView
+			android:id="@+id/tv_item_inspect_date"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:text="2017-11-6 12:25"
+			android:textColor="@color/black_hint"
+			android:textSize="@dimen/t14" />
+		
+		<Button
+			android:id="@+id/tv_item_inspect_tag"
+			style="@style/Base.Widget.AppCompat.Button.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_below="@id/tv_item_inspect_date"
+			android:text="备注"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t10" />
+	</RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -1,4 +1,4 @@
-package com.cmcc.inspection.feature.school.schoolitem;
+package com.cmcc.inspection.feature.school.item;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.feature.school.schooldetail.SchoolDetailActivity;
+import com.cmcc.inspection.feature.school.detail.SchoolDetailActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;

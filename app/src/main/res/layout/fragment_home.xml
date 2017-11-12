@@ -185,6 +185,7 @@
 			<View style="@style/view_line" />
 			
 			<com.hbln.lib_views.DrawableCenterTextView
+				android:id="@+id/tv_home_fortress"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -295,6 +296,7 @@
 			android:textSize="@dimen/t14" />
 		
 		<com.hbln.lib_views.DrawableCenterTextView
+			android:id="@+id/tv_home_track"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"

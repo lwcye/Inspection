@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-	<corners
-		android:bottomRightRadius="@dimen/x25"
-		android:topRightRadius="@dimen/x25" />
-	<solid android:color="@color/colorAccentRed" />
-	<stroke
-		android:color="@color/colorAccentRed"
-		android:dashGap="@dimen/x1" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:left="-1dp">
+		<shape xmlns:android="http://schemas.android.com/apk/res/android">
+			<corners
+				android:bottomRightRadius="@dimen/x25"
+				android:topRightRadius="@dimen/x25" />
+			<solid android:color="@color/colorAccentRed" />
+			<stroke
+				android:color="@color/colorAccentRed"
+				android:dashGap="1dp" />
+		</shape>
+	</item>
+</layer-list>

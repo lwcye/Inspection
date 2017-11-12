@@ -49,11 +49,11 @@
 
         </activity>
         <activity
-            android:name=".feature.school.schoolitem.SchoolItemActivity"
+            android:name=".feature.school.item.SchoolItemActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
-            android:name=".feature.school.schooldetail.SchoolDetailActivity"
+            android:name=".feature.school.detail.SchoolDetailActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
 
         </activity>
@@ -86,7 +86,6 @@
             android:name=".feature.accout.login.LoginActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity android:name=".feature.accout.register.RegisterActivity"/>
         <activity android:name=".feature.accout.register.RegisterResultActivity"/>
@@ -95,7 +94,9 @@
         <activity android:name=".feature.accout.forgetpsd.ForgetResultActivity"/>
         <activity android:name=".feature.model.ModelActivity"/>
         <activity android:name=".feature.model.ModelDetailActivity"/>
-        <activity android:name=".feature.InspectActivity"/>
+        <activity android:name=".feature.inspect.InspectActivity"/>
+        <activity android:name=".feature.fortress.FortressActivity"/>
+        <activity android:name=".feature.inspect.trackdetail.InspectTrackDetailActivity"/>
     </application>
 
 </manifest>

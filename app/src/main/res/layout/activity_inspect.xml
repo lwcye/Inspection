@@ -1,57 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/layout_background_default"
-              android:orientation="vertical">
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:background="@color/layout_background_default"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<RadioGroup
+		android:id="@+id/rg_inspect"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white"
+		android:orientation="horizontal"
+		android:paddingBottom="@dimen/x5"
+		android:paddingLeft="@dimen/x12"
+		android:paddingRight="@dimen/x12"
+		android:paddingTop="@dimen/x5">
+		
+		<RadioButton
+			android:id="@+id/rb_inspect_0"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/select_tab_left"
+			android:button="@null"
+			android:checked="true"
+			android:gravity="center"
+			android:text="轨迹申报"
+			android:textColor="@color/select_tab" />
+		
+		<RadioButton
+			android:id="@+id/rb_inspect_1"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/select_tab_right"
+			android:button="@null"
+			android:gravity="center"
+			android:text="线上家访"
+			android:textColor="@color/select_tab" />
+	</RadioGroup>
+	
+	<android.support.v4.view.ViewPager
+		android:id="@+id/vp_inspect"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
 
-    <include layout="@layout/title_bar"/>
-
-    <RadioGroup
-        android:id="@+id/rg_inspect"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_height"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/x5"
-        android:paddingLeft="@dimen/x12"
-        android:paddingRight="@dimen/x12"
-        android:paddingTop="@dimen/x5">
-
-        <RadioButton
-            android:id="@+id/rb_inspect_0"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/select_tab_left"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center"
-            android:text="轨迹申报"
-            android:textColor="@color/select_tab"/>
-
-        <RadioButton
-            android:id="@+id/rb_inspect_1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/select_tab_right"
-            android:button="@null"
-            android:gravity="center"
-            android:text="线上家访"
-            android:textColor="@color/select_tab"/>
-    </RadioGroup>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/x12"
-        android:layout_marginTop="@dimen/x12"
-        android:src="@drawable/img_inspect_sign"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_inspect"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </LinearLayout>

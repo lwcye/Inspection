@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.feature.InspectActivity;
+import com.cmcc.inspection.feature.inspect.InspectActivity;
 import com.cmcc.inspection.feature.brand.BrandActivity;
+import com.cmcc.inspection.feature.fortress.FortressActivity;
+import com.cmcc.inspection.feature.inspect.trackdetail.InspectTrackDetailActivity;
 import com.cmcc.inspection.feature.model.ModelActivity;
 import com.cmcc.inspection.feature.regular.RegularActivity;
 import com.cmcc.inspection.feature.school.school.SchoolActivity;
@@ -16,6 +18,8 @@ import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.inspection.utils.TitleUtil;
 import com.hbln.lib_views.DrawableCenterTextView;
+
+import static com.cmcc.inspection.feature.school.school.SchoolActivity.start;
 
 
 /**
@@ -36,7 +40,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     private RelativeLayout mRlHomeInspect;
     /** 先锋模范 */
     private DrawableCenterTextView mTvHomeModel;
-
+    
     /**
      * 创建Fragment实体
      *
@@ -45,63 +49,80 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     public static MainHomeFragment newInstance() {
         return new MainHomeFragment();
     }
-
+    
     @Override
     protected MainHomePresenter createPresenter() {
         return new MainHomePresenter();
     }
-
+    
     @Override
     public void initData() {
         TitleUtil.attach(mView)
-                .setLeft("贾汪区").setLeftColor(Color.WHITE)
-                .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
-                .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
-                .setColor(R.color.white, 0);
-
+            .setLeft("贾汪区").setLeftColor(Color.WHITE)
+            .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
+            .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
+            .setColor(R.color.white, 0);
+        
         initView(mView);
     }
-
+    
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_home_tab_work_arena:
+                //工作擂台
                 WorkArenaActivity.start(getBaseActivity());
                 break;
             case R.id.tv_home_school:
-                SchoolActivity.start(getBaseActivity());
+                //纪检学堂
+                start(getBaseActivity());
                 break;
             case R.id.tv_home_regular:
+                //制度规范
                 RegularActivity.start(getBaseActivity());
                 break;
             case R.id.tv_home_brand:
+                //品牌创新
                 BrandActivity.start(getBaseActivity());
                 break;
             case R.id.rl_home_inspect:
+                //监督管理
                 InspectActivity.start(getBaseActivity());
                 break;
+            case R.id.tv_home_fortress:
+                //支部堡垒
+                FortressActivity.start(getBaseActivity());
+                break;
             case R.id.tv_home_model:
+                //先锋模范
                 ModelActivity.start(getBaseActivity());
                 break;
             case R.id.tv_home_work_dynamic:
+                //工作动态
                 WorkDynamicActivity.start(getBaseActivity());
                 break;
             case R.id.tv_home_school_left:
-                SchoolActivity.start(getBaseActivity());
+                //清风讲堂
+                start(getBaseActivity(), SchoolActivity.INTENT_INDEX_SCHOOL);
                 break;
             case R.id.tv_home_school_right:
-                SchoolActivity.start(getBaseActivity());
+                //业务练兵
+                start(getBaseActivity(), SchoolActivity.INTENT_INDEX_ANSWER);
+                break;
+            case R.id.tv_home_track:
+                //业务练兵
+                InspectTrackDetailActivity.start(getBaseActivity());
                 break;
             default:
                 break;
         }
     }
-
+    
     public void initView(View view) {
         mTvHomeTabWorkArena = (DrawableCenterTextView) view.findViewById(R.id.tv_home_tab_work_arena);
         mTvHomeTabWorkArena.setOnClickListener(this);
@@ -111,6 +132,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         mTvHomeRegular.setOnClickListener(this);
         mTvHomeBrand = (DrawableCenterTextView) view.findViewById(R.id.tv_home_brand);
         mTvHomeBrand.setOnClickListener(this);
+        view.findViewById(R.id.tv_home_fortress).setOnClickListener(this);
         mRlHomeInspect = (RelativeLayout) view.findViewById(R.id.rl_home_inspect);
         mRlHomeInspect.setOnClickListener(this);
         mTvHomeModel = (DrawableCenterTextView) view.findViewById(R.id.tv_home_model);
@@ -118,5 +140,6 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         view.findViewById(R.id.tv_home_work_dynamic).setOnClickListener(this);
         view.findViewById(R.id.tv_home_school_left).setOnClickListener(this);
         view.findViewById(R.id.tv_home_school_right).setOnClickListener(this);
+        view.findViewById(R.id.tv_home_track).setOnClickListener(this);
     }
 }

@@ -1,4 +1,4 @@
-package com.cmcc.inspection.feature.school.schooldetail;
+package com.cmcc.inspection.feature.school.detail;
 
 
 import android.content.Context;

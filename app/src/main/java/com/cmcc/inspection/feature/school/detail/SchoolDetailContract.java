@@ -1,4 +1,4 @@
-package com.cmcc.inspection.feature.school.schoolitem;
+package com.cmcc.inspection.feature.school.detail;
 
 
 import com.cmcc.lib_common.mvp.BasePresenter;
@@ -9,7 +9,7 @@ import com.cmcc.lib_common.mvp.BaseView;
  *  邮箱 784787081@qq.com
  */
 
-public class SchoolItemContract {
+public class SchoolDetailContract {
     interface View extends BaseView {
         
     }

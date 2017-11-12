@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-	<solid android:color="@color/colorAccentRed" />
-	<stroke
-		android:color="@color/colorAccent"
-		android:dashGap="@dimen/x1" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:left="-1dp"
+		android:right="-1dp">
+		<shape xmlns:android="http://schemas.android.com/apk/res/android">
+			<solid android:color="@color/colorAccentRed" />
+			<stroke
+				android:color="@color/colorAccent"
+				android:dashGap="1dp" />
+		</shape>
+	</item>
+</layer-list>

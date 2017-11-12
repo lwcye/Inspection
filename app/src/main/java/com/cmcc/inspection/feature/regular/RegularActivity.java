@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
+import com.cmcc.inspection.feature.main.MainActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.utils.TitleUtil;
 
@@ -49,7 +49,7 @@ public class RegularActivity extends MVPBaseActivity<RegularContract.View, Regul
             .setLeftClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    WorkDynamicActivity.start(getContext());
+                    MainActivity.start(getContext());
                 }
             })
             .setTitle("制度规定");

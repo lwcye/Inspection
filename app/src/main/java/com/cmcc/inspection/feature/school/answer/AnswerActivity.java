@@ -21,7 +21,7 @@ import com.hbln.lib_views.BottomPopupDialog;
  */
 
 public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerPresenter> implements AnswerContract.View, View.OnClickListener {
-
+    
     private ImageButton mIbShaoolDetailFont;
     private ImageButton mIbShaoolDetailShare;
 
