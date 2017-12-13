@@ -1,1 +1,1 @@
-include ':app', ':lib_network', ':lib_map', ':lib_common', ':lib_views', ':lib_loader', ':lib_utils', ':module_demo'
+include ':app', ':lib_network', ':lib_map', ':lib_common', ':lib_views', ':lib_loader', ':lib_utils', ':module_demo', ':lib_webview'
