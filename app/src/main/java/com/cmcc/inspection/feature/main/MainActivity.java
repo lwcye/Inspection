@@ -11,8 +11,10 @@ import android.widget.RadioGroup;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.constans.ENVs;
+import com.cmcc.inspection.feature.main.find.FindFragment;
 import com.cmcc.inspection.feature.main.mainhome.MainHomeFragment;
 import com.cmcc.inspection.feature.main.mainuser.MainUserFragment;
+import com.cmcc.inspection.feature.main.message.MessageFragment;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.lib_utils.utils.ToastUtils;
 
@@ -37,6 +39,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
     /** Home页 */
     private MainHomeFragment mMainHomeFragment = new MainHomeFragment();
+    private FindFragment mMainFindFragment = new FindFragment();
+    private MessageFragment mMainMessageFragment = new MessageFragment();
     private MainUserFragment mMainUserFragment = new MainUserFragment();
     /** 是否需要退出 */
     private boolean mIsExit = false;
@@ -112,23 +116,23 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             case 0:
                 // 首页
                 showFragment(R.id.fl_main_fragment_container, mMainHomeFragment);
-//                hideFragment(mMainActiveFragment);
-//                hideFragment(mMainMediaFragment);
+                hideFragment(mMainFindFragment);
+                hideFragment(mMainMessageFragment);
                 hideFragment(mMainUserFragment);
                 break;
 
             case 1:
                 // 活动
-//                showFragment(R.id.fl_main_fragment_container, mMainActiveFragment);
+                showFragment(R.id.fl_main_fragment_container, mMainFindFragment);
                 hideFragment(mMainHomeFragment);
-//                hideFragment(mMainMediaFragment);
+                hideFragment(mMainMessageFragment);
                 hideFragment(mMainUserFragment);
                 break;
             case 2:
                 // 视频-临时注释-取消一个界面
-//                showFragment(R.id.fl_main_fragment_container, mMainMediaFragment);
+                showFragment(R.id.fl_main_fragment_container, mMainMessageFragment);
                 hideFragment(mMainHomeFragment);
-//                hideFragment(mMainActiveFragment);
+                hideFragment(mMainFindFragment);
                 hideFragment(mMainUserFragment);
                 break;
 
@@ -136,8 +140,8 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
                 // 我的
                 showFragment(R.id.fl_main_fragment_container, mMainUserFragment);
                 hideFragment(mMainHomeFragment);
-//                hideFragment(mMainActiveFragment);
-//                hideFragment(mMainMediaFragment);
+                hideFragment(mMainFindFragment);
+                hideFragment(mMainMessageFragment);
                 break;
             default:
                 break;

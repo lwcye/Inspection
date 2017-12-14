@@ -21,42 +21,41 @@ import com.hbln.lib_views.BottomPopupDialog;
  */
 
 public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerPresenter> implements AnswerContract.View, View.OnClickListener {
-    
     private ImageButton mIbShaoolDetailFont;
     private ImageButton mIbShaoolDetailShare;
-
+    
     @Override
     protected AnswerPresenter createPresenter() {
         return new AnswerPresenter();
     }
-
+    
     public static void start(Context context) {
         Intent starter = new Intent(context, AnswerActivity.class);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         initView();
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-                .setLeftClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBackPressed();
-                    }
-                })
-                .setColor(Color.WHITE, 255);
+            .setLeftClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            })
+            .setColor(Color.WHITE, 255);
     }
-
+    
     private void initView() {
         mIbShaoolDetailFont = (ImageButton) findViewById(R.id.ib_shaool_detail_font);
         mIbShaoolDetailFont.setOnClickListener(this);
         mIbShaoolDetailShare = (ImageButton) findViewById(R.id.ib_shaool_detail_share);
         mIbShaoolDetailShare.setOnClickListener(this);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

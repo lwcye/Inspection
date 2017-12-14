@@ -3,6 +3,7 @@ package com.cmcc.inspection.feature.accout.accountlist;
 
 import com.cmcc.lib_common.mvp.BasePresenter;
 import com.cmcc.lib_common.mvp.BaseView;
+import com.cmcc.lib_network.model.MailModel;
 
 /**
  * MVPPlugin
@@ -11,7 +12,7 @@ import com.cmcc.lib_common.mvp.BaseView;
 
 public class AccountListContract {
     interface View extends BaseView {
-        void setMailData(int index);
+        void setMailData(int index, MailModel mailModel);
     }
 
     interface Presenter extends BasePresenter<View> {

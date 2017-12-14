@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
+			  xmlns:tools="http://schemas.android.com/tools"
 			  android:orientation="vertical">
 	
 	<include layout="@layout/title_bar" />
@@ -11,19 +12,21 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="@dimen/x12"
-		android:text="纪检干部培训调查问卷"
+		tools:text="纪检干部培训调查问卷"
 		android:textColor="@color/black_title"
 		android:textSize="@dimen/t18" />
 	
 	<TextView
+		android:id="@+id/tv_answer_date"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/x12"
-		android:text="2017-01-01    答题量：1234人"
+		tools:text="2017-01-01    答题量：1234人"
 		android:textColor="@color/black_hint"
 		android:textSize="@dimen/t14" />
 	
 	<TextView
+		android:id="@+id/tv_answer_type"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/x12"
@@ -35,42 +38,48 @@
 		android:textColor="@color/white" />
 	
 	<TextView
+		android:id="@+id/tv_answer_content"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/x12"
 		android:layout_marginRight="@dimen/x12"
 		android:padding="@dimen/x5"
-		android:text="中央改进工作作风、密切联系群众八项规定出台后，各地严格执行公务接待制度，严格落实各项节约措施，坚决杜  绝公款浪费现象。我国政府狠杀浪费之风有利于？"
+		tools:text="中央改进工作作风、密切联系群众八项规定出台后，各地严格执行公务接待制度，严格落实各项节约措施，坚决杜  绝公款浪费现象。我国政府狠杀浪费之风有利于？"
 		android:textColor="@color/gray22"
 		android:textSize="@dimen/t14" />
 	
 	<RadioGroup
+		android:id="@+id/rg_answer"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 		
 		<RadioButton
+			android:id="@+id/rb_answer_0"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="践行政府宗旨，用手中权力造福人民"
+			tools:text="践行政府宗旨，用手中权力造福人民"
 			android:textColor="@color/gray22" />
 		
 		<RadioButton
+			android:id="@+id/rb_answer_1"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="加强廉政建设，以清廉党风带好民风"
+			tools:text="加强廉政建设，以清廉党风带好民风"
 			android:textColor="@color/gray22" />
 		
 		<RadioButton
+			android:id="@+id/rb_answer_2"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="广泛吸收民智，增强决策公众参与度"
+			tools:text="广泛吸收民智，增强决策公众参与度"
 			android:textColor="@color/gray22" />
 		
 		<RadioButton
+			android:id="@+id/rb_answer_3"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="提升德行操守，树立政府威信"
+			tools:text="提升德行操守，树立政府威信"
 			android:textColor="@color/gray22" />
 	</RadioGroup>
 	
@@ -80,6 +89,7 @@
 		android:layout_weight="1" />
 	
 	<Button
+		android:id="@+id/btn_answer_next"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"

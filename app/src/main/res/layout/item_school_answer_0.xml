@@ -32,6 +32,9 @@
 			android:id="@+id/tv_item_shcool_answer_1_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:paddingLeft="@dimen/x30"
+			android:paddingRight="@dimen/x30"
+			android:gravity="center"
 			android:text="学习资料"
 			android:textColor="@color/white"
 			android:textSize="@dimen/t26" />

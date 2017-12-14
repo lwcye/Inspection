@@ -15,6 +15,7 @@ import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.utils.TitleUtil;
+import com.cmcc.lib_network.model.ObjectModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_dynamic);
         initView();
+        mPresenter.getData();
     }
     
     private void initView() {
@@ -88,5 +90,10 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
             }
         };
         mRvWorkDynamic.setAdapter(mAdapter);
+    }
+    
+    @Override
+    public void setData(List<ObjectModel> list) {
+        
     }
 }

@@ -117,7 +117,10 @@
         <activity android:name=".feature.inspect.InspectActivity"/>
         <activity android:name=".feature.fortress.FortressActivity"/>
         <activity android:name=".feature.inspect.trackdetail.InspectTrackDetailActivity"/>
-        <activity android:name=".feature.accout.accountlist.AccountListActivity" />
+        <activity android:name=".feature.accout.accountlist.AccountListActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".feature.accout.accountlist.accountlistdetail.AccountListDetailActivity"/>
+        <activity android:name=".feature.inspect.visitanswer.VisitAnswerActivity"/>
     </application>
 
 </manifest>

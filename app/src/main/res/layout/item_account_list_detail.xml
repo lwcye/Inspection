@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginBottom="@dimen/x5"
+	android:layout_marginLeft="@dimen/x10"
+	android:layout_marginRight="@dimen/x10"
+	android:layout_marginTop="@dimen/x5"
+	android:elevation="5dp"
+	app:cardElevation="5dp"
+	>
+	
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/white"
+		android:orientation="horizontal">
+		
+		<com.hbln.lib_views.CircularImageView
+			android:id="@+id/civ_item_account_list_detail"
+			android:layout_width="@dimen/x70"
+			android:layout_height="@dimen/x70"
+			android:layout_margin="@dimen/x10"
+			android:src="@drawable/icon_account_list_pic"
+			app:civBorder="1px"
+			app:civBorderColor="@color/gray1"
+			app:civShape="circle" />
+		
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/x10"
+			android:layout_marginTop="@dimen/x10"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:orientation="vertical">
+			
+			<TextView
+				android:id="@+id/tv_item_account_list_detail_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t16"
+				android:textStyle="bold"
+				tools:text="盛艳玲" />
+			
+			<TextView
+				android:id="@+id/tv_item_account_list_detail_dw"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t14"
+				tools:text="所属单位：第一纪检组" />
+			
+			<TextView
+				android:id="@+id/tv_item_account_list_detail_zw"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t14"
+				tools:text="职务：" />
+			
+			<TextView
+				android:id="@+id/tv_item_account_list_detail_moblie"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t14"
+				tools:text="联系电话：" />
+		</LinearLayout>
+		
+		<View
+			style="@style/view_line_vir"
+			android:layout_marginLeft="@dimen/x10"
+			android:layout_marginRight="@dimen/x10"
+			android:layout_marginTop="@dimen/x10" />
+		
+		<ImageView
+			android:id="@+id/iv_item_account_list_detail_moblie"
+			android:layout_width="@dimen/x40"
+			android:layout_height="match_parent"
+			android:adjustViewBounds="true"
+			android:paddingLeft="@dimen/x5"
+			android:paddingRight="@dimen/x5"
+			android:src="@drawable/icon_account_list_phone" />
+	</LinearLayout>
+</android.support.v7.widget.CardView>

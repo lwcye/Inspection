@@ -16,7 +16,8 @@ public class URLs {
     public static final String HTTP_TOKEN = "HBWAPI@20171028";
     public static String UID = "";
     public static String ACCESS_TOKEN = "";
-
+    public static String PAGE_SIZE = "100";
+    
     public static String UID_KEY = "uid";
     public static String ACCESS_TOKEN_KEY = "access_token";
     public static String USERNAME_KEY = "username";

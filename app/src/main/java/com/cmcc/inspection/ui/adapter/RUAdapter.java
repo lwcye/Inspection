@@ -5,6 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.cmcc.inspection.R;
+import com.cmcc.lib_common.utils.loader.LoaderFactory;
 
 import java.util.List;
 
@@ -255,6 +259,10 @@ public abstract class RUAdapter<T> extends RecyclerView.Adapter {
      * @note 可选择实现此方法，给空数据的布局设置提示
      */
     protected void onInflateEmptyLayout(RUViewHolder holder) {
+        ImageView imageView = holder.getViewById(R.id.iv_empty);
+        if (imageView != null) {
+            LoaderFactory.getLoader().loadAssetsAsGif(imageView, "null_data.gif");
+        }
     }
     
     /**

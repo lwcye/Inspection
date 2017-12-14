@@ -3,8 +3,8 @@ package com.cmcc.lib_network.service;
 
 import com.cmcc.lib_network.model.DwLianDongModel;
 import com.cmcc.lib_network.model.LoginModel;
+import com.cmcc.lib_network.model.MailModel;
 import com.cmcc.lib_network.model.ObjectModel;
-import com.cmcc.lib_network.model.ResultModel;
 import com.cmcc.lib_network.model.UserInfoModel;
 
 import retrofit2.http.Field;
@@ -64,7 +64,7 @@ public interface UserService {
     
     @FormUrlEncoded
     @POST("public/api/main/tongxun")
-    Observable<ResultModel> tongxun(
+    Observable<MailModel> tongxun(
         @Field("name") String name
     );
 }

@@ -40,7 +40,7 @@ public class NetWorkInterceptor implements Interceptor {
     private final String CHARSET_NAME = "utf-8";
     /** 传输类型 */
     private final String DEC_MEDIA_TYPE = "application/x-www-form-urlencoded";
-
+    
     /**
      * 处理 cookie 过期时出现SessionTimeoutException
      * 1. 调用Session创建
@@ -50,47 +50,47 @@ public class NetWorkInterceptor implements Interceptor {
      * @return 转换后的Observable
      */
     public static <R> Observable.Transformer<R, R> retrySessionCreator() {
-
+        
         return new Observable.Transformer<R, R>() {
             /** 会话创建重试次数 */
             private int mRetryCount = 0;
-
+            
             @Override
             public Observable<R> call(Observable<R> observable) {
                 return observable.retryWhen(new Func1<Observable<? extends Throwable>, Observable<?>>() {
                     @Override
                     public Observable<?> call(Observable<? extends Throwable> observable) {
                         return observable
-                                .observeOn(Schedulers.io())
-                                .flatMap(new Func1<Throwable, Observable<?>>() {
-                                    @Override
-                                    public Observable<?> call(Throwable throwable) {
-                                        if (throwable instanceof TokenException) {
-                                            if (mRetryCount++ < RETRY_MAX_TIMES) {
-                                                return HttpRequest.login();
-                                            }
+                            .observeOn(Schedulers.io())
+                            .flatMap(new Func1<Throwable, Observable<?>>() {
+                                @Override
+                                public Observable<?> call(Throwable throwable) {
+                                    if (throwable instanceof TokenException) {
+                                        if (mRetryCount++ < RETRY_MAX_TIMES) {
+                                            return HttpRequest.login();
                                         }
-                                        return Observable.error(throwable);
                                     }
-                                });
+                                    return Observable.error(throwable);
+                                }
+                            });
                     }
                 });
             }
         };
     }
-
+    
     @Override
     public Response intercept(Chain chain) throws IOException {
         // 处理请求
         Request newRequest = handleRequest(chain.request());
         // 发送数据
         Response response = chain.proceed(newRequest);
-
+        
         return handleResponse(response);
     }
-
+    
     private Response handleResponse(Response response) throws IOException {
-
+        
         Request oldRequest = response.request();
         //打印请求
         StringBuilder stringBuilder = new StringBuilder("Request:");
@@ -104,13 +104,18 @@ public class NetWorkInterceptor implements Interceptor {
                 stringBuilder.append(formBody.name(i)).append("=").append(formBody.value(i)).append("&");
             }
         }
-
+        
         ResponseBody body = response.body();
         //打印 response
         String result = body.string();
+   
+        if (TextUtils.isEmpty(result)) {
+            LogUtils.e(stringBuilder.toString());
+            throw new TokenException();
+        }
         stringBuilder.append("\n").append("Result:").append(result);
         LogUtils.e(stringBuilder.toString());
-
+        
         Gson gson = new Gson();
         ObjectModel resultModel = gson.fromJson(result, ObjectModel.class);
         if (null == resultModel || !(resultModel.status == HttpResult.CODE_SUCCESS)) {
@@ -125,14 +130,14 @@ public class NetWorkInterceptor implements Interceptor {
                 throw new TokenException();
             }
         }
-
+        
         //创建新的响应
         Response.Builder builder = response.newBuilder();
         builder.headers(response.headers())
-                .body(ResponseBody.create(MediaType.parse(DEC_MEDIA_TYPE), result));
+            .body(ResponseBody.create(MediaType.parse(DEC_MEDIA_TYPE), result));
         return builder.build();
     }
-
+    
     /**
      * 处理请求
      *
@@ -143,7 +148,7 @@ public class NetWorkInterceptor implements Interceptor {
     private Request handleRequest(Request oldRequest) throws UnsupportedEncodingException {
         // 创建请求
         HttpUrl.Builder httpBuild = oldRequest.url().newBuilder();
-        if (!oldRequest.url().toString().contains("login")){
+        if (!oldRequest.url().toString().contains("login")) {
             //添加参数
             if (!TextUtils.isEmpty(URLs.UID)) {
                 httpBuild.addQueryParameter("uid", URLs.UID);
