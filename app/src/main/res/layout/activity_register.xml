@@ -1,185 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@color/layout_background_default"
-			  android:orientation="vertical">
-	
-	<include layout="@layout/title_bar" />
-	
-	<android.support.v4.widget.NestedScrollView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-		
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:orientation="vertical"
-			android:clipChildren="false"
-			android:clipToPadding="false"
-			android:paddingLeft="@dimen/x16"
-			android:paddingRight="@dimen/x16"
-			android:layout_height="match_parent">
-			
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="姓名"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<EditText
-				android:id="@+id/et_regist_name"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@drawable/shape_edittext"
-				android:hint="请输入姓名"
-				android:paddingLeft="@dimen/x10"
-				android:textColor="@color/black_title"
-				android:textColorHint="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="身份证号码"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<EditText
-				android:id="@+id/et_regist_sfid"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@drawable/shape_edittext"
-				android:hint="请输入身份证号码"
-				android:paddingLeft="@dimen/x10"
-				android:textColor="@color/black_title"
-				android:textColorHint="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<TextView
-				android:id="@+id/tv_regist_verfi"
-				android:layout_width="wrap_content"
-				android:layout_height="@dimen/x30"
-				android:layout_marginTop="@dimen/x10"
-				android:background="#1C9ED8"
-				android:gravity="center"
-				android:paddingLeft="@dimen/x15"
-				android:paddingRight="@dimen/x15"
-				android:text="验证"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t14" />
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="手机号码"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<EditText
-				android:id="@+id/et_regist_phone"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@drawable/shape_edittext"
-				android:hint="请输入手机号码"
-				android:paddingLeft="@dimen/x10"
-				android:textColor="@color/black_title"
-				android:textColorHint="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="单位职务"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				
-				<EditText
-					android:id="@+id/et_regist_dw_0"
-					android:layout_width="0dp"
-					android:layout_height="@dimen/view_height"
-					android:layout_marginRight="@dimen/x6"
-					android:layout_weight="1"
-					android:background="@drawable/shape_edittext"
-					android:editable="false"
-					android:hint="请选择单位"
-					android:paddingLeft="@dimen/x10"
-					android:textColor="@color/black_title"
-					android:textColorHint="@color/black_hint"
-					android:textSize="@dimen/t14" />
-				
-				<EditText
-					android:id="@+id/et_regist_dw_1"
-					android:layout_width="0dp"
-					android:layout_height="@dimen/view_height"
-					android:layout_marginLeft="@dimen/x6"
-					android:layout_weight="1"
-					android:background="@drawable/shape_edittext"
-					android:editable="false"
-					android:hint="请选择职务"
-					android:paddingLeft="@dimen/x10"
-					android:textColor="@color/black_title"
-					android:textColorHint="@color/black_hint"
-					android:textSize="@dimen/t14" />
-			</LinearLayout>
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="密码"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<EditText
-				android:id="@+id/et_regist_password"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@drawable/shape_edittext"
-				android:hint="请输入密码"
-				android:paddingLeft="@dimen/x10"
-				android:textColor="@color/black_title"
-				android:textColorHint="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<TextView
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10"
-				android:text="再次输入密码"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<EditText
-				android:id="@+id/et_regist_repassword"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@drawable/shape_edittext"
-				android:hint="请再次输入密码"
-				android:paddingLeft="@dimen/x10"
-				android:textColor="@color/black_title"
-				android:textColorHint="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<Button
-				android:id="@+id/tv_register_confirm"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:layout_marginTop="@dimen/x20"
-				android:background="@drawable/shape_btn_normal"
-				android:text="确认"
-				android:textColor="@color/white"
-				android:layout_marginBottom="@dimen/x20"
-				android:textSize="@dimen/t18" />
-		</LinearLayout>
-	</android.support.v4.widget.NestedScrollView>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/layout_background_default"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x16"
+            android:paddingRight="@dimen/x16">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:text="姓名"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <EditText
+                android:id="@+id/et_regist_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:background="@drawable/shape_edittext"
+                android:hint="请输入姓名"
+                android:paddingLeft="@dimen/x10"
+                android:textColor="@color/black_title"
+                android:textColorHint="@color/black_hint"
+                android:textSize="@dimen/t14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:text="身份证号码"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <EditText
+                android:id="@+id/et_regist_sfid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:background="@drawable/shape_edittext"
+                android:hint="请输入身份证号码"
+                android:maxLength="20"
+                android:paddingLeft="@dimen/x10"
+                android:textColor="@color/black_title"
+                android:textColorHint="@color/black_hint"
+                android:textSize="@dimen/t14"/>
+
+            <TextView
+                android:id="@+id/tv_regist_verfi"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x30"
+                android:layout_marginTop="@dimen/x10"
+                android:background="#1C9ED8"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
+                android:text="验证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:text="手机号码"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <EditText
+                android:id="@+id/et_regist_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:background="@drawable/shape_edittext"
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/x10"
+                android:textColor="@color/black_title"
+                android:textColorHint="@color/black_hint"
+                android:textSize="@dimen/t14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:text="单位职务"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/et_regist_dw_0"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/view_height"
+                    android:layout_marginRight="@dimen/x6"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_edittext"
+                    android:gravity="center_vertical"
+                    android:hint="请选择单位"
+                    android:paddingLeft="@dimen/x10"
+                    android:textColor="@color/black_title"
+                    android:textColorHint="@color/black_hint"
+                    android:textSize="@dimen/t14"/>
+
+                <TextView
+                    android:id="@+id/et_regist_dw_1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/view_height"
+                    android:layout_marginLeft="@dimen/x6"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_edittext"
+                    android:gravity="center_vertical"
+                    android:hint="请选择职务"
+                    android:paddingLeft="@dimen/x10"
+                    android:textColor="@color/black_title"
+                    android:textColorHint="@color/black_hint"
+                    android:textSize="@dimen/t14"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+
+                android:text="密码"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <EditText
+                android:id="@+id/et_regist_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:background="@drawable/shape_edittext"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/x10"
+                android:textColor="@color/black_title"
+                android:textColorHint="@color/black_hint"
+                android:textSize="@dimen/t14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:text="再次输入密码"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t18"/>
+
+            <EditText
+                android:id="@+id/et_regist_repassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:background="@drawable/shape_edittext"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/x10"
+                android:textColor="@color/black_title"
+                android:textColorHint="@color/black_hint"
+                android:textSize="@dimen/t14"/>
+
+            <Button
+                android:id="@+id/tv_register_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginTop="@dimen/x20"
+                android:background="@drawable/shape_btn_normal"
+                android:text="确认"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t18"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -93,16 +93,24 @@ public abstract class BaseFragment extends Fragment implements BaseView, Lifecyc
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView(view);
         initData();
     }
 
     /**
      * 初始化数据
      */
-    public abstract void initData();
+    public abstract void initView(View view);
 
     /**
      * 初始化数据
+     */
+    public abstract void initData();
+
+
+    /**
+     * 初始化数据
+     *
      * @return 布局id
      */
     public abstract int getLayoutId();

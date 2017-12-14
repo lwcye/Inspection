@@ -23,7 +23,8 @@ public abstract class HttpResult<T> implements Action1<T> {
     public static final int CODE_SUCCESS = 1;
     public static final int CODE_NULL = 2;
     public static final int CODE_FAIL = 0;
-    
+    public static final int CODE_TOKEN = 100001;
+
     /** 基类 */
     private BaseView mView;
     

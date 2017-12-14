@@ -1,5 +1,6 @@
 <resources>
 	<dimen name="title_bar_height">@dimen/x48</dimen>
+	<dimen name="title_bar_height_text">@dimen/x47</dimen>
 	<dimen name="view_height">@dimen/x45</dimen>
 	
 	<dimen name="margin_large">@dimen/x20</dimen>

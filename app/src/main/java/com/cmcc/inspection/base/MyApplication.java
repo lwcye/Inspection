@@ -2,7 +2,8 @@ package com.cmcc.inspection.base;
 
 import com.cmcc.inspection.BuildConfig;
 import com.cmcc.lib_common.base.BaseApp;
-import com.cmcc.lib_common.utils.LogUtils;
+import com.cmcc.lib_network.model.UserInfoModel;
+import com.cmcc.lib_utils.utils.LogUtils;
 
 /**
  * <p>describe</p><br>
@@ -16,6 +17,15 @@ import com.cmcc.lib_common.utils.LogUtils;
  * @note -
  */
 public class MyApplication extends BaseApp {
+    public static UserInfoModel sUserInfoModel;
+
+    public static UserInfoModel getUserInfoModel() {
+        return sUserInfoModel;
+    }
+
+    public static void setUserInfoModel(UserInfoModel userInfoModel) {
+        sUserInfoModel = userInfoModel;
+    }
 
     @Override
     public void onCreate() {
@@ -28,5 +38,6 @@ public class MyApplication extends BaseApp {
      */
     private void initLog() {
         LogUtils.init(BuildConfig.LOG_DEBUG, false, 'v', "lwc");
+
     }
 }

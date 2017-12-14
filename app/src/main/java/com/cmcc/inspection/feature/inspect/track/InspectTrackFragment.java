@@ -32,10 +32,10 @@ public class InspectTrackFragment extends MVPBaseFragment<InspectTrackContract.V
     
     @Override
     public void initData() {
-        initView(mView);
     }
     
-    private void initView(View view) {
+    @Override
+    public void initView(View view) {
         mRvInspectTrack = (RecyclerView) view.findViewById(R.id.rv_inspect_track);
         
         initRecyclerView();

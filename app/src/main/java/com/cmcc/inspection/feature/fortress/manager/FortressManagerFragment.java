@@ -33,10 +33,10 @@ public class FortressManagerFragment extends MVPBaseFragment<FortressManagerCont
     
     @Override
     public void initData() {
-        initView(mView);
     }
     
-    private void initView(View view) {
+    @Override
+    public void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_fortress_manager);
         initRecyclerVIew();
     

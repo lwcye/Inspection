@@ -14,7 +14,7 @@ import com.cmcc.inspection.constans.ENVs;
 import com.cmcc.inspection.feature.main.mainhome.MainHomeFragment;
 import com.cmcc.inspection.feature.main.mainuser.MainUserFragment;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
-import com.cmcc.lib_common.utils.ToastUtils;
+import com.cmcc.lib_utils.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
 

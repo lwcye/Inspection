@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@color/layout_background_default"
-			  android:orientation="vertical">
-	
-	<include layout="@layout/title_bar" />
-	
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="0dp"
-		android:layout_gravity="center"
-		android:layout_weight="1"
-		android:drawableLeft="@drawable/ic_register_success"
-		android:gravity="center"
-		android:text="注册成功"
-		android:textColor="@color/black_title"
-		android:textSize="@dimen/t26" />
-	
-	<Button
-		android:id="@+id/tv_register_confirm"
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/view_height"
-		android:layout_marginBottom="@dimen/x20"
-		android:layout_marginLeft="@dimen/x16"
-		android:layout_marginRight="@dimen/x16"
-		android:layout_marginTop="@dimen/x20"
-		android:background="@drawable/bg_btn_answer"
-		android:text="返回登录界面"
-		android:textColor="@color/white"
-		android:textSize="@dimen/t18" />
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/layout_background_default"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_register_success"
+        android:gravity="center"
+        android:text="注册成功"
+        android:textColor="@color/black_title"
+        android:textSize="@dimen/t26"/>
+
+    <Button
+        android:id="@+id/tv_register_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_height"
+        android:layout_marginBottom="@dimen/x20"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@drawable/bg_btn_answer"
+        android:text="返回登录界面"
+        android:textColor="@color/white"
+        android:textSize="@dimen/t18"/>
 </LinearLayout>
