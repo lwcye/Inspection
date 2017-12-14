@@ -3,8 +3,9 @@ package com.cmcc.lib_common.base;
 import android.app.Application;
 
 import com.cmcc.lib_common.constans.CommonSharePresf;
-import com.cmcc.lib_common.utils.SPUtils;
-import com.cmcc.lib_common.utils.Utils;
+import com.cmcc.lib_utils.utils.SPUtils;
+import com.cmcc.lib_utils.utils.ToastUtils;
+import com.cmcc.lib_utils.utils.Utils;
 
 
 /**
@@ -49,5 +50,6 @@ public class BaseApp extends Application {
     private void init() {
         //工具初始化
         Utils.init(this);
+        ToastUtils.init(true);
     }
 }

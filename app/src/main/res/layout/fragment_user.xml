@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -11,11 +12,17 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="姓名"/>
+            android:layout_width="@dimen/x70"
+            android:gravity="center_vertical|right"
+            android:text="姓名"
+            android:textColor="@color/black_hint"/>
 
         <TextView
+            android:id="@+id/tv_user_name"
             style="@style/cell_text_right"
-            android:text="李勇"/>
+            android:drawableRight="@null"
+            android:gravity="center_vertical"
+            tools:text="李勇"/>
     </LinearLayout>
 
     <View style="@style/view_line"/>
@@ -25,11 +32,17 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="身份证号码"/>
+            android:layout_width="@dimen/x70"
+            android:gravity="center_vertical|right"
+            android:text="身份证号码"
+            android:textColor="@color/black_hint"/>
 
         <TextView
+            android:id="@+id/tv_user_sfid"
             style="@style/cell_text_right"
-            android:text="00000000000000000"/>
+            android:drawableRight="@null"
+            android:gravity="center_vertical"
+            tools:text="00000000000000000"/>
     </LinearLayout>
 
     <View style="@style/view_line"/>
@@ -39,11 +52,17 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="联系方式"/>
+            android:layout_width="@dimen/x70"
+            android:gravity="center_vertical|right"
+            android:text="联系方式"
+            android:textColor="@color/black_hint"/>
 
         <TextView
+            android:id="@+id/tv_user_mobile"
             style="@style/cell_text_right"
-            android:text="00000000000"/>
+            android:drawableRight="@null"
+            android:gravity="center_vertical"
+            tools:text="00000000000"/>
     </LinearLayout>
 
     <View style="@style/view_line"/>
@@ -53,16 +72,23 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="单位及职务"/>
+            android:layout_width="@dimen/x70"
+            android:gravity="center_vertical|right"
+            android:text="单位及职务"
+            android:textColor="@color/black_hint"/>
 
         <TextView
+            android:id="@+id/tv_user_danwei"
             style="@style/cell_text_right"
-            android:text="巡查三组--职务"/>
+            android:drawableRight="@null"
+            android:gravity="center_vertical"
+            tools:text="巡查三组--职务"/>
     </LinearLayout>
 
     <View style="@style/view_line_block"/>
 
     <LinearLayout
+        android:id="@+id/ll_user_test"
         style="@style/cell_linlay">
 
         <TextView
@@ -70,12 +96,14 @@
             android:text="我的试卷"/>
 
         <TextView
+            android:id="@+id/tv_user_test"
             style="@style/cell_text_right"/>
     </LinearLayout>
 
     <View style="@style/view_line"/>
 
     <LinearLayout
+        android:id="@+id/ll_user_mail"
         style="@style/cell_linlay">
 
         <TextView
@@ -83,12 +111,14 @@
             android:text="通讯录"/>
 
         <TextView
+            android:id="@+id/tv_user_mail"
             style="@style/cell_text_right"/>
     </LinearLayout>
 
     <View style="@style/view_line_block"/>
 
     <LinearLayout
+        android:id="@+id/ll_user_change"
         style="@style/cell_linlay">
 
         <TextView
@@ -96,6 +126,7 @@
             android:text="修改密码"/>
 
         <TextView
+            android:id="@+id/tv_user_change"
             style="@style/cell_text_right"/>
     </LinearLayout>
 
@@ -103,7 +134,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <Button

@@ -4,7 +4,9 @@ package com.cmcc.inspection.feature.accout.register;
 import com.cmcc.lib_common.mvp.BasePresenter;
 import com.cmcc.lib_common.mvp.BaseView;
 import com.cmcc.lib_network.model.DwLianDongModel;
+import com.cmcc.lib_network.model.LoginModel;
 
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 /**
@@ -14,13 +16,14 @@ import rx.functions.Action1;
 
 public class RegisterContract {
     interface View extends BaseView {
+        void resultRegist(LoginModel objectModel);
     }
     
     interface Presenter extends BasePresenter<View> {
         void loadDwData(String pid, Action1<DwLianDongModel> action);
         
-        void requestRegist();
+        void requestRegist(String username, String password, String repassword, String email, String nickname, String sfid, String dwid, String token);
         
-        void verificationSfid();
+        void verificationSfid(String name, String sfid, Action0 action0);
     }
 }

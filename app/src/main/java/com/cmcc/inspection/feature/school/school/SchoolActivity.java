@@ -21,7 +21,7 @@ import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.utils.TitleUtil;
-import com.cmcc.lib_common.utils.LogUtils;
+import com.cmcc.lib_utils.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,10 @@ package com.cmcc.lib_network.service;
 
 
 import com.cmcc.lib_network.model.DwLianDongModel;
+import com.cmcc.lib_network.model.LoginModel;
+import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.ResultModel;
+import com.cmcc.lib_network.model.UserInfoModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -23,7 +26,7 @@ import rx.Observable;
 public interface UserService {
     @FormUrlEncoded
     @POST("public/api/logintoken/register")
-    Observable<ResultModel> register(
+    Observable<LoginModel> register(
         @Field("username") String username,
         @Field("password") String password,
         @Field("repassword") String repassword,
@@ -36,7 +39,7 @@ public interface UserService {
     
     @FormUrlEncoded
     @POST("public/api/logintoken/login")
-    Observable<ResultModel> login(
+    Observable<LoginModel> login(
         @Field("username") String username,
         @Field("password") String password,
         @Field("token") String token
@@ -44,7 +47,7 @@ public interface UserService {
     
     @FormUrlEncoded
     @POST("public/api/logintoken/useryanzheng")
-    Observable<ResultModel> useryanzheng(
+    Observable<ObjectModel> useryanzheng(
         @Field("name") String name,
         @Field("sfid") String sfid
     );
@@ -55,10 +58,8 @@ public interface UserService {
         @Field("pid") String pid
     );
     
-    @FormUrlEncoded
     @POST("public/api/main/userinfo")
-    Observable<ResultModel> userinfo(
-        @Field("uid") String uid
+    Observable<UserInfoModel> userinfo(
     );
     
     @FormUrlEncoded

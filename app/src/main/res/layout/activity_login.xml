@@ -1,68 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@drawable/img_login_bg"
-			  android:orientation="vertical">
-	
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_marginLeft="@dimen/x60"
-		android:layout_marginRight="@dimen/x60"
-		android:layout_marginTop="@dimen/x250"
-		android:orientation="vertical">
-		
-		<EditText
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/x75"
-			android:background="@color/white"
-			android:drawableLeft="@drawable/icon_user"
-			android:drawablePadding="@dimen/x5"
-			android:hint="请输入用户名"
-			android:padding="@dimen/x10" />
-		
-		<View style="@style/view_line" />
-		
-		<EditText
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/x75"
-			android:drawableLeft="@drawable/icon_psd"
-			android:drawablePadding="@dimen/x5"
-			android:background="@color/white"
-			android:hint="请输入密码"
-			android:padding="@dimen/x10" />
-		
-		<Button
-			android:id="@+id/tv_login_submit"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/view_height"
-			android:layout_marginTop="@dimen/x50"
-			android:background="@drawable/bg_btn_answer"
-			android:text="登录"
-			android:textColor="@color/white"
-			android:textSize="@dimen/t18" />
-		
-		<Button
-			android:id="@+id/tv_login_register"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/view_height"
-			android:layout_marginTop="@dimen/x10"
-			android:background="@drawable/bg_btn_trans"
-			android:text="注册"
-			android:textColor="@color/colorAccentRed"
-			android:textSize="@dimen/t18" />
-		
-		<TextView
-			android:id="@+id/tv_login_forget"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center"
-			android:layout_marginTop="@dimen/x10"
-			android:text="忘记密码?"
-			android:textColor="@color/black_hint"
-			android:textSize="@dimen/t14" />
-	</LinearLayout>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/img_login_bg"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/x240"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edittext"
+            android:padding="@dimen/x1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_login_username"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x75"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_user"
+                android:drawablePadding="@dimen/x5"
+                android:hint="请输入用户名"
+                android:padding="@dimen/x10"/>
+
+            <View
+                style="@style/view_line"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"/>
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x75"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_psd"
+                android:drawablePadding="@dimen/x5"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:padding="@dimen/x10"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/tv_login_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_height"
+            android:layout_marginTop="@dimen/x40"
+            android:background="@drawable/shape_btn_normal"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t18"/>
+
+        <Button
+            android:id="@+id/tv_login_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_height"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@drawable/bg_btn_trans"
+            android:text="注册"
+            android:textColor="@color/colorAccentRed"
+            android:textSize="@dimen/t18"/>
+
+        <TextView
+            android:id="@+id/tv_login_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/x10"
+            android:text="忘记密码?"
+            android:textColor="@color/black_hint"
+            android:textSize="@dimen/t14"/>
+    </LinearLayout>
 
 
 </LinearLayout>
