@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include layout="@layout/title_bar"/>
-
-    <RelativeLayout
-        android:id="@+id/rellay_web_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
-            android:id="@+id/mpb_web_view_progress"
-            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x3"
-            android:indeterminate="false"
-            android:max="100"
-            android:visibility="gone"
-            app:mpb_progressStyle="horizontal"
-            app:mpb_progressTint="#31bc31"
-            app:mpb_showProgressBackground="false"
-            app:mpb_useIntrinsicPadding="false"/>
-
-        <include
-            android:id="@+id/vg_web_view_error_container"
-            layout="@layout/layout_web_view_error_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"/>
-
-    </RelativeLayout>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	
+	<include layout="@layout/title_bar"/>
+	
+	<RelativeLayout
+		android:id="@+id/rellay_web_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+		
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/mpb_web_view_progress"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/x3"
+			android:indeterminate="false"
+			android:max="100"
+			android:visibility="gone"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_progressTint="#31bc31"
+			app:mpb_showProgressBackground="false"
+			app:mpb_useIntrinsicPadding="false"/>
+		
+		<include
+			android:id="@+id/vg_web_view_error_container"
+			layout="@layout/layout_web_view_error_page"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="invisible"/>
+	
+	</RelativeLayout>
 </LinearLayout>

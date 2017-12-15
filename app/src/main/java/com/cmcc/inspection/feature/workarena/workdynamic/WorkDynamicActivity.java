@@ -3,19 +3,24 @@ package com.cmcc.inspection.feature.workarena.workdynamic;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
+import com.cmcc.inspection.utils.ClickUtils;
 import com.cmcc.inspection.utils.TitleUtil;
-import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.WorkModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +31,14 @@ import java.util.List;
  * 邮箱 784787081@qq.com
  */
 
-public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.View, WorkDynamicPresenter> implements WorkDynamicContract.View {
+public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.View, WorkDynamicPresenter> implements WorkDynamicContract.View, View.OnClickListener, TextView.OnEditorActionListener, RUAdapter.OnItemClickListener {
     
     private RecyclerView mRvWorkDynamic;
-    private RUAdapter<String> mAdapter;
-    private List<String> mList = new ArrayList<>();
+    private RUAdapter<WorkModel.WorkInfoBean> mAdapter;
+    private List<WorkModel.WorkInfoBean> mList = new ArrayList<>();
+    /** 请输入内容... */
+    private EditText mEtWorkSeach;
+    private ImageView mIvEtSearch;
     
     @Override
     protected WorkDynamicPresenter createPresenter() {
@@ -51,49 +59,64 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
     }
     
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            })
-            .setColor(Color.WHITE, 255)
+        TitleUtil.attach(this)
+            .setBack(true)
             .setTitle("工作动态");
         mRvWorkDynamic = (RecyclerView) findViewById(R.id.rv_work_dynamic);
         initRecylerView();
         
+        mEtWorkSeach = (EditText) findViewById(R.id.et_work_seach);
+        mEtWorkSeach.setOnEditorActionListener(this);
+        mIvEtSearch = (ImageView) findViewById(R.id.iv_et_search);
+        mIvEtSearch.setOnClickListener(this);
     }
     
     private void initRecylerView() {
         mRvWorkDynamic.setLayoutManager(new LinearLayoutManager(getContext()));
-        mList.add("强化措施，奋力冲刺，确保圆满完成全年目标任务");
-        mList.add("旗帜鲜明讲政治 步调一致讲大局");
-        mList.add("强化基层党组织功能 充分发挥战斗堡垒作用");
-        mList.add("响应十九大从严治党要求，大吴街道开展“两化”先进基层党组织创建活动");
-        mAdapter = new RUAdapter<String>(getContext(), mList, R.layout.item_work_dynamic) {
+        mAdapter = new RUAdapter<WorkModel.WorkInfoBean>(getContext(), mList, R.layout.item_school_item) {
             @Override
-            protected void onInflateData(RUViewHolder holder, String data, int position) {
-                holder.setText(R.id.tv_item_work_dynamic_title, data);
-                if (position == 1) {
-                    holder.setText(R.id.tv_item_work_dynamic_name, "巡查二组");
-                    holder.setText(R.id.tv_item_work_dynamic_org, "巡查机构");
-                }
-                if (position == 2) {
-                    holder.setText(R.id.tv_item_work_dynamic_name, "大吴办");
-                    holder.setText(R.id.tv_item_work_dynamic_org, "乡镇");
-                }
-                if (position == 3) {
-                    holder.setText(R.id.tv_item_work_dynamic_name, "大吴办");
-                    holder.setText(R.id.tv_item_work_dynamic_org, "乡镇");
+            protected void onInflateData(RUViewHolder holder, WorkModel.WorkInfoBean data, int position) {
+                holder.setText(R.id.tv_item_shcool_item_title, data.title);
+                holder.setText(R.id.tv_item_shcool_item_dw, data.danwei);
+                holder.setText(R.id.tv_item_shcool_item_data, data.times);
+                if (TextUtils.isEmpty(data.picpath.toString())) {
+                    holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
+                    holder.setImageNet(R.id.iv_item_shcool_item, data.picpath.toString());
+                } else {
+                    holder.setVisibility(R.id.iv_item_shcool_item, View.GONE);
                 }
             }
         };
+        mAdapter.setOnItemClickListener(this);
         mRvWorkDynamic.setAdapter(mAdapter);
     }
     
     @Override
-    public void setData(List<ObjectModel> list) {
-        
+    public void setData(List<WorkModel.WorkInfoBean> list) {
+        mList = list;
+        mAdapter.setData(mList);
+    }
+    
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_et_search:
+                mPresenter.searchData(mEtWorkSeach.getText().toString().trim());
+                break;
+        }
+    }
+    
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (ClickUtils.isFastClick()) {
+            return true;
+        }
+        mPresenter.searchData(mEtWorkSeach.getText().toString().trim());
+        return true;
+    }
+    
+    @Override
+    public void onItemClick(View view, int itemType, int position) {
+        WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewContentActivity.TYPE_WORK);
     }
 }

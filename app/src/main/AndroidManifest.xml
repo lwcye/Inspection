@@ -125,6 +125,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".feature.accout.accountlist.accountlistdetail.AccountListDetailActivity"/>
         <activity android:name=".feature.inspect.visitanswer.VisitAnswerActivity"/>
-    </application>
+		<activity android:name=".feature.workarena.workdynamic.WebViewContentActivity" />
+	</application>
 
 </manifest>

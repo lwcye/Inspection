@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cmcc.lib_common.utils.loader.LoaderFactory;
+
 /**
  * RecyclerView的通用View保存器(RecyclerView Universal View Holder)
  *
@@ -104,6 +106,20 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
     public RUViewHolder setText(int resId, String text) {
         if (!TextUtils.isEmpty(text)) {
             ((TextView) getViewById(resId)).setText(text);
+        }
+        return this;
+    }
+    
+    /**
+     * 设置文本
+     *
+     * @param resId 资源id
+     * @param url 文本
+     * @return this
+     */
+    public RUViewHolder setImageNet(int resId, String url) {
+        if (!TextUtils.isEmpty(url)) {
+            LoaderFactory.getLoader().loadNet(((ImageView) getViewById(resId)), url);
         }
         return this;
     }

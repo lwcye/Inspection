@@ -73,6 +73,6 @@ public class FindFragment extends MVPBaseFragment<FindContract.View, FindPresent
     
     @Override
     public void onItemClick(View view, int itemType, int position) {
-        SchoolDetailActivity.start(getContext());
+        SchoolDetailActivity.start(getContext(), "" + position);
     }
 }

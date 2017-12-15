@@ -13,18 +13,19 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="A"
+			android:text="A -"
 			android:textColor="@color/colorAccentRed" />
 		
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:gravity="right"
-			android:text="A"
+			android:text="A +"
 			android:textColor="@color/colorAccentRed" />
 	</LinearLayout>
 	
 	<SeekBar
+		android:id="@+id/seek_dialog_font"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/x30"
 		android:progress="50" />

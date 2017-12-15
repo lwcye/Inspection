@@ -61,7 +61,7 @@ public class ForTressInspectFragment extends MVPBaseFragment<ForTressInspectCont
         mAdapter.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                SchoolDetailActivity.start(getContext());
+                SchoolDetailActivity.start(getContext(),position+"");
             }
         });
         mRvFortressInspect.setAdapter(mAdapter);

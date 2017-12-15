@@ -21,12 +21,13 @@ public class WorkDynamicPresenter extends BasePresenterImpl<WorkDynamicContract.
     @Override
     public void getData() {
         getView().showLoading("");
-        HttpRequest.getWorkService().jobdongtai(1 + "", PAGE_SIZE, "")
+        HttpRequest.getWorkService().jobdongtai("1", PAGE_SIZE)
             .compose(NetWorkInterceptor.<WorkModel>retrySessionCreator())
             .compose(getView().getBaseActivity().<WorkModel>applySchedulers(ActivityEvent.DESTROY))
             .subscribe(new HttpResult<WorkModel>() {
                 @Override
                 public void result(WorkModel workModel) {
+                    getView().setData(workModel.info);
                 }
             }, new HttpError(getView()), new HttpComplete(getView()));
     }
@@ -34,12 +35,13 @@ public class WorkDynamicPresenter extends BasePresenterImpl<WorkDynamicContract.
     @Override
     public void searchData(String title) {
         getView().showLoading("");
-        HttpRequest.getWorkService().jobdongtaisoso(title, 1 + "", PAGE_SIZE, "")
+        HttpRequest.getWorkService().jobdongtaisoso(title, "1", PAGE_SIZE)
             .compose(NetWorkInterceptor.<WorkModel>retrySessionCreator())
             .compose(getView().getBaseActivity().<WorkModel>applySchedulers(ActivityEvent.DESTROY))
             .subscribe(new HttpResult<WorkModel>() {
                 @Override
                 public void result(WorkModel workModel) {
+                    getView().setData(workModel.info);
                 }
             }, new HttpError(getView()), new HttpComplete(getView()));
     }

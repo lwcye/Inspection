@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cmcc.inspection.BuildConfig;
+import com.cmcc.inspection.R;
 import com.cmcc.inspection.utils.TitleUtil;
 import com.cmcc.inspection.widget.x5.utils.BridgeUtil;
 import com.cmcc.inspection.widget.x5.utils.BridgeWebView;
 import com.cmcc.inspection.widget.x5.utils.BridgeWebViewClient;
 import com.cmcc.inspection.widget.x5.utils.JsonUtil;
-import com.cmcc.lib_common.R;
 import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.AppUtils;
@@ -79,13 +79,13 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
     private Map<String, IOverrideUrlLoading> mExternalOverrideUrlLoading = new HashMap<>();
     /** Javascript注入规则映射 */
     private Map<String, String> mJavascriptInjectionMap = new HashMap<>();
-
+    
     /**
      * 私有化构造函数
      */
     private JsBridgeWebViewWrapper() {
     }
-
+    
     /**
      * 获取实例
      *
@@ -100,17 +100,17 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                                                         WebViewOption option, WebViewColorOption colorOption,
                                                         IPageAction action, IPageListener listener) {
         if (containerView == null || activity == null) {
-
+            
             return null;
         }
-
+        
         JsBridgeWebViewWrapper wrapper = new JsBridgeWebViewWrapper();
         wrapper.mActivityRef = new WeakReference<>(activity);
         wrapper.mPageAction = action;
         wrapper.mPageListener = listener;
         wrapper.mOption = option;
         wrapper.mColorOption = colorOption;
-
+        
         // 若没传递参数，则生成默认参数
         if (wrapper.mOption == null) {
             wrapper.mOption = new WebViewOption();
@@ -119,16 +119,16 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             wrapper.mOption.cookie = "";
             wrapper.mOption.showTitleBar = false;
         }
-
+        
         // 初始化WebView
         wrapper.initWebView(activity, containerView);
-
+        
         // 初始化数据
         wrapper.initData();
-
+        
         return wrapper;
     }
-
+    
     /**
      * 添加外部重写Url加载
      *
@@ -140,13 +140,13 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
      */
     public void addExternalOverrideUrlLoading(String startUrl, IOverrideUrlLoading overrideUrlLoading) {
         if (TextUtils.isEmpty(startUrl) || overrideUrlLoading == null) {
-
+            
             return;
         }
-
+        
         mExternalOverrideUrlLoading.put(startUrl, overrideUrlLoading);
     }
-
+    
     /**
      * 添加javascript注入
      *
@@ -156,13 +156,13 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
      */
     public void addJavascriptInjection(String startUrl, String javascriptPath) {
         if (TextUtils.isEmpty(startUrl) || TextUtils.isEmpty(javascriptPath)) {
-
+            
             return;
         }
-
+        
         mJavascriptInjectionMap.put(startUrl, javascriptPath);
     }
-
+    
     /**
      * 注册Js回调
      *
@@ -171,21 +171,21 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
     public void registerJsCallback() {
         //  初始化必须在这里执行，顺序不能乱
         initWebViewJsCallback();
-
+        
         if (!mIsRegisterJs) {
             mIsRegisterJs = true;
             // 注册Js回调到WebView中
             WebViewManager.getInstance().registerJsCallback(mWebView);
         }
     }
-
+    
     /**
      * 初始化WebView相关的Js回调
      */
     private void initWebViewJsCallback() {
         // 在这里添加需要操作WebView的Js回调
     }
-
+    
     /**
      * 注入javascript代码
      *
@@ -194,7 +194,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
      */
     private void injectJavascript(WebView webview, String url) {
         List<String> injectedRecord = new ArrayList<>();
-
+        
         for (Map.Entry<String, String> entry : mJavascriptInjectionMap.entrySet()) {
             String startUrl = entry.getKey();
             String javascriptPath = entry.getValue();
@@ -207,12 +207,12 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                     // 标记为已注入
                     injectedRecord.add(javascriptPath);
                 }
-
+                
                 continue;
             }
         }
     }
-
+    
     /**
      * 释放
      *
@@ -221,10 +221,10 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
     public void onDestroy() {
         // 隐藏loading
         mPageAction.onHideIndeterminateLoading();
-
+        
         // 清除Cookie
         WebViewSession.clearCookie();
-
+        
         // 释放WebView
         if (mWebView != null) {
             mWebView.setOnKeyListener(null);
@@ -234,7 +234,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             mWebView.destroy();
         }
     }
-
+    
     /**
      * 初始化WebView
      *
@@ -244,24 +244,24 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
      */
     private void initWebView(BaseActivity activity, ViewGroup containerView) {
         LayoutInflater inflater = activity.getLayoutInflater();
-
+        
         // 加载布局
         inflater.inflate(R.layout.layout_js_bridge_web_view, containerView);
-
+        
         // 配置标题栏
         TitleUtil.attach(mActivityRef.get())
-                .setTitle(mOption.title)
-                .setBack(true);
-
+            .setTitle(mOption.title)
+            .setBack(true);
+        
         // 动态创建WebView
         ViewGroup vgContainer = (ViewGroup) containerView.findViewById(R.id.rellay_web_view_container);
         mWebView = WebViewManager.getInstance().createWebView(activity, vgContainer);
-
+        
         // Debug下允许Chrome调试
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
-
+        
         // 配置WebView
         WebSettings settings = mWebView.getSettings();
         // 自适应窗口
@@ -281,7 +281,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
         } else {
             settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
-
+        
         // 屏蔽掉长按时间
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -289,14 +289,14 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                 return true;
             }
         });
-
+        
         // 允许调试
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (0 != (BaseApp.getInstance().getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE)) {
                 WebView.setWebContentsDebuggingEnabled(true);
             }
         }
-
+        
         // 允许下载
         mWebView.setDownloadListener(new DownloadListener() {
             @Override
@@ -308,17 +308,17 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                 BaseApp.getInstance().startActivity(intent);
             }
         });
-
+        
         // 状态处理
         mWebView.setWebViewClient(new BridgeWebViewClient(mWebView) {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-
+                
                 // 跳转到统一的错误处理页面
                 showErrorPage(view, description);
             }
-
+            
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -327,43 +327,43 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                 if (mOption.blockNetworkImage) {
                     view.getSettings().setBlockNetworkImage(true);
                 }
-
+                
                 // 隐藏错误页面
                 hideErrorPage();
             }
-
+            
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 // 注入Javascript代码
                 injectJavascript(view, url);
-
+                
                 // 网络图片延迟加载
                 if (mOption.blockNetworkImage) {
                     view.getSettings().setBlockNetworkImage(false);
                 }
-
+                
                 // 页面加载结束，若可以返回则显示关闭按钮
                 if (view.canGoBack()) {
                     mVgIconClose.setVisibility(View.VISIBLE);
                 }
             }
-
+            
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 /** 调试打印 */
                 if (AppUtils.isAppDebug()) {
                     LogUtils.d("shouldOverrideUrlLoading: " + url);
                 }
-
+                
                 // 通用处理
                 final int process = WebViewManager.getInstance().processShouldOverrideUrlLoading(view, url);
                 if (process != WebViewManager.PROCESS_NOTHING) {
                     // 通用处理失败后，在这里拦截
-
+                    
                     return true;
                 }
-
+                
                 // 外部重写优先处理
                 boolean disposed = false;
                 for (Map.Entry<String, IOverrideUrlLoading> entry : mExternalOverrideUrlLoading.entrySet()) {
@@ -371,16 +371,16 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                     if (WebViewManager.matchStartUrl(url, startUrl)) {
                         IOverrideUrlLoading overrideUrlLoading = entry.getValue();
                         disposed = overrideUrlLoading.onOverrideUrlLoading(view, url, mPageAction);
-
+                        
                         break;
                     }
                 }
                 if (disposed) {
                     // 若外部已处理，则返回
-
+                    
                     return true;
                 }
-
+                
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
@@ -388,15 +388,15 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-
+                
                 //  重写标题
                 setTitle(title);
             }
-
+            
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-
+                
                 // 更新进度
                 if (mOption != null && !mOption.indeterminate) {
                     // 进度条样式
@@ -423,7 +423,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                     }
                 }
             }
-
+            
             @Override
             public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
                 // Android 5.0+
@@ -432,7 +432,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                 }
                 return true;
             }
-
+            
             /**
              * 打开文件
              *
@@ -442,7 +442,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             public void openFileChooser(ValueCallback<Uri> uploadMsg) {
                 openFileChooser(uploadMsg, "");
             }
-
+            
             /**
              * 打开文件
              *
@@ -452,7 +452,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
                 openFileChooser(uploadMsg, acceptType, "");
             }
-
+            
             /**
              * 打开文件
              *
@@ -468,11 +468,11 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                 }
             }
         });
-
+        
         // 进度条(一定要放到WebView创建之后，否则z轴顺序不对)
         mMpbLoadingProgress = (MaterialProgressBar) containerView.findViewById(R.id.mpb_web_view_progress);
         mMpbLoadingProgress.bringToFront();
-
+        
         // 创建错误布局(一定要放到WebView创建之后，否则z轴顺序不对)
         mVgErrorLayout = (ViewGroup) containerView.findViewById(R.id.vg_web_view_error_container);
         mVgErrorLayout.bringToFront();
@@ -483,8 +483,8 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             }
         });
     }
-
-
+    
+    
     /**
      * 设置标题
      *
@@ -495,7 +495,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             TitleUtil.attach(mActivityRef.get()).setTitle(title);
         }
     }
-
+    
     /**
      * 初始化数据
      */
@@ -505,13 +505,13 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             if (mOption.url == null) {
                 mOption.url = "";
             }
-
+            
             if (mOption.url.startsWith("http") || mOption.url.startsWith("https")) {
                 // 远程地址
                 if (NetworkUtils.isConnected()) {
                     // 初始化Cookie
                     WebViewSession.setCookie(mOption.url, mOption.cookie);
-
+                    
                     // 解析并设置header
                     final Map<String, String> headers = new HashMap<>();
                     JsonUtil.parseFlatJson(mOption.header, new JsonUtil.IParseCallback() {
@@ -520,12 +520,12 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
                             headers.put(key, value);
                         }
                     });
-
+                    
                     // 状态回调
                     if (mPageListener != null) {
                         mPageListener.onBegin(mOption.url, mOption.title);
                     }
-
+                    
                     // 加载链接
                     mWebView.loadUrl(mOption.url, headers);
                 } else {
@@ -537,20 +537,20 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             }
         }
     }
-
+    
     /**
      * 设置视频播放全屏
      */
     private void enableX5FullscreenFunc() {
         if (mWebView.getX5WebViewExtension() != null) {
             Bundle data = new Bundle();
-//            data.putBoolean("standardFullScreen", false);// true表示标准全屏，false表示X5全屏；不设置默认false，
-//            data.putBoolean("supportLiteWnd", true);// false：关闭小窗；true：开启小窗；不设置默认true，
+            data.putBoolean("standardFullScreen", false);// true表示标准全屏，false表示X5全屏；不设置默认false，
+            data.putBoolean("supportLiteWnd", true);// false：关闭小窗；true：开启小窗；不设置默认true，
             data.putInt("DefaultVideoScreen", 2);// 1：以页面内开始播放，2：以全屏开始播放；不设置默认：1
             mWebView.getX5WebViewExtension().invokeMiscMethod("setVideoParams", data);
         }
     }
-
+    
     /**
      * 回退
      */
@@ -565,7 +565,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             }
             mPageListener.onBack(previousUrl);
         }
-
+        
         if (mPageAction != null) {
             // 隐藏转圈
             mPageAction.onHideIndeterminateLoading();
@@ -580,14 +580,14 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
             }
         }
     }
-
+    
     /**
      * 加载上次失败的Url
      */
     private void loadLastFailingUrl() {
         mWebView.reload();
     }
-
+    
     /**
      * 显示错误页面
      *
@@ -597,7 +597,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
     private void showErrorPage(WebView view, String reason) {
         // 标记已经出现错误
         mIsError = true;
-
+        
         // 显示错误
         TextView tvReason = ViewUtils.findViewById(mVgErrorLayout, R.id.tv_web_view_error_reason);
         if (!TextUtils.isEmpty(reason)) {
@@ -607,7 +607,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
         }
         mVgErrorLayout.setVisibility(View.VISIBLE);
     }
-
+    
     /**
      * 隐藏错误页面
      */
@@ -622,21 +622,21 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
         mIsError = false;
         mVgErrorLayout.setVisibility(View.INVISIBLE);
     }
-
+    
     /**
      * 获取WebView
      *
      * @return webview
      */
     public WebView getWebView() {
-
+        
         return mWebView;
     }
-
+    
     @Override
     public void onClick(View v) {
     }
-
+    
     /**
      * 页面动作
      */
@@ -645,24 +645,24 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
          * 显示转圈Loading
          */
         void onShowIndeterminateLoading();
-
+        
         /**
          * 隐藏转圈Loading
          */
         void onHideIndeterminateLoading();
-
+        
         /**
          * 显示toast
          *
          * @param msg 消息
          */
         void onShowToast(String msg);
-
+        
         /**
          * 结束
          */
         void onFinish();
-
+        
         /**
          * 打开文件选择器
          *
@@ -672,7 +672,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
          * @note Android 5.0版本以下
          */
         void onOpenFileChooser(ValueCallback<Uri> filePathCallback, String acceptType, String capture);
-
+        
         /**
          * 打开文件选择器
          *
@@ -682,7 +682,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
          */
         void onOpenFileChooserAboveL(ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams);
     }
-
+    
     /**
      * 页面状态监听
      */
@@ -693,20 +693,20 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
          * @param url 地址
          */
         void onBegin(String url, String title);
-
+        
         /**
          * 返回被点击
          *
          * @param previousUrl 上一个地址
          */
         void onBack(String previousUrl);
-
+        
         /**
          * 结束被点击
          */
         void onFinish();
     }
-
+    
     /**
      * 重写Url加载回调
      */

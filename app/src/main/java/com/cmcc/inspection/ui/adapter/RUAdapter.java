@@ -40,7 +40,7 @@ public abstract class RUAdapter<T> extends RecyclerView.Adapter {
     /** 监听item点击事件 */
     private OnItemClickListener mOnItemClickListener;
     /** 数据为空时的布局id */
-    private int mDataEmptyLayoutId = 0;
+    private int mDataEmptyLayoutId = R.layout.layout_empty;
     /** 是否数据为空 */
     private boolean mIsDataEmpty;
     /** 加载更多的布局id */

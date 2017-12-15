@@ -18,16 +18,20 @@
 			android:orientation="vertical">
 			
 			<TextView
-				android:id="@+id/tv_shcool_detail_title"
+				android:id="@+id/tv_webview_title"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/view_height"
 				android:gravity="center"
+				android:paddingBottom="@dimen/x12"
+				android:paddingLeft="@dimen/x12"
+				android:paddingRight="@dimen/x12"
+				android:paddingTop="@dimen/x12"
 				android:text="强筋骨、明纪律 铸造执纪铁军"
 				android:textColor="@color/black_title"
 				android:textSize="@dimen/t18" />
 			
 			<TextView
-				android:id="@+id/tv_shcool_detail_date"
+				android:id="@+id/tv_webview_date"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/x12"
@@ -40,7 +44,7 @@
 			<View style="@style/view_line" />
 			
 			<com.cmcc.inspection.widget.x5.utils.BridgeWebView
-				android:id="@+id/wv_school_detail"
+				android:id="@+id/wv_webview"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />
 			
@@ -49,7 +53,7 @@
 				android:layout_height="wrap_content">
 				
 				<com.hbln.lib_views.DrawableCenterTextView
-					android:id="@+id/tv_school_detail_zan"
+					android:id="@+id/tv_webview_zan"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
@@ -60,7 +64,7 @@
 					android:textSize="@dimen/t14" />
 				
 				<com.hbln.lib_views.DrawableCenterTextView
-					android:id="@+id/tv_school_detail_cai"
+					android:id="@+id/tv_webview_cai"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
@@ -90,7 +94,7 @@
 					android:textStyle="bold" />
 				
 				<EditText
-					android:id="@+id/et_school_comment"
+					android:id="@+id/et_webview_comment"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="@dimen/x10"
@@ -100,7 +104,7 @@
 					android:minHeight="@dimen/x80" />
 				
 				<Button
-					android:id="@+id/btn_school_detail_submit"
+					android:id="@+id/btn_webview_submit"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="right"
@@ -127,7 +131,7 @@
 		android:layout_height="@dimen/view_height">
 		
 		<ImageButton
-			android:id="@+id/ib_shaool_detail_font"
+			android:id="@+id/ib_webview_font"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
@@ -135,7 +139,7 @@
 			android:src="@drawable/icon_font" />
 		
 		<ImageButton
-			android:id="@+id/ib_shaool_detail_share"
+			android:id="@+id/ib_webview_share"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:layout_weight="1"

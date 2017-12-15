@@ -22,16 +22,23 @@ import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.utils.TitleUtil;
 import com.cmcc.lib_utils.utils.LogUtils;
+import com.cmcc.lib_utils.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * MVPPlugin
- * 邮箱 784787081@qq.com
+ * <p> 清风讲堂 </p><br>
+ *
+ * @author lwc
+ * @date 2017/12/15 20:24
+ * @note -
+ * -------------------------------------------------------------------------------------------------
+ * @modified -
+ * @date -
+ * @note -
  */
-
 public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolPresenter> implements SchoolContract.View, RadioGroup.OnCheckedChangeListener {
     public static final String INTENT_INDEX = "index";
     public static final int INTENT_INDEX_SCHOOL = 0;
@@ -109,19 +116,20 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
     
     private void initRecylerView() {
         mRvSchool.setLayoutManager(new LinearLayoutManager(getContext()));
-        mList_0.add(R.drawable.img_shcool_0);
-        mList_0.add(R.drawable.img_shcool_1);
         mList_0.add(R.drawable.img_shcool_2);
+        mList_0.add(R.drawable.img_shcool_1);
+        mList_0.add(R.drawable.img_shcool_0);
         mAdapter_0 = new RUAdapter<Integer>(getContext(), mList_0, R.layout.item_school_0) {
             @Override
             protected void onInflateData(RUViewHolder holder, Integer data, int position) {
                 holder.setImageView(R.id.iv_item_shcool_0, data);
+                holder.setText(R.id.tv_item_school_date, "最新更新时间：" + TimeUtils.getNowTimeString("yyyy-MM-dd"));
             }
         };
         mAdapter_0.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                SchoolItemActivity.start(getContext());
+                SchoolItemActivity.start(getContext(), position);
             }
         });
         
