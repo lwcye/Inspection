@@ -20,10 +20,10 @@ android {
     buildTypes {
         release {
             // 不显示Log
-            buildConfigField "boolean", "LEO_DEBUG", "false"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             zipAlignEnabled true
             shrinkResources true
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {

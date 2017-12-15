@@ -23,6 +23,7 @@ public class BaseApp extends Application {
     private static BaseApp sBaseApp;
     /** 系统偏好设置 */
     private static SPUtils spUtils;
+
     /** 单列 */
     public static BaseApp getInstance() {
         return sBaseApp;

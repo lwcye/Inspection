@@ -5,6 +5,7 @@ import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
+import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.JiafangModel;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -14,17 +15,18 @@ import com.trello.rxlifecycle.android.ActivityEvent;
  */
 
 public class InspectVisitPresenter extends BasePresenterImpl<InspectVisitContract.View> implements InspectVisitContract.Presenter {
-    
+
     @Override
     public void loadData() {
         getView().showLoading("");
         HttpRequest.getJiaFangServicee().index()
-            .compose(getView().getBaseActivity().<JiafangModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<JiafangModel>() {
-                @Override
-                public void result(JiafangModel jiafangModel) {
-                    getView().setData(jiafangModel);
-                }
-            }, new HttpError(getView()), new HttpComplete(getView()));
+                .compose(NetWorkInterceptor.<JiafangModel>retrySessionCreator())
+                .compose(getView().getBaseActivity().<JiafangModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<JiafangModel>() {
+                    @Override
+                    public void result(JiafangModel jiafangModel) {
+                        getView().setData(jiafangModel);
+                    }
+                }, new HttpError(getView()), new HttpComplete(getView()));
     }
 }

@@ -5,6 +5,7 @@ import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
+import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.MailModel;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -14,7 +15,7 @@ import com.trello.rxlifecycle.android.ActivityEvent;
  */
 
 public class AccountListPresenter extends BasePresenterImpl<AccountListContract.View> implements AccountListContract.Presenter {
-    
+
     @Override
     public void getMailData(final int index) {
         getView().showLoading("");
@@ -36,12 +37,13 @@ public class AccountListPresenter extends BasePresenterImpl<AccountListContract.
                 break;
         }
         HttpRequest.getUserService().tongxun(name)
-            .compose(getView().getBaseActivity().<MailModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<MailModel>() {
-                @Override
-                public void result(MailModel mailModel) {
-                    getView().setMailData(index, mailModel);
-                }
-            }, new HttpError(getView()), new HttpComplete(getView()));
+                .compose(NetWorkInterceptor.<MailModel>retrySessionCreator())
+                .compose(getView().getBaseActivity().<MailModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<MailModel>() {
+                    @Override
+                    public void result(MailModel mailModel) {
+                        getView().setMailData(index, mailModel);
+                    }
+                }, new HttpError(getView()), new HttpComplete(getView()));
     }
 }

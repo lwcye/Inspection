@@ -44,6 +44,7 @@ public class JfShiTiModel extends ResultModel {
         public String create_time;
         public String pic;
         public String typeid;
+        public String nums;
         public List<DanxuanBean> danxuan;
         public List<DuoxuanBean> duoxuan;
         public List<WendaBean> wenda;

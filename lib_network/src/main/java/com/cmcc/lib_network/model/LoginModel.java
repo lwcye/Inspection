@@ -4,6 +4,15 @@ import android.text.TextUtils;
 
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_network.constans.URLs;
+import com.cmcc.lib_network.http.HttpComplete;
+import com.cmcc.lib_network.http.HttpError;
+import com.cmcc.lib_network.http.HttpRequest;
+import com.cmcc.lib_network.http.HttpResult;
+import com.cmcc.lib_network.http.NetWorkInterceptor;
+import com.google.gson.Gson;
+
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * <p>describe</p><br>
@@ -35,6 +44,36 @@ public class LoginModel extends ResultModel {
         BaseApp.getSpUtils().put(URLs.UID_KEY, "");
         BaseApp.getSpUtils().put(URLs.USERNAME_KEY, "");
         BaseApp.getSpUtils().put(URLs.PASSWORD_KEY, "");
+        BaseApp.getSpUtils().put(URLs.USERINFO_KEY, "");
+    }
+
+    public static void getUserInfo(final Action1<UserInfoModel.UserInfo> userInfoAction1) {
+        if (userInfoAction1 == null) {
+            return;
+        }
+        String userinfo = BaseApp.getSpUtils().getString(URLs.USERINFO_KEY, "");
+        if (!TextUtils.isEmpty(userinfo)) {
+            UserInfoModel.UserInfo userInfo = new Gson().fromJson(userinfo, UserInfoModel.UserInfo.class);
+            if (userInfo != null) {
+                userInfoAction1.call(userInfo);
+            }
+        } else {
+            HttpRequest.getUserService().userinfo()
+                    .compose(NetWorkInterceptor.<UserInfoModel>retrySessionCreator())
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new HttpResult<UserInfoModel>() {
+                        @Override
+                        public void result(UserInfoModel userInfoModel) {
+                            setUserInfo(userInfoModel.info);
+                            userInfoAction1.call(userInfoModel.info);
+                        }
+                    }, new HttpError(), new HttpComplete());
+        }
+    }
+
+    public static void setUserInfo(UserInfoModel.UserInfo userInfo) {
+        BaseApp.getSpUtils().put(URLs.USERINFO_KEY, new Gson().toJson(userInfo));
     }
 
     /**
@@ -49,6 +88,12 @@ public class LoginModel extends ResultModel {
             URLs.UID = uid;
             BaseApp.getSpUtils().put(URLs.UID_KEY, uid);
         }
+        getUserInfo(new Action1<UserInfoModel.UserInfo>() {
+            @Override
+            public void call(UserInfoModel.UserInfo userInfo) {
+
+            }
+        });
     }
 
     /**

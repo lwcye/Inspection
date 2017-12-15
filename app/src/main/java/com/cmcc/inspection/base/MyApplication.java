@@ -1,6 +1,5 @@
 package com.cmcc.inspection.base;
 
-import com.cmcc.inspection.BuildConfig;
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_utils.utils.LogUtils;
@@ -37,7 +36,7 @@ public class MyApplication extends BaseApp {
      * Log的初始化
      */
     private void initLog() {
-        LogUtils.init(BuildConfig.LOG_DEBUG, false, 'v', "lwc");
-
+        // TODO: lwc 2017/12/15
+        LogUtils.init(true, false, 'v', "lwc");
     }
 }

@@ -4,6 +4,7 @@ package com.cmcc.inspection.feature.main.mainhome;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.brand.BrandActivity;
@@ -17,7 +18,11 @@ import com.cmcc.inspection.feature.workarena.WorkArenaActivity;
 import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.inspection.utils.TitleUtil;
+import com.cmcc.lib_network.model.LoginModel;
+import com.cmcc.lib_network.model.UserInfoModel;
 import com.hbln.lib_views.DrawableCenterTextView;
+
+import rx.functions.Action1;
 
 import static com.cmcc.inspection.feature.school.school.SchoolActivity.start;
 
@@ -40,6 +45,10 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     private RelativeLayout mRlHomeInspect;
     /** 先锋模范 */
     private DrawableCenterTextView mTvHomeModel;
+    /** 先锋模范 */
+    private TextView mTvHomeNickname;
+    private TextView mTvHomeDw;
+    private TextView mTvHomeMobile;
 
     /**
      * 创建Fragment实体
@@ -57,7 +66,14 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
 
     @Override
     public void initData() {
-
+        LoginModel.getUserInfo(new Action1<UserInfoModel.UserInfo>() {
+            @Override
+            public void call(UserInfoModel.UserInfo userInfo) {
+                mTvHomeNickname.setText(userInfo.nickname);
+                mTvHomeDw.setText(userInfo.danwei);
+                mTvHomeMobile.setText(userInfo.mobile);
+            }
+        });
     }
 
     @Override
@@ -128,6 +144,9 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
 
         mTvHomeTabWorkArena = (DrawableCenterTextView) view.findViewById(R.id.tv_home_tab_work_arena);
         mTvHomeTabWorkArena.setOnClickListener(this);
+        mTvHomeNickname = (TextView) view.findViewById(R.id.tv_home_nickname);
+        mTvHomeDw = (TextView) view.findViewById(R.id.tv_home_dw);
+        mTvHomeMobile = (TextView) view.findViewById(R.id.tv_home_mobile);
         mTvHomeSchool = (DrawableCenterTextView) view.findViewById(R.id.tv_home_school);
         mTvHomeSchool.setOnClickListener(this);
         mTvHomeRegular = (DrawableCenterTextView) view.findViewById(R.id.tv_home_regular);

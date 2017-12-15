@@ -17,9 +17,9 @@ import java.util.List;
  * @note -
  */
 public class JiafangModel extends ResultModel {
-    
+
     public List<JiafangInfoBean> info;
-    
+
     public static class JiafangInfoBean implements Parcelable {
         /**
          * id : 2
@@ -32,7 +32,7 @@ public class JiafangModel extends ResultModel {
          * typeid : 97
          * times : 2017-12-14 18:37
          */
-        
+
         public String id;
         public String title;
         public String dannums;
@@ -42,12 +42,13 @@ public class JiafangModel extends ResultModel {
         public String pic;
         public String typeid;
         public String times;
-    
+        public String nums;
+
         @Override
         public int describeContents() {
             return 0;
         }
-    
+
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.id);
@@ -59,11 +60,12 @@ public class JiafangModel extends ResultModel {
             dest.writeString(this.pic);
             dest.writeString(this.typeid);
             dest.writeString(this.times);
+            dest.writeString(this.nums);
         }
-    
+
         public JiafangInfoBean() {
         }
-    
+
         protected JiafangInfoBean(Parcel in) {
             this.id = in.readString();
             this.title = in.readString();
@@ -74,14 +76,15 @@ public class JiafangModel extends ResultModel {
             this.pic = in.readString();
             this.typeid = in.readString();
             this.times = in.readString();
+            this.nums = in.readString();
         }
-    
-        public static final Parcelable.Creator<JiafangInfoBean> CREATOR = new Parcelable.Creator<JiafangInfoBean>() {
+
+        public static final Creator<JiafangInfoBean> CREATOR = new Creator<JiafangInfoBean>() {
             @Override
             public JiafangInfoBean createFromParcel(Parcel source) {
                 return new JiafangInfoBean(source);
             }
-        
+
             @Override
             public JiafangInfoBean[] newArray(int size) {
                 return new JiafangInfoBean[size];

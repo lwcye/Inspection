@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,7 +20,6 @@ import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.utils.TitleUtil;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_network.model.JiafangModel;
-import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.lib_views.BottomPopupDialog;
@@ -35,7 +35,10 @@ import java.util.List;
 
 public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.View, VisitAnswerPresenter> implements VisitAnswerContract.View, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private static final String INTENT_KEY = "jiafangInfoBean";
-    
+    private static final String INTENT_NAME = "name";
+    private static final String INTENT_GUANXI = "guanxi";
+    private static final String INTENT_MOBILE = "mobile";
+
     /** 纪检干部培训调查问卷 */
     private TextView mTvAnswerTitle;
     /** 2017-01-01    答题量：1234人 */
@@ -55,53 +58,63 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
     private RadioGroup mRgAnswer;
     /** 下一题 */
     private Button mBtnAnswerNext;
-    
+
     private ImageButton mIbShaoolDetailFont;
     private ImageButton mIbShaoolDetailShare;
     private JiafangModel.JiafangInfoBean mBean;
     private JfShiTiModel mJfShiTiModel;
-    private int danXuanIndex = 0;
-    private int duoXuanIndex = 0;
-    private int wenDaIndex = 0;
-    private int index = 0;
-    
+    private int position = 0;
+    private int type = 0;
+    private String name = "";
+    private String guanxi = "";
+    private String moblie = "";
+
     private List<String> stids = new ArrayList<>();
     private List<String> daids = new ArrayList<>();
-    
+    private EditText mEtAnswerWanda;
+    /** 提交 */
+    private Button mBtnAnswerSubmit;
+
+    public static void start(Context context, JiafangModel.JiafangInfoBean jiafangInfoBean, String name, String guanxi, String mobile) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(guanxi) || TextUtils.isEmpty(mobile) || jiafangInfoBean == null) {
+            return;
+        }
+
+        Intent starter = new Intent(context, VisitAnswerActivity.class);
+        starter.putExtra(INTENT_KEY, jiafangInfoBean);
+        starter.putExtra(INTENT_NAME, name);
+        starter.putExtra(INTENT_GUANXI, guanxi);
+        starter.putExtra(INTENT_MOBILE, mobile);
+        context.startActivity(starter);
+    }
+
     @Override
     protected VisitAnswerPresenter createPresenter() {
         return new VisitAnswerPresenter();
     }
-    
-    public static void start(Context context, JiafangModel.JiafangInfoBean jiafangInfoBean) {
-        Intent starter = new Intent(context, VisitAnswerActivity.class);
-        starter.putExtra(INTENT_KEY, jiafangInfoBean);
-        context.startActivity(starter);
-    }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         mBean = getIntent().getParcelableExtra(INTENT_KEY);
+        name = getIntent().getStringExtra(INTENT_NAME);
+        guanxi = getIntent().getStringExtra(INTENT_GUANXI);
+        moblie = getIntent().getStringExtra(INTENT_MOBILE);
         mPresenter.loadData(mBean);
         initView();
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            })
-            .setTitle("线上家访")
-            .setColor(Color.WHITE, 255);
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                })
+                .setTitle("线上家访")
+                .setColor(Color.WHITE, 255);
     }
-    
+
     private void initView() {
-        mIbShaoolDetailFont = (ImageButton) findViewById(R.id.ib_shaool_detail_font);
-        mIbShaoolDetailFont.setOnClickListener(this);
-        mIbShaoolDetailShare = (ImageButton) findViewById(R.id.ib_shaool_detail_share);
-        mIbShaoolDetailShare.setOnClickListener(this);
         mTvAnswerTitle = (TextView) findViewById(R.id.tv_answer_title);
         mTvAnswerDate = (TextView) findViewById(R.id.tv_answer_date);
         mTvAnswerType = (TextView) findViewById(R.id.tv_answer_type);
@@ -114,8 +127,11 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
         mRgAnswer.setOnCheckedChangeListener(this);
         mBtnAnswerNext = (Button) findViewById(R.id.btn_answer_next);
         mBtnAnswerNext.setOnClickListener(this);
+        mEtAnswerWanda = (EditText) findViewById(R.id.et_answer_wanda);
+        mBtnAnswerSubmit = (Button) findViewById(R.id.btn_answer_submit);
+        mBtnAnswerSubmit.setOnClickListener(this);
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -140,56 +156,103 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
                 shareDialog.show();
                 break;
             case R.id.btn_answer_next:
-                if (index == 0) {
-                    stids.add(mJfShiTiModel.info.danxuan.get(danXuanIndex - 1).id + ",");
+                if (position + 1 == (mJfShiTiModel.info.danxuan.size() + mJfShiTiModel.info.wenda.size())) {
+                    mBtnAnswerNext.setVisibility(View.INVISIBLE);
+                }
+                if (type == 0) {
+                    stids.add(mJfShiTiModel.info.danxuan.get(position - 1).id + ",");
                     if (TextUtils.isEmpty(getRbIndex())) {
                         ToastUtils.showShortToastSafe("请选择一个选项");
                         return;
                     }
-                    daids.add(getRbIndex() + ",");
-                } else if (index == 1) {
-                    stids.add(mJfShiTiModel.info.danxuan.get(danXuanIndex - 1).id + ",");
+                    daids.add(getRbIndex() + "@");
+                } else if (type == 1) {
+                    stids.add(mJfShiTiModel.info.danxuan.get(position - 1).id + ",");
                     if (TextUtils.isEmpty(getRbIndex())) {
                         ToastUtils.showShortToastSafe("请至少选择一个选项");
                         return;
                     }
-                    daids.add(getRbIndex() + ",");
+                    daids.add(mEtAnswerWanda.getText().toString().trim() + "@");
                 } else {
-                    stids.add(mJfShiTiModel.info.danxuan.get(danXuanIndex - 1).id + ",");
-                    daids.add("问答,");
+                    stids.add(mJfShiTiModel.info.wenda.get(position - mJfShiTiModel.info.danxuan.size() - 1).id + ",");
+                    daids.add(mEtAnswerWanda.getText().toString().trim() + "@");
                 }
-                if (mJfShiTiModel.info.danxuan != null && danXuanIndex < mJfShiTiModel.info.danxuan.size()) {
-                    LogUtils.e(danXuanIndex, mJfShiTiModel.info.danxuan.size());
-                    resetDanXuanData(mJfShiTiModel.info.danxuan.get(danXuanIndex++));
-                } else if (mJfShiTiModel.info.duoxuan != null && duoXuanIndex < mJfShiTiModel.info.duoxuan.size()) {
-                    index = 1;
-                    resetDanXuanData(mJfShiTiModel.info.danxuan.get(duoXuanIndex++));
+
+                if (mJfShiTiModel.info.danxuan != null && position < mJfShiTiModel.info.danxuan.size()) {
+                    resetDanXuanData(mJfShiTiModel.info.danxuan.get(position++));
+                } else if (mJfShiTiModel.info.duoxuan != null && position < mJfShiTiModel.info.duoxuan.size()) {
+                    type = 1;
+                    resetDanXuanData(mJfShiTiModel.info.danxuan.get(position++));
                 } else {
-                    LogUtils.e(stids);
-                    LogUtils.e(daids);
-                    index = 2;
-                    resetWenDaData(mJfShiTiModel.info.wenda.get(wenDaIndex++));
+                    type = 2;
+                    resetWenDaData(mJfShiTiModel.info.wenda.get((position - mJfShiTiModel.info.danxuan.size())));
                 }
+                mRbAnswer0.setChecked(false);
+                mRbAnswer1.setChecked(false);
+                mRbAnswer2.setChecked(false);
+                mRbAnswer3.setChecked(false);
+                mEtAnswerWanda.setText("");
                 break;
+            case R.id.btn_answer_submit:
+                if (type == 0) {
+                    stids.add(mJfShiTiModel.info.danxuan.get(position - 1).id + ",");
+                    if (TextUtils.isEmpty(getRbIndex())) {
+                        ToastUtils.showShortToastSafe("请选择一个选项");
+                        return;
+                    }
+                    daids.add(getRbIndex() + "@");
+                } else if (type == 1) {
+                    stids.add(mJfShiTiModel.info.danxuan.get(position - 1).id + ",");
+                    if (TextUtils.isEmpty(getRbIndex())) {
+                        ToastUtils.showShortToastSafe("请至少选择一个选项");
+                        return;
+                    }
+                    daids.add(mEtAnswerWanda.getText().toString().trim() + "@");
+                } else {
+                    stids.add(mJfShiTiModel.info.wenda.get(position - mJfShiTiModel.info.danxuan.size() - 1).id + ",");
+                    daids.add(mEtAnswerWanda.getText().toString().trim() + "@");
+                }
+
+                StringBuilder ids = new StringBuilder();
+                for (String stid : stids) {
+                    ids.append(stid);
+                }
+                CharSequence stids = ids.toString().subSequence(0, ids.toString().length() - 1);
+
+                StringBuilder daans = new StringBuilder();
+                for (String stid : daids) {
+                    daans.append(stid);
+                }
+                CharSequence daids = daans.toString().subSequence(0, daans.toString().length() - 1);
+                mPresenter.submit(mBean.id, name, guanxi, moblie, stids.toString(), daids.toString());
+                break;
+            default:
+                break;
+
         }
     }
-    
+
     @Override
     public void setData(JfShiTiModel jfShiTiModel) {
         mJfShiTiModel = jfShiTiModel;
         mTvAnswerTitle.setText(mJfShiTiModel.info.title);
-        mTvAnswerDate.setText(TimeUtils.millis2String(Long.valueOf(mJfShiTiModel.info.create_time) * 1000, "yyyy-MM-dd") + "\t\t" + "答题量" + mJfShiTiModel.info.duonums);
-        
-        resetDanXuanData(mJfShiTiModel.info.danxuan.get(danXuanIndex++));
+        mTvAnswerDate.setText(TimeUtils.millis2String(Long.valueOf(mJfShiTiModel.info.create_time) * 1000, "yyyy-MM-dd") + "\t\t" + "答题量" + mJfShiTiModel.info.nums);
+
+        resetDanXuanData(mJfShiTiModel.info.danxuan.get(position++));
     }
-    
+
+    @Override
+    public void submitSuccess(String message) {
+        ToastUtils.showShortToastSafe(message);
+        finish();
+    }
+
     public void resetDanXuanData(JfShiTiModel.ShiTiInfoBean.DanxuanBean danxuanBean) {
         mTvAnswerType.setText("单选题");
-        mTvAnswerContent.setText(danXuanIndex + "、" + danxuanBean.title);
-        
+        mTvAnswerContent.setText(position + "、" + danxuanBean.title);
+
         for (int i = 0; i < danxuanBean.danan.size(); i++) {
             RadioButton button;
-            
             if (i == 0) {
                 button = mRbAnswer0;
             } else if (i == 1) {
@@ -207,22 +270,23 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
             }
         }
     }
-    
+
     public void resetDuoXuanData(JfShiTiModel.ShiTiInfoBean.DanxuanBean danxuanBean) {
         mTvAnswerType.setText("多选题");
-        mTvAnswerContent.setText(danXuanIndex + "、" + danxuanBean.title);
+        mTvAnswerContent.setText(position + "、" + danxuanBean.title);
         mRbAnswer0.setText(danxuanBean.danan.get(0));
         mRbAnswer1.setText(danxuanBean.danan.get(1));
         mRbAnswer2.setText(danxuanBean.danan.get(2));
         mRbAnswer3.setText(danxuanBean.danan.get(3));
     }
-    
+
     public void resetWenDaData(JfShiTiModel.ShiTiInfoBean.WendaBean danxuanBean) {
-        mTvAnswerType.setText("单选题");
-        mTvAnswerContent.setText(danXuanIndex + "、" + danxuanBean.title);
-        
+        mRgAnswer.setVisibility(View.GONE);
+        mEtAnswerWanda.setVisibility(View.VISIBLE);
+        mTvAnswerType.setText("问答题");
+        mTvAnswerContent.setText(++position + "、" + danxuanBean.title);
     }
-    
+
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
@@ -237,9 +301,9 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
             default:
                 break;
         }
-        
+
     }
-    
+
     public String getRbIndex() {
         if (mRbAnswer0.isChecked()) {
             return "A";
@@ -255,5 +319,5 @@ public class VisitAnswerActivity extends MVPBaseActivity<VisitAnswerContract.Vie
         }
         return "";
     }
-    
+
 }

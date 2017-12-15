@@ -20,28 +20,28 @@ import com.cmcc.inspection.utils.TitleUtil;
  */
 
 public class InspectTrackDetailActivity extends MVPBaseActivity<InspectTrackDetailContract.View, InspectTrackDetailPresenter> implements InspectTrackDetailContract.View, View.OnClickListener {
-    
+
     /** 轨迹追踪 */
     private TextView mBtbInspectTrackDetail;
     private ImageView mIvTrackDetail;
-    
+
     @Override
     protected InspectTrackDetailPresenter createPresenter() {
         return new InspectTrackDetailPresenter();
     }
-    
+
     public static void start(Context context) {
         Intent starter = new Intent(context, InspectTrackDetailActivity.class);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inpect_track_detail);
         initView();
     }
-    
+
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
             .setLeftClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class InspectTrackDetailActivity extends MVPBaseActivity<InspectTrackDeta
         mBtbInspectTrackDetail.setOnClickListener(this);
         mIvTrackDetail = (ImageView) findViewById(R.id.iv_track_detail);
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

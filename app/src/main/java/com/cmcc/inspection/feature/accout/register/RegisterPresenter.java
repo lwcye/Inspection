@@ -7,6 +7,7 @@ import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
+import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.DwLianDongModel;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.ObjectModel;
@@ -30,6 +31,7 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> 
             pid = "0";
         }
         HttpRequest.getUserService().dwliandong(pid)
+                .compose(NetWorkInterceptor.<DwLianDongModel>retrySessionCreator())
                 .compose(getView().getBaseActivity().<DwLianDongModel>applySchedulers(ActivityEvent.DESTROY))
                 .subscribe(new HttpResult<DwLianDongModel>() {
                     @Override
@@ -90,6 +92,7 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> 
         }
         getView().showLoading("");
         HttpRequest.getUserService().useryanzheng(name, sfid)
+                .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
                 .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
                 .subscribe(new HttpResult<ObjectModel>() {
                     @Override
