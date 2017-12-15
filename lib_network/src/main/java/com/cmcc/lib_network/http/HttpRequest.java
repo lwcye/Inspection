@@ -5,6 +5,7 @@ import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.service.JiaFangService;
+import com.cmcc.lib_network.service.ShcoolService;
 import com.cmcc.lib_network.service.UserService;
 import com.cmcc.lib_network.service.WorkService;
 
@@ -31,14 +32,15 @@ public class HttpRequest {
     private static UserService sUserService;
     private static WorkService sWorkService;
     private static JiaFangService sJiaFangService;
-
+    private static ShcoolService sShcoolService;
+    
     private static synchronized <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
         interceptorList.add(new NetWorkInterceptor());
         return RetrofitWrapper.createInstance(URLs.HTTP_URL, RetrofitWrapper.CONVERTER_GSON,
-                interceptorList, false).create(service);
+            interceptorList, false).create(service);
     }
-
+    
     /**
      * 获取user服务
      *
@@ -50,7 +52,7 @@ public class HttpRequest {
         }
         return sUserService;
     }
-
+    
     /**
      * 获取user服务
      *
@@ -62,7 +64,7 @@ public class HttpRequest {
         }
         return sWorkService;
     }
-
+    
     /**
      * 获取user服务
      *
@@ -74,7 +76,19 @@ public class HttpRequest {
         }
         return sJiaFangService;
     }
-
+    
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized ShcoolService getShcoolService() {
+        if (null == sShcoolService) {
+            sShcoolService = create(ShcoolService.class);
+        }
+        return sShcoolService;
+    }
+    
     /**
      * 登陆的接口调用
      *
@@ -82,16 +96,16 @@ public class HttpRequest {
      */
     public static Observable<LoginModel> login() {
         return HttpRequest.getUserService().login(BaseApp.getSpUtils().getString(URLs.USERNAME_KEY),
-                BaseApp.getSpUtils().getString(URLs.PASSWORD_KEY),
-                URLs.HTTP_TOKEN)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .doOnNext(new HttpResult<LoginModel>() {
-                    @Override
-                    public void result(LoginModel loginModel) {
-                        loginModel.saveUserInfo();
-                    }
-                })
-                .observeOn(Schedulers.io());
+            BaseApp.getSpUtils().getString(URLs.PASSWORD_KEY),
+            URLs.HTTP_TOKEN)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .doOnNext(new HttpResult<LoginModel>() {
+                @Override
+                public void result(LoginModel loginModel) {
+                    loginModel.saveUserInfo();
+                }
+            })
+            .observeOn(Schedulers.io());
     }
 }

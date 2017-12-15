@@ -44,6 +44,6 @@ public class WorkModel extends ResultModel {
         public String nums;
         public String times;
         public String danwei;
-        public List<Object> picpath;
+        public Object picpath;
     }
 }

@@ -28,8 +28,8 @@ android {
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            zipAlignEnabled false
-            shrinkResources false
+            zipAlignEnabled true
+            shrinkResources true
             minifyEnabled false
             debuggable true
         }

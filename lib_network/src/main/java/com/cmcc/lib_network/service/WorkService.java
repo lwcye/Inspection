@@ -1,5 +1,6 @@
 package com.cmcc.lib_network.service;
 
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_network.model.WorkModel;
 
 import retrofit2.http.Field;
@@ -24,22 +25,20 @@ public interface WorkService {
     Observable<WorkModel> jobdongtaisoso(
         @Field("title") String title,
         @Field("pageNo") String pageNo,
-        @Field("pageSize") String pageSize,
-        @Field("typeid") String typeid
+        @Field("pageSize") String pageSize
     );
     
     @FormUrlEncoded
     @POST("public/api/main/jobdongtai")
     Observable<WorkModel> jobdongtai(
         @Field("pageNo") String pageNo,
-        @Field("pageSize") String pageSize,
-        @Field("typeid") String typeid
+        @Field("pageSize") String pageSize
     
     );
     
     @FormUrlEncoded
     @POST("public/api/main/jobdongtaiview")
-    Observable<WorkModel> jobdongtaiview(
+    Observable<WebViewModel> jobdongtaiview(
         @Field("id") String id
     );
 }
