@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.base.MyApplication;
 import com.cmcc.inspection.feature.accout.accountlist.AccountListActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.lib_network.model.UserInfoModel;
@@ -50,6 +49,11 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
 
     @Override
     public void initData() {
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mPresenter.loadUserInfo();
     }
 
@@ -102,11 +106,10 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
     }
 
     @Override
-    public void resultUserInfo(UserInfoModel userInfoModel) {
-        MyApplication.setUserInfoModel(userInfoModel);
-        mTvUserName.setText(userInfoModel.info.nickname);
-        mTvUserSfid.setText(userInfoModel.info.sfid);
-        mTvUserMobile.setText(userInfoModel.info.mobile);
-        mTvUserDanwei.setText(userInfoModel.info.danwei);
+    public void resultUserInfo(UserInfoModel.UserInfo userInfoModel) {
+        mTvUserName.setText(userInfoModel.nickname);
+        mTvUserSfid.setText(userInfoModel.sfid);
+        mTvUserMobile.setText(userInfoModel.mobile);
+        mTvUserDanwei.setText(userInfoModel.danwei);
     }
 }

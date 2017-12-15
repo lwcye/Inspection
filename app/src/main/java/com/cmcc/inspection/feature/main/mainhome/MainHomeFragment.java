@@ -66,6 +66,12 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         LoginModel.getUserInfo(new Action1<UserInfoModel.UserInfo>() {
             @Override
             public void call(UserInfoModel.UserInfo userInfo) {

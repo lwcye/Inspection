@@ -109,6 +109,18 @@ public class ViewUtils {
     }
 
     /**
+     * 通过id查找view
+     *
+     * @param root 根view
+     * @param id id
+     * @return 查找到的view
+     */
+    public static <T extends View> T findViewById(View root, int id) {
+
+        return (T) root.findViewById(id);
+    }
+
+    /**
      * 给TextView设置Drawable,如果不设置，传0
      *
      * @param view TextView

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/tv_web_view_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="@dimen/x10"
+            android:text="噢，出现错误了"
+            android:textColor="#505050"
+            android:textSize="@dimen/t16"/>
+
+        <TextView
+            android:id="@+id/tv_web_view_error_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_web_view_error_message"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="(DNS_PROBE_ERROR)"
+            android:textColor="#b3b3b3"
+            android:textSize="@dimen/t12"/>
+
+        <TextView
+            android:id="@+id/tv_web_view_error_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_web_view_error_reason"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x10"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="@dimen/x10"
+            android:text="重试"
+            android:textColor="#00A3FF"
+            android:textSize="@dimen/t16"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

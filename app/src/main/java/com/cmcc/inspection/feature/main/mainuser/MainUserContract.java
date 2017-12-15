@@ -12,7 +12,7 @@ import com.cmcc.lib_network.model.UserInfoModel;
 
 public class MainUserContract {
     interface View extends BaseView {
-        void resultUserInfo(UserInfoModel userInfoModel);
+        void resultUserInfo(UserInfoModel.UserInfo userInfoModel);
     }
 
     interface Presenter extends BasePresenter<View> {
