@@ -79,7 +79,7 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
                 holder.setText(R.id.tv_item_shcool_item_title, data.title);
                 holder.setText(R.id.tv_item_shcool_item_dw, data.danwei);
                 holder.setText(R.id.tv_item_shcool_item_data, data.times);
-                if (TextUtils.isEmpty(data.picpath.toString())) {
+                if (!TextUtils.isEmpty(data.picpath.toString())) {
                     holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
                     holder.setImageNet(R.id.iv_item_shcool_item, data.picpath.toString());
                 } else {

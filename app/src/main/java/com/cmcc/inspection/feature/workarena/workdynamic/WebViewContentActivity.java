@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cmcc.inspection.R;
@@ -22,6 +23,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.WebViewModel;
+import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.lib_views.BottomPopupDialog;
 import com.hbln.lib_views.DrawableCenterTextView;
@@ -45,8 +47,15 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     public static final String INTENT_TYPE = "type";
     public static final int TYPE_SCHOOL = 0;
     public static final int TYPE_WORK = 1;
+    public static final int TYPE_REGULAR = 2;
     public int mType = 0;
     public String mId = "";
+    
+    public static boolean hasComment = true;
+    public static boolean hasZan = true;
+    public static boolean hasFont = true;
+    
+    
     private BottomPopupDialog fontDialog;
     /** 强筋骨、明纪律 铸造执纪铁军 */
     private TextView mTvWebviewTitle;
@@ -62,6 +71,9 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     private Button mBtnWebviewSubmit;
     private ImageButton mIbWebviewFont;
     private ImageButton mIbWebviewShare;
+    private LinearLayout mLlWebviewZan;
+    private LinearLayout mLlWebviewComment;
+    private LinearLayout mLlWebviewFont;
     
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, WebViewContentActivity.class);
@@ -82,6 +94,14 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         loadData(mId, mType);
     }
     
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hasComment = true;
+        hasZan = true;
+        hasFont = true;
+    }
+    
     private void loadData(String id, int type) {
         if (TextUtils.isEmpty(id)) {
             ToastUtils.showShortToastSafe("数据读取错误");
@@ -89,11 +109,13 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
             return;
         }
         showLoading("");
-        Observable<WebViewModel> observable;
+        Observable<WebViewModel> observable = HttpRequest.getWorkService().jobdongtaiview(id);
         if (type == TYPE_SCHOOL) {
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
-        } else {
+        } else if (type == TYPE_WORK) {
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
+        } else if (type == TYPE_REGULAR) {
+            observable = HttpRequest.getRegularService().zdview(id);
         }
         observable
             .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
@@ -124,8 +146,28 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
         
-        WebViewManager.getInstance().initWebView(mWvWebview);
+        mLlWebviewZan = (LinearLayout) findViewById(R.id.ll_webview_zan);
+        mLlWebviewComment = (LinearLayout) findViewById(R.id.ll_webview_comment);
+        mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
         
+        if (hasZan) {
+            mLlWebviewZan.setVisibility(View.VISIBLE);
+        } else {
+            mLlWebviewZan.setVisibility(View.GONE);
+        }
+        if (hasComment) {
+            mLlWebviewComment.setVisibility(View.VISIBLE);
+        } else {
+            mLlWebviewComment.setVisibility(View.GONE);
+        }
+        if (hasFont) {
+            mLlWebviewFont.setVisibility(View.VISIBLE);
+        } else {
+            mLlWebviewFont.setVisibility(View.GONE);
+        }
+        
+        
+        WebViewManager.getInstance().initWebView(mWvWebview);
     }
     
     @Override
@@ -157,6 +199,9 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
+        if (TextUtils.isEmpty(data.times)) {
+            data.times = TimeUtils.millis2String(Long.valueOf(data.create_time) * 1000, "yyyy-MM-dd");
+        }
         mTvWebviewDate.setText(data.times + "\t\t" + "阅读量：" + data.nums);
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
     }

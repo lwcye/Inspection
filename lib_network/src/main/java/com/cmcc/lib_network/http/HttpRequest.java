@@ -5,6 +5,8 @@ import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.service.JiaFangService;
+import com.cmcc.lib_network.service.ModelService;
+import com.cmcc.lib_network.service.RegularService;
 import com.cmcc.lib_network.service.ShcoolService;
 import com.cmcc.lib_network.service.UserService;
 import com.cmcc.lib_network.service.WorkService;
@@ -33,6 +35,8 @@ public class HttpRequest {
     private static WorkService sWorkService;
     private static JiaFangService sJiaFangService;
     private static ShcoolService sShcoolService;
+    private static RegularService sRegularService;
+    private static ModelService sModelService;
     
     private static synchronized <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
@@ -87,6 +91,30 @@ public class HttpRequest {
             sShcoolService = create(ShcoolService.class);
         }
         return sShcoolService;
+    }
+    
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized RegularService getRegularService() {
+        if (null == sRegularService) {
+            sRegularService = create(RegularService.class);
+        }
+        return sRegularService;
+    }
+    
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized ModelService getModelService() {
+        if (null == sModelService) {
+            sModelService = create(ModelService.class);
+        }
+        return sModelService;
     }
     
     /**

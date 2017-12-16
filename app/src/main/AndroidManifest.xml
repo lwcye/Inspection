@@ -113,9 +113,7 @@
         <activity android:name=".feature.accout.loginforget.LoginForgetActivity"/>
         <activity android:name=".feature.accout.forgetpsd.ForgetResultActivity"/>
         <activity android:name=".feature.model.ModelActivity"/>
-        <activity
-            android:name=".feature.model.ModelDetailActivity"/>
-        <activity
+		<activity
             android:name=".feature.inspect.InspectActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".feature.fortress.FortressActivity"/>
@@ -126,6 +124,7 @@
         <activity android:name=".feature.accout.accountlist.accountlistdetail.AccountListDetailActivity"/>
         <activity android:name=".feature.inspect.visitanswer.VisitAnswerActivity"/>
 		<activity android:name=".feature.workarena.workdynamic.WebViewContentActivity" />
+		<activity android:name=".feature.model.ModelDetailActivity" />
 	</application>
 
 </manifest>

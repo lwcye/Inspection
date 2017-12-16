@@ -129,7 +129,7 @@ public class GlideLoader implements ILoader {
                     break;
             }
         }
-        request.crossFade().into(target);
+        request.fitCenter().thumbnail(0.2f).into(target);
     }
     /**
      * 通过参数设置加载图片
@@ -150,6 +150,6 @@ public class GlideLoader implements ILoader {
         if (options.thumbnail != Options.RES_NONE) {
             request.thumbnail(options.thumbnail);
         }
-        request.crossFade().into(target);
+        request.into(target);
     }
 }

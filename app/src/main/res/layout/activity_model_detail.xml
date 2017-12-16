@@ -17,31 +17,36 @@
 			android:background="@color/white"
 			android:orientation="vertical">
 			
-			<TextView
-				android:id="@+id/tv_webview_title"
+			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:gravity="center"
-				android:paddingBottom="@dimen/x12"
-				android:paddingLeft="@dimen/x12"
-				android:paddingRight="@dimen/x12"
-				android:paddingTop="@dimen/x12"
-				android:text="强筋骨、明纪律 铸造执纪铁军"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
-			
-			<TextView
-				android:id="@+id/tv_webview_date"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="@dimen/x12"
-				android:layout_marginLeft="@dimen/x12"
-				android:layout_marginRight="@dimen/x12"
-				android:text="2017-01-01    阅读量：1234"
-				android:textColor="@color/black_hint"
-				android:textSize="@dimen/t14" />
-			
-			<View style="@style/view_line" />
+				android:layout_height="@dimen/x100"
+				android:background="@drawable/img_model_top_bg"
+				android:orientation="vertical">
+				
+				<TextView
+					android:id="@+id/tv_webview_title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/x25"
+					android:gravity="center"
+					android:text="2016年个人总结"
+					android:textColor="@color/colorAccentRedDeep"
+					android:textSize="@dimen/t18"
+					android:textStyle="bold" />
+				
+				<TextView
+					android:id="@+id/tv_webview_date"
+					android:layout_width="wrap_content"
+					android:paddingBottom="@dimen/x3"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginTop="@dimen/x20"
+					android:background="@drawable/img_model_detail_name"
+					android:gravity="center"
+					android:text="场小学"
+					android:textColor="@color/white"
+					android:textSize="@dimen/t12" />
+			</LinearLayout>
 			
 			<com.cmcc.inspection.widget.x5.utils.BridgeWebView
 				android:id="@+id/wv_webview"

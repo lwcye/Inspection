@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:orientation="vertical">
+	
+	<LinearLayout
+		android:id="@+id/ll_item_ragular"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x120">
+		
+		<ImageView
+			android:id="@+id/iv_item_regular"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:adjustViewBounds="true"
+			android:src="@drawable/img_ragular_0" />
+	</LinearLayout>
+	
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x20"
+		android:background="@drawable/img_ragular_div" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		
+		<TextView
+			android:id="@+id/tv_item_regular"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:paddingLeft="@dimen/x12"
+			android:paddingRight="@dimen/x12"
+			android:text="《党章》"
+			android:textColor="@color/black_title"
+			android:textSize="@dimen/t16" />
+	</LinearLayout>
+</LinearLayout>

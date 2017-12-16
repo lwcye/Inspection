@@ -6,293 +6,101 @@
 	
 	<include layout="@layout/title_bar" />
 	
-	<ScrollView
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:background="@drawable/img_ragular_bg"
+		android:orientation="vertical">
+		
+		<RadioGroup
+			android:id="@+id/rg_ragular"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/view_height"
+			android:background="@color/white"
+			android:orientation="horizontal"
+			android:paddingBottom="@dimen/x5"
+			android:paddingLeft="@dimen/x12"
+			android:paddingRight="@dimen/x12"
+			android:paddingTop="@dimen/x5">
+			
+			<RadioButton
+				android:id="@+id/rb_ragular_0"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@drawable/select_tab_left"
+				android:button="@null"
+				android:checked="true"
+				android:gravity="center"
+				android:text="中央"
+				android:textColor="@color/select_tab" />
+			
+			<RadioButton
+				android:id="@+id/rb_ragular_1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@drawable/select_tab_center"
+				android:button="@null"
+				android:gravity="center"
+				android:text="省"
+				android:textColor="@color/select_tab" />
+			
+			<RadioButton
+				android:id="@+id/rb_ragular_2"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@drawable/select_tab_center"
+				android:button="@null"
+				android:gravity="center"
+				android:text="市"
+				android:textColor="@color/select_tab" />
+			
+			<RadioButton
+				android:id="@+id/rb_ragular_3"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@drawable/select_tab_right"
+				android:button="@null"
+				android:gravity="center"
+				android:text="区"
+				android:textColor="@color/select_tab" />
+		</RadioGroup>
 		
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@drawable/img_ragular_bg"
-			android:orientation="vertical">
-			
-			<RadioGroup
-				android:id="@+id/rg_ragular"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
-				android:background="@color/white"
-				android:orientation="horizontal"
-				android:paddingBottom="@dimen/x5"
-				android:paddingLeft="@dimen/x12"
-				android:paddingRight="@dimen/x12"
-				android:paddingTop="@dimen/x5">
-				
-				<RadioButton
-					android:id="@+id/rb_ragular_0"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="@drawable/select_tab_left"
-					android:button="@null"
-					android:checked="true"
-					android:gravity="center"
-					android:text="中央"
-					android:textColor="@color/select_tab" />
-				
-				<RadioButton
-					android:id="@+id/rb_ragular_1"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="@drawable/select_tab_center"
-					android:button="@null"
-					android:gravity="center"
-					android:text="省"
-					android:textColor="@color/select_tab" />
-				
-				<RadioButton
-					android:id="@+id/rb_ragular_2"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="@drawable/select_tab_center"
-					android:button="@null"
-					android:gravity="center"
-					android:text="市"
-					android:textColor="@color/select_tab" />
-				
-				<RadioButton
-					android:id="@+id/rb_ragular_3"
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:background="@drawable/select_tab_right"
-					android:button="@null"
-					android:gravity="center"
-					android:text="区"
-					android:textColor="@color/select_tab" />
-			</RadioGroup>
+			android:layout_margin="@dimen/x12"
+			android:background="@color/white">
 			
 			<EditText
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/x30"
-				android:layout_margin="@dimen/x12"
+				android:id="@+id/et_reguler_seach"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/x36"
+				android:layout_weight="1"
 				android:background="@color/white"
-				android:drawableRight="@drawable/icon_search"
 				android:hint="请输入内容..."
+				android:imeOptions="actionSearch"
+				android:paddingLeft="@dimen/x10"
 				android:paddingRight="@dimen/x10"
 				android:textSize="@dimen/t12" />
 			
-			<LinearLayout
-				android:id="@+id/ll_ragular_0"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/x120">
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_0" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_0" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_1" />
-			</LinearLayout>
-			
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="@drawable/img_ragular_div" />
-			
-			<LinearLayout
-				
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《党章》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《中国共产党党内监督条例》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《中国共产党纪律处分条例》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-			</LinearLayout>
-			
-			<LinearLayout
-				android:id="@+id/ll_ragular_1"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/x120">
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_2" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_2" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_3" />
-			</LinearLayout>
-			
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="@drawable/img_ragular_div" />
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《“五铁五不怕”精神》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《审查人员“六不准”》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《安全文明审查“五必须”	》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-			</LinearLayout>
-			
-			<LinearLayout
-				android:id="@+id/ll_ragular_2"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/x120">
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_3" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_4" />
-				
-				<ImageView
-					android:layout_width="0dp"
-					android:layout_height="match_parent"
-					android:layout_weight="1"
-					android:adjustViewBounds="true"
-					android:src="@drawable/img_ragular_4" />
-			</LinearLayout>
-			
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="@drawable/img_ragular_div" />
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《驻点审查人员守则》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《“五铁五不怕”精神》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-				
-				<TextView
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:gravity="center"
-					android:paddingLeft="@dimen/x12"
-					android:paddingRight="@dimen/x12"
-					android:text="《关于进一步规范信访举报件办》"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t16" />
-			</LinearLayout>
+			<ImageView
+				android:id="@+id/iv_et_search"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:adjustViewBounds="true"
+				android:paddingLeft="@dimen/x10"
+				android:paddingRight="@dimen/x10"
+				android:scaleType="center"
+				android:src="@drawable/icon_search" />
 		</LinearLayout>
-	</ScrollView>
+		
+		<android.support.v4.view.ViewPager
+			android:id="@+id/vp_regular"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+	</LinearLayout>
 </LinearLayout>

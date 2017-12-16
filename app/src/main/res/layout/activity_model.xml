@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<RadioGroup
+		android:id="@+id/rg_model"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white"
+		android:orientation="horizontal"
+		android:paddingBottom="@dimen/x5"
+		android:paddingLeft="@dimen/x12"
+		android:paddingRight="@dimen/x12"
+		android:paddingTop="@dimen/x5">
+		
+		<RadioButton
+			android:id="@+id/rb_model_0"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/select_tab_left"
+			android:button="@null"
+			android:checked="true"
+			android:gravity="center"
+			android:text="先进个人"
+			android:textColor="@color/select_tab" />
+		
+		<RadioButton
+			android:id="@+id/rb_model_3"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/select_tab_right"
+			android:button="@null"
+			android:gravity="center"
+			android:text="先进集体"
+			android:textColor="@color/select_tab" />
+	</RadioGroup>
+	
+	<android.support.v4.view.ViewPager
+		android:id="@+id/vp_model"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/img_model_bg"
+		android:clipChildren="false"
+		android:clipToPadding="false"
+		android:paddingTop="@dimen/x10" />
+</LinearLayout>

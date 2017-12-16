@@ -26,13 +26,23 @@ public class ListFragment<T> extends BaseFragment {
     public RecyclerView mRecyclerView;
     public List<T> mList;
     public RUAdapter<T> mAdapter;
+    public RecyclerView.LayoutManager mLayoutManager;
+    public RecyclerView.ItemDecoration mItemDecoration;
     public RUAdapter.OnItemClickListener mOnItemClickListener;
     
     @Override
     public void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
+        if (mLayoutManager == null) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            mRecyclerView.setLayoutManager(mLayoutManager);
+        }
+        if (mItemDecoration == null) {
+            mRecyclerView.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
+        } else {
+            mRecyclerView.addItemDecoration(mItemDecoration);
+        }
         setAdapter(mAdapter);
     }
     
@@ -47,6 +57,14 @@ public class ListFragment<T> extends BaseFragment {
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.setDataEmptyLayoutId(R.layout.layout_empty);
         }
+    }
+    
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
+        mLayoutManager = layoutManager;
+    }
+    
+    public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        mItemDecoration = itemDecoration;
     }
     
     public void setData(List<T> list) {

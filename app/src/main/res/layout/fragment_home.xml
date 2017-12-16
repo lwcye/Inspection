@@ -161,7 +161,7 @@
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/img_home_tab_2"
                 android:gravity="center"
-                android:text="制度规范"
+                android:text="制度规定"
                 android:textColor="@color/black_title"
                 android:textSize="@dimen/t16"/>
         </LinearLayout>

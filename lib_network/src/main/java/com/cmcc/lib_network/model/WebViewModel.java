@@ -30,5 +30,10 @@ public class WebViewModel extends ResultModel {
         public String author;
         public String typeid;
         public String times;
+        public String danweione;
+        public String danweitwo;
+        public String name;
+        public Object fujian;
+        public String zhiwu;
     }
 }
