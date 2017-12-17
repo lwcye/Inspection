@@ -6,6 +6,7 @@ import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.service.JiaFangService;
 import com.cmcc.lib_network.service.ModelService;
+import com.cmcc.lib_network.service.PingPaiService;
 import com.cmcc.lib_network.service.RegularService;
 import com.cmcc.lib_network.service.ShcoolService;
 import com.cmcc.lib_network.service.UserService;
@@ -37,6 +38,7 @@ public class HttpRequest {
     private static ShcoolService sShcoolService;
     private static RegularService sRegularService;
     private static ModelService sModelService;
+    private static PingPaiService sPingPaiService;
     
     private static synchronized <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
@@ -115,6 +117,17 @@ public class HttpRequest {
             sModelService = create(ModelService.class);
         }
         return sModelService;
+    }
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized PingPaiService getBrandService() {
+        if (null == sPingPaiService) {
+            sPingPaiService = create(PingPaiService.class);
+        }
+        return sPingPaiService;
     }
     
     /**

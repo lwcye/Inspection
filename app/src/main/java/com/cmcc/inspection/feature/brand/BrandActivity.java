@@ -6,35 +6,39 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.brand.branddetail.BrandDetailActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
+import com.cmcc.inspection.ui.adapter.RUAdapter;
+import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.utils.TitleUtil;
-import com.hbln.lib_views.DrawableCenterTextView;
+import com.cmcc.lib_network.model.BrandModel;
+import com.cmcc.lib_utils.utils.ViewUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * MVPPlugin
- * 邮箱 784787081@qq.com
+ * <p> 品牌创新 </p><br>
+ *
+ * @author lwc
+ * @date 2017/12/16 23:01
+ * @note -
+ * -------------------------------------------------------------------------------------------------
+ * @modified -
+ * @date -
+ * @note -
  */
-
-public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPresenter> implements BrandContract.View, View.OnClickListener {
-    
-    /** 监督执纪\n问责平台 */
-    private TextView mTvBrandTab0;
-    /** 监督责任\n考核 */
-    private TextView mTvBrandTab1;
-    /** 三清贾汪大\n数据信息公开\n平台 */
-    private TextView mTvBrandTab2;
-    /** “守住底线，\n不忘初心”主\n题教育会 */
-    private TextView mTvBrandTab3;
-    /** 优化营商\n环境 */
-    private TextView mTvBrandTab4;
-    /** “月月\n谈”制度 */
-    private TextView mTvBrandTab5;
+public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPresenter> implements BrandContract.View, View.OnClickListener, RUAdapter.OnItemClickListener {
+    private RecyclerView mRvBrand;
+    private List<BrandModel.Info> mList = new ArrayList<>();
+    private RUAdapter<BrandModel.Info> mAdapter;
     
     @Override
     protected BrandPresenter createPresenter() {
@@ -51,49 +55,92 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand);
         initView();
+        mPresenter.loadData();
     }
     
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
-                .setLeftClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBackPressed();
-                    }
-                })
-                .setColor(Color.WHITE, 255);
-        mTvBrandTab0 = (DrawableCenterTextView) findViewById(R.id.tv_brand_tab_0);
-        mTvBrandTab0.setOnClickListener(this);
-        mTvBrandTab1 = (DrawableCenterTextView) findViewById(R.id.tv_brand_tab_1);
-        mTvBrandTab2 = (TextView) findViewById(R.id.tv_brand_tab_2);
-        mTvBrandTab3 = (TextView) findViewById(R.id.tv_brand_tab_3);
-        mTvBrandTab5 = (TextView) findViewById(R.id.tv_brand_tab_5);
-        mTvBrandTab1.setOnClickListener(this);
-        mTvBrandTab2.setOnClickListener(this);
-        mTvBrandTab3.setOnClickListener(this);
-        mTvBrandTab4 = (DrawableCenterTextView) findViewById(R.id.tv_brand_tab_4);
-        mTvBrandTab4.setOnClickListener(this);
-        mTvBrandTab5.setOnClickListener(this);
-
+        TitleUtil.attach(this)
+            .setBack(true)
+            .setTitle("品牌创新");
+        mRvBrand = (RecyclerView) findViewById(R.id.rv_brand);
+        
+        initRecylerView();
+    }
+    
+    private void initRecylerView() {
+        
+        mAdapter = new RUAdapter<BrandModel.Info>(getContext(), mList, R.layout.item_brand) {
+            @Override
+            protected void onInflateData(RUViewHolder holder, BrandModel.Info data, final int position) {
+                int resId = R.drawable.icon_brand_tab_3;
+                if (position % 3 == 0) {
+                    resId = R.drawable.icon_brand_tab_0;
+                }
+                if (position % 3 == 1) {
+                    resId = R.drawable.icon_brand_tab_1;
+                }
+                if (position % 3 == 2) {
+                    resId = R.drawable.icon_brand_tab_2;
+                }
+                TextView viewById = holder.getViewById(R.id.dtv_item_brand);
+                if (position % 6 == 2) {
+                    ViewUtils.setTextDrawable(viewById, resId, 0, 0, 0, getContext());
+                } else if (position % 6 == 3) {
+                    ViewUtils.setTextDrawable(viewById, 0, 0, resId, 0, getContext());
+                } else {
+                    ViewUtils.setTextDrawable(viewById, 0, resId, 0, 0, getContext());
+                }
+                
+                if (position % 6 == 0) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#A2A09A"));
+                } else if (position % 6 == 1) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#005586"));
+                } else if (position % 6 == 2) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00D0FF"));
+                } else if (position % 6 == 3) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00D0FF"));
+                } else if (position % 6 == 4) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#FEBC02"));
+                } else if (position % 6 == 5) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00F4FF"));
+                }
+                
+                holder.setText(R.id.dtv_item_brand, position + data.title);
+            }
+        };
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position % 6 == 2) {
+                    return 2;
+                }
+                if (position % 6 == 3) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        mRvBrand.setLayoutManager(gridLayoutManager);
+        mAdapter.setOnItemClickListener(this);
+        mRvBrand.setAdapter(mAdapter);
+    }
+    
+    
+    @Override
+    public void setData(BrandModel data) {
+        mList = data.info;
+        mAdapter.setData(mList);
     }
     
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_brand_tab_0:
-                break;
-            case R.id.tv_brand_tab_1:
-                break;
-            case R.id.tv_brand_tab_2:
-                BrandDetailActivity.start(getContext());
-                break;
-            case R.id.tv_brand_tab_3:
-                break;
-            case R.id.tv_brand_tab_4:
-                break;
-            case R.id.tv_brand_tab_5:
-                break;
-        }
+         
+    }
+    
+    @Override
+    public void onItemClick(View view, int itemType, int position) {
+        BrandDetailActivity.start(getContext(), mList.get(position).id);
     }
 }
 

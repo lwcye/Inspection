@@ -199,10 +199,17 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
+        String times;
         if (TextUtils.isEmpty(data.times)) {
-            data.times = TimeUtils.millis2String(Long.valueOf(data.create_time) * 1000, "yyyy-MM-dd");
+            try {
+                times = TimeUtils.millis2String(Long.valueOf(data.create_time) * 1000, "yyyy-MM-dd");
+            } catch (NumberFormatException e) {
+                times = data.create_time;
+            }
+        } else {
+            times = data.times;
         }
-        mTvWebviewDate.setText(data.times + "\t\t" + "阅读量：" + data.nums);
+        mTvWebviewDate.setText(times + "\t\t" + "阅读量：" + data.nums);
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
     }
 }
