@@ -11,6 +11,7 @@ import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.widget.BeiZhuDialog;
+import com.cmcc.lib_network.model.TrackModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,76 +28,98 @@ import java.util.List;
  * @date -
  * @note -
  */
-public class InspectTrackFragment extends MVPBaseFragment<InspectTrackContract.View, InspectTrackPresenter> implements InspectTrackContract.View, View.OnClickListener {
+public class InspectTrackFragment extends MVPBaseFragment<InspectTrackContract.View, InspectTrackPresenter> implements InspectTrackContract.View, View.OnClickListener, RUAdapter.OnItemClickListener {
     private RecyclerView mRvInspectTrack;
-    private List<String> mList = new ArrayList<>();
-    private RUAdapter<String> mAdapter;
+    private List<TrackModel.InfoBean> mList = new ArrayList<>();
+    private RUAdapter<TrackModel.InfoBean> mAdapter;
     private BeiZhuDialog mBeiZhuDialog;
-
+    
     @Override
     protected InspectTrackPresenter createPresenter() {
         return new InspectTrackPresenter();
     }
-
+    
     @Override
     public void initData() {
         mPresenter.loadTrackData();
     }
-
+    
     @Override
     public void initView(View view) {
         mRvInspectTrack = (RecyclerView) view.findViewById(R.id.rv_inspect_track);
         view.findViewById(R.id.iv_track_sign).setOnClickListener(this);
         initRecyclerView();
     }
-
+    
     private void initRecyclerView() {
         mRvInspectTrack.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        mList.add("0");
-        mList.add("1");
-        mList.add("2");
-        mAdapter = new RUAdapter<String>(getContext(), mList, R.layout.item_inspect_track) {
+        mAdapter = new RUAdapter<TrackModel.InfoBean>(getContext(), mList, R.layout.item_inspect_track) {
             @Override
-            protected void onInflateData(RUViewHolder holder, String data, int position) {
-
+            protected void onInflateData(RUViewHolder holder, TrackModel.InfoBean data, final int position) {
+                if (position % 3 == 0) {
+                    holder.setImageView(R.id.iv_item_inspect, R.drawable.icon_inspect_item_0);
+                } else if (position % 3 == 1) {
+                    holder.setImageView(R.id.iv_item_inspect, R.drawable.icon_inspect_item_1);
+                } else {
+                    holder.setImageView(R.id.iv_item_inspect, R.drawable.icon_inspect_item_2);
+                }
+                holder.setText(R.id.tv_item_inspect_name, data.name);
+                holder.setText(R.id.tv_item_inspect_loc, "位置：" + data.address);
+                holder.setText(R.id.tv_item_inspect_date, data.times);
+                holder.setOnClickListener(R.id.tv_item_inspect_tag, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showBeiZhuDialog(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mPresenter.postTrackTag(mList.get(position).id, mBeiZhuDialog.getBeiZhu());
+                            }
+                        });
+                    }
+                });
             }
         };
-        mAdapter.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int itemType, int position) {
-                InspectTrackDetailActivity.start(getContext());
-            }
-        });
+        mAdapter.setOnItemClickListener(this);
         mRvInspectTrack.setAdapter(mAdapter);
     }
-
+    
     @Override
     public int getLayoutId() {
         return R.layout.fragment_inspect_track;
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_track_sign:
-                showBeiZhuDialog();
+                showBeiZhuDialog(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.postTrackData(mBeiZhuDialog.getBeiZhu());
+                    }
+                });
                 break;
             default:
                 break;
         }
     }
-
-    private void showBeiZhuDialog() {
+    
+    private void showBeiZhuDialog(View.OnClickListener onClickListener) {
         if (mBeiZhuDialog == null) {
             mBeiZhuDialog = new BeiZhuDialog(getContext());
-            mBeiZhuDialog.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPresenter.postTrackData(mBeiZhuDialog.getBeiZhu());
-                }
-            });
         }
+        mBeiZhuDialog.setOnClickListener(onClickListener);
         mBeiZhuDialog.show();
+    }
+    
+    @Override
+    public void setTrackData(TrackModel trackData) {
+        mList = trackData.info;
+        mAdapter.setData(mList);
+    }
+    
+    @Override
+    public void onItemClick(View view, int itemType, int position) {
+        InspectTrackDetailActivity.start(getContext(), mList.get(position));
     }
 }

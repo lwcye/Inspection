@@ -49,7 +49,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     private TextView mTvHomeNickname;
     private TextView mTvHomeDw;
     private TextView mTvHomeMobile;
-
+    
     /**
      * 创建Fragment实体
      *
@@ -58,17 +58,17 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     public static MainHomeFragment newInstance() {
         return new MainHomeFragment();
     }
-
+    
     @Override
     protected MainHomePresenter createPresenter() {
         return new MainHomePresenter();
     }
-
+    
     @Override
     public void initData() {
-
+        
     }
-
+    
     @Override
     public void onResume() {
         super.onResume();
@@ -81,12 +81,12 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
             }
         });
     }
-
+    
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -132,22 +132,22 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 break;
             case R.id.tv_home_track:
                 //业务练兵
-                InspectTrackDetailActivity.start(getBaseActivity());
+                InspectTrackDetailActivity.start(getBaseActivity(), null);
                 break;
             default:
                 break;
         }
     }
-
+    
     @Override
     public void initView(View view) {
         TitleUtil.attach(view)
-                .setLeft("贾汪区").setLeftColor(Color.WHITE)
-                .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
-                .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
-                .setColor(R.color.white, 0)
-                .setShadow(false);
-
+            .setLeft("贾汪区").setLeftColor(Color.WHITE)
+            .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
+            .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
+            .setColor(R.color.white, 0)
+            .setShadow(false);
+        
         mTvHomeTabWorkArena = (DrawableCenterTextView) view.findViewById(R.id.tv_home_tab_work_arena);
         mTvHomeTabWorkArena.setOnClickListener(this);
         mTvHomeNickname = (TextView) view.findViewById(R.id.tv_home_nickname);

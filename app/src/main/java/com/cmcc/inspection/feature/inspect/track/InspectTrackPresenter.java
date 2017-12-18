@@ -10,6 +10,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.TrackModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -19,20 +20,21 @@ import com.trello.rxlifecycle.android.ActivityEvent;
  */
 
 public class InspectTrackPresenter extends BasePresenterImpl<InspectTrackContract.View> implements InspectTrackContract.Presenter {
-
+    
     @Override
     public void loadTrackData() {
         getView().showLoading("");
         HttpRequest.getTrackService().index("1", URLs.PAGE_SIZE)
-                .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
-                .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
-                .subscribe(new HttpResult<ObjectModel>() {
-                    @Override
-                    public void result(ObjectModel objectModel) {
-                    }
-                }, new HttpError(getView()), new HttpComplete(getView()));
+            .compose(NetWorkInterceptor.<TrackModel>retrySessionCreator())
+            .compose(getView().getBaseActivity().<TrackModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<TrackModel>() {
+                @Override
+                public void result(TrackModel objectModel) {
+                    getView().setTrackData(objectModel);
+                }
+            }, new HttpError(getView()), new HttpComplete(getView()));
     }
-
+    
     @Override
     public void postTrackData(final String beiZhu) {
         getView().showLoading("");
@@ -40,19 +42,36 @@ public class InspectTrackPresenter extends BasePresenterImpl<InspectTrackContrac
             @Override
             public void locationListener(BDLocation location) {
                 HttpRequest.getTrackService().add(TimeUtils.getNowTimeMills() / 1000 + "",
-                        location.getLongitude() + "",
-                        location.getLatitude() + "",
-                        location.getAddrStr(),
-                        beiZhu)
-                        .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
-                        .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
-                        .subscribe(new HttpResult<ObjectModel>() {
-                            @Override
-                            public void result(ObjectModel objectModel) {
-                            }
-                        }, new HttpError(getView()), new HttpComplete(getView()));
+                    location.getLongitude() + "",
+                    location.getLatitude() + "",
+                    location.getAddrStr(),
+                    beiZhu)
+                    .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
+                    .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
+                    .subscribe(new HttpResult<ObjectModel>() {
+                        @Override
+                        public void result(ObjectModel objectModel) {
+                        }
+                    }, new HttpError(getView()) {
+                        @Override
+                        public void call(Throwable throwable) {
+                        }
+                    }, new HttpComplete(getView()));
             }
         });
-
+        
+    }
+    
+    @Override
+    public void postTrackTag(String id, String beiZhu) {
+        getView().showLoading("");
+        HttpRequest.getTrackService().beizhu(id, beiZhu)
+            .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
+            .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<ObjectModel>() {
+                @Override
+                public void result(ObjectModel objectModel) {
+                }
+            }, new HttpError(getView()), new HttpComplete(getView()));
     }
 }

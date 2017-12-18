@@ -66,10 +66,9 @@
 			android:textSize="@dimen/t16" />
 	</LinearLayout>
 	
-	<ImageView
-		android:id="@+id/iv_track_detail"
+	<com.baidu.mapapi.map.MapView
+		android:id="@+id/map_track_detail"
+		android:clickable="true"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:scaleType="centerCrop"
-		android:src="@drawable/img_inspect_track_0" />
+		android:layout_height="match_parent" />
 </LinearLayout>

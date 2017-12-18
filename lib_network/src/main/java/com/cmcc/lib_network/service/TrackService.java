@@ -1,6 +1,7 @@
 package com.cmcc.lib_network.service;
 
 import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.TrackModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -26,7 +27,7 @@ public interface TrackService {
      */
     @FormUrlEncoded
     @POST("public/api/guiji/index")
-    Observable<ObjectModel> index(
+    Observable<TrackModel> index(
             @Field("pageNo") String pageNo,
             @Field("pageSize") String pageSize
     );

@@ -61,7 +61,7 @@ import com.cmcc.lib_utils.utils.Utils;
  */
 public class BaiduMapUtils {
     /** 默认地图缩放大小，值越大越地图详细 */
-    public static final int MAP_ZOOM_DEFAULT = 17;
+    public static final int MAP_ZOOM_DEFAULT = 15;
     /** 默认地图缩放间隔 */
     public static final int MAP_ZOOM_DIV = 3;
     /** 默认地图缩放间隔 */
@@ -82,13 +82,13 @@ public class BaiduMapUtils {
     private BDLocation mBDLocation;
     /** 定位次数 */
     private int mLocationNum = 0;
-
+    
     /**
      * 无参构造类
      */
     private BaiduMapUtils() {
     }
-
+    
     /**
      * 单例模式
      *
@@ -97,7 +97,7 @@ public class BaiduMapUtils {
     public static BaiduMapUtils getInstance() {
         return sOurInstance;
     }
-
+    
     /**
      * 开启定位，并在BaiduMapUtils保存Location信息
      *
@@ -116,7 +116,7 @@ public class BaiduMapUtils {
         mLocationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                LogUtils.d(bdLocation);
+                LogUtils.e(bdLocation);
                 if (bdLocation == null) {
                     // 若定位失败，重试10次
                     if (mLocationNum < RETRY_COUNT) {
@@ -126,7 +126,7 @@ public class BaiduMapUtils {
                     } else {
                         ToastUtils.showShortToastSafe(R.string.o2o_error_location);
                         mLocationClient.stop();
-
+                        
                         return;
                     }
                 } else {
@@ -143,12 +143,12 @@ public class BaiduMapUtils {
                             ToastUtils.showShortToastSafe(R.string.o2o_error_location);
                         }
                         mLocationClient.stop();
-
+                        
                         return;
                     }
                 }
                 mLocationClient.stop();
-
+                
                 mBDLocation = bdLocation;
                 if (null != baiduMap) {
                     //增加自己的定位信息
@@ -156,7 +156,7 @@ public class BaiduMapUtils {
                 }
                 locationListener.locationListener(mBDLocation);
             }
-
+            
             @Override
             public void onConnectHotSpotMessage(String s, int i) {
             }
@@ -164,7 +164,7 @@ public class BaiduMapUtils {
         initLocation(mLocationClient);
         mLocationClient.start();
     }
-
+    
     /**
      * 初始化定位的设置参数
      *
@@ -174,41 +174,41 @@ public class BaiduMapUtils {
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         //可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-
+        
         option.setCoorType("bd09ll");
         //可选，默认gcj02，设置返回的定位结果坐标系
-
+        
         int span = 3500;
         option.setScanSpan(span);
         //可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-
+        
         option.setIsNeedAddress(true);
         //可选，设置是否需要地址信息，默认不需要
-
+        
         option.setOpenGps(true);
         //可选，默认false,设置是否使用gps
-
+        
         option.setLocationNotify(true);
         //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-
+        
         option.setIsNeedLocationDescribe(true);
         //可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-
+        
         option.setIsNeedLocationPoiList(true);
         //可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-
+        
         option.setIgnoreKillProcess(false);
         //可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-
+        
         option.SetIgnoreCacheException(false);
         //可选，默认false，设置是否收集CRASH信息，默认收集
-
+        
         option.setEnableSimulateGps(false);
         //可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
-
+        
         mLocationClient.setLocOption(option);
     }
-
+    
     /**
      * 初始化百度地图的参数
      *
@@ -227,10 +227,11 @@ public class BaiduMapUtils {
             @Override
             public void onMapLoaded() {
                 baiduOption(baiduMap, finalZoom);
+                moveMapToCurrentLocation(baiduMap);
             }
         });
     }
-
+    
     /**
      * 百度初始化参数设置
      *
@@ -245,7 +246,7 @@ public class BaiduMapUtils {
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(builder.build());
         baiduMap.animateMapStatus(mMapStatusUpdate);
     }
-
+    
     /**
      * 添加自身地位的覆盖物
      *
@@ -257,15 +258,15 @@ public class BaiduMapUtils {
             public void locationListener(BDLocation location) {
                 baiduMap.setMyLocationEnabled(true);
                 MyLocationData locData = new MyLocationData.Builder()
-                        .accuracy(mBDLocation.getRadius())
-                        // 此处设置开发者获取到的方向信息，顺时针0-360
-                        .direction(mBDLocation.getDirection()).latitude(mBDLocation.getLatitude())
-                        .longitude(mBDLocation.getLongitude()).build();
+                    .accuracy(mBDLocation.getRadius())
+                    // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(mBDLocation.getDirection()).latitude(mBDLocation.getLatitude())
+                    .longitude(mBDLocation.getLongitude()).build();
                 baiduMap.setMyLocationData(locData);
             }
         });
     }
-
+    
     /**
      * 将百度地图移动到指定经纬度处
      *
@@ -282,7 +283,7 @@ public class BaiduMapUtils {
         //改变地图状态
         baiduMap.animateMapStatus(mMapStatusUpdate);
     }
-
+    
     /**
      * 移动到当前位置
      *
@@ -292,6 +293,7 @@ public class BaiduMapUtils {
         beginLocation(baiduMap, true, new OnLocationListener() {
             @Override
             public void locationListener(BDLocation location) {
+                LogUtils.e(location);
                 //设定中心点坐标
                 LatLng center = new LatLng(mBDLocation.getLatitude(), mBDLocation.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder().zoom(MAP_ZOOM_DEFAULT).target(center);
@@ -302,7 +304,7 @@ public class BaiduMapUtils {
             }
         });
     }
-
+    
     /**
      * 通过经纬度信息来获取地址信息
      *
@@ -317,9 +319,9 @@ public class BaiduMapUtils {
         mGeoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
             @Override
             public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
-
+                
             }
-
+            
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
                 if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -333,7 +335,7 @@ public class BaiduMapUtils {
         });
         mGeoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(new LatLng(latitude, longitude)));
     }
-
+    
     /**
      * 通过地址信息获取经纬度
      *
@@ -355,15 +357,15 @@ public class BaiduMapUtils {
                 //获取反向地理编码结果
                 locationWithAddressListener.locationWithAddressListener(geoCodeResult);
             }
-
+            
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
-
+                
             }
         });
         mGeoCoder.geocode(new GeoCodeOption().city(CITY_DEFAULT).address(address));
     }
-
+    
     /**
      * 在百度地图上指定的经纬度添加覆盖物
      *
@@ -379,14 +381,14 @@ public class BaiduMapUtils {
         //构建MarkerOption，用于在地图上添加Marker
         LatLng point = new LatLng(latitude, longitude);
         MarkerOptions option = new MarkerOptions()
-                .position(point)
-                .draggable(false)
-                .animateType(MarkerOptions.MarkerAnimateType.grow)
-                .icon(bitmap);
+            .position(point)
+            .draggable(false)
+            .animateType(MarkerOptions.MarkerAnimateType.grow)
+            .icon(bitmap);
         //在地图上添加Marker，并显示
         return baiduMap.addOverlay(option);
     }
-
+    
     /**
      * 根据2个坐标点进行缩放地图
      *
@@ -403,9 +405,9 @@ public class BaiduMapUtils {
         builder.include(new LatLng(otherLatitude, otherLongitude));
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLngBounds(builder.build());
         baiduMap.animateMapStatus(update);
-
+        
     }
-
+    
     /**
      * 搜索关键字
      *
@@ -417,7 +419,7 @@ public class BaiduMapUtils {
         mSuggestionSearch.setOnGetSuggestionResultListener(onGetSuggestionResultListener);
         mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(keyword).city(CITY_DEFAULT).citylimit(true));
     }
-
+    
     /**
      * 通过兴趣点uid搜索详细信息
      *
@@ -429,9 +431,9 @@ public class BaiduMapUtils {
         mPoiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
             @Override
             public void onGetPoiResult(PoiResult poiResult) {
-
+                
             }
-
+            
             @Override
             public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
                 if (poiDetailResult.error != SearchResult.ERRORNO.NO_ERROR) {
@@ -441,15 +443,15 @@ public class BaiduMapUtils {
                     onGetDetailResult.getDetailResult(poiDetailResult);
                 }
             }
-
+            
             @Override
             public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-
+                
             }
         });
         mPoiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUid(uid));
     }
-
+    
     /**
      * 释放内存相关的操作
      */
@@ -471,7 +473,7 @@ public class BaiduMapUtils {
             baiduMap.clear();
         }
     }
-
+    
     /**
      * 定位监听器
      */
@@ -483,7 +485,7 @@ public class BaiduMapUtils {
          */
         void locationListener(BDLocation location);
     }
-
+    
     /**
      * 通过经纬度监听地址位置
      */
@@ -495,7 +497,7 @@ public class BaiduMapUtils {
          */
         void getAddressWithLocationListener(ReverseGeoCodeResult reverseGeoCodeResult);
     }
-
+    
     /**
      * 通过地址信息监听经纬度
      */
@@ -507,7 +509,7 @@ public class BaiduMapUtils {
          */
         void locationWithAddressListener(GeoCodeResult geoCodeResult);
     }
-
+    
     /**
      * 获得地址详细信息
      */

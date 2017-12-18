@@ -47,6 +47,7 @@
 			android:layout_alignLeft="@id/tv_item_inspect_name"
 			android:layout_alignParentBottom="true"
 			android:layout_below="@id/tv_item_inspect_name"
+			android:layout_marginRight="@dimen/x55"
 			android:gravity="bottom"
 			android:text="位置："
 			android:textColor="@color/black_title"
@@ -63,11 +64,15 @@
 		
 		<Button
 			android:id="@+id/tv_item_inspect_tag"
-			style="@style/Base.Widget.AppCompat.Button.Small"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="@dimen/x50"
+			android:layout_height="@dimen/x25"
 			android:layout_alignParentRight="true"
+			android:layout_alignParentBottom="true"
 			android:layout_below="@id/tv_item_inspect_date"
+			android:minHeight="0dp"
+			android:minWidth="0dp"
+			android:paddingBottom="@dimen/x5"
+			android:paddingTop="@dimen/x5"
 			android:text="备注"
 			android:textColor="@color/black_title"
 			android:textSize="@dimen/t10" />

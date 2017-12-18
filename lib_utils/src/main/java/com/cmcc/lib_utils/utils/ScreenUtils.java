@@ -40,7 +40,7 @@ public class ScreenUtils {
     private ScreenUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    
     /**
      * 获取屏幕的宽度（单位：px）
      *
@@ -52,7 +52,21 @@ public class ScreenUtils {
         windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
         return dm.widthPixels;
     }
-
+    
+    public static float getScreenXdpi() {
+        WindowManager windowManager = (WindowManager) Utils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
+        windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
+        return dm.xdpi;
+    }
+    
+    public static float getScreenYdpi() {
+        WindowManager windowManager = (WindowManager) Utils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
+        windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
+        return dm.ydpi;
+    }
+    
     /**
      * 获取屏幕的高度（单位：px）
      *
@@ -64,7 +78,14 @@ public class ScreenUtils {
         windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
         return dm.heightPixels;
     }
-
+    
+    public static float getScreenDensity() {
+        WindowManager windowManager = (WindowManager) Utils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
+        windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
+        return dm.density;
+    }
+    
     /**
      * 判断是否横屏
      *
@@ -73,7 +94,7 @@ public class ScreenUtils {
     public static boolean isLandscape() {
         return Utils.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
-
+    
     /**
      * 设置屏幕为横屏
      * <p>还有一种就是在Activity中加属性android:screenOrientation="landscape"</p>
@@ -87,7 +108,7 @@ public class ScreenUtils {
     public static void setLandscape(Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
-
+    
     /**
      * 判断是否竖屏
      *
@@ -96,7 +117,7 @@ public class ScreenUtils {
     public static boolean isPortrait() {
         return Utils.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
-
+    
     /**
      * 设置屏幕为竖屏
      *
@@ -105,7 +126,7 @@ public class ScreenUtils {
     public static void setPortrait(Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
-
+    
     /**
      * 获取屏幕旋转角度
      *
@@ -125,7 +146,7 @@ public class ScreenUtils {
                 return 270;
         }
     }
-
+    
     /**
      * 获取当前屏幕截图，包含状态栏
      *
@@ -143,7 +164,7 @@ public class ScreenUtils {
         view.destroyDrawingCache();
         return ret;
     }
-
+    
     /**
      * 获取当前屏幕截图，不包含状态栏
      *
@@ -162,7 +183,7 @@ public class ScreenUtils {
         view.destroyDrawingCache();
         return ret;
     }
-
+    
     /**
      * 判断是否锁屏
      *
@@ -172,7 +193,7 @@ public class ScreenUtils {
         KeyguardManager km = (KeyguardManager) Utils.getContext().getSystemService(Context.KEYGUARD_SERVICE);
         return km.inKeyguardRestrictedInputMode();
     }
-
+    
     /**
      * 获取进入休眠时长
      *
@@ -186,7 +207,7 @@ public class ScreenUtils {
             return -123;
         }
     }
-
+    
     /**
      * 设置进入休眠时长
      * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_SETTINGS" />}</p>

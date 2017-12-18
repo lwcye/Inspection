@@ -3,6 +3,7 @@ package com.cmcc.inspection.base;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.tencent.smtt.sdk.QbSdk;
@@ -24,7 +25,7 @@ public class MyApplication extends BaseApp {
     public void onCreate() {
         super.onCreate();
         initLog();
-
+        SDKInitializer.initialize(getApplicationContext());
     }
     /**
      * 初始化X5内核

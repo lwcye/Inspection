@@ -26,4 +26,5 @@ public interface BaseView {
      * @note 标志可用于打印调试信息
      */
     public String TAG();
+    
 }
