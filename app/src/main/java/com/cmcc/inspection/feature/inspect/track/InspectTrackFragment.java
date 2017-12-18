@@ -41,6 +41,11 @@ public class InspectTrackFragment extends MVPBaseFragment<InspectTrackContract.V
     
     @Override
     public void initData() {
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
         mPresenter.loadTrackData();
     }
     

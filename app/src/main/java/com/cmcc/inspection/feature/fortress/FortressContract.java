@@ -3,6 +3,8 @@ package com.cmcc.inspection.feature.fortress;
 
 import com.cmcc.lib_common.mvp.BasePresenter;
 import com.cmcc.lib_common.mvp.BaseView;
+import com.cmcc.lib_network.model.FortressHomeModel;
+import com.cmcc.lib_network.model.JianDuModel;
 
 /**
  * MVPPlugin
@@ -11,10 +13,16 @@ import com.cmcc.lib_common.mvp.BaseView;
 
 public class FortressContract {
     interface View extends BaseView {
-     
+        void setJianDuData(JianDuModel jianDuData);
+        
+        void setJiaoYuData(FortressHomeModel homeModel);
+        
     }
     
     interface Presenter extends BasePresenter<View> {
-     
+        void loadJiaoYuData();
+        
+        void loadJianDuData();
+        
     }
 }

@@ -48,6 +48,8 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     public static final int TYPE_SCHOOL = 0;
     public static final int TYPE_WORK = 1;
     public static final int TYPE_REGULAR = 2;
+    public static final int TYPE_FORTRESS_JIANDU = 3;
+    public static final int TYPE_FORTRESS_HOME = 4;
     public int mType = 0;
     public String mId = "";
     
@@ -116,6 +118,10 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
         } else if (type == TYPE_REGULAR) {
             observable = HttpRequest.getRegularService().zdview(id);
+        }else if (type == TYPE_FORTRESS_HOME) {
+            observable = HttpRequest.getFortressService().zhuzhiview(id);
+        }if (type == TYPE_FORTRESS_JIANDU) {
+            observable = HttpRequest.getFortressService().dangyuanjianduview(id);
         }
         observable
             .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())

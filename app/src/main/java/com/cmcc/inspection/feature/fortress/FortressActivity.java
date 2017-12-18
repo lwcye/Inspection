@@ -8,18 +8,25 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.feature.fortress.education.FortressEducationFragment;
-import com.cmcc.inspection.feature.fortress.inspect.ForTressInspectFragment;
+import com.cmcc.inspection.feature.fortress.education.FortressHomeFragment;
 import com.cmcc.inspection.feature.fortress.manager.FortressManagerFragment;
 import com.cmcc.inspection.feature.main.MainActivity;
+import com.cmcc.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
 import com.cmcc.inspection.ui.adapter.FragmentViewPagerAdapter;
+import com.cmcc.inspection.ui.adapter.RUAdapter;
+import com.cmcc.inspection.ui.adapter.RUViewHolder;
+import com.cmcc.inspection.ui.fragment.ListFragment;
 import com.cmcc.inspection.utils.TitleUtil;
+import com.cmcc.lib_network.model.FortressHomeModel;
+import com.cmcc.lib_network.model.JianDuModel;
+import com.cmcc.lib_utils.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +45,18 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
     private RadioButton mRbFortress1;
     /** 党员管理 */
     private RadioButton mRbFortress2;
+    private RadioButton mRbFortress3;
     private RadioGroup mRgFortress;
     private ViewPager mVpForTress;
     private FragmentViewPagerAdapter mAdapter;
+    
+    private List<JianDuModel.InfoBean> mJianDuModels = new ArrayList<>();
+    private RUAdapter<JianDuModel.InfoBean> mJianDuRUAdapter;
+    private ListFragment<JianDuModel.InfoBean> mJianDuListFragment = new ListFragment<>();
+    
+    private List<FortressHomeModel.InfoBean> mJiaoYuModels = new ArrayList<>();
+    private RUAdapter<FortressHomeModel.InfoBean> mJiaoYuRUAdapter;
+    private ListFragment<FortressHomeModel.InfoBean> mJiaoYuListFragment = new ListFragment<>();
     
     @Override
     protected FortressPresenter createPresenter() {
@@ -57,6 +73,8 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fortress);
         initView();
+        mPresenter.loadJianDuData();
+        mPresenter.loadJiaoYuData();
     }
     
     private void initView() {
@@ -67,22 +85,70 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
                     MainActivity.start(getContext());
                 }
             })
-            .setTitle("制度规定");
+            .setTitle("支部堡垒");
         mRbFortress0 = (RadioButton) findViewById(R.id.rb_fortress_0);
         mRbFortress1 = (RadioButton) findViewById(R.id.rb_fortress_1);
         mRbFortress2 = (RadioButton) findViewById(R.id.rb_fortress_2);
+        mRbFortress3 = (RadioButton) findViewById(R.id.rb_fortress_3);
         mRgFortress = (RadioGroup) findViewById(R.id.rg_fortress);
         mVpForTress = (ViewPager) findViewById(R.id.vp_fortress);
         mRgFortress.setOnCheckedChangeListener(this);
         
         
+        initViewPager();
+        mVpForTress.addOnPageChangeListener(this);
+    }
+    
+    private void initViewPager() {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(new FortressEducationFragment());
-        fragmentList.add(new ForTressInspectFragment());
+        mJianDuRUAdapter = new RUAdapter<JianDuModel.InfoBean>(getContext(), mJianDuModels, R.layout.item_fortress) {
+            @Override
+            protected void onInflateData(RUViewHolder holder, JianDuModel.InfoBean data, int position) {
+                holder.setText(R.id.tv_item_fortress, data.title);
+                holder.setText(R.id.tv_item_fortress_date, data.times);
+                if (TextUtils.isEmpty(data.author)) {
+                    holder.setVisibility(R.id.tv_item_fortress_name, View.GONE);
+                } else {
+                    holder.setVisibility(R.id.tv_item_fortress_name, View.VISIBLE);
+                    holder.setText(R.id.tv_item_fortress_name, data.author);
+                }
+            }
+        };
+        mJianDuListFragment.setAdapter(mJianDuRUAdapter);
+        mJianDuListFragment.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int itemType, int position) {
+                WebViewContentActivity.start(getContext(), mJianDuModels.get(position).id, WebViewContentActivity.TYPE_FORTRESS_JIANDU);
+            }
+        });
+        
+        mJiaoYuRUAdapter = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mJiaoYuModels, R.layout.item_fortress) {
+            @Override
+            protected void onInflateData(RUViewHolder holder, FortressHomeModel.InfoBean data, int position) {
+                holder.setText(R.id.tv_item_fortress, data.title);
+                holder.setText(R.id.tv_item_fortress_date, data.times);
+                if (TextUtils.isEmpty(data.zhibuname)) {
+                    holder.setVisibility(R.id.tv_item_fortress_name, View.GONE);
+                } else {
+                    holder.setVisibility(R.id.tv_item_fortress_name, View.VISIBLE);
+                    holder.setText(R.id.tv_item_fortress_name, data.zhibuname);
+                }
+            }
+        };
+        
+        mJiaoYuListFragment.setAdapter(mJiaoYuRUAdapter);
+        mJiaoYuListFragment.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int itemType, int position) {
+                WebViewContentActivity.start(getContext(), mJiaoYuModels.get(position).id, WebViewContentActivity.TYPE_FORTRESS_HOME);
+            }
+        });
+        fragmentList.add(new FortressHomeFragment());
+        fragmentList.add(mJiaoYuListFragment);
+        fragmentList.add(mJianDuListFragment);
         fragmentList.add(new FortressManagerFragment());
         mAdapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         mVpForTress.setAdapter(mAdapter);
-        mVpForTress.addOnPageChangeListener(this);
     }
     
     
@@ -97,6 +163,9 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
                 break;
             case R.id.rb_fortress_2:
                 mVpForTress.setCurrentItem(2);
+                break;
+            case R.id.rb_fortress_3:
+                mVpForTress.setCurrentItem(3);
                 break;
             default:
                 break;
@@ -120,6 +189,9 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
             case 2:
                 mRbFortress2.setChecked(true);
                 break;
+            case 3:
+                mRbFortress3.setChecked(true);
+                break;
             default:
                 break;
         }
@@ -128,5 +200,19 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
     @Override
     public void onPageScrollStateChanged(int state) {
         
+    }
+    
+    @Override
+    public void setJianDuData(JianDuModel jianDuData) {
+        LogUtils.e(jianDuData.info.size());
+        mJianDuModels = jianDuData.info;
+        mJianDuRUAdapter.setData(mJianDuModels);
+    }
+    
+    @Override
+    public void setJiaoYuData(FortressHomeModel homeModel) {
+        mJiaoYuModels = homeModel.info;
+        LogUtils.e(mJiaoYuModels.size());
+        mJiaoYuRUAdapter.setData(mJiaoYuModels);
     }
 }

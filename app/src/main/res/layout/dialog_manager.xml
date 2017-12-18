@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/x330"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:background="@color/white"
+	android:gravity="center"
+	android:orientation="vertical">
+	
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x60"
+		android:background="@color/colorAccentRed"
+		android:gravity="center_vertical"
+		android:paddingLeft="@dimen/x20"
+		android:text="个人基本信息"
+		android:textColor="@color/white"
+		android:textSize="@dimen/t22" />
+	
+	<View
+		android:id="@+id/v_dialog_shadow"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/x1"
+		android:background="@color/gray4" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingLeft="@dimen/x30"
+		android:paddingRight="@dimen/x30">
+		
+		<LinearLayout
+			style="@style/cell_linlay">
+			
+			<TextView
+				style="@style/cell_text_left"
+				android:layout_width="@dimen/x70"
+				android:gravity="center_vertical|right"
+				android:text="姓名："
+				android:textColor="@color/black_hint" />
+			
+			<TextView
+				android:id="@+id/tv_manager_name"
+				style="@style/cell_text_right"
+				android:drawableRight="@null"
+				android:gravity="center_vertical"
+				tools:text="李勇" />
+		</LinearLayout>
+		
+		<LinearLayout
+			style="@style/cell_linlay">
+			
+			<TextView
+				style="@style/cell_text_left"
+				android:layout_width="@dimen/x70"
+				android:gravity="center_vertical|right"
+				android:text="职务："
+				android:textColor="@color/black_hint" />
+			
+			<TextView
+				android:id="@+id/tv_manager_zhiwu"
+				style="@style/cell_text_right"
+				android:drawableRight="@null"
+				android:gravity="center_vertical"
+				tools:text="李勇" />
+		</LinearLayout>
+		
+		<LinearLayout
+			style="@style/cell_linlay">
+			
+			<TextView
+				style="@style/cell_text_left"
+				android:layout_width="@dimen/x70"
+				android:gravity="center_vertical|right"
+				android:text="所属单位："
+				android:textColor="@color/black_hint" />
+			
+			<TextView
+				android:id="@+id/tv_manager_danwei"
+				style="@style/cell_text_right"
+				android:drawableRight="@null"
+				android:gravity="center_vertical"
+				tools:text="李勇" />
+		</LinearLayout>
+	
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/x20"
+		android:layout_marginRight="@dimen/x10"
+		android:layout_marginTop="@dimen/x20">
+		
+		<Space
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" />
+		
+		<Button
+			android:id="@+id/btn_beizhu_ok"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/shape_btn_normal_small"
+			android:minHeight="0dp"
+			android:minWidth="0dp"
+			android:paddingBottom="@dimen/x5"
+			android:paddingLeft="@dimen/x10"
+			android:paddingRight="@dimen/x10"
+			android:paddingTop="@dimen/x5"
+			android:text="确认"
+			android:textColor="@color/white"
+			android:textSize="@dimen/t14" />
+	</LinearLayout>
+</LinearLayout>

@@ -23,7 +23,7 @@ import java.util.List;
  * 邮箱 784787081@qq.com
  */
 
-public class FortressEducationFragment extends MVPBaseFragment<FortressEducationContract.View, FortressEducationPresenter> implements FortressEducationContract.View {
+public class FortressHomeFragment extends MVPBaseFragment<FortressEducationContract.View, FortressEducationPresenter> implements FortressEducationContract.View {
     
     private View view;
     private RecyclerView mRvFortressModuleBtn;

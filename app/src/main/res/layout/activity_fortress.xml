@@ -26,7 +26,7 @@
 			android:button="@null"
 			android:checked="true"
 			android:gravity="center"
-			android:text="党员教育"
+			android:text="首页"
 			android:textColor="@color/select_tab" />
 		
 		<RadioButton
@@ -37,11 +37,21 @@
 			android:background="@drawable/select_tab_center"
 			android:button="@null"
 			android:gravity="center"
-			android:text="党员监督"
+			android:text="党员教育"
 			android:textColor="@color/select_tab" />
 		
 		<RadioButton
 			android:id="@+id/rb_fortress_2"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="@drawable/select_tab_center"
+			android:button="@null"
+			android:gravity="center"
+			android:text="党员监督"
+			android:textColor="@color/select_tab" />
+		<RadioButton
+			android:id="@+id/rb_fortress_3"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"

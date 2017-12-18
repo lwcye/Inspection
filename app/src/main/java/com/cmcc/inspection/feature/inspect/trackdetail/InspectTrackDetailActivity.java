@@ -78,7 +78,11 @@ public class InspectTrackDetailActivity extends MVPBaseActivity<InspectTrackDeta
         mBean = getIntent().getParcelableExtra(INTENT_BEAN);
         initView();
         mPresenter.initBaiduMap(mBaiduMap);
-        showLoc(mBean);
+        if (mBean == null) {
+            mPresenter.loadTrackData();
+        } else {
+            showLoc(mBean);
+        }
     }
     
     private void initView() {

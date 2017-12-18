@@ -4,6 +4,7 @@ package com.cmcc.lib_network.http;
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.model.LoginModel;
+import com.cmcc.lib_network.service.FortressService;
 import com.cmcc.lib_network.service.JiaFangService;
 import com.cmcc.lib_network.service.ModelService;
 import com.cmcc.lib_network.service.PingPaiService;
@@ -41,8 +42,9 @@ public class HttpRequest {
     private static ModelService sModelService;
     private static PingPaiService sPingPaiService;
     private static TrackService sTrackService;
-
-
+    private static FortressService sFortressService;
+    
+    
     private static synchronized <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
         interceptorList.add(new NetWorkInterceptor());
@@ -121,6 +123,7 @@ public class HttpRequest {
         }
         return sModelService;
     }
+    
     /**
      * 获取user服务
      *
@@ -132,6 +135,7 @@ public class HttpRequest {
         }
         return sPingPaiService;
     }
+    
     /**
      * 获取user服务
      *
@@ -142,6 +146,18 @@ public class HttpRequest {
             sTrackService = create(TrackService.class);
         }
         return sTrackService;
+    }
+    
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized FortressService getFortressService() {
+        if (null == sFortressService) {
+            sFortressService = create(FortressService.class);
+        }
+        return sFortressService;
     }
     
     /**

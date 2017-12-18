@@ -16,8 +16,6 @@ import com.cmcc.inspection.feature.main.mainhome.MainHomeFragment;
 import com.cmcc.inspection.feature.main.mainuser.MainUserFragment;
 import com.cmcc.inspection.feature.main.message.MessageFragment;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
-import com.cmcc.lib_utils.utils.LogUtils;
-import com.cmcc.lib_utils.utils.ScreenUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -64,11 +62,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        LogUtils.e(ScreenUtils.getScreenHeight());
-        LogUtils.e(ScreenUtils.getScreenWidth());
-        LogUtils.e(ScreenUtils.getScreenXdpi());
-        LogUtils.e(ScreenUtils.getScreenYdpi());
-        LogUtils.e(ScreenUtils.getScreenDensity());
     }
 
     @Override
