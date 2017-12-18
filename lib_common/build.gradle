@@ -41,4 +41,6 @@ dependencies {
     compile 'me.zhanghai.android.materialprogressbar:library:1.3.0'
     compile project(':lib_utils')
     compile project(':lib_views')
+    provided files('../provided-libs/BaiduLBS_Android.jar')
+
 }

@@ -1,5 +1,8 @@
 package com.cmcc.inspection.base;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.tencent.smtt.sdk.QbSdk;
@@ -43,6 +46,11 @@ public class MyApplication extends BaseApp {
         };
         //x5内核初始化接口
         QbSdk.initX5Environment(getApplicationContext(), cb);
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
     /**
      * Log的初始化

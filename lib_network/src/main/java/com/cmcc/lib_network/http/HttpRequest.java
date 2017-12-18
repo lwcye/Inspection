@@ -9,6 +9,7 @@ import com.cmcc.lib_network.service.ModelService;
 import com.cmcc.lib_network.service.PingPaiService;
 import com.cmcc.lib_network.service.RegularService;
 import com.cmcc.lib_network.service.ShcoolService;
+import com.cmcc.lib_network.service.TrackService;
 import com.cmcc.lib_network.service.UserService;
 import com.cmcc.lib_network.service.WorkService;
 
@@ -39,7 +40,9 @@ public class HttpRequest {
     private static RegularService sRegularService;
     private static ModelService sModelService;
     private static PingPaiService sPingPaiService;
-    
+    private static TrackService sTrackService;
+
+
     private static synchronized <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
         interceptorList.add(new NetWorkInterceptor());
@@ -128,6 +131,17 @@ public class HttpRequest {
             sPingPaiService = create(PingPaiService.class);
         }
         return sPingPaiService;
+    }
+    /**
+     * 获取user服务
+     *
+     * @return 服务对象
+     */
+    public static synchronized TrackService getTrackService() {
+        if (null == sTrackService) {
+            sTrackService = create(TrackService.class);
+        }
+        return sTrackService;
     }
     
     /**

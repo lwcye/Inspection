@@ -9,9 +9,23 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        // ndk平台选项
+        ndk {
+            // 设置支持的 SO 库构架，注意这里要根据你的实际情况来设置
+            abiFilters 'armeabi-v7a'
+        }
+        // 打包资源种类配置
+        resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
+    // 排除构建的目录
+    sourceSets {
+        // 动态库目录
+        main {
+            jniLibs.srcDir '../provided-libs/jniLibs'
+        }
+    }
     //解决测试冲突
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
@@ -24,13 +38,15 @@ android {
             zipAlignEnabled true
             shrinkResources true
             minifyEnabled false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            zipAlignEnabled true
-            shrinkResources true
+            zipAlignEnabled false
+            shrinkResources false
             minifyEnabled false
+            multiDexEnabled true
             debuggable true
         }
     }
@@ -40,7 +56,21 @@ android {
 //    def file = variant.outputs[0].outputFile
 //    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + "-" + new Date().format("yyMMddHHmm", TimeZone.getTimeZone("GMT+8")) + ".apk"))
 //}
+/******************** 方法超65535 ********************/
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex' // enable multidex
 
+        // optional
+        // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+    }
+}
+/******************** 方法超65535 ********************/
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -53,5 +83,10 @@ dependencies {
         compile project(':lib_network')
         compile project(':lib_common')
     }
-    compile files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+    // 方法数超65535
+    compile 'com.android.support:multidex:1.0.1'
+    // X5浏览器
+    provided files('../provided-libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+    provided files('../provided-libs/BaiduLBS_Android.jar')
+    compile files('libs/BaiduLBS_Android.jar')
 }

@@ -41,31 +41,31 @@ public class AccountListDetailActivity extends MVPBaseActivity<AccountListDetail
     private List<MailModel.MailInfo.XingxiBean> mList = new ArrayList<>();
     private RUAdapter<MailModel.MailInfo.XingxiBean> mAdapter;
     private RecyclerView mRvAccountListDetail;
-    
+
     public static void start(Context context, MailModel.MailInfo mailInfo) {
         Intent starter = new Intent(context, AccountListDetailActivity.class);
         starter.putExtra(INTENT_INFO, mailInfo);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected AccountListDetailPresenter createPresenter() {
         return new AccountListDetailPresenter();
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_list_detail);
         mInfo = getIntent().getParcelableExtra(INTENT_INFO);
-        
+
         TitleUtil.attach(this)
-            .setTitle("通讯簿-" + mInfo.name)
-            .setBack(true);
+                .setTitle("通讯簿-" + mInfo.name)
+                .setBack(true);
         initView();
-        
+
     }
-    
+
     private void initView() {
         mRvAccountListDetail = (RecyclerView) findViewById(R.id.rv_account_list_detail);
         mRvAccountListDetail.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -81,12 +81,12 @@ public class AccountListDetailActivity extends MVPBaseActivity<AccountListDetail
                     ImageView viewById = holder.getViewById(R.id.civ_item_account_list_detail);
                     LoaderFactory.getLoader().loadNet(viewById, data.pic, new Options(RES_NONE, RES_NONE, TYPE_CIRCLE));
                 }
-                
+
                 holder.setOnClickListener(R.id.iv_item_account_list_detail_moblie, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (!TextUtils.isEmpty(data.mobile)) {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.mobile));
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + data.mobile));
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             BaseApp.getInstance().startActivity(intent);
                         } else {
@@ -94,7 +94,7 @@ public class AccountListDetailActivity extends MVPBaseActivity<AccountListDetail
                         }
                     }
                 });
-                
+
             }
         };
         mAdapter.setDataEmptyLayoutId(R.layout.layout_empty);

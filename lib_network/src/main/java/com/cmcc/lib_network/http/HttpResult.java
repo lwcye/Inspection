@@ -66,6 +66,7 @@ public abstract class HttpResult<T> implements Action1<T> {
      *
      * @param t 请求结果实例
      */
+    @Override
     public void call(T t) {
         if (EmptyUtils.isEmpty(t)) {
             error(CODE_NULL, ResUtils.getString(R.string.error_network_data));

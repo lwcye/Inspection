@@ -1,0 +1,7 @@
+﻿$axure.loadCurrentPage(
+(function() {
+    var _ = function() { var r={},a=arguments; for(var i=0; i<a.length; i+=2) r[a[i]]=a[i+1]; return r; }
+    var _creator = function() { return _(b,c,d,e,f,g,h,g,i,_(j,k),l,[m,n],o,_(p,q,r,s,t,u,v,_(),w,_(x,y,z,A,B,_(C,D,E,F),G,null,H,A,I,A,J,K,L,null,M,N,O,P,Q,R,S,N),T,_(),U,_(V,_(W,X,Y,[_(W,Z,ba,g,bb,[_(bc,bd,W,be,bf,bg),_(bc,bh,W,bi,bj,_(bk,o,b,bl,bm,bn),bo,bp)])])),bq,_(br,[])),bs,_(),bt,_());}; 
+var b="url",c="在线测试.html",d="generationDate",e=new Date(1513324915721.49),f="isCanvasEnabled",g=false,h="isAdaptiveEnabled",i="sketchKeys",j="",k="s0",l="variables",m="a",n="b",o="page",p="packageId",q="bb4f5f81eb03485a8f3367a578dec7f0",r="type",s="Axure:Page",t="name",u="在线测试",v="notes",w="style",x="baseStyle",y="627587b6038d43cca051c114ac41ad32",z="pageAlignment",A="near",B="fill",C="fillType",D="solid",E="color",F=0x33FFFFFF,G="image",H="imageHorizontalAlignment",I="imageVerticalAlignment",J="imageRepeat",K="auto",L="favicon",M="sketchFactor",N="0",O="colorStyle",P="appliedColor",Q="fontName",R="Applied Font",S="borderWidth",T="adaptiveStyles",U="interactionMap",V="onLoad",W="description",X="页面载入时",Y="cases",Z="Case 1",ba="isNewIfGroup",bb="actions",bc="action",bd="wait",be="等待 1000 毫秒",bf="waitTime",bg=1000,bh="linkWindow",bi="在 当前窗口 打开 业务练兵",bj="target",bk="targetType",bl="业务练兵.html",bm="includeVariables",bn=true,bo="linkType",bp="current",bq="diagram",br="objects",bs="masters",bt="objectPaths";
+return _creator();
+})());
