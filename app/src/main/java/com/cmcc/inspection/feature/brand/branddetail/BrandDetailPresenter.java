@@ -30,17 +30,4 @@ public class BrandDetailPresenter extends BasePresenterImpl<BrandDetailContract.
                 }
             }, new HttpError(getView()), new HttpComplete(getView()));
     }
-    
-    @Override
-    public void loadWaiXuan(String id) {
-        getView().showLoading("");
-        HttpRequest.getBrandService().waixuanview(id)
-            .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
-            .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<ObjectModel>() {
-                @Override
-                public void result(ObjectModel brandModel) {
-                }
-            }, new HttpError(getView()), new HttpComplete(getView()));
-    }
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.hbln.lib_views.DrawableCenterTextView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/tv_item_fortress_btn"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:padding="@dimen/x5"
-	android:drawablePadding="@dimen/x10"
-	android:gravity="center"
-	android:textColor="@color/black_title"
-	android:textSize="@dimen/t16">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_item_fortress_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:drawablePadding="@dimen/x10"
+    android:gravity="center"
+    android:padding="@dimen/x5"
+    android:textColor="@color/black_title"
+    android:textSize="@dimen/t16">
 
 </com.hbln.lib_views.DrawableCenterTextView>

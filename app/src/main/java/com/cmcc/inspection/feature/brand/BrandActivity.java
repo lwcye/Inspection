@@ -39,17 +39,17 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
     private RecyclerView mRvBrand;
     private List<BrandModel.Info> mList = new ArrayList<>();
     private RUAdapter<BrandModel.Info> mAdapter;
-    
-    @Override
-    protected BrandPresenter createPresenter() {
-        return new BrandPresenter();
-    }
-    
+
     public static void start(Context context) {
         Intent starter = new Intent(context, BrandActivity.class);
         context.startActivity(starter);
     }
-    
+
+    @Override
+    protected BrandPresenter createPresenter() {
+        return new BrandPresenter();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,18 +57,18 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
         initView();
         mPresenter.loadData();
     }
-    
+
     private void initView() {
         TitleUtil.attach(this)
-            .setBack(true)
-            .setTitle("品牌创新");
+                .setBack(true)
+                .setTitle("品牌创新");
         mRvBrand = (RecyclerView) findViewById(R.id.rv_brand);
-        
+
         initRecylerView();
     }
-    
+
     private void initRecylerView() {
-        
+
         mAdapter = new RUAdapter<BrandModel.Info>(getContext(), mList, R.layout.item_brand) {
             @Override
             protected void onInflateData(RUViewHolder holder, BrandModel.Info data, final int position) {
@@ -90,7 +90,7 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
                 } else {
                     ViewUtils.setTextDrawable(viewById, 0, resId, 0, 0, getContext());
                 }
-                
+
                 if (position % 6 == 0) {
                     holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#A2A09A"));
                 } else if (position % 6 == 1) {
@@ -104,8 +104,8 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
                 } else if (position % 6 == 5) {
                     holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00F4FF"));
                 }
-                
-                holder.setText(R.id.dtv_item_brand, position + data.title);
+
+                holder.setText(R.id.dtv_item_brand, data.title);
             }
         };
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
@@ -125,19 +125,19 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
         mAdapter.setOnItemClickListener(this);
         mRvBrand.setAdapter(mAdapter);
     }
-    
-    
+
+
     @Override
     public void setData(BrandModel data) {
         mList = data.info;
         mAdapter.setData(mList);
     }
-    
+
     @Override
     public void onClick(View v) {
-         
+
     }
-    
+
     @Override
     public void onItemClick(View view, int itemType, int position) {
         BrandDetailActivity.start(getContext(), mList.get(position).id);

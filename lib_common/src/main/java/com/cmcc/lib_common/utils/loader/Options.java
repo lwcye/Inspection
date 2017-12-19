@@ -18,6 +18,8 @@ public class Options {
     public static final int RES_NONE = -1;
     /** 圆形类型 */
     public static final int TYPE_CIRCLE = 1;
+    /** 圆角 */
+    public static final int ROUNDED_CORNERS = 2;
     /** 微缩图显示指数 */
     public static final float THUMDNAIL_DETAIL = 0.2f;
 

@@ -31,7 +31,7 @@ public class AccountListPresenter extends BasePresenterImpl<AccountListContract.
                 name = "乡镇";
                 break;
             case 3:
-                name = "巡查机构";
+                name = "巡察机构";
                 break;
             default:
                 break;
@@ -44,6 +44,10 @@ public class AccountListPresenter extends BasePresenterImpl<AccountListContract.
                     public void result(MailModel mailModel) {
                         getView().setMailData(index, mailModel);
                     }
-                }, new HttpError(getView()), new HttpComplete(getView()));
+                }, new HttpError(getView()) {
+                    @Override
+                    public void call(Throwable throwable) {
+                    }
+                }, new HttpComplete(getView()));
     }
 }

@@ -89,4 +89,5 @@ dependencies {
     provided files('../provided-libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
     provided files('../provided-libs/BaiduLBS_Android.jar')
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.youth.banner:banner:1.4.10'
 }

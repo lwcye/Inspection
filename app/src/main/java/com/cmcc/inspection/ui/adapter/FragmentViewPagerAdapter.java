@@ -22,6 +22,8 @@ import java.util.List;
 public class FragmentViewPagerAdapter extends FragmentPagerAdapter {
     /** Fragment列表 */
     private List<Fragment> mFragmentList;
+    private List<String> Titles;
+
 
     /**
      * 构造类，初始化数据列表
@@ -52,6 +54,18 @@ public class FragmentViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return mFragmentList.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (Titles != null) {
+            return Titles.get(position);
+        }
+        return super.getPageTitle(position);
+    }
+
+    public void setTitles(List<String> titles) {
+        Titles = titles;
     }
 
     @Override

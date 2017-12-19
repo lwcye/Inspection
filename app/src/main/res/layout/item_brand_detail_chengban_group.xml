@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item_brand_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/x5"
+    android:layout_marginLeft="@dimen/x12"
+    android:layout_marginRight="@dimen/x12"
+    android:layout_marginTop="@dimen/x5"
+    android:background="@drawable/shape_brand_detail_yellow">
+
+    <TextView
+        android:id="@+id/tv_item_brand_detail_danwei"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x20"
+        android:layout_marginLeft="@dimen/x10"
+        android:background="#FF9100"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x15"
+        android:text="办公室"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_item_brand_detail_position"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x20"
+        android:background="@drawable/shape_brand_detail_num"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/t14"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_brand_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x12"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x30"/>
+</RelativeLayout>

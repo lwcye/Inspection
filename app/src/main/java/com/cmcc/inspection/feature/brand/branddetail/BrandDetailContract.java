@@ -17,7 +17,5 @@ public class BrandDetailContract {
     
     interface Presenter extends BasePresenter<View> {
         void loadDetail(String ppid);
-        
-        void loadWaiXuan(String id);
     }
 }

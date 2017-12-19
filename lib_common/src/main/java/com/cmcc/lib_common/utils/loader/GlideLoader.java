@@ -1,16 +1,24 @@
 package com.cmcc.lib_common.utils.loader;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
-import com.bumptech.glide.DrawableTypeRequest;
-import com.bumptech.glide.GifTypeRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.cmcc.lib_utils.utils.ConvertUtils;
 
 import java.io.File;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 
 /**
  * <p>使用Glide框架加载图片</p><br>
@@ -23,7 +31,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * @date -
  * @note -
  */
-public class GlideLoader implements ILoader {
+class GlideLoader implements ILoader {
     private Options mOptions;
 
     @Override
@@ -62,15 +70,15 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
+    public void loadAssetsGif(ImageView target, String assetName) {
+        load(getRequestManager(target.getContext()).asGif().load("file:///android_asset/" + assetName), target, mOptions);
+    }
+
+    @Override
     public void loadAssets(ImageView target, String assetName) {
         load(getRequestManager(target.getContext()).load("file:///android_asset/" + assetName), target, mOptions);
     }
-    
-    @Override
-    public void loadAssetsAsGif(ImageView target, String assetName) {
-        load(getRequestManager(target.getContext()).load("file:///android_asset/" + assetName).asGif(), target, mOptions);
-    }
-    
+
     @Override
     public void loadFile(ImageView target, File file, Options options) {
         load(getRequestManager(target.getContext()).load(file), target, options);
@@ -80,6 +88,28 @@ public class GlideLoader implements ILoader {
     public void loadFile(ImageView target, File file) {
         load(getRequestManager(target.getContext()).load(file), target, mOptions);
     }
+
+    @Override
+    public void loadListener(Context context, Object url, final IOnImageLoadListener onImageLoadListener) {
+        getRequestManager(context).asBitmap().load(url).listener(new RequestListener<Bitmap>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                if (null != e) {
+                    onImageLoadListener.onFail(e.fillInStackTrace());
+                } else {
+                    onImageLoadListener.onFail(new NullPointerException().fillInStackTrace());
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                onImageLoadListener.onSuccess(model, resource);
+                return false;
+            }
+        }).submit();
+    }
+
 
     @Override
     public void clearMemoryCache(Context context) {
@@ -108,14 +138,17 @@ public class GlideLoader implements ILoader {
      * @param target ImageView的
      * @param options 通过构造类进行参数设置
      */
-    private void load(DrawableTypeRequest request, ImageView target, Options options) {
-        if (options == null) options = Options.defaultOptions();
+    private void load(RequestBuilder<?> request, ImageView target, Options options) {
+        RequestOptions requestOptions = new RequestOptions();
+        if (options == null) {
+            options = Options.defaultOptions();
+        }
 
         if (options.loadingResId != Options.RES_NONE) {
-            request.placeholder(options.loadingResId);
+            requestOptions.placeholder(options.loadingResId);
         }
         if (options.loadErrorResId != Options.RES_NONE) {
-            request.error(options.loadErrorResId);
+            requestOptions.error(options.loadErrorResId);
         }
         if (options.thumbnail != Options.RES_NONE) {
             request.thumbnail(options.thumbnail);
@@ -123,33 +156,15 @@ public class GlideLoader implements ILoader {
         if (options.type != Options.RES_NONE) {
             switch (options.type) {
                 case Options.TYPE_CIRCLE:
-                    request.bitmapTransform(new CropCircleTransformation(target.getContext()));
+                    requestOptions.circleCrop();
+                    break;
+                case Options.ROUNDED_CORNERS:
+                    requestOptions.transform(new RoundedCornersTransformation(target.getContext(), ConvertUtils.dp2px(5), 0));
                     break;
                 default:
                     break;
             }
         }
-        request.fitCenter().thumbnail(0.2f).into(target);
-    }
-    /**
-     * 通过参数设置加载图片
-     *
-     * @param request Glide请求管理器
-     * @param target ImageView的
-     * @param options 通过构造类进行参数设置
-     */
-    private void load(GifTypeRequest request, ImageView target, Options options) {
-        if (options == null) options = Options.defaultOptions();
-        
-        if (options.loadingResId != Options.RES_NONE) {
-            request.placeholder(options.loadingResId);
-        }
-        if (options.loadErrorResId != Options.RES_NONE) {
-            request.error(options.loadErrorResId);
-        }
-        if (options.thumbnail != Options.RES_NONE) {
-            request.thumbnail(options.thumbnail);
-        }
-        request.into(target);
+        request.apply(requestOptions).into(target);
     }
 }

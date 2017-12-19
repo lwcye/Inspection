@@ -73,7 +73,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                     WorkDynamicActivity.start(getContext());
                 }
             })
-            .setTitle("巡查机构");
+            .setTitle("巡察机构");
         mRbWorkInspection0 = (RadioButton) findViewById(R.id.rb_work_inspection_0);
         mRbWorkInspection1 = (RadioButton) findViewById(R.id.rb_work_inspection_1);
         mRbWorkInspection2 = (RadioButton) findViewById(R.id.rb_work_inspection_2);
@@ -90,11 +90,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
     private void initRecylerView() {
         mRvWorkInspection.setLayoutManager(new LinearLayoutManager(getContext()));
         mList.add("巡察办");
-        mList.add("巡查一组");
-        mList.add("巡查二组");
-        mList.add("巡查三组");
-        mList.add("巡查四组");
-        mList.add("巡查五组");
+        mList.add("巡察一组");
+        mList.add("巡察二组");
+        mList.add("巡察三组");
+        mList.add("巡察四组");
+        mList.add("巡察五组");
         mAdapter = new RUAdapter<String>(getContext(), mList, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, String data, int position) {

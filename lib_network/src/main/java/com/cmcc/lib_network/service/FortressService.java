@@ -3,7 +3,6 @@ package com.cmcc.lib_network.service;
 import com.cmcc.lib_network.model.FortressHomeModel;
 import com.cmcc.lib_network.model.JianDuModel;
 import com.cmcc.lib_network.model.ManagerModel;
-import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.WebViewModel;
 
 import retrofit2.http.Field;
@@ -64,26 +63,26 @@ public interface FortressService {
     
     @FormUrlEncoded
     @POST("public/api/zhibu/sanhuiyikelist")
-    Observable<ObjectModel> sanhuiyikelist(
+    Observable<FortressHomeModel> sanhuiyikelist(
         @Field("type") String type
     );
     
     @FormUrlEncoded
     @POST("public/api/zhibu/sanhuiyikeview")
-    Observable<ObjectModel> sanhuiyikeview(
+    Observable<WebViewModel> sanhuiyikeview(
         @Field("id") String id
     );
     
     @FormUrlEncoded
     @POST("public/api/zhibu/qzgongzuolist")
-    Observable<ObjectModel> qzgongzuolist(
+    Observable<FortressHomeModel> qzgongzuolist(
         @Field("pageNo") String pageNo,
         @Field("pageSize") String pageSize
     );
     
     @FormUrlEncoded
     @POST("public/api/zhibu/qzgzview")
-    Observable<ObjectModel> qzgzview(
+    Observable<WebViewModel> qzgzview(
         @Field("id") String id
     );
 }

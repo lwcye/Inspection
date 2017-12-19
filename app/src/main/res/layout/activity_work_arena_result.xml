@@ -199,7 +199,7 @@
 			android:layout_height="@dimen/x35"
 			android:layout_marginLeft="@dimen/x25"
 			android:background="@color/colorAccent"
-			android:text="巡查机构"
+			android:text="巡察机构"
 			android:textColor="@color/white" />
 	</LinearLayout>
 </RelativeLayout>

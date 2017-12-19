@@ -20,7 +20,7 @@ public interface ILoader<T extends ImageView> {
     /**
      * 初始化
      *
-     * @param context
+     * @param context 上下文
      */
     void init(Context context, Options options);
 
@@ -75,19 +75,21 @@ public interface ILoader<T extends ImageView> {
     void loadAssets(ImageView target, String assetName, Options options);
 
     /**
-     * asset加载图片
+     * asset加载gif图片
      *
      * @param target ImageView控件
      * @param assetName 地址
      */
-    void loadAssets(ImageView target, String assetName);
+    void loadAssetsGif(ImageView target, String assetName);
+
     /**
      * asset加载图片
      *
      * @param target ImageView控件
      * @param assetName 地址
      */
-    void loadAssetsAsGif(ImageView target, String assetName);
+    void loadAssets(ImageView target, String assetName);
+
     /**
      * 本地文件加载图片
      *
@@ -106,6 +108,15 @@ public interface ILoader<T extends ImageView> {
     void loadFile(ImageView target, File file);
 
     /**
+     * 网络请求监听
+     *
+     * @param context 上下文
+     * @param url 请求链接
+     * @param onImageLoadListener 网络请求的监听器
+     */
+    void loadListener(Context context, Object url, IOnImageLoadListener onImageLoadListener);
+
+    /**
      * 清理内存缓存
      *
      * @param context 上下文
@@ -118,5 +129,4 @@ public interface ILoader<T extends ImageView> {
      * @param context 上下文
      */
     void clearDiskCache(Context context);
-
 }

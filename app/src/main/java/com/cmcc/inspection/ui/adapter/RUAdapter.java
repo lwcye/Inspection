@@ -261,7 +261,7 @@ public abstract class RUAdapter<T> extends RecyclerView.Adapter {
     protected void onInflateEmptyLayout(RUViewHolder holder) {
         ImageView imageView = holder.getViewById(R.id.iv_empty);
         if (imageView != null) {
-            LoaderFactory.getLoader().loadAssetsAsGif(imageView, "null_data.gif");
+            LoaderFactory.getLoader().loadAssetsGif(imageView, "null_data.gif");
         }
     }
     

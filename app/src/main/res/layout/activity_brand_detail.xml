@@ -1,331 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:orientation="vertical">
-	
-	<include layout="@layout/title_bar" />
-	
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_weight="1">
-		
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-			
-			<TextView
-				android:id="@+id/tv_brand_detail"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="@drawable/img_brand_title_bg"
-				android:gravity="center"
-				android:paddingLeft="@dimen/x12"
-				android:paddingRight="@dimen/x12"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t22"
-				android:textStyle="bold" />
-			
-			<ImageView
-				android:id="@+id/iv_brand_detail"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:adjustViewBounds="true" />
-			
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:adjustViewBounds="true"
-				android:background="@drawable/img_brand_detail_title"
-				android:gravity="center"
-				android:text="简介"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t16"
-				android:textStyle="bold" />
-			
-			<com.cmcc.inspection.widget.x5.utils.BridgeWebView
-				android:id="@+id/wv_brand_detail"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content" />
-			
-			<TextView
-				android:id="@+id/ll_brand_detail_waixuan"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="@dimen/x10"
-				android:adjustViewBounds="true"
-				android:background="@drawable/img_brand_detail_title"
-				android:gravity="center"
-				android:text="外宣稿件"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t16"
-				android:textStyle="bold" />
-			
-			<RelativeLayout
-				android:id="@+id/rl_brand_detail_waixuan"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x12"
-				android:layout_marginRight="@dimen/x12"
-				android:background="@drawable/shape_brand_detail">
-				
-				<ImageView
-					android:id="@+id/imageView"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/icon_brand_detail_tag" />
-				
-				<android.support.v7.widget.RecyclerView
-					android:id="@+id/rv_brand_detail_waixuan"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_below="@+id/imageView"
-					android:layout_centerHorizontal="true"
-					android:layout_marginLeft="@dimen/x12"
-					android:layout_marginRight="@dimen/x12" />
-			</RelativeLayout>
-			
-			<TextView
-				android:id="@+id/ll_brand_detail_fenguan"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="@dimen/x10"
-				android:adjustViewBounds="true"
-				android:background="@drawable/img_brand_detail_title"
-				android:gravity="center"
-				android:text="分管领导"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t16"
-				android:textStyle="bold" />
-			
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x12"
-				android:layout_marginRight="@dimen/x12"
-				android:background="@drawable/shape_brand_detail">
-				
-				<ImageView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/icon_brand_detail_tag" />
-				
-				<ImageView
-					android:id="@+id/iv_brand_detail_fenguan"
-					android:layout_width="@dimen/x50"
-					android:layout_height="@dimen/x80"
-					android:layout_centerHorizontal="true"
-					android:layout_marginLeft="@dimen/x20"
-					android:layout_marginRight="@dimen/x20"
-					android:layout_marginTop="@dimen/x12" />
-				
-				<TextView
-					android:id="@+id/tv_brand_detail_fenguan"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_below="@id/iv_brand_detail_fenguan"
-					android:layout_centerHorizontal="true"
-					android:layout_marginBottom="@dimen/x12"
-					android:layout_marginTop="@dimen/x5"
-					android:textColor="@color/black"
-					android:textSize="@dimen/t16" />
-			</RelativeLayout>
-			
-			<TextView
-				android:id="@+id/ll_brand_detail_chengban"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="@dimen/x10"
-				android:adjustViewBounds="true"
-				android:background="@drawable/img_brand_detail_title"
-				android:gravity="center"
-				android:text="承办科室"
-				android:textColor="@color/white"
-				android:textSize="@dimen/t16"
-				android:textStyle="bold" />
-			
-			<RelativeLayout
-				android:id="@+id/rl_brand_detail_0"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x12"
-				android:layout_marginRight="@dimen/x12"
-				android:background="@drawable/shape_brand_detail_yellow">
-				
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/x20"
-					android:layout_marginLeft="@dimen/x10"
-					android:background="#FF9100"
-					android:gravity="center_vertical"
-					android:paddingLeft="@dimen/x15"
-					android:text="办公室"
-					android:textColor="@color/white" />
-				
-				<TextView
-					android:layout_width="@dimen/x20"
-					android:layout_height="@dimen/x20"
-					android:background="@drawable/shape_brand_detail_num"
-					android:gravity="center"
-					android:text="1"
-					android:textColor="@color/black"
-					android:textSize="@dimen/t14"
-					android:textStyle="bold" />
-				
-				<android.support.v7.widget.RecyclerView
-					android:id="@+id/rv_brand_detail_0"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="@dimen/x12"
-					android:layout_marginLeft="@dimen/x12"
-					android:layout_marginRight="@dimen/x12"
-					android:layout_marginTop="@dimen/x30" />
-			</RelativeLayout>
-			
-			<RelativeLayout
-				android:id="@+id/rl_brand_detail_1"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x12"
-				android:layout_marginRight="@dimen/x12"
-				android:background="@drawable/shape_brand_detail_yellow">
-				
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/x20"
-					android:layout_marginLeft="@dimen/x10"
-					android:background="#FF9100"
-					android:gravity="center_vertical"
-					android:paddingLeft="@dimen/x15"
-					android:text="干部监督管理室"
-					android:textColor="@color/white" />
-				
-				<TextView
-					android:layout_width="@dimen/x20"
-					android:layout_height="@dimen/x20"
-					android:background="@drawable/shape_brand_detail_num"
-					android:gravity="center"
-					android:text="2"
-					android:textColor="@color/black"
-					android:textSize="@dimen/t14"
-					android:textStyle="bold" />
-				
-				<android.support.v7.widget.RecyclerView
-					android:id="@+id/rv_brand_detail_1"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="@dimen/x12"
-					android:layout_marginLeft="@dimen/x12"
-					android:layout_marginRight="@dimen/x12"
-					android:layout_marginTop="@dimen/x30" />
-			</RelativeLayout>
-			
-			<LinearLayout
-				android:id="@+id/ll_webview_zan"
-				android:layout_marginTop="@dimen/x10"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-				
-				<com.hbln.lib_views.DrawableCenterTextView
-					android:id="@+id/tv_webview_zan"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:drawableTop="@drawable/icon_zan"
-					android:gravity="center"
-					android:text="当前数量：1234"
-					android:textColor="@color/gray20"
-					android:textSize="@dimen/t14" />
-				
-				<com.hbln.lib_views.DrawableCenterTextView
-					android:id="@+id/tv_webview_cai"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:drawableTop="@drawable/icon_cai"
-					android:gravity="center"
-					android:text="当前数量：0"
-					android:textColor="@color/gray20"
-					android:textSize="@dimen/t14" />
-			</LinearLayout>
-			
-			<LinearLayout
-				android:id="@+id/ll_webview_comment"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="@color/layout_background_default"
-				android:orientation="vertical"
-				android:paddingBottom="@dimen/x20"
-				android:paddingTop="@dimen/x10">
-				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:drawableLeft="@drawable/shape_red_school"
-					android:drawablePadding="@dimen/x5"
-					android:text="交流讨论站"
-					android:textColor="@color/black_title"
-					android:textSize="@dimen/t18"
-					android:textStyle="bold" />
-				
-				<EditText
-					android:id="@+id/et_webview_comment"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x10"
-					android:layout_marginRight="@dimen/x10"
-					android:layout_marginTop="@dimen/x10"
-					android:background="@drawable/shape_edittext"
-					android:minHeight="@dimen/x80" />
-				
-				<Button
-					android:id="@+id/btn_webview_submit"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="right"
-					android:layout_marginRight="@dimen/x10"
-					android:layout_marginTop="@dimen/x10"
-					android:background="@drawable/shape_btn_normal_small"
-					android:minHeight="0dp"
-					android:minWidth="0dp"
-					android:paddingBottom="@dimen/x5"
-					android:paddingLeft="@dimen/x10"
-					android:paddingRight="@dimen/x10"
-					android:paddingTop="@dimen/x5"
-					android:text="提交"
-					android:textColor="@color/white"
-					android:textSize="@dimen/t14" />
-			</LinearLayout>
-		</LinearLayout>
-	</ScrollView>
-	
-	<View style="@style/view_line" />
-	
-	<LinearLayout
-		android:id="@+id/ll_webview_font"
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/view_height">
-		
-		<ImageButton
-			android:id="@+id/ib_webview_font"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="@color/white"
-			android:src="@drawable/icon_font" />
-		
-		<ImageButton
-			android:id="@+id/ib_webview_share"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:background="@color/white"
-			android:src="@drawable/icon_share" />
-	</LinearLayout>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_brand_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_brand_title_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x12"
+                android:paddingRight="@dimen/x12"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t22"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/iv_brand_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:background="@drawable/img_brand_detail_title"
+                android:gravity="center"
+                android:text="简介"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16"
+                android:textStyle="bold"/>
+
+            <com.cmcc.inspection.widget.x5.utils.BridgeWebView
+                android:id="@+id/wv_brand_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/ll_brand_detail_waixuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x10"
+                android:adjustViewBounds="true"
+                android:background="@drawable/img_brand_detail_title"
+                android:gravity="center"
+                android:text="外宣稿件"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16"
+                android:textStyle="bold"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_brand_detail_waixuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x12"
+                android:layout_marginRight="@dimen/x12"
+                android:background="@drawable/shape_brand_detail">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_brand_detail_tag"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_brand_detail_waixuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/x12"
+                    android:layout_marginRight="@dimen/x12"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/ll_brand_detail_fenguan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x10"
+                android:adjustViewBounds="true"
+                android:background="@drawable/img_brand_detail_title"
+                android:gravity="center"
+                android:text="分管领导"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16"
+                android:textStyle="bold"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x12"
+                android:layout_marginRight="@dimen/x12"
+                android:background="@drawable/shape_brand_detail">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_brand_detail_tag"/>
+
+                <ImageView
+                    android:id="@+id/iv_brand_detail_fenguan"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/x80"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginRight="@dimen/x20"
+                    android:layout_marginTop="@dimen/x12"/>
+
+                <TextView
+                    android:id="@+id/tv_brand_detail_fenguan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_brand_detail_fenguan"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/x12"
+                    android:layout_marginTop="@dimen/x5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/t16"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/ll_brand_detail_chengban"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x10"
+                android:adjustViewBounds="true"
+                android:background="@drawable/img_brand_detail_title"
+                android:gravity="center"
+                android:text="承办科室"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_brand_detail_chengban"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/ll_webview_zan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10">
+
+                <com.hbln.lib_views.DrawableCenterTextView
+                    android:id="@+id/tv_webview_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/icon_zan"
+                    android:gravity="center"
+                    android:text="当前数量：1234"
+                    android:textColor="@color/gray20"
+                    android:textSize="@dimen/t14"/>
+
+                <com.hbln.lib_views.DrawableCenterTextView
+                    android:id="@+id/tv_webview_cai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/icon_cai"
+                    android:gravity="center"
+                    android:text="当前数量：0"
+                    android:textColor="@color/gray20"
+                    android:textSize="@dimen/t14"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_webview_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/layout_background_default"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/x20"
+                android:paddingTop="@dimen/x10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/shape_red_school"
+                    android:drawablePadding="@dimen/x5"
+                    android:text="交流讨论站"
+                    android:textColor="@color/black_title"
+                    android:textSize="@dimen/t18"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/et_webview_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginTop="@dimen/x10"
+                    android:background="@drawable/shape_edittext"
+                    android:minHeight="@dimen/x80"/>
+
+                <Button
+                    android:id="@+id/btn_webview_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginTop="@dimen/x10"
+                    android:background="@drawable/shape_btn_normal_small"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingBottom="@dimen/x5"
+                    android:paddingLeft="@dimen/x10"
+                    android:paddingRight="@dimen/x10"
+                    android:paddingTop="@dimen/x5"
+                    android:text="提交"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t14"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <View style="@style/view_line"/>
+
+    <LinearLayout
+        android:id="@+id/ll_webview_font"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_height">
+
+        <ImageButton
+            android:id="@+id/ib_webview_font"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/icon_font"/>
+
+        <ImageButton
+            android:id="@+id/ib_webview_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/icon_share"/>
+    </LinearLayout>
 </LinearLayout>

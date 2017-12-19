@@ -1,0 +1,33 @@
+package com.cmcc.inspection.feature.fortress.education;
+
+
+import com.cmcc.inspection.model.CellBean;
+import com.cmcc.lib_common.mvp.BasePresenter;
+import com.cmcc.lib_common.mvp.BaseView;
+import com.cmcc.lib_network.model.FortressHomeModel;
+
+import java.util.List;
+
+/**
+ * MVPPlugin
+ * 邮箱 784787081@qq.com
+ */
+
+public class FortressHomeContract {
+    interface View extends BaseView {
+        void setWenTiData(FortressHomeModel homeModel);
+
+        void setDangZhiBuDaHuiData(FortressHomeModel homeModel);
+
+        void showBtn(List<CellBean> btnBean);
+
+    }
+
+    interface Presenter extends BasePresenter<View> {
+        void loadWenTiData();
+
+        void loadDangZhiBuDaHuiData();
+        
+        void loadBtnData();
+    }
+}

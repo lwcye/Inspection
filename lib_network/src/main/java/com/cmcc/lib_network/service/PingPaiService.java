@@ -2,7 +2,7 @@ package com.cmcc.lib_network.service;
 
 import com.cmcc.lib_network.model.BrandDetailModel;
 import com.cmcc.lib_network.model.BrandModel;
-import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.WebViewModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -33,7 +33,7 @@ public interface PingPaiService {
     
     @FormUrlEncoded
     @POST("public/api/pingpai/waixuanview")
-    Observable<ObjectModel> waixuanview(
+    Observable<WebViewModel> waixuanview(
         @Field("id") String id
     );
 }

@@ -201,7 +201,7 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
     public void onPageScrollStateChanged(int state) {
         
     }
-    
+
     @Override
     public void setJianDuData(JianDuModel jianDuData) {
         LogUtils.e(jianDuData.info.size());

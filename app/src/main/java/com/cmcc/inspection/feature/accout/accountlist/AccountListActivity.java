@@ -74,7 +74,7 @@ public class AccountListActivity extends MVPBaseActivity<AccountListContract.Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_list);
         TitleUtil.attach(this)
-            .setTitle("通讯薄")
+            .setTitle("通讯录")
             .setBack(true);
         initView();
         

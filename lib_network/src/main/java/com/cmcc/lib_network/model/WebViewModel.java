@@ -12,6 +12,8 @@ package com.cmcc.lib_network.model;
  * @note -
  */
 public class WebViewModel extends ResultModel {
+    public String resultCount;
+    public String pageCount;
     public WebViewInfo info;
     
     public static class WebViewInfo {

@@ -3,6 +3,7 @@ package com.cmcc.lib_common.base;
 import android.app.Application;
 
 import com.cmcc.lib_common.constans.CommonSharePresf;
+import com.cmcc.lib_utils.utils.CrashUtils;
 import com.cmcc.lib_utils.utils.SPUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.cmcc.lib_utils.utils.Utils;
@@ -52,5 +53,7 @@ public class BaseApp extends Application {
         //工具初始化
         Utils.init(this);
         ToastUtils.init(true);
+        // 崩溃记录
+        CrashUtils.getInstance().init();
     }
 }

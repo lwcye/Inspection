@@ -27,7 +27,7 @@
 			android:button="@null"
 			android:checked="true"
 			android:gravity="center"
-			android:text="巡查报告"
+			android:text="巡察报告"
 			android:textColor="@color/select_tab" />
 		
 		<RadioButton

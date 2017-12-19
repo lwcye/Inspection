@@ -13,16 +13,18 @@ import com.cmcc.lib_network.model.JianDuModel;
 
 public class FortressContract {
     interface View extends BaseView {
+
+
         void setJianDuData(JianDuModel jianDuData);
-        
+
         void setJiaoYuData(FortressHomeModel homeModel);
-        
     }
-    
+
     interface Presenter extends BasePresenter<View> {
+
         void loadJiaoYuData();
-        
+
         void loadJianDuData();
-        
+
     }
 }

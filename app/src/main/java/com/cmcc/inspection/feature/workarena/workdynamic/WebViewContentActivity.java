@@ -23,6 +23,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.WebViewModel;
+import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.lib_views.BottomPopupDialog;
@@ -50,14 +51,14 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     public static final int TYPE_REGULAR = 2;
     public static final int TYPE_FORTRESS_JIANDU = 3;
     public static final int TYPE_FORTRESS_HOME = 4;
-    public int mType = 0;
-    public String mId = "";
-    
+    public static final int TYPE_FORTRESS_QUN_ZHONG = 5;
+    public static final int TYPE_FORTRESS_SAN_HUI = 6;
+    public static final int TYPE_BRAND_WAIXUAN = 7;
     public static boolean hasComment = true;
     public static boolean hasZan = true;
     public static boolean hasFont = true;
-    
-    
+    public int mType = 0;
+    public String mId = "";
     private BottomPopupDialog fontDialog;
     /** 强筋骨、明纪律 铸造执纪铁军 */
     private TextView mTvWebviewTitle;
@@ -76,26 +77,26 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     private LinearLayout mLlWebviewZan;
     private LinearLayout mLlWebviewComment;
     private LinearLayout mLlWebviewFont;
-    
+
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, WebViewContentActivity.class);
         starter.putExtra(INTENT_ID, id);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_content);
         mId = getIntent().getStringExtra(INTENT_ID);
         mType = getIntent().getIntExtra(INTENT_TYPE, 0);
-        
+
         initView();
         initView();
         loadData(mId, mType);
     }
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -103,7 +104,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         hasZan = true;
         hasFont = true;
     }
-    
+
     private void loadData(String id, int type) {
         if (TextUtils.isEmpty(id)) {
             ToastUtils.showShortToastSafe("数据读取错误");
@@ -112,31 +113,38 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         }
         showLoading("");
         Observable<WebViewModel> observable = HttpRequest.getWorkService().jobdongtaiview(id);
+        LogUtils.e(type);
         if (type == TYPE_SCHOOL) {
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
         } else if (type == TYPE_WORK) {
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
         } else if (type == TYPE_REGULAR) {
             observable = HttpRequest.getRegularService().zdview(id);
-        }else if (type == TYPE_FORTRESS_HOME) {
+        } else if (type == TYPE_FORTRESS_HOME) {
             observable = HttpRequest.getFortressService().zhuzhiview(id);
-        }if (type == TYPE_FORTRESS_JIANDU) {
+        } else if (type == TYPE_FORTRESS_QUN_ZHONG) {
+            observable = HttpRequest.getFortressService().qzgzview(id);
+        } else if (type == TYPE_FORTRESS_JIANDU) {
             observable = HttpRequest.getFortressService().dangyuanjianduview(id);
+        } else if (type == TYPE_FORTRESS_SAN_HUI) {
+            observable = HttpRequest.getFortressService().sanhuiyikeview(id);
+        } else if (type == TYPE_BRAND_WAIXUAN) {
+            observable = HttpRequest.getBrandService().waixuanview(id);
         }
         observable
-            .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
-            .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<WebViewModel>() {
-                @Override
-                public void result(WebViewModel webViewModel) {
-                    setData(webViewModel.info);
-                }
-            }, new HttpError(this), new HttpComplete(this));
+                .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
+                .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<WebViewModel>() {
+                    @Override
+                    public void result(WebViewModel webViewModel) {
+                        setData(webViewModel.info);
+                    }
+                }, new HttpError(this), new HttpComplete(this));
     }
-    
+
     private void initView() {
         TitleUtil.attach(this)
-            .setBack(true);
+                .setBack(true);
         mTvWebviewTitle = (TextView) findViewById(R.id.tv_webview_title);
         mTvWebviewDate = (TextView) findViewById(R.id.tv_webview_date);
         mWvWebview = (BridgeWebView) findViewById(R.id.wv_webview);
@@ -151,11 +159,11 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mIbWebviewFont.setOnClickListener(this);
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
-        
+
         mLlWebviewZan = (LinearLayout) findViewById(R.id.ll_webview_zan);
         mLlWebviewComment = (LinearLayout) findViewById(R.id.ll_webview_comment);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
-        
+
         if (hasZan) {
             mLlWebviewZan.setVisibility(View.VISIBLE);
         } else {
@@ -171,11 +179,11 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         } else {
             mLlWebviewFont.setVisibility(View.GONE);
         }
-        
-        
+
+
         WebViewManager.getInstance().initWebView(mWvWebview);
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -202,7 +210,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
-    
+
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
         String times;
