@@ -11,6 +11,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="第一党小组"
+		android:paddingLeft="@dimen/x20"
 		android:textColor="@color/gray22"
 		android:textSize="@dimen/t16" />
 	

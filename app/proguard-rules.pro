@@ -26,3 +26,16 @@
 -keep class com.baidu.** {*;}
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
+
+-keep class com.umeng.commonsdk.** {*;}
+
+-keep class com.umeng.error.UMError{ public ; }
+
+-keep class com.umeng.error.UMErrorCatch{ public ; }
+
+-keep class com.umeng.error.UMErrorDataManger{ public ; }
+
+-keep class com.umeng.error.BatteryUtils{ public ; }
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}

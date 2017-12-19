@@ -90,4 +90,7 @@ dependencies {
     provided files('../provided-libs/BaiduLBS_Android.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.youth.banner:banner:1.4.10'
+    compile files('libs/umeng-analytics-7.4.0.jar')
+    compile files('libs/umeng-common-1.4.0.jar')
+    compile files('libs/umerror_android_1.0.0.jar')
 }

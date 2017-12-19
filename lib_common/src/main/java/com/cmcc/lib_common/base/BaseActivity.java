@@ -28,6 +28,7 @@ import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.android.RxLifecycleAndroid;
+import com.umeng.analytics.MobclickAgent;
 
 import javax.annotation.Nonnull;
 
@@ -98,6 +99,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     protected void onResume() {
         super.onResume();
         mLifecycleSubject.onNext(ActivityEvent.RESUME);
+        MobclickAgent.onResume(this);
     }
 
     @CallSuper
@@ -105,6 +107,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
     protected void onPause() {
         mLifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @CallSuper

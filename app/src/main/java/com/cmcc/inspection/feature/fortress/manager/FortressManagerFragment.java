@@ -65,6 +65,7 @@ public class FortressManagerFragment extends MVPBaseFragment<FortressManagerCont
     @Override
     public void setManagerData(final ManagerModel managerData) {
         mExpandableListView.setAdapter(new PersonExpListAdapter(managerData.info));
+//        mExpandableListView.setGroupIndicator(((BaseActivity) getActivity()).getCompatDrawable(R.drawable.selector_exp));
         mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

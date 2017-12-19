@@ -7,6 +7,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.tencent.smtt.sdk.QbSdk;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * <p>describe</p><br>
@@ -26,6 +27,8 @@ public class MyApplication extends BaseApp {
         super.onCreate();
         initLog();
         SDKInitializer.initialize(getApplicationContext());
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE,null);
+        UMConfigure.setLogEnabled(true);
     }
     /**
      * 初始化X5内核
