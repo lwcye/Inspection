@@ -14,12 +14,12 @@
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true" />
 	
-	<ImageView
-		android:id="@+id/iv_item_shcool_answer_1_status"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:rotation="330"
-		android:src="@drawable/icon_shchool_answer_normal" />
+	<!--<ImageView-->
+		<!--android:id="@+id/iv_item_shcool_answer_1_status"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:rotation="330"-->
+		<!--android:src="@drawable/icon_shchool_answer_normal" />-->
 	
 	<LinearLayout
 		android:layout_width="match_parent"

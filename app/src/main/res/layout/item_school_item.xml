@@ -4,6 +4,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_marginBottom="@dimen/x5"
 	android:layout_marginLeft="@dimen/x10"
 	android:layout_marginRight="@dimen/x10"
@@ -33,7 +34,7 @@
 			android:paddingLeft="@dimen/x10"
 			android:paddingRight="@dimen/x10"
 			android:paddingTop="@dimen/x10"
-			android:text="强筋骨、明纪律 铸造执纪铁军"
+			tools:text="强筋骨、明纪律 铸造执纪铁军"
 			android:textColor="@color/black_title"
 			android:textSize="@dimen/t18" />
 		
@@ -50,7 +51,7 @@
 				android:gravity="left"
 				android:paddingLeft="@dimen/x10"
 				android:paddingRight="@dimen/x10"
-				android:text="2017-01-01"
+				tools:text="2017-01-01"
 				android:textColor="@color/black_hint"
 				android:textSize="@dimen/t14" />
 			
@@ -60,7 +61,7 @@
 				android:layout_height="wrap_content"
 				android:gravity="right"
 				android:paddingRight="@dimen/x5"
-				android:text="2017-01-01"
+				tools:text="2017-01-01"
 				android:textColor="@color/black_hint"
 				android:textSize="@dimen/t14" />
 		</LinearLayout>

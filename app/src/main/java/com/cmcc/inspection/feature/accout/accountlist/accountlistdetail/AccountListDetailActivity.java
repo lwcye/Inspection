@@ -60,7 +60,7 @@ public class AccountListDetailActivity extends MVPBaseActivity<AccountListDetail
         mInfo = getIntent().getParcelableExtra(INTENT_INFO);
 
         TitleUtil.attach(this)
-                .setTitle("通讯簿-" + mInfo.name)
+                .setTitle("通讯录-" + mInfo.name)
                 .setBack(true);
         initView();
 

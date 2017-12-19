@@ -15,9 +15,9 @@ import android.widget.RadioGroup;
 
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.main.MainActivity;
-import com.cmcc.inspection.feature.school.answer.AnswerActivity;
 import com.cmcc.inspection.feature.school.item.SchoolItemActivity;
 import com.cmcc.inspection.mvp.MVPBaseActivity;
+import com.cmcc.inspection.ui.Activity.BusnissListActivity;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
 import com.cmcc.inspection.utils.TitleUtil;
@@ -145,14 +145,14 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
                 }
                 if (position == 2) {
                     holder.setText(R.id.tv_item_shcool_answer_1_title, "体会交流");
-                    holder.setImageView(R.id.iv_item_shcool_answer_1_status, R.drawable.icon_shchool_answer_press);
+                    //holder.setImageView(R.id.iv_item_shcool_answer_1_status, R.drawable.icon_shchool_answer_press);
                 }
             }
         };
         mAdapter_1.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                AnswerActivity.start(getContext());
+                BusnissListActivity.start(getContext(), position);
             }
         });
     }

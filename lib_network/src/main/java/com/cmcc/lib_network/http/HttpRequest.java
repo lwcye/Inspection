@@ -6,6 +6,7 @@ import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.service.FortressService;
 import com.cmcc.lib_network.service.JiaFangService;
+import com.cmcc.lib_network.service.KaoShiService;
 import com.cmcc.lib_network.service.ModelService;
 import com.cmcc.lib_network.service.PingPaiService;
 import com.cmcc.lib_network.service.RegularService;
@@ -43,6 +44,7 @@ public class HttpRequest {
     private static PingPaiService sPingPaiService;
     private static TrackService sTrackService;
     private static FortressService sFortressService;
+    private static KaoShiService sKaoShiService;
     
     
     private static synchronized <T> T create(final Class<T> service) {
@@ -158,6 +160,13 @@ public class HttpRequest {
             sFortressService = create(FortressService.class);
         }
         return sFortressService;
+    }
+    
+    public static synchronized KaoShiService getKaoShiService() {
+        if (null == sKaoShiService) {
+            sKaoShiService = create(KaoShiService.class);
+        }
+        return sKaoShiService;
     }
     
     /**

@@ -59,7 +59,7 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
         mAdapter = new RUAdapter<JiafangModel.JiafangInfoBean>(getContext(), mList, R.layout.item_school_answer_0) {
             @Override
             protected void onInflateData(RUViewHolder holder, JiafangModel.JiafangInfoBean data, int position) {
-                holder.setVisibility(R.id.iv_item_shcool_answer_1_status, View.GONE);
+               // holder.setVisibility(R.id.iv_item_shcool_answer_1_status, View.GONE);
                 holder.setText(R.id.tv_item_shcool_answer_1_title, data.title);
                 holder.setText(R.id.tv_item_shcool_answer_1_content, data.nums + "人参与答题");
                 if (!TextUtils.isEmpty(data.pic)) {

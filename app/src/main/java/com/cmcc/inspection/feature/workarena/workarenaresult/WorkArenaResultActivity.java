@@ -30,6 +30,10 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
     private LinearLayout mLlWorkArenaResultBtn0;
     /** 巡查机构 */
     private Button mBtnWorkResultInspection;
+    /** 科    室 */
+    private Button mBtnWorkResultKeshi;
+    /** 乡    镇 */
+    private Button mBtnWorkResultXiang;
     
     public static void start(Context context) {
         Intent starter = new Intent(context, WorkArenaResultActivity.class);
@@ -56,6 +60,10 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
         mLlWorkArenaResultBtn0 = (LinearLayout) findViewById(R.id.ll_work_arena_result_btn_0);
         mBtnWorkResultInspection = (Button) findViewById(R.id.btn_work_result_inspection);
         mBtnWorkResultInspection.setOnClickListener(this);
+        mBtnWorkResultKeshi = (Button) findViewById(R.id.btn_work_result_keshi);
+        mBtnWorkResultKeshi.setOnClickListener(this);
+        mBtnWorkResultXiang = (Button) findViewById(R.id.btn_work_result_xiang);
+        mBtnWorkResultXiang.setOnClickListener(this);
     }
     
     @Override
@@ -65,6 +73,12 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
                 WorkIninspectionActivity.start(getContext());
                 break;
             case R.id.btn_work_result_inspection:
+                WorkInspectActivity.start(getContext());
+                break;
+            case R.id.btn_work_result_keshi:
+                WorkIninspectionActivity.start(getContext());
+                break;
+            case R.id.btn_work_result_xiang:
                 WorkInspectActivity.start(getContext());
                 break;
         }

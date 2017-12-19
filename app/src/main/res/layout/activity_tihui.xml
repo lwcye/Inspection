@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white"
+			android:orientation="vertical">
+			
+			<TextView
+				android:id="@+id/tv_tihui_title"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/view_height"
+				android:gravity="center"
+				android:paddingBottom="@dimen/x12"
+				android:paddingLeft="@dimen/x12"
+				android:paddingRight="@dimen/x12"
+				android:paddingTop="@dimen/x12"
+				android:text="强筋骨、明纪律 铸造执纪铁军"
+				android:textColor="@color/black_title"
+				android:textSize="@dimen/t18" />
+			
+			<TextView
+				android:id="@+id/tv_tihui_date"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/x12"
+				android:layout_marginLeft="@dimen/x12"
+				android:layout_marginRight="@dimen/x12"
+				android:text="2017-01-01    阅读量：1234"
+				android:textColor="@color/black_hint"
+				android:textSize="@dimen/t14" />
+			
+			<View style="@style/view_line" />
+			
+			<TextView
+				android:id="@+id/tv_tihui_title_question"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/x12"
+				android:background="#F2F2F0"
+				android:padding="@dimen/x10"
+				android:text="问：对党员入党前的违纪问题，应如何处理？" />
+			
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/x12">
+				
+				<ImageView
+					android:layout_width="@dimen/x40"
+					android:layout_height="@dimen/x40"
+					android:src="@drawable/img_home_user_icon" />
+				
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/x5"
+					android:orientation="vertical">
+					
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+						
+						<TextView
+							android:id="@+id/tv_tihui_name"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="盛艳玲"
+							android:textColor="@color/black_title"
+							android:textSize="@dimen/t14" />
+						
+						<TextView
+							android:id="@+id/tv_tihui_danwei"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="（第一纪检组）"
+							android:textColor="@color/black_hint"
+							android:textSize="@dimen/t14" />
+						
+						<Space
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_weight="1" />
+						
+						<TextView
+							android:id="@+id/tv_tihui_zan"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="13"
+							android:textColor="@color/black_hint"
+							android:textSize="@dimen/t14" />
+					</LinearLayout>
+					
+					<TextView
+						android:id="@+id/tv_tihui_content"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/x10"
+						android:text="依据有关规定，对党员入党前的违纪问题，应按以下原则进行处理：\n
+1.党员向党组织隐瞒的入党前的违纪行为，如属严重错误，一般应当予以除名；对入党后表现尚好的，给予严重警告、撤销党内职务或者留党察看处分。\n
+2.党员向党组织隐瞒的入党前的违纪行为，如属一般问题，可不予追究，但要对该党员进行批评教育。\n
+对严重错误与一般问题界限的把握，可根据党员入党前违纪行为的性质、情节和后果，并参考《中国共产党纪律处分条例》的相关规定进行综合判断。\n"
+						android:textColor="@color/black_title"
+						android:textSize="@dimen/t14" />
+					
+					<TextView
+						android:id="@+id/tv_tihui_answer_date"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/x10"
+						android:text="2017-11-22"
+						android:textColor="@color/black_hint"
+						android:textSize="@dimen/t14" />
+				</LinearLayout>
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="#F2F2F0"
+		android:gravity="center_vertical"
+		android:paddingBottom="@dimen/x5"
+		android:paddingLeft="@dimen/x12"
+		android:paddingRight="@dimen/x12"
+		android:paddingTop="@dimen/x5">
+		
+		<EditText
+			android:id="@+id/et_tihui_comment"
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/view_height_small"
+			android:layout_marginRight="@dimen/x10"
+			android:layout_weight="1"
+			android:background="@color/white"
+			android:hint="请输入解答"
+			android:paddingLeft="@dimen/x10"
+			android:textSize="@dimen/t14" />
+		
+		<Button
+			android:id="@+id/btn_tihui_comment"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="评论"
+			android:textColor="@color/white"
+			android:textSize="@dimen/t14" />
+	</LinearLayout>
+</LinearLayout>

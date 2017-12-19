@@ -237,7 +237,7 @@ public class AccountListActivity extends MVPBaseActivity<AccountListContract.Vie
                 list = mList2;
                 break;
             case 3:
-                list = mList2;
+                list = mList3;
                 break;
             default:
                 list = mList0;

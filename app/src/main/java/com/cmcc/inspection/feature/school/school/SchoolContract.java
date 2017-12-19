@@ -11,10 +11,8 @@ import com.cmcc.lib_common.mvp.BaseView;
 
 public class SchoolContract {
     interface View extends BaseView {
-        
     }
     
     interface Presenter extends BasePresenter<View> {
-        
     }
 }

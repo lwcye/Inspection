@@ -48,6 +48,12 @@ public class JfShiTiModel extends ResultModel {
         public List<DanxuanBean> danxuan;
         public List<DuoxuanBean> duoxuan;
         public List<WendaBean> wenda;
+        public List<PanduanBean> panduan;
+        public String panduannums;
+        public String danxuanfenshu;
+        public String duoxuanfenshu;
+        public String panduanfenshu;
+        public String times;
         
         public static class DanxuanBean {
             /**
@@ -69,6 +75,8 @@ public class JfShiTiModel extends ResultModel {
             public String sort;
             public String catid;
             public List<String> danan;
+            public String daanjiexi;
+            public String okdaan;
         }
         
         public static class DuoxuanBean {
@@ -109,6 +117,32 @@ public class JfShiTiModel extends ResultModel {
             public String daan;
             public String sort;
             public String catid;
+        }
+        
+        public static class PanduanBean {
+            /**
+             * id : 87
+             * typeid : 104
+             * title : 2012年12月5日，中共中央政治局召开会议，审议通过了中央政治局关于改进工作作风、密切联系群众的“八项规定”。
+             * daan : √|×
+             * sort : null
+             * catid : 101
+             * daanjiexi : null
+             * okdaan : ×
+             * create_time : 1513680326
+             * danan : ["√","×"]
+             */
+            
+            public String id;
+            public String typeid;
+            public String title;
+            public String daan;
+            public String sort;
+            public String catid;
+            public String daanjiexi;
+            public String okdaan;
+            public String create_time;
+            public List<String> danan;
         }
     }
 }

@@ -163,6 +163,7 @@
 		android:layout_marginTop="@dimen/x30">
 		
 		<Button
+			android:id="@+id/btn_work_result_keshi"
 			android:layout_width="@dimen/x120"
 			android:layout_height="@dimen/x35"
 			android:background="@color/colorAccent"
@@ -187,6 +188,7 @@
 		android:layout_marginTop="@dimen/x20">
 		
 		<Button
+			android:id="@+id/btn_work_result_xiang"
 			android:layout_width="@dimen/x120"
 			android:layout_height="@dimen/x35"
 			android:background="@color/colorAccent"
