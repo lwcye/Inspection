@@ -3,6 +3,7 @@ package com.cmcc.lib_network.service;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_network.model.KaoShiModel;
 import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.TiHuiModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -48,7 +49,7 @@ public interface KaoShiService {
     
     @FormUrlEncoded
     @POST("public/api/kaoshi/thjlloglist")
-    Observable<KaoShiModel> thjlloglist(
+    Observable<TiHuiModel> thjlloglist(
         @Field("tid") String tid
     );
     
@@ -57,7 +58,6 @@ public interface KaoShiService {
     @POST("public/api/kaoshi/thjllogadd")
     Observable<ObjectModel> thjllogadd(
         @Field("tid") String tid,
-        @Field("uid") String uid,
         @Field("content") String content
     );
 }

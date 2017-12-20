@@ -42,7 +42,9 @@ public class TitleUtil {
             titleUtil.mRight = (TextView) activity.findViewById(R.id.right);
             titleUtil.mShadow = activity.findViewById(R.id.v_title_bar_shadow);
             if (titleUtil.mCenter != null) {
-                titleUtil.mCenter.setText(activity.getTitle());
+                if (activity.getTitle() != activity.getString(R.string.app_name)) {
+                    titleUtil.mCenter.setText(activity.getTitle());
+                }
             }
         }
         return titleUtil;

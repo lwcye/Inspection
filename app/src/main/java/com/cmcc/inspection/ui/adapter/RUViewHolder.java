@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmcc.lib_common.utils.loader.LoaderFactory;
+import com.cmcc.lib_common.utils.loader.Options;
 
 /**
  * RecyclerView的通用View保存器(RecyclerView Universal View Holder)
@@ -35,7 +36,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
     private View mItemView;
     /** 适配器 */
     private RUAdapter<?> mAdapter;
-    
+
     /**
      * 构造函数
      *
@@ -48,7 +49,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         mItemView = itemView;
         mViewArray = new SparseArray<View>();
     }
-    
+
     /**
      * 获取Holder
      *
@@ -60,10 +61,10 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
      */
     public static RUViewHolder getHolder(RUAdapter<?> adapter, Context context, ViewGroup parent, int layoutId) {
         View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        
+
         return new RUViewHolder(adapter, itemView);
     }
-    
+
     /**
      * 通过资源id获得View
      *
@@ -74,28 +75,28 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
     @SuppressWarnings("unchecked")
     public <V extends View> V getViewById(int resId) {
         View v = mViewArray.get(resId);
-        
+
         if (v == null) {
             v = mItemView.findViewById(resId);
             mViewArray.put(resId, v);
-            
+
             // 第一次view被缓存时的回调
             mAdapter.onViewCached(this, v, resId);
         }
-        
+
         return (V) v;
     }
-    
+
     /**
      * 获取当前位置
      *
      * @return 当前位置
      */
     public int getHolderPosition() {
-        
+
         return getLayoutPosition();
     }
-    
+
     /**
      * 设置文本
      *
@@ -109,7 +110,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         }
         return this;
     }
-    
+
     /**
      * 设置文本
      *
@@ -123,19 +124,26 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         }
         return this;
     }
-    
+
+    public RUViewHolder setImageNetCircle(int resId, String url) {
+        if (!TextUtils.isEmpty(url)) {
+            LoaderFactory.getLoader().loadNet(((ImageView) getViewById(resId)), url, new Options(Options.RES_NONE, Options.RES_NONE, Options.TYPE_CIRCLE));
+        }
+        return this;
+    }
+
     public RUViewHolder setHint(int resId, String text) {
         if (!TextUtils.isEmpty(text)) {
             ((TextView) getViewById(resId)).setHint(text);
         }
         return this;
     }
-    
+
     public RUViewHolder setEnabled(int resId, boolean enabled) {
         getViewById(resId).setEnabled(enabled);
         return this;
     }
-    
+
     /**
      * 设置可见性
      *
@@ -147,7 +155,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         getViewById(resId).setVisibility(visibility);
         return this;
     }
-    
+
     /**
      * 设置字体颜色
      *
@@ -159,7 +167,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         ((TextView) getViewById(resId)).setTextColor(color);
         return this;
     }
-    
+
     /**
      * 设置item的背景颜色
      *
@@ -170,7 +178,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         itemView.setBackgroundColor(color);
         return this;
     }
-    
+
     /**
      * 设置item的背景颜色
      *
@@ -181,7 +189,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         getViewById(resId).setBackgroundColor(color);
         return this;
     }
-    
+
     /**
      * 设置item的背景颜色
      *
@@ -192,7 +200,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         itemView.setBackgroundResource(drawableId);
         return this;
     }
-    
+
     /**
      * 设置item的背景颜色
      *
@@ -203,7 +211,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         getViewById(resId).setBackgroundResource(drawableId);
         return this;
     }
-    
+
     /**
      * 设置图片
      *
@@ -215,7 +223,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         ((ImageView) getViewById(resId)).setImageBitmap(bitmap);
         return this;
     }
-    
+
     /**
      * 设置图片
      *
@@ -227,7 +235,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         ((ImageView) getViewById(viewResId)).setImageResource(resId);
         return this;
     }
-    
+
     /**
      * 设置监听
      *
@@ -239,7 +247,7 @@ public class RUViewHolder extends RecyclerView.ViewHolder {
         getViewById(resId).setOnClickListener(onClickListener);
         return this;
     }
-    
+
     public RUViewHolder addTextChangedListener(int resId, TextWatcher textWatcher) {
         ((EditText) getViewById(resId)).addTextChangedListener(textWatcher);
         return this;

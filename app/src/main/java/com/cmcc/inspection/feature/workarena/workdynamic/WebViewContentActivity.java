@@ -93,7 +93,6 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mType = getIntent().getIntExtra(INTENT_TYPE, 0);
 
         initView();
-        initView();
         loadData(mId, mType);
     }
 
