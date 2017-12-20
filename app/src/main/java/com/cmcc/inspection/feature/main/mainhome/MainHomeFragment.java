@@ -7,11 +7,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.brand.BrandActivity;
 import com.cmcc.inspection.feature.fortress.FortressActivity;
 import com.cmcc.inspection.feature.inspect.InspectActivity;
-import com.cmcc.inspection.feature.inspect.track.InspectTrackPresenter;
 import com.cmcc.inspection.feature.inspect.trackdetail.InspectTrackDetailActivity;
 import com.cmcc.inspection.feature.model.ModelActivity;
 import com.cmcc.inspection.feature.regular.RegularActivity;
@@ -19,6 +19,7 @@ import com.cmcc.inspection.feature.school.school.SchoolActivity;
 import com.cmcc.inspection.feature.workarena.WorkArenaActivity;
 import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
+import com.cmcc.inspection.utils.BaiduMapUtils;
 import com.cmcc.inspection.utils.TitleUtil;
 import com.cmcc.inspection.widget.BeiZhuDialog;
 import com.cmcc.lib_network.model.LoginModel;
@@ -70,7 +71,13 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     
     @Override
     public void initData() {
-        
+        BaiduMapUtils.getInstance().beginLocation(null, true, new BaiduMapUtils.OnLocationListener() {
+            @Override
+            public void locationListener(BDLocation location) {
+                TitleUtil.attach(getView())
+                    .setLeft(location.getDistrict());
+            }
+        });
     }
     
     @Override

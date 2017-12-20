@@ -40,6 +40,11 @@ import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.cmcc.lib_utils.utils.Utils;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
 
 /**
  * 百度地图帮助类
@@ -154,7 +159,20 @@ public class BaiduMapUtils {
                     //增加自己的定位信息
                     addCurrentLocationOverlay(baiduMap);
                 }
-                locationListener.locationListener(mBDLocation);
+                Observable.just(mBDLocation)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<BDLocation>() {
+                        @Override
+                        public void call(BDLocation bdLocation) {
+                            locationListener.locationListener(mBDLocation);
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            LogUtils.e(throwable);
+                        }
+                    });
             }
             
             @Override
