@@ -90,7 +90,7 @@ public class AccountListActivity extends MVPBaseActivity<AccountListContract.Vie
         mRbMail2 = (RadioButton) findViewById(R.id.rb_mail_2);
         mRbMail3 = (RadioButton) findViewById(R.id.rb_mail_3);
         mRgMail = (RadioGroup) findViewById(R.id.rg_mail);
-        mEtMailSearch = (EditText) findViewById(R.id.et_mail_search);
+        mEtMailSearch = (EditText) findViewById(R.id.et_search);
         mVpMail = (ViewPager) findViewById(R.id.vp_mail);
         
         mRgMail.setOnCheckedChangeListener(this);

@@ -12,6 +12,7 @@ import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.TrackModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
+import com.cmcc.lib_utils.utils.ToastUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 /**
@@ -51,6 +52,7 @@ public class InspectTrackPresenter extends BasePresenterImpl<InspectTrackContrac
                     .subscribe(new HttpResult<ObjectModel>() {
                         @Override
                         public void result(ObjectModel objectModel) {
+                            ToastUtils.showShortToastSafe(objectModel.info.toString());
                         }
                     }, new HttpError(getView()) {
                         @Override
@@ -59,7 +61,6 @@ public class InspectTrackPresenter extends BasePresenterImpl<InspectTrackContrac
                     }, new HttpComplete(getView()));
             }
         });
-        
     }
     
     @Override

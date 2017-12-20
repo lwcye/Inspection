@@ -64,15 +64,7 @@
 			android:textColor="@color/select_tab" />
 	</RadioGroup>
 	
-	<EditText
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/x30"
-		android:layout_margin="@dimen/x12"
-		android:textSize="@dimen/t12"
-		android:hint="请输入内容..."
-		android:background="@color/white"
-		android:drawableRight="@drawable/icon_search"
-		android:paddingRight="@dimen/x10" />
+	<include layout="@layout/layout_edit_search" />
 	
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/rv_work_inspection"

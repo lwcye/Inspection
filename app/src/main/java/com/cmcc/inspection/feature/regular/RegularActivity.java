@@ -117,9 +117,9 @@ public class RegularActivity extends MVPBaseActivity<RegularContract.View, Regul
         mRbRagular3 = (RadioButton) findViewById(R.id.rb_ragular_3);
         mRgRagular = (RadioGroup) findViewById(R.id.rg_ragular);
         mRgRagular.setOnCheckedChangeListener(this);
-        mEtRegulerSeach = (EditText) findViewById(R.id.et_reguler_seach);
+        mEtRegulerSeach = (EditText) findViewById(R.id.et_search);
         mEtRegulerSeach.setOnEditorActionListener(this);
-        mIvEtSearch = (ImageView) findViewById(R.id.iv_et_search);
+        mIvEtSearch = (ImageView) findViewById(R.id.iv_search);
         mIvEtSearch.setOnClickListener(this);
         mVpRegular = (ViewPager) findViewById(R.id.vp_regular);
         mVpRegular.addOnPageChangeListener(this);
@@ -206,7 +206,7 @@ public class RegularActivity extends MVPBaseActivity<RegularContract.View, Regul
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_et_search:
+            case R.id.iv_search:
                 mPresenter.loadData(index, mEtRegulerSeach.getText().toString().trim());
                 break;
             default:

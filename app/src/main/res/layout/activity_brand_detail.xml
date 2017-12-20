@@ -239,6 +239,7 @@
     <LinearLayout
         android:id="@+id/ll_webview_font"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="@dimen/view_height">
 
         <ImageButton
@@ -246,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="?selectableItemBackground"
             android:src="@drawable/icon_font"/>
 
         <ImageButton
@@ -254,7 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="?selectableItemBackground"
             android:src="@drawable/icon_share"/>
     </LinearLayout>
 </LinearLayout>

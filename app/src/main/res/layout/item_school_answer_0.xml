@@ -8,18 +8,19 @@
 		android:id="@+id/iv_item_shcool_answer_1"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/x185"
-		android:scaleType="centerCrop"
-		android:src="@drawable/img_school_answer_0"
-		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
-		android:layout_alignParentStart="true" />
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:background="?selectableItemBackground"
+		android:scaleType="centerCrop"
+		android:src="@drawable/img_school_answer_0" />
 	
 	<!--<ImageView-->
-		<!--android:id="@+id/iv_item_shcool_answer_1_status"-->
-		<!--android:layout_width="wrap_content"-->
-		<!--android:layout_height="wrap_content"-->
-		<!--android:rotation="330"-->
-		<!--android:src="@drawable/icon_shchool_answer_normal" />-->
+	<!--android:id="@+id/iv_item_shcool_answer_1_status"-->
+	<!--android:layout_width="wrap_content"-->
+	<!--android:layout_height="wrap_content"-->
+	<!--android:rotation="330"-->
+	<!--android:src="@drawable/icon_shchool_answer_normal" />-->
 	
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -32,9 +33,9 @@
 			android:id="@+id/tv_item_shcool_answer_1_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:gravity="center"
 			android:paddingLeft="@dimen/x30"
 			android:paddingRight="@dimen/x30"
-			android:gravity="center"
 			android:text="学习资料"
 			android:textColor="@color/white"
 			android:textSize="@dimen/t26" />
