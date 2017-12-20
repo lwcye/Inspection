@@ -1,7 +1,5 @@
 package com.cmcc.lib_network.model;
 
-import android.text.TextUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,13 +105,8 @@ public class BrandDetailModel extends ResultModel {
             public List<ChengBan> initList() {
                 List<ChengBan> mList = new ArrayList<>();
                 mList.add(new ChengBan("室主任", zhuren, zhurenpic));
-                String[] names = guguanshuzu.get(0).name.split("，");
-                String[] pics = new String[names.length];
-                if (!TextUtils.isEmpty(guguanshuzu.get(0).pic)) {
-                    pics = guguanshuzu.get(0).pic.split("，");
-                }
-                for (int i = 0; i < names.length; i++) {
-                    mList.add(new ChengBan("业务骨干", names[i], pics[i]));
+                for (int i = 0; i < guguanshuzu.size(); i++) {
+                    mList.add(new ChengBan("业务骨干", guguanshuzu.get(i).name, guguanshuzu.get(i).pic));
                 }
                 return mList;
             }
