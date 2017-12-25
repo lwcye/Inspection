@@ -1,6 +1,7 @@
 package com.cmcc.inspection.feature.main.mainuser;
 
 
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.accout.accountlist.AccountListActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.lib_network.model.UserInfoModel;
+import com.cmcc.lib_utils.utils.AppUtils;
 
 
 /**
@@ -72,6 +74,16 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
         mTvUserTest = (TextView) view.findViewById(R.id.tv_user_test);
         mLlUserTest = (LinearLayout) view.findViewById(R.id.ll_user_test);
         mLlUserTest.setOnClickListener(this);
+        mLlUserTest.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("当前版本");
+                builder.setMessage("版本名：" + AppUtils.getAppVersionName() + ",版本号：" + AppUtils.getAppVersionCode());
+                builder.create().show();
+                return false;
+            }
+        });
         mTvUserMail = (TextView) view.findViewById(R.id.tv_user_mail);
         mLlUserMail = (LinearLayout) view.findViewById(R.id.ll_user_mail);
         mLlUserMail.setOnClickListener(this);
