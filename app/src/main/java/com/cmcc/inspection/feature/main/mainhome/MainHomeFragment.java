@@ -3,9 +3,11 @@ package com.cmcc.inspection.feature.main.mainhome;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
 import com.cmcc.inspection.R;
 import com.cmcc.inspection.feature.brand.BrandActivity;
 import com.cmcc.inspection.feature.fortress.FortressActivity;
@@ -17,7 +19,9 @@ import com.cmcc.inspection.feature.school.school.SchoolActivity;
 import com.cmcc.inspection.feature.workarena.WorkArenaActivity;
 import com.cmcc.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
+import com.cmcc.inspection.utils.BaiduMapUtils;
 import com.cmcc.inspection.utils.TitleUtil;
+import com.cmcc.inspection.widget.BeiZhuDialog;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.UserInfoModel;
 import com.hbln.lib_views.DrawableCenterTextView;
@@ -49,6 +53,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     private TextView mTvHomeNickname;
     private TextView mTvHomeDw;
     private TextView mTvHomeMobile;
+    private ImageView mIvHomeSign;
     
     /**
      * 创建Fragment实体
@@ -66,7 +71,13 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     
     @Override
     public void initData() {
-        
+        BaiduMapUtils.getInstance().beginLocation(null, true, new BaiduMapUtils.OnLocationListener() {
+            @Override
+            public void locationListener(BDLocation location) {
+                TitleUtil.attach(getView())
+                    .setLeft(location.getDistrict());
+            }
+        });
     }
     
     @Override
@@ -87,9 +98,24 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         return R.layout.fragment_home;
     }
     
+    private BeiZhuDialog mBeiZhuDialog;
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_home_sign:
+                //签到
+                if (mBeiZhuDialog == null) {
+                    mBeiZhuDialog = new BeiZhuDialog(getContext());
+                }
+                mBeiZhuDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.postTrackData(mBeiZhuDialog.getBeiZhu());
+                    }
+                });
+                mBeiZhuDialog.show();
+                break;
             case R.id.tv_home_tab_work_arena:
                 //工作擂台
                 WorkArenaActivity.start(getBaseActivity());
@@ -168,5 +194,6 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         view.findViewById(R.id.tv_home_school_left).setOnClickListener(this);
         view.findViewById(R.id.tv_home_school_right).setOnClickListener(this);
         view.findViewById(R.id.tv_home_track).setOnClickListener(this);
+        view.findViewById(R.id.iv_home_sign).setOnClickListener(this);
     }
 }

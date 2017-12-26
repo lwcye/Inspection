@@ -6,15 +6,19 @@ import com.cmcc.lib_common.mvp.BaseView;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
 public class MainHomeContract {
     interface View extends BaseView {
         
     }
-
-    interface  Presenter extends BasePresenter<View> {
-        
+    
+    interface Presenter extends BasePresenter<View> {
+        /**
+         * 签到上传定位
+         * @param beiZhu
+         */
+        void postTrackData(final String beiZhu);
     }
 }

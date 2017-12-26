@@ -65,9 +65,9 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
         mRvWorkDynamic = (RecyclerView) findViewById(R.id.rv_work_dynamic);
         initRecylerView();
         
-        mEtWorkSeach = (EditText) findViewById(R.id.et_work_seach);
+        mEtWorkSeach = (EditText) findViewById(R.id.et_search);
         mEtWorkSeach.setOnEditorActionListener(this);
-        mIvEtSearch = (ImageView) findViewById(R.id.iv_et_search);
+        mIvEtSearch = (ImageView) findViewById(R.id.iv_search);
         mIvEtSearch.setOnClickListener(this);
     }
     
@@ -100,7 +100,7 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_et_search:
+            case R.id.iv_search:
                 mPresenter.searchData(mEtWorkSeach.getText().toString().trim());
                 break;
         }

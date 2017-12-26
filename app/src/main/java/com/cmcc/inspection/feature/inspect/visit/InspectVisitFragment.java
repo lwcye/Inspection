@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.cmcc.inspection.R;
-import com.cmcc.inspection.feature.inspect.visitanswer.VisitAnswerActivity;
+import com.cmcc.inspection.feature.school.answer.AnswerActivity;
 import com.cmcc.inspection.mvp.MVPBaseFragment;
 import com.cmcc.inspection.ui.adapter.RUAdapter;
 import com.cmcc.inspection.ui.adapter.RUViewHolder;
@@ -85,7 +85,7 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
         mDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VisitAnswerActivity.start(getContext(), mList.get(position), mDialog.getAnswerName(), mDialog.getAnswerGuanxi(), mDialog.getAnswerMobile());
+                AnswerActivity.start(getContext(), mList.get(position).id, mDialog.getAnswerName(), mDialog.getAnswerGuanxi(), mDialog.getAnswerMobile());
             }
         });
         mDialog.show();

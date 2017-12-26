@@ -11,6 +11,8 @@ import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import rx.Observable;
+
 import static android.R.attr.name;
 
 /**
@@ -21,10 +23,15 @@ import static android.R.attr.name;
 public class AnswerPresenter extends BasePresenterImpl<AnswerContract.View> implements AnswerContract.Presenter {
     
     @Override
-    public void loadData(String sjid) {
+    public void loadData(String sjid, int type) {
+        Observable<JfShiTiModel> shiti;
+        if (type == AnswerActivity.TYPE_VISIT) {
+            shiti = HttpRequest.getJiaFangServicee().shiti(sjid);
+        } else {
+            shiti = HttpRequest.getKaoShiService().shiti(sjid);
+        }
         getView().showLoading("");
-        HttpRequest.getKaoShiService().shiti(sjid)
-            .compose(NetWorkInterceptor.<JfShiTiModel>retrySessionCreator())
+        shiti.compose(NetWorkInterceptor.<JfShiTiModel>retrySessionCreator())
             .compose(getView().getBaseActivity().<JfShiTiModel>applySchedulers(ActivityEvent.DESTROY))
             .subscribe(new HttpResult<JfShiTiModel>() {
                 @Override
@@ -39,6 +46,21 @@ public class AnswerPresenter extends BasePresenterImpl<AnswerContract.View> impl
         LogUtils.e("sjid", sjid, "name", name, "stids", stids, "daids", daids);
         getView().showLoading("");
         HttpRequest.getKaoShiService().wenjuan(sjid, stids, daids)
+            .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
+            .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<ObjectModel>() {
+                @Override
+                public void result(ObjectModel objectModel) {
+                    getView().submitSuccess(objectModel.info.toString());
+                }
+            }, new HttpError(getView()), new HttpComplete(getView()));
+    }
+    
+    @Override
+    public void submit(String sjid, String name, String guanxi, String mobile, String stids, String daids) {
+        LogUtils.e("sjid", sjid, "name", name, "guanxi", guanxi, "mobile", mobile, "stids", stids, "daids", daids);
+        getView().showLoading("");
+        HttpRequest.getJiaFangServicee().wenjuan(sjid, name, guanxi, mobile, stids, daids)
             .compose(NetWorkInterceptor.<ObjectModel>retrySessionCreator())
             .compose(getView().getBaseActivity().<ObjectModel>applySchedulers(ActivityEvent.DESTROY))
             .subscribe(new HttpResult<ObjectModel>() {

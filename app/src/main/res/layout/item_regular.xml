@@ -7,6 +7,7 @@
 	<LinearLayout
 		android:id="@+id/ll_item_ragular"
 		android:layout_width="match_parent"
+		android:background="?selectableItemBackground"
 		android:layout_height="@dimen/x120">
 		
 		<ImageView

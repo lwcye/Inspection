@@ -36,7 +36,7 @@
 		android:id="@+id/btn_dialog_cancel"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/view_height"
-		android:background="@color/white"
+		android:background="?selectableItemBackground"
 		android:text="关闭"
 		android:textColor="@color/black_title"
 		android:textSize="@dimen/t18" />

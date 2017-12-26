@@ -9,9 +9,9 @@
 	android:layout_marginLeft="@dimen/x10"
 	android:layout_marginRight="@dimen/x10"
 	android:layout_marginTop="@dimen/x5"
-	android:elevation="5dp"
-	app:cardElevation="5dp"
-	>
+	app:cardCornerRadius="@dimen/x3"
+	android:background="@color/white"
+	app:cardElevation="5dp">
 	
 	<LinearLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,7 @@
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@color/white"
+		android:background="?selectableItemBackground"
 		android:orientation="horizontal">
 		
 		<com.hbln.lib_views.CircularImageView
@@ -78,7 +78,6 @@
 		<View
 			style="@style/view_line_vir"
 			android:layout_marginLeft="@dimen/x10"
-			android:layout_marginRight="@dimen/x10"
 			android:layout_marginTop="@dimen/x10" />
 		
 		<ImageView
@@ -86,7 +85,8 @@
 			android:layout_width="@dimen/x40"
 			android:layout_height="match_parent"
 			android:adjustViewBounds="true"
-			android:paddingLeft="@dimen/x5"
+			android:background="?selectableItemBackground"
+			android:paddingLeft="@dimen/x15"
 			android:paddingRight="@dimen/x5"
 			android:src="@drawable/icon_account_list_phone" />
 	</LinearLayout>

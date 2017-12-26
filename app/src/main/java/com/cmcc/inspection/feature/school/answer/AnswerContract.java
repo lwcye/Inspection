@@ -12,15 +12,18 @@ import com.cmcc.lib_network.model.JfShiTiModel;
 public class AnswerContract {
     interface View extends BaseView {
         void setData(JfShiTiModel jfShiTiModel);
-    
+        
         void submitSuccess(String message);
     }
     
     interface Presenter extends BasePresenter<View> {
-        void loadData(String sjid);
-    
+        void loadData(String sjid, int type);
+        
         void submit(String sjid,
                     String stids,
                     String daids);
+        
+        void submit(String sjid, String name, String guanxi, String mobile, String stids, String daids);
     }
+    
 }

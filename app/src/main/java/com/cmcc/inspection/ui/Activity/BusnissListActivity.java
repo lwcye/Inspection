@@ -89,9 +89,9 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
         TitleUtil.attach(this)
             .setTitle(title)
             .setBack(true);
-        mLlListSeach = (LinearLayout) findViewById(R.id.ll_list_seach);
-        mEtListSeach = (EditText) findViewById(R.id.et_list_seach);
-        mIvlistSearch = (ImageView) findViewById(R.id.iv_list_search);
+        mLlListSeach = (LinearLayout) findViewById(R.id.ll_search);
+        mEtListSeach = (EditText) findViewById(R.id.et_search);
+        mIvlistSearch = (ImageView) findViewById(R.id.iv_search);
         mRvList = (RecyclerView) findViewById(R.id.rv_list);
         mRvList.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new RUAdapter<KaoShiModel.InfoBean>(getContext(), mList, R.layout.item_school_item) {

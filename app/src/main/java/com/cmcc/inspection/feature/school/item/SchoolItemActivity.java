@@ -75,11 +75,11 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
             .setBack(true)
             .setTitle(title);
         mRvSchoolItem = (RecyclerView) findViewById(R.id.rv_school_item);
-        mEtShcoolItemSeach = (EditText) findViewById(R.id.et_shcool_item_seach);
+        mEtShcoolItemSeach = (EditText) findViewById(R.id.et_search);
         mEtShcoolItemSeach.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         mEtShcoolItemSeach.setOnEditorActionListener(this);
         initRecylerView();
-        mIvEtSearch = (ImageView) findViewById(R.id.iv_et_search);
+        mIvEtSearch = (ImageView) findViewById(R.id.iv_search);
         mIvEtSearch.setOnClickListener(this);
     }
     
@@ -126,7 +126,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_et_search:
+            case R.id.iv_search:
                 mPresenter.searchData(index, mEtShcoolItemSeach.getText().toString().trim());
                 break;
         }
