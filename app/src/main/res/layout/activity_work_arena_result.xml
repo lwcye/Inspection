@@ -53,10 +53,10 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			
 			android:padding="@dimen/x10">
 			
 			<TextView
+				android:id="@+id/tv_work_arena_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="第四纪检组" />
@@ -70,6 +70,7 @@
 				android:gravity="center_vertical">
 				
 				<TextView
+					android:id="@+id/tv_work_arena_0"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawableLeft="@drawable/img_work_arena_result_rank_0"
@@ -77,18 +78,18 @@
 					android:text="纪律审查:" />
 				
 				<ProgressBar
+					android:id="@+id/pb_work_arena_0"
 					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
 					android:layout_width="@dimen/x150"
 					android:layout_height="@dimen/x20"
-					android:progress="90" />
+					android:progress="0" />
 				
 				<TextView
+					android:id="@+id/tv_work_arena_nums_0"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawablePadding="@dimen/x10"
-					android:drawableRight="@drawable/img_work_arena_result_rank_flower"
 					android:gravity="center"
-					android:text="14"
 					android:textColor="@color/colorAccent" />
 			</LinearLayout>
 			
@@ -101,6 +102,7 @@
 				android:gravity="center_vertical">
 				
 				<TextView
+					android:id="@+id/tv_work_arena_1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawableLeft="@drawable/img_work_arena_result_rank_1"
@@ -108,17 +110,18 @@
 					android:text="信息数量:" />
 				
 				<ProgressBar
+					android:id="@+id/pb_work_arena_1"
 					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
 					android:layout_width="@dimen/x150"
 					android:layout_height="@dimen/x20"
-					android:progress="96" />
+					android:progress="0" />
 				
 				<TextView
+					android:id="@+id/tv_work_arena_nums_1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawablePadding="@dimen/x10"
 					android:gravity="center"
-					android:text="36"
 					android:textColor="@color/colorAccent" />
 			</LinearLayout>
 			
@@ -131,6 +134,7 @@
 				android:gravity="center_vertical">
 				
 				<TextView
+					android:id="@+id/tv_work_arena_2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawableLeft="@drawable/img_work_arena_result_rank_2"
@@ -138,17 +142,18 @@
 					android:text="外宣数量:" />
 				
 				<ProgressBar
+					android:id="@+id/pb_work_arena_2"
 					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
 					android:layout_width="@dimen/x150"
 					android:layout_height="@dimen/x20"
-					android:progress="94" />
+					android:progress="0" />
 				
 				<TextView
+					android:id="@+id/tv_work_arena_nums_2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:drawablePadding="@dimen/x10"
 					android:gravity="center"
-					android:text="28"
 					android:textColor="@color/colorAccent" />
 			</LinearLayout>
 		</LinearLayout>

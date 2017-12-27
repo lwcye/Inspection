@@ -1,6 +1,7 @@
 package com.cmcc.lib_network.service;
 
 import com.cmcc.lib_network.model.WebViewModel;
+import com.cmcc.lib_network.model.WorkArenaModel;
 import com.cmcc.lib_network.model.WorkModel;
 
 import retrofit2.http.Field;
@@ -40,5 +41,17 @@ public interface WorkService {
     @POST("public/api/main/jobdongtaiview")
     Observable<WebViewModel> jobdongtaiview(
         @Field("id") String id
+    );
+    
+    @POST("public/api/yewu/userpaiming")
+    Observable<WorkArenaModel> userpaiming(
+    );
+    
+    @FormUrlEncoded
+    @POST("public/api/yewu/getinfo")
+    Observable<WebViewModel> getinfo(
+        @Field("shijian") String shijian,
+        @Field("type") String type,
+        @Field("keshi") String keshi
     );
 }

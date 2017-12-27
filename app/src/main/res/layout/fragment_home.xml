@@ -332,15 +332,14 @@
 		android:layout_height="@dimen/x20"
 		android:layout_alignBottom="@id/iv_home_top_bg" />
 	
-	<ImageView
+	<Button
 		android:id="@+id/iv_home_sign"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_width="@dimen/x50"
+		android:layout_height="@dimen/x50"
 		android:layout_alignParentRight="true"
 		android:layout_alignTop="@id/space_home"
 		android:layout_centerVertical="true"
-		android:layout_marginBottom="30dp"
+		android:layout_marginBottom="@dimen/x30"
 		android:layout_marginRight="@dimen/x25"
-		android:background="?selectableItemBackground"
-		android:src="@drawable/icon_home_sign" />
+		android:background="@drawable/icon_home_sign" />
 </RelativeLayout>

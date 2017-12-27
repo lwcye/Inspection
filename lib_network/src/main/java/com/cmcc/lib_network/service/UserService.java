@@ -67,4 +67,10 @@ public interface UserService {
     Observable<MailModel> tongxun(
         @Field("name") String name
     );
+    
+    @FormUrlEncoded
+    @POST("public/api/logintoken/getversion")
+    Observable<ObjectModel> getversion(
+        @Field("version") String version
+    );
 }
