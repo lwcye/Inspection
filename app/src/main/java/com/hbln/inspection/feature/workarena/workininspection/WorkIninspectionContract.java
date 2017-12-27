@@ -16,6 +16,6 @@ public class WorkIninspectionContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void loadData(int type);
+        void loadData(int type, String date);
     }
 }

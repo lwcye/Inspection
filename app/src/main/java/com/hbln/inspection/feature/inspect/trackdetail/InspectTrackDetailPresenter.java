@@ -84,7 +84,7 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
                         });
                     } else {
                         //在判断有网络有，判断是否有GPS导航
-                        checkGpsSetting();
+                        //checkGpsSetting();
                     }
                 }
             }

@@ -41,7 +41,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/x20">
+			android:layout_marginTop="@dimen/x16">
 			
 			<TextView
 				android:id="@+id/tv_item_fortress_name"

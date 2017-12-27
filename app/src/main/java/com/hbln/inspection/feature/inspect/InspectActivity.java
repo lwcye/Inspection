@@ -60,7 +60,7 @@ public class InspectActivity extends BaseActivity implements View.OnClickListene
                     MainActivity.start(getContext());
                 }
             })
-            .setTitle("制度规定");
+            .setTitle("监督管理");
         mRbInspect0 = (RadioButton) findViewById(R.id.rb_inspect_0);
         mRbInspect0.setOnClickListener(this);
         mRbInspect1 = (RadioButton) findViewById(R.id.rb_inspect_1);

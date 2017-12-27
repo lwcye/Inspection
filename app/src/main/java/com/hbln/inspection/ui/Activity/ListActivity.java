@@ -50,7 +50,7 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
     public static final int TYPE_SAN_HUI = 3;
     public static boolean hasSearch = true;
     public int mType = 0;
-
+    
     private LinearLayout mLlListSeach;
     private EditText mEtListSeach;
     private ImageView mIvlistSearch;
@@ -58,13 +58,13 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
     private RUAdapter<FortressHomeModel.InfoBean> mAdapter;
     private List<FortressHomeModel.InfoBean> mList = new ArrayList<>();
     private FortressHomeModel mWenTiData;
-
+    
     public static void start(Context context, int type) {
         Intent starter = new Intent(context, ListActivity.class);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +73,13 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
         initView();
         loadData();
     }
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();
         hasSearch = true;
     }
-
+    
     private void initView() {
         String title;
         if (mType == TYPE_WENTI) {
@@ -90,14 +90,14 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
             title = "群众工作";
         }
         TitleUtil.attach(this)
-                .setTitle(title)
-                .setBack(true);
+            .setTitle(title)
+            .setBack(true);
         mLlListSeach = (LinearLayout) findViewById(R.id.ll_search);
         mEtListSeach = (EditText) findViewById(R.id.et_search);
         mIvlistSearch = (ImageView) findViewById(R.id.iv_search);
         mRvList = (RecyclerView) findViewById(R.id.rv_list);
         mRvList.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mList, R.layout.item_fortress) {
+        mAdapter = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mList, R.layout.item_fortress_img) {
             @Override
             protected void onInflateData(RUViewHolder holder, FortressHomeModel.InfoBean data, int position) {
                 holder.setText(R.id.tv_item_fortress, data.title);
@@ -107,13 +107,19 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
                     holder.setVisibility(R.id.tv_item_fortress_name, View.VISIBLE);
                     holder.setText(R.id.tv_item_fortress_name, data.zhibuname);
                 }
+                if (TextUtils.isEmpty(data.pic)) {
+                    holder.setVisibility(R.id.iv_item_fortress, View.GONE);
+                } else {
+                    holder.setVisibility(R.id.iv_item_fortress, View.VISIBLE);
+                    holder.setImageNet(R.id.iv_item_fortress, data.pic);
+                }
                 holder.setText(R.id.tv_item_fortress_date, data.times);
             }
         };
         mAdapter.setOnItemClickListener(this);
         mRvList.setAdapter(mAdapter);
     }
-
+    
     public void loadData() {
         Observable<FortressHomeModel> request;
         if (mType == TYPE_WENTI) {
@@ -123,24 +129,24 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
         } else {
             request = HttpRequest.getFortressService().qzgongzuolist("1", URLs.PAGE_SIZE);
         }
-
+        
         showLoading("");
         request.compose(NetWorkInterceptor.<FortressHomeModel>retrySessionCreator())
-                .compose(getBaseActivity().<FortressHomeModel>applySchedulers(ActivityEvent.DESTROY))
-                .subscribe(new HttpResult<FortressHomeModel>() {
-                    @Override
-                    public void result(FortressHomeModel objectModel) {
-                        setWenTiData(objectModel);
-                    }
-                }, new HttpError(this), new HttpComplete(this));
+            .compose(getBaseActivity().<FortressHomeModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<FortressHomeModel>() {
+                @Override
+                public void result(FortressHomeModel objectModel) {
+                    setWenTiData(objectModel);
+                }
+            }, new HttpError(this), new HttpComplete(this));
     }
-
+    
     public void setWenTiData(FortressHomeModel wenTiData) {
         mWenTiData = wenTiData;
         mList = mWenTiData.info;
         mAdapter.setData(mList);
     }
-
+    
     @Override
     public void onItemClick(View view, int itemType, int position) {
         if (mType == TYPE_WENTI || mType == TYPE_DANG_FEI) {

@@ -64,10 +64,23 @@
 			android:textColor="@color/select_tab" />
 	</RadioGroup>
 	
-	<include layout="@layout/layout_edit_search" />
+	<TextView
+		android:id="@+id/tv_work_month"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height_small"
+		android:layout_marginBottom="@dimen/x5"
+		android:layout_marginLeft="@dimen/x12"
+		android:layout_marginRight="@dimen/x12"
+		android:layout_marginTop="@dimen/x12"
+		android:background="@color/white"
+		android:gravity="center_vertical"
+		android:paddingLeft="@dimen/x12"
+		android:text="2017年12月"
+		android:textColor="@color/black_title"
+		android:textSize="@dimen/t18" />
 	
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/rv_work_inspection"
+	<android.support.v4.view.ViewPager
+		android:id="@+id/vp_work"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
 </LinearLayout>

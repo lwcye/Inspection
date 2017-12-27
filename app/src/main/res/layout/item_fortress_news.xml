@@ -34,7 +34,6 @@
 		android:layout_alignParentBottom="true"
 		android:layout_marginLeft="@dimen/x10"
 		android:layout_toRightOf="@id/iv_item_fortress_news"
-		android:text="第四纪检组"
 		android:textColor="@color/black_hint"
 		android:textSize="@dimen/t14" />
 	

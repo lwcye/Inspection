@@ -101,7 +101,7 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
     
     private void initViewPager() {
         List<Fragment> fragmentList = new ArrayList<>();
-        mJianDuRUAdapter = new RUAdapter<JianDuModel.InfoBean>(getContext(), mJianDuModels, R.layout.item_fortress) {
+        mJianDuRUAdapter = new RUAdapter<JianDuModel.InfoBean>(getContext(), mJianDuModels, R.layout.item_fortress_img) {
             @Override
             protected void onInflateData(RUViewHolder holder, JianDuModel.InfoBean data, int position) {
                 holder.setText(R.id.tv_item_fortress, data.title);
@@ -111,6 +111,12 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
                 } else {
                     holder.setVisibility(R.id.tv_item_fortress_name, View.VISIBLE);
                     holder.setText(R.id.tv_item_fortress_name, data.author);
+                }
+                if (TextUtils.isEmpty(data.pic)) {
+                    holder.setVisibility(R.id.iv_item_fortress, View.GONE);
+                } else {
+                    holder.setVisibility(R.id.iv_item_fortress, View.VISIBLE);
+                    holder.setImageNet(R.id.iv_item_fortress, data.pic);
                 }
             }
         };
@@ -122,7 +128,7 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
             }
         });
         
-        mJiaoYuRUAdapter = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mJiaoYuModels, R.layout.item_fortress) {
+        mJiaoYuRUAdapter = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mJiaoYuModels, R.layout.item_fortress_img) {
             @Override
             protected void onInflateData(RUViewHolder holder, FortressHomeModel.InfoBean data, int position) {
                 holder.setText(R.id.tv_item_fortress, data.title);
@@ -132,6 +138,12 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
                 } else {
                     holder.setVisibility(R.id.tv_item_fortress_name, View.VISIBLE);
                     holder.setText(R.id.tv_item_fortress_name, data.zhibuname);
+                }
+                if (TextUtils.isEmpty(data.pic)) {
+                    holder.setVisibility(R.id.iv_item_fortress, View.GONE);
+                } else {
+                    holder.setVisibility(R.id.iv_item_fortress, View.VISIBLE);
+                    holder.setImageNet(R.id.iv_item_fortress, data.pic);
                 }
             }
         };

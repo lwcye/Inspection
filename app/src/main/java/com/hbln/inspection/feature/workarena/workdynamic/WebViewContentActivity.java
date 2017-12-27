@@ -77,25 +77,25 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     private LinearLayout mLlWebviewZan;
     private LinearLayout mLlWebviewComment;
     private LinearLayout mLlWebviewFont;
-
+    
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, WebViewContentActivity.class);
         starter.putExtra(INTENT_ID, id);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_content);
         mId = getIntent().getStringExtra(INTENT_ID);
         mType = getIntent().getIntExtra(INTENT_TYPE, 0);
-
+        
         initView();
         loadData(mId, mType);
     }
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -103,7 +103,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         hasZan = true;
         hasFont = true;
     }
-
+    
     private void loadData(String id, int type) {
         if (TextUtils.isEmpty(id)) {
             ToastUtils.showShortToastSafe("数据读取错误");
@@ -131,19 +131,19 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
             observable = HttpRequest.getBrandService().waixuanview(id);
         }
         observable
-                .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
-                .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
-                .subscribe(new HttpResult<WebViewModel>() {
-                    @Override
-                    public void result(WebViewModel webViewModel) {
-                        setData(webViewModel.info);
-                    }
-                }, new HttpError(this), new HttpComplete(this));
+            .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
+            .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<WebViewModel>() {
+                @Override
+                public void result(WebViewModel webViewModel) {
+                    setData(webViewModel.info);
+                }
+            }, new HttpError(this), new HttpComplete(this));
     }
-
+    
     private void initView() {
         TitleUtil.attach(this)
-                .setBack(true);
+            .setBack(true);
         mTvWebviewTitle = (TextView) findViewById(R.id.tv_webview_title);
         mTvWebviewDate = (TextView) findViewById(R.id.tv_webview_date);
         mWvWebview = (BridgeWebView) findViewById(R.id.wv_webview);
@@ -158,11 +158,11 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mIbWebviewFont.setOnClickListener(this);
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
-
+        
         mLlWebviewZan = (LinearLayout) findViewById(R.id.ll_webview_zan);
         mLlWebviewComment = (LinearLayout) findViewById(R.id.ll_webview_comment);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
-
+        
         if (hasZan) {
             mLlWebviewZan.setVisibility(View.VISIBLE);
         } else {
@@ -178,11 +178,10 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         } else {
             mLlWebviewFont.setVisibility(View.GONE);
         }
-
-
+        
         WebViewManager.getInstance().initWebView(mWvWebview);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -209,7 +208,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
-
+    
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
         String times;
@@ -224,5 +223,6 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         }
         mTvWebviewDate.setText(times + "\t\t" + "阅读量：" + data.nums);
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
+//        mWvWebview.loadData(data.content, "text/html;charset=UTF-8", null);
     }
 }

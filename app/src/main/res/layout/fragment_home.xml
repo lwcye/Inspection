@@ -151,9 +151,9 @@
 				android:background="?selectableItemBackground"
 				android:drawableLeft="@drawable/img_home_tab_1"
 				android:gravity="center"
-				android:text="纪检学堂"
+				android:text="反腐讲习所"
 				android:textColor="@color/black_title"
-				android:textSize="@dimen/t16" />
+				android:textSize="@dimen/t14" />
 			
 			<View style="@style/view_line" />
 			

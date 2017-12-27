@@ -44,9 +44,15 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
 
     @Override
     public void initData() {
+        
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
         mPresenter.loadData();
     }
-
+    
     @Override
     public void initView(View view) {
         mRvInspectTrack = (RecyclerView) view.findViewById(R.id.rv_inspect_visit);

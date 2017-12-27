@@ -266,6 +266,7 @@ public class JsBridgeWebViewWrapper implements View.OnClickListener {
         WebSettings settings = mWebView.getSettings();
         // 自适应窗口
         settings.setUseWideViewPort(true);
+        settings.setDefaultTextEncodingName("UTF-8");
         settings.setLoadWithOverviewMode(true);
         // 允许本地存储数据
         settings.setDomStorageEnabled(true);

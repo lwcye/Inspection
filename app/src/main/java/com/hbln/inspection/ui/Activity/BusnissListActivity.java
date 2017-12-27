@@ -72,6 +72,12 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
     }
     
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadData();
+    }
+    
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         hasSearch = true;

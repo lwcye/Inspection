@@ -51,7 +51,7 @@ public class WorkTypeModel extends ResultModel {
         public String typeid;
         public String dwid;
         public String uid;
-        public String nums;
+        public int nums;
         public String year;
         public String month;
         public String danwei;

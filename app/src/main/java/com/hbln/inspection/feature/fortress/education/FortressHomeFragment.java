@@ -142,6 +142,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
             protected void onInflateData(RUViewHolder holder, FortressHomeModel.InfoBean data, int position) {
                 holder.setImageNet(R.id.iv_item_fortress_news, data.picpath);
                 holder.setText(R.id.tv_item_fortress_news_title, data.title);
+                holder.setText(R.id.tv_item_fortress_news_name, data.zhibuname);
             }
         };
         mAdapterNews.setOnItemClickListener(this);

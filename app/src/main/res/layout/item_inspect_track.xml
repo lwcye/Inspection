@@ -66,7 +66,7 @@
 		<Button
 			android:id="@+id/tv_item_inspect_tag"
 			android:layout_width="@dimen/x50"
-			android:layout_height="@dimen/x30"
+			android:layout_height="wrap_content"
 			android:layout_alignParentBottom="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@id/tv_item_inspect_date"

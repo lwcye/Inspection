@@ -24,27 +24,30 @@ import com.trello.rxlifecycle.android.ActivityEvent;
  */
 
 public class MainPresenter extends BasePresenterImpl<MainContract.View> implements MainContract.Presenter {
-
+    
     private Dialog dialog;
-
+    
     @Override
     public void getVersion() {
         getView().showLoading("");
         HttpRequest.getUserService().getversion(AppUtils.getAppVersionName())
-                .compose(NetWorkInterceptor.<VersionModel>retrySessionCreator())
-                .compose(getView().getBaseActivity().<VersionModel>applySchedulers(ActivityEvent.DESTROY))
-                .subscribe(new HttpResult<VersionModel>() {
-                    @Override
-                    public void result(VersionModel versionModel) {
-                        getView().setVersion(versionModel);
+            .compose(NetWorkInterceptor.<VersionModel>retrySessionCreator())
+            .compose(getView().getBaseActivity().<VersionModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<VersionModel>() {
+                @Override
+                public void result(VersionModel versionModel) {
+                    getView().setVersion(versionModel);
+                }
+            }, new HttpError(getView()) {
+                @Override
+                public void call(Throwable throwable) {
+                    if (null != getView()) {
+                        getView().hideLoading();
                     }
-                }, new HttpError(getView()) {
-                    @Override
-                    public void call(Throwable throwable) {
-                    }
-                }, new HttpComplete(getView()));
+                }
+            }, new HttpComplete(getView()));
     }
-
+    
     @Override
     public void upDataVersion(final String url) {
         dialog = DialogUtils.getInstance().showProgress(getView().getBaseActivity());
@@ -57,7 +60,7 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
                 progressBar.setProgress(percent);
                 textView.setText(new StringBuilder().append(percent).append("%"));
             }
-
+            
             @Override
             public void onFinish(boolean error, String path) {
                 if (error) {

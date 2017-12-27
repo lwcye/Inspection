@@ -53,6 +53,7 @@ public class InspectTrackPresenter extends BasePresenterImpl<InspectTrackContrac
                         @Override
                         public void result(ObjectModel objectModel) {
                             ToastUtils.showShortToastSafe(objectModel.info.toString());
+                            loadTrackData();
                         }
                     }, new HttpError(getView()) {
                         @Override
