@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'lwcye'
+            keyPassword '19881003'
+            storeFile file('../keystore/MyAndroidSignKey.jks')
+            storePassword '19881003'
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
@@ -12,7 +20,7 @@ android {
         // ndk平台选项
         ndk {
             // 设置支持的 SO 库构架，注意这里要根据你的实际情况来设置
-            abiFilters 'armeabi-v7a','x86'
+            abiFilters 'armeabi-v7a'
         }
         // 打包资源种类配置
         resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
@@ -30,7 +38,6 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
-
     buildTypes {
         release {
             // 不显示Log
@@ -39,6 +46,7 @@ android {
             shrinkResources false
             minifyEnabled false
             multiDexEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -48,6 +56,7 @@ android {
             minifyEnabled false
             multiDexEnabled true
             debuggable true
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -90,6 +99,7 @@ dependencies {
     provided files('../provided-libs/BaiduLBS_Android.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.liulishuo.filedownloader:library:1.4.1'
     compile files('libs/umeng-analytics-7.4.0.jar')
     compile files('libs/umeng-common-1.4.0.jar')
     compile files('libs/umerror_android_1.0.0.jar')

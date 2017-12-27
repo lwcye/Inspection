@@ -39,7 +39,7 @@ public class IntentUtils {
     private IntentUtils() {
         throw new UnsupportedOperationException("u can't fuck me...");
     }
-    
+
     /**
      * 获取安装App（支持6.0）的意图
      *
@@ -49,7 +49,7 @@ public class IntentUtils {
     public static Intent getInstallAppIntent(String filePath) {
         return getInstallAppIntent(FileUtils.getFileByPath(filePath));
     }
-    
+
     /**
      * 获取安装App(支持6.0)的意图
      *
@@ -62,7 +62,7 @@ public class IntentUtils {
         }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String type;
-        
+
         if (Build.VERSION.SDK_INT < 23) {
             type = "application/vnd.android.package-archive";
         } else {
@@ -70,13 +70,19 @@ public class IntentUtils {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(Utils.getContext(), Utils.getContext().getApplicationContext().getPackageName() + ".provider", file);
-            intent.setDataAndType(contentUri, type);
+            try {
+                String providerName = AppUtils.getAppPackageName() + ".fileprovider";
+                Uri contentUri = FileProvider.getUriForFile(Utils.getContext(), providerName, file);
+                intent.setDataAndType(contentUri, type);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), type);
         }
-        intent.setDataAndType(Uri.fromFile(file), type);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取卸载App的意图
      *
@@ -88,7 +94,7 @@ public class IntentUtils {
         intent.setData(Uri.parse("package:" + packageName));
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取打开App的意图
      *
@@ -98,7 +104,7 @@ public class IntentUtils {
     public static Intent getLaunchAppIntent(String packageName) {
         return Utils.getContext().getPackageManager().getLaunchIntentForPackage(packageName);
     }
-    
+
     /**
      * 获取App具体设置的意图
      *
@@ -110,7 +116,7 @@ public class IntentUtils {
         intent.setData(Uri.parse("package:" + packageName));
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取分享文本的意图
      *
@@ -123,7 +129,7 @@ public class IntentUtils {
         intent.putExtra(Intent.EXTRA_TEXT, content);
         return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取分享图片的意图
      *
@@ -134,7 +140,7 @@ public class IntentUtils {
     public static Intent getShareImageIntent(String content, String imagePath) {
         return getShareImageIntent(content, FileUtils.getFileByPath(imagePath));
     }
-    
+
     /**
      * 获取分享图片的意图
      *
@@ -148,7 +154,7 @@ public class IntentUtils {
         }
         return getShareImageIntent(content, Uri.fromFile(image));
     }
-    
+
     /**
      * 获取分享图片的意图
      *
@@ -163,7 +169,7 @@ public class IntentUtils {
         intent.setType("image/*");
         return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取其他应用组件的意图
      *
@@ -174,7 +180,7 @@ public class IntentUtils {
     public static Intent getComponentIntent(String packageName, String className) {
         return getComponentIntent(packageName, className, null);
     }
-    
+
     /**
      * 获取其他应用组件的意图
      *
@@ -192,7 +198,7 @@ public class IntentUtils {
         intent.setComponent(cn);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取关机的意图
      * <p>需添加权限 {@code <uses-permission android:name="android.permission.SHUTDOWN"/>}</p>
@@ -203,7 +209,7 @@ public class IntentUtils {
         Intent intent = new Intent(Intent.ACTION_SHUTDOWN);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取跳至拨号界面意图
      *
@@ -213,7 +219,7 @@ public class IntentUtils {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取拨打电话意图
      * <p>需添加权限 {@code <uses-permission android:name="android.permission.CALL_PHONE"/>}</p>
@@ -224,7 +230,7 @@ public class IntentUtils {
         Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phoneNumber));
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 获取跳至发送短信界面的意图
      *
@@ -237,8 +243,8 @@ public class IntentUtils {
         intent.putExtra("sms_body", content);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
-    
+
+
     /**
      * 获取拍照的意图
      *
@@ -250,25 +256,25 @@ public class IntentUtils {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outUri);
         return intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-    
+
     /**
      * 跳转到系统Gps设置界面
      */
     public static void jumpGpsSetting() {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Utils.getContext().startActivity(intent);
     }
-    
+
     /**
      * 跳转到系统设置界面
      */
     public static void jumpSetting() {
         Intent intent = new Intent(Settings.ACTION_SETTINGS)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Utils.getContext().startActivity(intent);
     }
-    
+
     /**
      * 跳转拨打电话界面
      *

@@ -39,7 +39,7 @@
 			
 			<View style="@style/view_line" />
 			
-			<com.cmcc.inspection.widget.x5.utils.BridgeWebView
+			<com.hbln.inspection.widget.x5.utils.BridgeWebView
 				android:id="@+id/wv_school_detail"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />

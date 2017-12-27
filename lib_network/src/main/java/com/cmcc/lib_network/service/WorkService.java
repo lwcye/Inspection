@@ -3,6 +3,7 @@ package com.cmcc.lib_network.service;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_network.model.WorkArenaModel;
 import com.cmcc.lib_network.model.WorkModel;
+import com.cmcc.lib_network.model.WorkTypeModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -49,7 +50,7 @@ public interface WorkService {
     
     @FormUrlEncoded
     @POST("public/api/yewu/getinfo")
-    Observable<WebViewModel> getinfo(
+    Observable<WorkTypeModel> getinfo(
         @Field("shijian") String shijian,
         @Field("type") String type,
         @Field("keshi") String keshi

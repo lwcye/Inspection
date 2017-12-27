@@ -46,7 +46,7 @@
                 android:textSize="@dimen/t16"
                 android:textStyle="bold"/>
 
-            <com.cmcc.inspection.widget.x5.utils.BridgeWebView
+            <com.hbln.inspection.widget.x5.utils.BridgeWebView
                 android:id="@+id/wv_brand_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

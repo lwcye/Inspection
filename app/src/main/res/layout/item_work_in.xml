@@ -1,92 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
-	
-	<ImageView
-		android:id="@+id/iv_work_in_status"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"
-		android:padding="@dimen/x5"
-		android:src="@drawable/ic_work_in_up" />
-	
-	<android.support.v7.widget.CardView
-		android:id="@+id/cv_item_work_in"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/x12"
-		android:layout_marginLeft="@dimen/x12"
-		android:layout_marginRight="@dimen/x25"
-		android:layout_marginTop="@dimen/x12">
-		
-		
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-			
-			<TextView
-				android:id="@+id/tv_item_work_in_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x65"
-				android:drawableRight="@drawable/img_work_arena_result_rank_flower"
-				android:text="第四纪检组"
-				android:textColor="@color/black_title"
-				android:textSize="@dimen/t20" />
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginBottom="@dimen/x10"
-				android:layout_marginLeft="@dimen/x10"
-				android:layout_marginRight="@dimen/x10"
-				android:layout_marginTop="@dimen/x10"
-				android:gravity="center_vertical">
-				
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x45"
-					android:gravity="center"
-					android:text="第一种形态:" />
-				
-				<ProgressBar
-					android:id="@+id/pb_item_work_in"
-					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-					android:layout_width="@dimen/x150"
-					android:layout_height="@dimen/x20"
-					android:progress="100" />
-				
-				<TextView
-					android:id="@+id/tv_item_work_in_num"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x10"
-					android:drawablePadding="@dimen/x10"
-					android:gravity="center"
-					android:text="6"
-					android:textColor="@color/colorAccent" />
-			</LinearLayout>
-		
-		</LinearLayout>
-	</android.support.v7.widget.CardView>
-	
-	<TextView
-		android:id="@+id/iv_work_in_rank"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignLeft="@id/cv_item_work_in"
-		android:layout_marginLeft="@dimen/x10"
-		android:background="@drawable/img_work_in_num_3"
-		android:elevation="@dimen/x20"
-		android:gravity="center"
-		android:paddingBottom="@dimen/x8"
-		android:textColor="@color/white"
-		android:textSize="@dimen/t16" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_item_work_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x12"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x12">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_item_work_in_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x65"
+                android:drawableRight="@drawable/img_work_arena_result_rank_flower"
+                android:text="第四纪检组"
+                android:textColor="@color/black_title"
+                android:textSize="@dimen/t20"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:gravity="center"
+                    android:text="第一种形态:"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_item_work_in"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x20"
+                    android:progress="100"/>
+
+                <TextView
+                    android:id="@+id/tv_item_work_in_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:drawablePadding="@dimen/x10"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/iv_work_in_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/cv_item_work_in"
+        android:layout_marginLeft="@dimen/x10"
+        android:background="@drawable/img_work_in_num_3"
+        android:elevation="@dimen/x20"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x8"
+        android:textColor="@color/white"
+        android:textSize="@dimen/t16"/>
 
 
 </RelativeLayout>

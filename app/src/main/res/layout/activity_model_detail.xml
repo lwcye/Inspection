@@ -48,7 +48,7 @@
 					android:textSize="@dimen/t12" />
 			</LinearLayout>
 			
-			<com.cmcc.inspection.widget.x5.utils.BridgeWebView
+			<com.hbln.inspection.widget.x5.utils.BridgeWebView
 				android:id="@+id/wv_webview"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />

@@ -6,6 +6,7 @@ import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.MailModel;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.UserInfoModel;
+import com.cmcc.lib_network.model.VersionModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -70,7 +71,7 @@ public interface UserService {
     
     @FormUrlEncoded
     @POST("public/api/logintoken/getversion")
-    Observable<ObjectModel> getversion(
+    Observable<VersionModel> getversion(
         @Field("version") String version
     );
 }

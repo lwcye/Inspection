@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="com.cmcc.inspection">
+		  package="com.hbln.inspection">
 	<!-- 用于读取手机当前的状态 -->
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
@@ -44,7 +44,20 @@
 		<meta-data
 			android:name="UMENG_CHANNEL"
 			android:value="lwc" />
-		
+
+		<!-- provider -->
+		<provider
+			android:name="android.support.v4.content.FileProvider"
+			android:authorities="${applicationId}.fileprovider"
+			android:exported="false"
+			android:grantUriPermissions="true">
+
+			<!-- 元数据 -->
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/file_paths"/>
+		</provider>
+
 		<activity
 			android:name=".feature.main.MainActivity"
 			android:label="@string/app_name"
@@ -138,7 +151,6 @@
 			android:name=".feature.accout.accountlist.AccountListActivity"
 			android:windowSoftInputMode="stateHidden|adjustPan" />
 		<activity android:name=".feature.accout.accountlist.accountlistdetail.AccountListDetailActivity" />
-		<activity android:name=".feature.inspect.visitanswer.VisitAnswerActivity" />
 		<activity android:name=".feature.workarena.workdynamic.WebViewContentActivity" />
 		<activity android:name=".feature.model.ModelDetailActivity" />
 		<activity
