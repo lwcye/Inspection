@@ -180,7 +180,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_2);
         } else {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_3);
-            holder.setText(R.id.iv_work_in_rank, (position + 1) + "");
+            holder.setText(R.id.iv_work_in_rank, data.paiming + "");
         }
     }
     
