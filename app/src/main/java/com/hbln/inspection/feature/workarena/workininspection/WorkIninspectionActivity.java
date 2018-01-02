@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.cmcc.lib_network.model.WorkTypeModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
+import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
@@ -47,7 +48,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
     /** 外宣数量榜 */
     private RadioButton mRvWorkIn2;
     private RadioGroup mRgWorkIn;
-    
+
     private RUAdapter<WorkTypeModel.InfoBean> mAdapter0;
     private List<WorkTypeModel.InfoBean> mList0 = new ArrayList<>();
     private ListFragment<WorkTypeModel.InfoBean> mFragment0 = new ListFragment<>();
@@ -63,17 +64,17 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
     /** 2017年12月 */
     private TextView mTvWorkInMonth;
     private String[] month;
-    
+
     public static void start(Context context) {
         Intent starter = new Intent(context, WorkIninspectionActivity.class);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected WorkIninspectionPresenter createPresenter() {
         return new WorkIninspectionPresenter();
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,24 +84,24 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         mPresenter.loadData(1, null);
         mPresenter.loadData(2, null);
     }
-    
+
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.start(getContext());
-                }
-            })
-            .setColor(Color.WHITE, 255)
-            .setRightDrawable(R.drawable.icon_work_dynamic, 0, 0, 0)
-            .setRightClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WorkDynamicActivity.start(getContext());
-                }
-            })
-            .setTitle(TITLE);
+                .setLeftClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.start(getContext());
+                    }
+                })
+                .setColor(Color.WHITE, 255)
+                .setRightDrawable(R.drawable.icon_work_dynamic, 0, 0, 0)
+                .setRightClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        WorkDynamicActivity.start(getContext());
+                    }
+                })
+                .setTitle(TITLE);
         mTvWorkInMonth = (TextView) findViewById(R.id.tv_work_in_month);
         mTvWorkInMonth.setOnClickListener(this);
         mTvWorkInMonth.setText(TimeUtils.getNowTimeString("yyyy年MM月"));
@@ -112,10 +113,10 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         mVpWorkIn = (ViewPager) findViewById(R.id.vp_work_in);
         mVpWorkIn.addOnPageChangeListener(this);
         onCheckedChanged(mRgWorkIn, R.id.rv_work_in_0);
-        
+
         initViewPager();
     }
-    
+
     private void initViewPager() {
         mAdapter0 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList0, R.layout.item_work_in) {
             @Override
@@ -128,7 +129,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         };
         mFragment0.setAdapter(mAdapter0);
         mFragment0.setOnItemClickListener(this);
-        
+
         mAdapter1 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList1, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
@@ -140,7 +141,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         };
         mFragment1.setAdapter(mAdapter1);
         mFragment1.setOnItemClickListener(this);
-        
+
         mAdapter2 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList2, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
@@ -152,26 +153,28 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         };
         mFragment2.setAdapter(mAdapter2);
         mFragment2.setOnItemClickListener(this);
-        
+
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(mFragment0);
         fragmentList.add(mFragment1);
         fragmentList.add(mFragment2);
         mVpWorkIn.setAdapter(new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList));
     }
-    
+
     private void setItemData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
         holder.setText(R.id.tv_item_work_in_name, data.danwei);
         TextView diff = holder.getViewById(R.id.tv_item_work_in_diff);
         if (data.diff >= 0) {
-            diff.setText("+" + data.diff + "");
+            diff.setText(data.diff + "");
+            ViewUtils.setTextDrawable(diff, R.drawable.ic_work_arena_arrow_up, 0, 0, 0, getContext());
             diff.setTextColor(Color.parseColor("#3C7F7D"));
         } else {
-            diff.setText("-" + (-data.diff) + "");
+            diff.setText(Math.abs(data.diff) + "");
+            ViewUtils.setTextDrawable(diff, R.drawable.ic_work_arena_arrow_down, 0, 0, 0, getContext());
             diff.setTextColor(Color.parseColor("#FF0041"));
         }
         holder.setText(R.id.tv_item_work_in_num, data.nums + "");
-        
+
         if (data.paiming == 1) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_0);
         } else if (data.paiming == 2) {
@@ -183,7 +186,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             holder.setText(R.id.iv_work_in_rank, data.paiming + "");
         }
     }
-    
+
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
@@ -201,12 +204,12 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
         }
         mVpWorkIn.setCurrentItem(index);
     }
-    
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        
+
     }
-    
+
     @Override
     public void onPageSelected(int position) {
         index = position;
@@ -224,12 +227,12 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
                 break;
         }
     }
-    
+
     @Override
     public void onPageScrollStateChanged(int state) {
-        
+
     }
-    
+
     @Override
     public void setData(WorkTypeModel data, int type) {
         data.initModel();
@@ -244,18 +247,18 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             mAdapter2.setData(mList2);
         }
     }
-    
+
     @Override
     public void onItemClick(View view, int itemType, int position) {
-        
+
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_work_in_month:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                
+
                 int mm = Integer.valueOf(TimeUtils.getNowTimeString("MM"));
                 month = new String[mm];
                 for (int i = 0; i < mm; i++) {

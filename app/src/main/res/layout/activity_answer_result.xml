@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/layout_background_default"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <TextView
+        android:id="@+id/tv_answer_result_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/x12"
+        android:drawableLeft="@drawable/ic_answer_result_location"
+        android:drawablePadding="@dimen/x5"
+        android:text="在线测试"
+        android:textColor="@color/black"
+        android:textSize="@dimen/t18"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/img_answer_reuslt"/>
+
+        <TextView
+            android:id="@+id/tv_answer_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="95"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t26"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_toRightOf="@id/tv_answer_result"
+            android:text="分"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t14"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_answer_result"
+            android:layout_gravity="center_horizontal"
+            android:layout_toRightOf="@id/tv_answer_result"
+            android:text="答题得分"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t14"/>
+    </RelativeLayout>
+
+
+    <View
+        style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="测试题"/>
+
+        <TextView
+            android:id="@+id/tv_answer_result_title"
+            style="@style/cell_text_right"
+            android:drawableRight="@null"/>
+    </LinearLayout>
+
+    <View
+        style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="答题总分"/>
+
+        <TextView
+            android:id="@+id/tv_answer_result_chengji"
+            style="@style/cell_text_right"
+            android:drawableRight="@null"/>
+    </LinearLayout>
+
+    <View
+        style="@style/view_line"/>
+
+    <LinearLayout
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="答题总数"/>
+
+        <TextView
+            android:id="@+id/tv_answer_result_nums"
+            style="@style/cell_text_right"
+            android:drawableRight="@null"/>
+    </LinearLayout>
+</LinearLayout>

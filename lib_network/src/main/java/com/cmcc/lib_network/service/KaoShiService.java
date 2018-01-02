@@ -1,5 +1,6 @@
 package com.cmcc.lib_network.service;
 
+import com.cmcc.lib_network.model.AnswerModel;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_network.model.KaoShiModel;
 import com.cmcc.lib_network.model.ObjectModel;
@@ -36,7 +37,7 @@ public interface KaoShiService {
     
     @FormUrlEncoded
     @POST("public/api/kaoshi/wenjuan")
-    Observable<ObjectModel> wenjuan(
+    Observable<AnswerModel> wenjuan(
         @Field("sjid") String sjid,
         @Field("stids") String stids,
         @Field("daids") String daids

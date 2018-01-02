@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.cmcc.lib_network.model.WorkTypeModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
+import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
@@ -174,10 +175,12 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         holder.setText(R.id.tv_item_work_in_name, data.danwei);
         TextView diff = holder.getViewById(R.id.tv_item_work_in_diff);
         if (data.diff >= 0) {
-            diff.setText("+" + data.diff + "");
+            diff.setText(data.diff + "");
+            ViewUtils.setTextDrawable(diff, R.drawable.ic_work_arena_arrow_up, 0, 0, 0, getContext());
             diff.setTextColor(Color.parseColor("#3C7F7D"));
         } else {
-            diff.setText("-" + (-data.diff) + "");
+            diff.setText(Math.abs(data.diff) + "");
+            ViewUtils.setTextDrawable(diff, R.drawable.ic_work_arena_arrow_down, 0, 0, 0, getContext());
             diff.setTextColor(Color.parseColor("#FF0041"));
         }
         holder.setText(R.id.tv_item_work_in_num, data.nums + "");
@@ -190,7 +193,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_2);
         } else {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_3);
-            holder.setText(R.id.iv_work_in_rank, (position + 1) + "");
+            holder.setText(R.id.iv_work_in_rank, data.paiming + "");
         }
     }
     

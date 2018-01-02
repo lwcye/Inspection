@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"
-			  android:background="@color/gray4"
-			  android:orientation="horizontal"
-			  android:padding="@dimen/x10">
-	
-	<TextView
-		android:id="@+id/tv_item_fortress_manager_child_name"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="王春雷"
-		android:textColor="@color/gray22"
-		android:textSize="@dimen/t14" />
-	
-	<View
-		style="@style/view_line" />
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/gray4"
+              android:orientation="horizontal"
+              android:padding="@dimen/x10">
+
+    <TextView
+        android:id="@+id/tv_item_fortress_manager_child_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/x5"
+        android:paddingLeft="@dimen/x12"
+        android:text="王春雷"
+        android:textColor="@color/gray22"
+        android:textSize="@dimen/t14"/>
+
+    <View
+        style="@style/view_line"/>
 </LinearLayout>

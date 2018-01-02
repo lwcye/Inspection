@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.cmcc.lib_network.model.ManagerModel;
 import com.cmcc.lib_utils.utils.Utils;
+import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 
 import java.util.List;
@@ -24,46 +25,46 @@ import java.util.List;
  */
 public class PersonExpListAdapter extends BaseExpandableListAdapter {
     private List<ManagerModel.InfoBean> dataset;
-    
+
     public PersonExpListAdapter(List<ManagerModel.InfoBean> dataset) {
         this.dataset = dataset;
     }
-    
+
     @Override
     public int getGroupCount() {
         return dataset.size();
     }
-    
+
     @Override
     public int getChildrenCount(int groupPosition) {
         return dataset.get(groupPosition).renyuan.size();
     }
-    
+
     @Override
     public Object getGroup(int groupPosition) {
         return dataset.get(groupPosition);
     }
-    
+
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         return dataset.get(groupPosition).renyuan.get(childPosition);
     }
-    
+
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
     }
-    
+
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
     }
-    
+
     @Override
     public boolean hasStableIds() {
         return false;
     }
-    
+
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View view = null;
@@ -82,7 +83,7 @@ public class PersonExpListAdapter extends BaseExpandableListAdapter {
         groupholder.mGroupContent.setText(dataset.get(groupPosition).renyuan.size() + "人");
         return view;
     }
-    
+
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View view = null;
@@ -96,20 +97,26 @@ public class PersonExpListAdapter extends BaseExpandableListAdapter {
             childHolder.mChildName = (TextView) view.findViewById(R.id.tv_item_fortress_manager_child_name);
             view.setTag(childHolder);
         }
+
         childHolder.mChildName.setText(dataset.get(groupPosition).renyuan.get(childPosition).name);
+        if (childPosition == 0) {
+            ViewUtils.setTextDrawable(childHolder.mChildName, 0, 0, R.drawable.ic_fortress_manager_child, 0, Utils.getContext());
+        } else {
+            ViewUtils.setTextDrawable(childHolder.mChildName, 0, 0, 0, 0, Utils.getContext());
+        }
         return view;
     }
-    
+
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-    
+
     private static class GroupHolder {
         TextView mGroupName;
         TextView mGroupContent;
     }
-    
+
     private static class ChildHolder {
         TextView mChildName;
     }

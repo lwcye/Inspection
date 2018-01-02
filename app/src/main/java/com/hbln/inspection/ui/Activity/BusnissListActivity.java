@@ -20,6 +20,7 @@ import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.KaoShiModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
+import com.hbln.inspection.feature.school.answer.AnswerResultActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
@@ -48,20 +49,20 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
     public static final int TYPE_TIHUI = 2;
     public static boolean hasSearch = true;
     public int mType = 0;
-    
+
     private LinearLayout mLlListSeach;
     private EditText mEtListSeach;
     private ImageView mIvlistSearch;
     private RecyclerView mRvList;
     private RUAdapter<KaoShiModel.InfoBean> mAdapter;
     private List<KaoShiModel.InfoBean> mList = new ArrayList<>();
-    
+
     public static void start(Context context, int type) {
         Intent starter = new Intent(context, BusnissListActivity.class);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,19 +71,19 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
         initView();
         loadData();
     }
-    
+
     @Override
     protected void onRestart() {
         super.onRestart();
         loadData();
     }
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         hasSearch = true;
     }
-    
+
     private void initView() {
         String title;
         if (mType == TYPE_XUEXI) {
@@ -93,8 +94,8 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
             title = "体会交流";
         }
         TitleUtil.attach(this)
-            .setTitle(title)
-            .setBack(true);
+                .setTitle(title)
+                .setBack(true);
         mLlListSeach = (LinearLayout) findViewById(R.id.ll_search);
         mEtListSeach = (EditText) findViewById(R.id.et_search);
         mIvlistSearch = (ImageView) findViewById(R.id.iv_search);
@@ -116,7 +117,7 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
         mAdapter.setOnItemClickListener(this);
         mRvList.setAdapter(mAdapter);
     }
-    
+
     public void loadData() {
         Observable<KaoShiModel> request;
         if (mType == TYPE_XUEXI) {
@@ -126,28 +127,34 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
         } else {
             request = HttpRequest.getKaoShiService().tihuijiaoliu();
         }
-        
+
         showLoading("");
         request.compose(NetWorkInterceptor.<KaoShiModel>retrySessionCreator())
-            .compose(getBaseActivity().<KaoShiModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<KaoShiModel>() {
-                @Override
-                public void result(KaoShiModel objectModel) {
-                    setKaoShiData(objectModel);
-                }
-            }, new HttpError(this), new HttpComplete(this));
+                .compose(getBaseActivity().<KaoShiModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<KaoShiModel>() {
+                    @Override
+                    public void result(KaoShiModel objectModel) {
+                        setKaoShiData(objectModel);
+                    }
+                }, new HttpError(this), new HttpComplete(this));
     }
-    
+
     public void setKaoShiData(KaoShiModel kaoShiData) {
         mList = kaoShiData.info;
         mAdapter.setData(mList);
     }
-    
+
     @Override
     public void onItemClick(View view, int itemType, int position) {
         if (mType == TYPE_XUEXI || mType == TYPE_CESHI) {
+            if (mType == TYPE_XUEXI) {
+                AnswerResultActivity.TYPE = "学习资料";
+            } else {
+                AnswerResultActivity.TYPE = "在线测试";
+            }
             AnswerActivity.start(getContext(), mList.get(position).id);
         } else {
+            AnswerResultActivity.TYPE = "体会交流";
             TiHuiActivity.start(getContext(), mList.get(position).id);
         }
     }

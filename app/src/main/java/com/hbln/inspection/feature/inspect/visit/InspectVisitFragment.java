@@ -11,6 +11,7 @@ import com.cmcc.lib_common.utils.loader.LoaderFactory;
 import com.cmcc.lib_network.model.JiafangModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
+import com.hbln.inspection.feature.school.answer.AnswerResultActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
@@ -44,15 +45,15 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
 
     @Override
     public void initData() {
-        
+
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
         mPresenter.loadData();
     }
-    
+
     @Override
     public void initView(View view) {
         mRvInspectTrack = (RecyclerView) view.findViewById(R.id.rv_inspect_visit);
@@ -65,7 +66,7 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
         mAdapter = new RUAdapter<JiafangModel.JiafangInfoBean>(getContext(), mList, R.layout.item_school_answer_0) {
             @Override
             protected void onInflateData(RUViewHolder holder, JiafangModel.JiafangInfoBean data, int position) {
-               // holder.setVisibility(R.id.iv_item_shcool_answer_1_status, View.GONE);
+                // holder.setVisibility(R.id.iv_item_shcool_answer_1_status, View.GONE);
                 holder.setText(R.id.tv_item_shcool_answer_1_title, data.title);
                 holder.setText(R.id.tv_item_shcool_answer_1_content, data.nums + "人参与答题");
                 if (!TextUtils.isEmpty(data.pic)) {
@@ -91,6 +92,7 @@ public class InspectVisitFragment extends MVPBaseFragment<InspectVisitContract.V
         mDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AnswerResultActivity.TYPE = "在线家访";
                 AnswerActivity.start(getContext(), mList.get(position).id, mDialog.getAnswerName(), mDialog.getAnswerGuanxi(), mDialog.getAnswerMobile());
             }
         });

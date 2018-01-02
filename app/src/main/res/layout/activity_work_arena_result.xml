@@ -1,230 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				xmlns:app="http://schemas.android.com/apk/res-auto"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="@drawable/img_work_arena_bg">
-	
-	<ImageView
-		android:id="@+id/iv_work_arena_result_top"
-		android:layout_width="wrap_content"
-		android:layout_height="@dimen/x260"
-		android:adjustViewBounds="true"
-		android:src="@drawable/img_work_arena_result_top" />
-	
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignBottom="@id/iv_work_arena_result_top"
-		android:layout_centerHorizontal="true"
-		android:layout_marginBottom="@dimen/x10">
-		
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:adjustViewBounds="true"
-			android:src="@drawable/img_work_arena_result_top_0" />
-		
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:adjustViewBounds="true"
-			android:src="@drawable/img_work_arena_result_top_1" />
-		
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:adjustViewBounds="true"
-			android:src="@drawable/img_work_arena_result_top_2" />
-	</LinearLayout>
-	
-	<android.support.v7.widget.CardView
-		android:id="@+id/cv_work_arena_result"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/iv_work_arena_result_top"
-		android:layout_marginLeft="@dimen/x12"
-		android:layout_marginRight="@dimen/x12"
-		android:background="@color/white"
-		app:cardCornerRadius="@dimen/x5"
-		app:cardElevation="@dimen/x5">
-		
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:padding="@dimen/x10">
-			
-			<TextView
-				android:id="@+id/tv_work_arena_title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="第四纪检组" />
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x10"
-				android:layout_marginRight="@dimen/x10"
-				android:layout_marginTop="@dimen/x10"
-				android:gravity="center_vertical">
-				
-				<TextView
-					android:id="@+id/tv_work_arena_rank_0"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/img_work_arena_result_rank_0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_0"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					android:text="纪律审查:" />
-				
-				<ProgressBar
-					android:id="@+id/pb_work_arena_0"
-					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-					android:layout_width="@dimen/x150"
-					android:layout_height="@dimen/x20"
-					android:progress="0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_nums_0"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x3"
-					android:drawablePadding="@dimen/x10"
-					android:gravity="center"
-					android:textColor="@color/colorAccent" />
-			</LinearLayout>
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x10"
-				android:layout_marginRight="@dimen/x10"
-				android:layout_marginTop="@dimen/x10"
-				android:gravity="center_vertical">
-				
-				<TextView
-					android:id="@+id/tv_work_arena_rank_1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/img_work_arena_result_rank_0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					android:text="信息数量:" />
-				
-				<ProgressBar
-					android:id="@+id/pb_work_arena_1"
-					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-					android:layout_width="@dimen/x150"
-					android:layout_height="@dimen/x20"
-					android:progress="0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_nums_1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x3"
-					android:drawablePadding="@dimen/x10"
-					android:gravity="center"
-					android:textColor="@color/colorAccent" />
-			</LinearLayout>
-			
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/x10"
-				android:layout_marginRight="@dimen/x10"
-				android:layout_marginTop="@dimen/x10"
-				android:gravity="center_vertical">
-				
-				<TextView
-					android:id="@+id/tv_work_arena_rank_2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="@drawable/img_work_arena_result_rank_0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					android:text="外宣数量:" />
-				
-				<ProgressBar
-					android:id="@+id/pb_work_arena_2"
-					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-					android:layout_width="@dimen/x150"
-					android:layout_height="@dimen/x20"
-					android:progress="0" />
-				
-				<TextView
-					android:id="@+id/tv_work_arena_nums_2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/x3"
-					android:drawablePadding="@dimen/x10"
-					android:gravity="center"
-					android:textColor="@color/colorAccent" />
-			</LinearLayout>
-		</LinearLayout>
-	</android.support.v7.widget.CardView>
-	
-	<LinearLayout
-		android:id="@+id/ll_work_arena_result_btn_0"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/cv_work_arena_result"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="@dimen/x30">
-		
-		<Button
-			android:id="@+id/btn_work_result_keshi"
-			android:layout_width="@dimen/x120"
-			android:layout_height="@dimen/x35"
-			android:background="@color/colorAccent"
-			android:text="科    室"
-			android:textColor="@color/white" />
-		
-		<Button
-			android:id="@+id/btn_work_result_in"
-			android:layout_width="@dimen/x120"
-			android:layout_height="@dimen/x35"
-			android:layout_marginLeft="@dimen/x25"
-			android:background="@color/colorAccent"
-			android:text="派驻纪检组"
-			android:textColor="@color/white" />
-	</LinearLayout>
-	
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/ll_work_arena_result_btn_0"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="@dimen/x20">
-		
-		<Button
-			android:id="@+id/btn_work_result_xiang"
-			android:layout_width="@dimen/x120"
-			android:layout_height="@dimen/x35"
-			android:background="@color/colorAccent"
-			android:text="乡    镇"
-			android:textColor="@color/white" />
-		
-		<Button
-			android:id="@+id/btn_work_result_inspection"
-			android:layout_width="@dimen/x120"
-			android:layout_height="@dimen/x35"
-			android:layout_marginLeft="@dimen/x25"
-			android:background="@color/colorAccent"
-			android:text="巡察机构"
-			android:textColor="@color/white" />
-	</LinearLayout>
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/img_work_arena_bg">
+
+    <ImageView
+        android:id="@+id/iv_work_arena_result_top"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x260"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_work_arena_result_top"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_work_arena_result_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/x10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_work_arena_result_top_0"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_work_arena_result_top_1"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_work_arena_result_top_2"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_work_arena_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_work_arena_result_top"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginRight="@dimen/x12"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/x5"
+        app:cardElevation="@dimen/x5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/x10">
+
+            <TextView
+                android:id="@+id/tv_work_arena_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="第四纪检组"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_work_arena_rank_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/x6"
+                    android:src="@drawable/img_work_arena_result_rank_0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t14"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="纪律审查:"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_work_arena_0"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x20"
+                    android:progress="0"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_nums_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x3"
+                    android:drawablePadding="@dimen/x10"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_work_arena_rank_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/x6"
+                    android:src="@drawable/img_work_arena_result_rank_0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t14"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="信息数量:"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_work_arena_1"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x20"
+                    android:progress="0"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_nums_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x3"
+                    android:drawablePadding="@dimen/x10"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_work_arena_rank_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/img_work_arena_result_rank_0"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/x6"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t14"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="外宣数量:"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_work_arena_2"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x20"
+                    android:progress="0"/>
+
+                <TextView
+                    android:id="@+id/tv_work_arena_nums_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x3"
+                    android:drawablePadding="@dimen/x10"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/ll_work_arena_result_btn_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_work_arena_result"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x30">
+
+        <Button
+            android:id="@+id/btn_work_result_keshi"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x35"
+            android:background="@color/colorAccent"
+            android:text="科    室"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_work_result_in"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x35"
+            android:layout_marginLeft="@dimen/x25"
+            android:background="@color/colorAccent"
+            android:text="派驻纪检组"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_work_arena_result_btn_0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x20">
+
+        <Button
+            android:id="@+id/btn_work_result_xiang"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x35"
+            android:background="@color/colorAccent"
+            android:text="乡    镇"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_work_result_inspection"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x35"
+            android:layout_marginLeft="@dimen/x25"
+            android:background="@color/colorAccent"
+            android:text="巡察机构"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -91,18 +91,24 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
                     ViewUtils.setTextDrawable(viewById, 0, resId, 0, 0, getContext());
                 }
 
-                if (position % 6 == 0) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#A2A09A"));
-                } else if (position % 6 == 1) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#005586"));
-                } else if (position % 6 == 2) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00D0FF"));
-                } else if (position % 6 == 3) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00D0FF"));
-                } else if (position % 6 == 4) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#FEBC02"));
-                } else if (position % 6 == 5) {
-                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#00F4FF"));
+                if (position % 9 == 0) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#5D5F6E"));
+                } else if (position % 9 == 1) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#D4BD91"));
+                } else if (position % 9 == 2) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#B2D8E5"));
+                } else if (position % 9 == 3) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#47B5CE"));
+                } else if (position % 9 == 4) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#DA6290"));
+                } else if (position % 9 == 5) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#5D5F6E"));
+                } else if (position % 9 == 6) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#D4BD91"));
+                } else if (position % 9 == 7) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#DA6290"));
+                } else if (position % 9 == 8) {
+                    holder.setBackgroundColor(R.id.dtv_item_brand, Color.parseColor("#47B5CE"));
                 }
 
                 holder.setText(R.id.dtv_item_brand, data.title);

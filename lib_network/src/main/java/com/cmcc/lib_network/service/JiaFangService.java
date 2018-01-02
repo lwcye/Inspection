@@ -1,8 +1,8 @@
 package com.cmcc.lib_network.service;
 
+import com.cmcc.lib_network.model.AnswerModel;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_network.model.JiafangModel;
-import com.cmcc.lib_network.model.ObjectModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -48,7 +48,7 @@ public interface JiaFangService {
      */
     @FormUrlEncoded
     @POST("public/api/jiafang/wenjuan")
-    Observable<ObjectModel> wenjuan(
+    Observable<AnswerModel> wenjuan(
         @Field("sjid") String sjid,
         @Field("name") String name,
         @Field("guanxi") String guanxi,
