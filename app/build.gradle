@@ -62,8 +62,9 @@ android {
 }
 
 android.applicationVariants.all { variant ->
+    def timestamp = new Date().format("yyyyMMddHHMM", TimeZone.getTimeZone("GMT+8"))
     def file = variant.outputs[0].outputFile
-    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
+    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + timestamp + "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
 }
 
 /******************** 方法超65535 ********************/

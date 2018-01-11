@@ -17,7 +17,7 @@ public class FortressHomeContract {
     interface View extends BaseView {
         void setWenTiData(FortressHomeModel homeModel);
 
-        void setDangZhiBuDaHuiData(FortressHomeModel homeModel);
+        void setBannerData(FortressHomeModel homeModel);
 
         void showBtn(List<CellBean> btnBean);
 
@@ -26,7 +26,7 @@ public class FortressHomeContract {
     interface Presenter extends BasePresenter<View> {
         void loadWenTiData();
 
-        void loadDangZhiBuDaHuiData();
+        void loadBannerData();
         
         void loadBtnData();
     }

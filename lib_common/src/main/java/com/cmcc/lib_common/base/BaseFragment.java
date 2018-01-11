@@ -212,6 +212,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, Lifecyc
 
     @Override
     public void hideLoading() {
-        getBaseActivity().hideLoading();
+        if (getBaseActivity() != null) {
+            getBaseActivity().hideLoading();
+        }
     }
 }

@@ -42,18 +42,18 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
     /** 请输入内容... */
     private EditText mEtShcoolItemSeach;
     private ImageView mIvEtSearch;
-    
+
     public static void start(Context context, int index) {
         Intent starter = new Intent(context, SchoolItemActivity.class);
         starter.putExtra(INTENT_INDEX, index);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected SchoolItemPresenter createPresenter() {
         return new SchoolItemPresenter();
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +62,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         initView();
         mPresenter.loadData(index);
     }
-    
+
     private void initView() {
         String title = "清风纪语";
         if (index == 1) {
@@ -72,8 +72,8 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
             title = "毛遂论坛";
         }
         TitleUtil.attach(this)
-            .setBack(true)
-            .setTitle(title);
+                .setBack(true)
+                .setTitle(title);
         mRvSchoolItem = (RecyclerView) findViewById(R.id.rv_school_item);
         mEtShcoolItemSeach = (EditText) findViewById(R.id.et_search);
         mEtShcoolItemSeach.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
@@ -82,7 +82,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         mIvEtSearch = (ImageView) findViewById(R.id.iv_search);
         mIvEtSearch.setOnClickListener(this);
     }
-    
+
     private void initRecylerView() {
         mRvSchoolItem.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new RUAdapter<SchoolModel.SchoolInfo>(getContext(), mList, R.layout.item_school_item) {
@@ -91,7 +91,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
                 holder.setText(R.id.tv_item_shcool_item_title, data.title);
                 holder.setText(R.id.tv_item_shcool_item_data, data.times);
                 holder.setText(R.id.tv_item_shcool_item_dw, data.author);
-                if (!TextUtils.isEmpty(data.pic)) {
+                if (!TextUtils.isEmpty(data.picpath)) {
                     holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
                     holder.setImageNet(R.id.iv_item_shcool_item, data.pic);
                 } else {
@@ -107,13 +107,13 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         });
         mRvSchoolItem.setAdapter(mAdapter);
     }
-    
+
     @Override
     public void setData(SchoolModel schoolModel) {
         mList = schoolModel.info;
         mAdapter.setData(mList);
     }
-    
+
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (ClickUtils.isFastClick()) {
@@ -122,7 +122,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         mPresenter.searchData(index, mEtShcoolItemSeach.getText().toString().trim());
         return true;
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

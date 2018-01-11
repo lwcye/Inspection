@@ -282,14 +282,18 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         } else if (mQuestionType == 2) {
             //判断答案
             LogUtils.e(indexPanDuan);
-            JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean = mJfShiTiModel.info.panduan.get(indexPanDuan);
-            stids.add(panduanBean.id + ",");
-            if (TextUtils.isEmpty(getRbPanDanIndex(panduanBean))) {
-                ToastUtils.showShortToastSafe("请至少选择一个选项");
+            if (indexPanDuan >= mJfShiTiModel.info.panduan.size()) {
                 return true;
+            } else {
+                JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean = mJfShiTiModel.info.panduan.get(indexPanDuan);
+                stids.add(panduanBean.id + ",");
+                if (TextUtils.isEmpty(getRbPanDanIndex(panduanBean))) {
+                    ToastUtils.showShortToastSafe("请至少选择一个选项");
+                    return true;
+                }
+                daids.add(getRbPanDanIndex(panduanBean) + "@");
+                indexPanDuan++;
             }
-            daids.add(getRbPanDanIndex(panduanBean) + "@");
-            indexPanDuan++;
         } else {
             //问答
             stids.add(mJfShiTiModel.info.wenda.get(indexWenda).id + ",");

@@ -34,5 +34,6 @@ public class SchoolModel extends ResultModel{
         public String author;
         public String typeid;
         public String times;
+        public String picpath;
     }
 }

@@ -154,7 +154,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
         initView(mView);
         mPresenter.loadBtnData();
         mPresenter.loadWenTiData();
-        mPresenter.loadDangZhiBuDaHuiData();
+        mPresenter.loadBannerData();
     }
 
     @Override
@@ -164,7 +164,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
     }
 
     @Override
-    public void setDangZhiBuDaHuiData(FortressHomeModel homeModel) {
+    public void setBannerData(FortressHomeModel homeModel) {
         mListBanner = homeModel.info;
         images = new ArrayList<>();
         titles = new ArrayList<>();

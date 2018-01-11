@@ -39,15 +39,20 @@ public class FortressHomePresenter extends BasePresenterImpl<FortressHomeContrac
     }
 
     @Override
-    public void loadDangZhiBuDaHuiData() {
+    public void loadBannerData() {
         getView().showLoading("");
-        HttpRequest.getFortressService().sanhuiyikelist("支部党员大会")
+        HttpRequest.getFortressService().zhuzhishlist("文体活动")
                 .compose(NetWorkInterceptor.<FortressHomeModel>retrySessionCreator())
                 .compose(getView().getBaseActivity().<FortressHomeModel>applySchedulers(ActivityEvent.DESTROY))
                 .subscribe(new HttpResult<FortressHomeModel>() {
                     @Override
                     public void result(FortressHomeModel objectModel) {
-                        getView().setDangZhiBuDaHuiData(objectModel);
+                        if (objectModel != null && objectModel.info.size() > 1) {
+                            objectModel.info = objectModel.info.subList(0, 2);
+                            getView().setBannerData(objectModel);
+                        } else {
+                            getView().setBannerData(objectModel);
+                        }
                     }
                 }, new HttpError(getView()) {
                     @Override
