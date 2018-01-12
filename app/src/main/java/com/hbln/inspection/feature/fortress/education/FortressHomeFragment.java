@@ -137,6 +137,8 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
         });
 
         mRvFortressModuleNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvFortressModuleNews.setNestedScrollingEnabled(false);
+
         mAdapterNews = new RUAdapter<FortressHomeModel.InfoBean>(getContext(), mListNews, R.layout.item_fortress_news) {
             @Override
             protected void onInflateData(RUViewHolder holder, FortressHomeModel.InfoBean data, int position) {
@@ -168,7 +170,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
         mListBanner = homeModel.info;
         images = new ArrayList<>();
         titles = new ArrayList<>();
-        if (homeModel != null && homeModel.info != null && homeModel.info.size() > 0) {
+        if (homeModel.info != null && homeModel.info.size() > 0) {
             for (FortressHomeModel.InfoBean infoBean : homeModel.info) {
                 images.add(infoBean.picpath);
                 titles.add(infoBean.title);
