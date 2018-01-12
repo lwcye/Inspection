@@ -102,6 +102,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
         // 设置Banner样式
         mBannerFortressImage.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
         mBannerFortressImage.setIndicatorGravity(BannerConfig.CENTER);
+        mBannerFortressImage.setDelayTime(6000);
         //设置指示器位置（当banner模式中有指示器时）
         mBannerFortressImage.setIndicatorGravity(BannerConfig.CENTER);
         // 点击监听
