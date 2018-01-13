@@ -133,8 +133,10 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
         
         WorkArenaModel.InfoBean.Lanmu1Bean lanmu1 = arenaModel.info.lanmu1;
         mTvWorkArena0.setText(lanmu1.lanmu);
-        if (lanmu1.nums > 0) {
+        if (lanmu1.nums > 0 && lanmu1.zongshu > 0) {
             mPbWorkArena0.setProgress(lanmu1.nums * 100 / lanmu1.zongshu);
+        } else {
+            mPbWorkArena0.setProgress(0);
         }
         mTvWorkArenaNums0.setText(String.valueOf(lanmu1.nums));
         
@@ -152,12 +154,14 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
         
         WorkArenaModel.InfoBean.Lanmu1Bean lanmu2 = arenaModel.info.lanmu2;
         mTvWorkArena1.setText(lanmu2.lanmu);
-        if (lanmu2.nums > 0) {
-            mPbWorkArena0.setProgress(lanmu2.nums * 100 / lanmu2.zongshu);
+        if (lanmu2.nums > 0 && lanmu2.zongshu > 0) {
+            mPbWorkArena1.setProgress(lanmu2.nums * 100 / lanmu2.zongshu);
+        } else {
+            mPbWorkArena1.setProgress(0);
         }
         mTvWorkArenaNums1.setText(String.valueOf(lanmu2.nums));
         if (lanmu2.paiming == 1) {
-            ViewUtils.setTextDrawable(mTvWorkArenaNums0, 0, 0, R.drawable.img_work_arena_result_rank_flower, 0, getContext());
+            ViewUtils.setTextDrawable(mTvWorkArenaNums1, 0, 0, R.drawable.img_work_arena_result_rank_flower, 0, getContext());
             mTvWorkArenaRank1.setBackgroundResource(R.drawable.img_work_arena_result_rank_0);
         } else if (lanmu2.paiming == 2) {
             mTvWorkArenaRank1.setBackgroundResource(R.drawable.img_work_arena_result_rank_1);
@@ -170,12 +174,14 @@ public class WorkArenaResultActivity extends MVPBaseActivity<WorkArenaResultCont
         
         WorkArenaModel.InfoBean.Lanmu1Bean lanmu3 = arenaModel.info.lanmu3;
         mTvWorkArena2.setText(lanmu3.lanmu);
-        if (lanmu3.nums > 0) {
-            mPbWorkArena0.setProgress(lanmu3.nums * 100 / lanmu3.zongshu);
+        if (lanmu3.nums > 0 && lanmu3.zongshu > 0) {
+            mPbWorkArena2.setProgress(lanmu3.nums * 100 / lanmu3.zongshu);
+        } else {
+            mPbWorkArena2.setProgress(0);
         }
         mTvWorkArenaNums2.setText(String.valueOf(lanmu3.nums));
         if (lanmu3.paiming == 1) {
-            ViewUtils.setTextDrawable(mTvWorkArenaNums0, 0, 0, R.drawable.img_work_arena_result_rank_flower, 0, getContext());
+            ViewUtils.setTextDrawable(mTvWorkArenaNums2, 0, 0, R.drawable.img_work_arena_result_rank_flower, 0, getContext());
             mTvWorkArenaRank2.setBackgroundResource(R.drawable.img_work_arena_result_rank_0);
         } else if (lanmu3.paiming == 2) {
             mTvWorkArenaRank2.setBackgroundResource(R.drawable.img_work_arena_result_rank_1);
