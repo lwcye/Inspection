@@ -125,7 +125,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "报告数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                bar.setProgress((data.nums * 100 / mList0.get(0).nums));
+                if (data.nums == 0 || mList0.get(0).nums == 0) {
+                    bar.setProgress(0);
+                } else {
+                    bar.setProgress((data.nums * 100 / mList0.get(0).nums));
+                }
             }
         };
         mFragment0.setAdapter(mAdapter0);
@@ -136,7 +140,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "线索数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                bar.setProgress((data.nums * 100 / mList1.get(0).nums));
+                if (data.nums == 0 || mList1.get(0).nums == 0) {
+                    bar.setProgress(0);
+                } else {
+                    bar.setProgress((data.nums * 100 / mList1.get(0).nums));
+                }
             }
         };
         mFragment1.setAdapter(mAdapter1);
@@ -147,7 +155,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "信息数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                bar.setProgress((data.nums * 100 / mList2.get(0).nums));
+                if (data.nums == 0 || mList2.get(0).nums == 0) {
+                    bar.setProgress(0);
+                } else {
+                    bar.setProgress((data.nums * 100 / mList2.get(0).nums));
+                }
             }
         };
         mFragment2.setAdapter(mAdapter2);
@@ -158,7 +170,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "外宣数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                bar.setProgress((data.nums * 100 / mList2.get(0).nums));
+                if (data.nums == 0 || mList3.get(0).nums == 0) {
+                    bar.setProgress(0);
+                } else {
+                    bar.setProgress((data.nums * 100 / mList3.get(0).nums));
+                }
             }
         };
         mFragment3.setAdapter(mAdapter3);
