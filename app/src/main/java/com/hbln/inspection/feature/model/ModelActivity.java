@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import com.cmcc.lib_network.model.ModelModel;
 import com.cmcc.lib_utils.utils.ConvertUtils;
 import com.hbln.inspection.R;
-import com.hbln.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
@@ -80,13 +79,6 @@ public class ModelActivity extends MVPBaseActivity<ModelContract.View, ModelPres
     
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WorkDynamicActivity.start(getContext());
-                }
-            })
-            
             .setTitle("先锋模范");
         mRbModel0 = (RadioButton) findViewById(R.id.rb_model_0);
         mRbModel3 = (RadioButton) findViewById(R.id.rb_model_3);

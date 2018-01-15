@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -21,7 +23,6 @@ import com.cmcc.lib_network.model.WorkTypeModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
-import com.hbln.inspection.feature.workarena.workdynamic.WorkDynamicActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
@@ -91,15 +92,9 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
     }
     
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
+        TitleUtil.attach(this)
+            .setBack(true)
             .setColor(Color.WHITE, 255)
-            .setRightDrawable(R.drawable.icon_work_dynamic, 0, 0, 0)
-            .setRightClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WorkDynamicActivity.start(getContext());
-                }
-            })
             .setTitle("巡察机构");
         mTvWorkMonth = (TextView) findViewById(R.id.tv_work_month);
         mVpWork = (ViewPager) findViewById(R.id.vp_work);
@@ -119,19 +114,28 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
     }
     
     private void initViewPager() {
+        RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.set(0,0,0,0);
+            }
+        };
         mAdapter0 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList0, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "报告数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                if (data.nums == 0 || mList0.get(0).nums == 0) {
-                    bar.setProgress(0);
+                WorkTypeModel.InfoBean infoBean = mList0.get(0);
+                if (data.nums > 0 && infoBean.nums > 0) {
+                    bar.setProgress((data.nums * 100 / infoBean.nums));
                 } else {
-                    bar.setProgress((data.nums * 100 / mList0.get(0).nums));
+                    bar.setProgress(0);
                 }
             }
         };
+        mFragment0.setItemDecoration(itemDecoration);
         mFragment0.setAdapter(mAdapter0);
         
         mAdapter1 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList1, R.layout.item_work_in) {
@@ -140,13 +144,15 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "线索数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                if (data.nums == 0 || mList1.get(0).nums == 0) {
-                    bar.setProgress(0);
+                WorkTypeModel.InfoBean infoBean = mList1.get(0);
+                if (data.nums > 0 && infoBean.nums > 0) {
+                    bar.setProgress((data.nums * 100 / infoBean.nums));
                 } else {
-                    bar.setProgress((data.nums * 100 / mList1.get(0).nums));
+                    bar.setProgress(0);
                 }
             }
         };
+        mFragment1.setItemDecoration(itemDecoration);
         mFragment1.setAdapter(mAdapter1);
         
         mAdapter2 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList2, R.layout.item_work_in) {
@@ -155,13 +161,15 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "信息数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                if (data.nums == 0 || mList2.get(0).nums == 0) {
-                    bar.setProgress(0);
+                WorkTypeModel.InfoBean infoBean = mList2.get(0);
+                if (data.nums > 0 && infoBean.nums > 0) {
+                    bar.setProgress((data.nums * 100 / infoBean.nums));
                 } else {
-                    bar.setProgress((data.nums * 100 / mList2.get(0).nums));
+                    bar.setProgress(0);
                 }
             }
         };
+        mFragment2.setItemDecoration(itemDecoration);
         mFragment2.setAdapter(mAdapter2);
         
         mAdapter3 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList3, R.layout.item_work_in) {
@@ -170,13 +178,16 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "外宣数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-                if (data.nums == 0 || mList3.get(0).nums == 0) {
-                    bar.setProgress(0);
+                
+                WorkTypeModel.InfoBean infoBean = mList3.get(0);
+                if (data.nums > 0 && infoBean.nums > 0) {
+                    bar.setProgress((data.nums * 100 / infoBean.nums));
                 } else {
-                    bar.setProgress((data.nums * 100 / mList3.get(0).nums));
+                    bar.setProgress(0);
                 }
             }
         };
+        mFragment3.setItemDecoration(itemDecoration);
         mFragment3.setAdapter(mAdapter3);
         
         List<Fragment> fragmentList = new ArrayList<>();
@@ -203,10 +214,13 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         
         if (data.paiming == 1) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_0);
+            holder.setText(R.id.iv_work_in_rank, "");
         } else if (data.paiming == 2) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_1);
+            holder.setText(R.id.iv_work_in_rank, "");
         } else if (data.paiming == 3) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_2);
+            holder.setText(R.id.iv_work_in_rank, "");
         } else {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_3);
             holder.setText(R.id.iv_work_in_rank, data.paiming + "");

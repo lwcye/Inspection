@@ -34,7 +34,7 @@ public class AnswerResultActivity extends BaseActivity {
     private TextView mTvAnswerResultNums;
     /** 在线测试 */
     private TextView mTvAnswerResultType;
-
+    
     public static void start(Context context, String title, String nums, String chengji) {
         Intent starter = new Intent(context, AnswerResultActivity.class);
         starter.putExtra(INTENT_TITLE, title);
@@ -42,27 +42,27 @@ public class AnswerResultActivity extends BaseActivity {
         starter.putExtra(INTENT_CHENG_JI, chengji);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_result);
         initView();
-
+        
         title = getIntent().getStringExtra(INTENT_TITLE);
         nums = getIntent().getStringExtra(INTENT_NUMS);
         chengji = getIntent().getStringExtra(INTENT_CHENG_JI);
-
+        
         mTvAnswerResult.setText(chengji);
         mTvAnswerResultTitle.setText(title);
-        mTvAnswerResultChengji.setText(chengji);
+        mTvAnswerResultChengji.setText(chengji + "分");
         mTvAnswerResultNums.setText(nums);
         mTvAnswerResultType.setText(TYPE);
     }
-
+    
     private void initView() {
         TitleUtil.attach(this)
-                .setBack(true);
+            .setBack(true);
         mTvAnswerResult = (TextView) findViewById(R.id.tv_answer_result);
         mTvAnswerResultTitle = (TextView) findViewById(R.id.tv_answer_result_title);
         mTvAnswerResultChengji = (TextView) findViewById(R.id.tv_answer_result_chengji);

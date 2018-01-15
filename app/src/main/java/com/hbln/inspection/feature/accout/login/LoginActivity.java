@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +25,7 @@ import com.hbln.inspection.mvp.MVPBaseActivity;
  * 邮箱 784787081@qq.com
  */
 
-public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View, View.OnClickListener {
+public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPresenter> implements LoginContract.View, View.OnClickListener, TextWatcher {
     /** 登录 */
     private Button mTvLoginSubmit;
     /** 注册 */
@@ -61,6 +63,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         mTvLoginForget = (TextView) findViewById(R.id.tv_login_forget);
         mTvLoginForget.setOnClickListener(this);
         mEtLoginUsername = (EditText) findViewById(R.id.et_login_username);
+        mEtLoginUsername.addTextChangedListener(this);
         mEtLoginPassword = (EditText) findViewById(R.id.et_login_password);
     }
 
@@ -86,5 +89,20 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         loginModel.saveUserInfo();
         MainActivity.start(getContext());
         finish();
+    }
+    
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        
+    }
+    
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+       
+    }
+    
+    @Override
+    public void afterTextChanged(Editable s) {
+        
     }
 }

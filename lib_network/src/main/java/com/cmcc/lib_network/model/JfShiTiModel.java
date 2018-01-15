@@ -41,6 +41,7 @@ public class JfShiTiModel extends ResultModel {
         public String dannums;
         public String duonums;
         public String wendannums;
+        public String panduannums;
         public String create_time;
         public String pic;
         public String typeid;
@@ -49,7 +50,6 @@ public class JfShiTiModel extends ResultModel {
         public List<DuoxuanBean> duoxuan;
         public List<WendaBean> wenda;
         public List<PanduanBean> panduan;
-        public String panduannums;
         public String danxuanfenshu;
         public String duoxuanfenshu;
         public String panduanfenshu;
@@ -99,6 +99,7 @@ public class JfShiTiModel extends ResultModel {
             public String sort;
             public String catid;
             public List<String> danan;
+            public String okdaan;
         }
         
         public static class WendaBean {
@@ -117,6 +118,7 @@ public class JfShiTiModel extends ResultModel {
             public String daan;
             public String sort;
             public String catid;
+            public String okdaan;
         }
         
         public static class PanduanBean {

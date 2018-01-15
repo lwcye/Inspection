@@ -149,10 +149,11 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
         if (mType == TYPE_XUEXI || mType == TYPE_CESHI) {
             if (mType == TYPE_XUEXI) {
                 AnswerResultActivity.TYPE = "学习资料";
+                AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_XUEXI);
             } else {
                 AnswerResultActivity.TYPE = "在线测试";
+                AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
             }
-            AnswerActivity.start(getContext(), mList.get(position).id);
         } else {
             AnswerResultActivity.TYPE = "体会交流";
             TiHuiActivity.start(getContext(), mList.get(position).id);
