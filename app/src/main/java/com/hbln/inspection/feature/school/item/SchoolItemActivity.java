@@ -93,7 +93,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
                 holder.setText(R.id.tv_item_shcool_item_dw, data.author);
                 if (!TextUtils.isEmpty(data.picpath)) {
                     holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
-                    holder.setImageNet(R.id.iv_item_shcool_item, data.pic);
+                    holder.setImageNet(R.id.iv_item_shcool_item, data.picpath);
                 } else {
                     holder.setVisibility(R.id.iv_item_shcool_item, View.GONE);
                 }
