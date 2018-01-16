@@ -157,7 +157,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 start(getBaseActivity(), SchoolActivity.INTENT_INDEX_ANSWER);
                 break;
             case R.id.tv_home_track:
-                //业务练兵
+                //轨迹查询
                 InspectTrackDetailActivity.start(getBaseActivity(), null);
                 break;
             default:

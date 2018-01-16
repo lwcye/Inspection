@@ -21,6 +21,6 @@ public class InspectTrackDetailContract {
     interface Presenter extends BasePresenter<View> {
         void initBaiduMap(BaiduMap baiduMap);
         
-        void loadTrackData();
+        void loadTrackData(String startTime, String endTime, String uids);
     }
 }

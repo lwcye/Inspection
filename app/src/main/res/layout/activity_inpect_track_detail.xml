@@ -1,74 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:background="@color/layout_background_default"
-			  android:orientation="vertical">
-	
-	<include layout="@layout/title_bar" />
-	
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/view_height"
-		android:orientation="horizontal">
-		
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_marginLeft="@dimen/x10"
-			android:gravity="center"
-			android:text="开始时间："
-			android:textColor="@color/black_title"
-			android:textSize="@dimen/t14" />
-		
-		<EditText
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
-			android:background="@color/white"
-			android:paddingLeft="@dimen/x5"
-			android:textColor="@color/black_title"
-			android:textColorHint="@color/black_hint"
-			android:textSize="@dimen/t12" />
-		
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_marginLeft="@dimen/x10"
-			android:gravity="center"
-			android:text="结束时间："
-			android:textColor="@color/black_title"
-			android:textSize="@dimen/t14" />
-		
-		<EditText
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
-			android:background="@color/white"
-			android:paddingLeft="@dimen/x5"
-			android:textColor="@color/black_title"
-			android:textColorHint="@color/black_hint"
-			android:textSize="@dimen/t12" />
-		
-		<TextView
-			android:id="@+id/btb_inspect_track_detail"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginLeft="@dimen/x5"
-			android:layout_marginRight="@dimen/x10"
-			android:background="@drawable/img_btn_inspect_track_detail"
-			android:gravity="center"
-			android:text="轨迹追踪"
-			android:textColor="@color/white"
-			android:textSize="@dimen/t16" />
-	</LinearLayout>
-	
-	<com.baidu.mapapi.map.MapView
-		android:id="@+id/map_track_detail"
-		android:clickable="true"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent" />
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/layout_background_default"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="center"
+            android:onClick="startTime"
+            android:text="开始时间："
+            android:textColor="@color/black_title"
+            android:textSize="@dimen/t14"/>
+
+        <TextView
+            android:id="@+id/tv_inspect_track_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="startTime"
+            android:paddingLeft="@dimen/x5"
+            android:textColor="@color/black_title"
+            android:textColorHint="@color/black_hint"
+            android:textSize="@dimen/t12"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="center"
+            android:onClick="endTime"
+            android:text="结束时间："
+            android:textColor="@color/black_title"
+            android:textSize="@dimen/t14"/>
+
+        <TextView
+            android:id="@+id/tv_inspect_track_end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="endTime"
+            android:paddingLeft="@dimen/x5"
+            android:textColor="@color/black_title"
+            android:textColorHint="@color/black_hint"
+            android:textSize="@dimen/t12"/>
+
+        <TextView
+            android:id="@+id/btb_inspect_track_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/img_btn_inspect_track_detail"
+            android:gravity="center"
+            android:text="轨迹追踪"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t16"/>
+    </LinearLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map_track_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"/>
 </LinearLayout>

@@ -29,6 +29,9 @@ public interface TrackService {
     @POST("public/api/guiji/index")
     Observable<TrackModel> index(
             @Field("pageNo") String pageNo,
+            @Field("starttime") String starttime,
+            @Field("endtime") String endtime,
+            @Field("uids") String uids,
             @Field("pageSize") String pageSize
     );
 

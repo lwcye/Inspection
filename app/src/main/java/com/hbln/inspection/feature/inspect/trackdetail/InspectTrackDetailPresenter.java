@@ -9,9 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.Marker;
-import com.hbln.inspection.mvp.BasePresenterImpl;
-import com.hbln.inspection.utils.BaiduMapUtils;
-import com.hbln.inspection.widget.DialogUtils;
 import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.http.HttpComplete;
@@ -23,6 +20,9 @@ import com.cmcc.lib_network.model.TrackModel;
 import com.cmcc.lib_utils.utils.IntentUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.NetworkUtils;
+import com.hbln.inspection.mvp.BasePresenterImpl;
+import com.hbln.inspection.utils.BaiduMapUtils;
+import com.hbln.inspection.widget.DialogUtils;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -35,7 +35,7 @@ import rx.functions.Action1;
 
 public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackDetailContract.View> implements InspectTrackDetailContract.Presenter, BaiduMapUtils.OnLocationListener, BaiduMap.OnMarkerClickListener {
     BaiduMap mBaiduMap;
-    
+
     @Override
     public void initBaiduMap(BaiduMap baiduMap) {
         // 判断是否有网络,有网络就请求数据
@@ -45,21 +45,21 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
         checkPermission();
         BaiduMapUtils.getInstance().initBaiduMap(baiduMap, 0);
     }
-    
+
     @Override
-    public void loadTrackData() {
+    public void loadTrackData(String startTime, String endTime, String uids) {
         getView().showLoading("");
-        HttpRequest.getTrackService().index("1", URLs.PAGE_SIZE)
-            .compose(NetWorkInterceptor.<TrackModel>retrySessionCreator())
-            .compose(getView().getBaseActivity().<TrackModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<TrackModel>() {
-                @Override
-                public void result(TrackModel objectModel) {
-                    getView().setTrack(objectModel);
-                }
-            }, new HttpError(getView()), new HttpComplete(getView()));
+        HttpRequest.getTrackService().index("1", startTime, endTime, uids, URLs.PAGE_SIZE)
+                .compose(NetWorkInterceptor.<TrackModel>retrySessionCreator())
+                .compose(getView().getBaseActivity().<TrackModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<TrackModel>() {
+                    @Override
+                    public void result(TrackModel objectModel) {
+                        getView().setTrack(objectModel);
+                    }
+                }, new HttpError(getView()), new HttpComplete(getView()));
     }
-    
+
     /**
      * 判断手机网络是否连接
      */
@@ -90,7 +90,7 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
             }
         });
     }
-    
+
     /**
      * 判断GPS开关是否开启
      */
@@ -113,6 +113,7 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
             });
         }
     }
+
     /**
      * 请求百度地图权限，详情可查看http://lbsyun.baidu.com/index.php?title=android-locsdk/guide/androidmnotice
      */
@@ -128,7 +129,7 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
                 }
             }
         });
-        
+
         if (!rxPermissions.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe();
         }
@@ -136,12 +137,12 @@ public class InspectTrackDetailPresenter extends BasePresenterImpl<InspectTrackD
             rxPermissions.request(Manifest.permission.READ_PHONE_STATE).subscribe();
         }
     }
-    
+
     @Override
     public void locationListener(BDLocation location) {
         LogUtils.e(location);
     }
-    
+
     @Override
     public boolean onMarkerClick(Marker marker) {
         getView().showTrackDetail(marker.getTitle(), marker.getPosition().latitude, marker.getPosition().longitude);
