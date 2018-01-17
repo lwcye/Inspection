@@ -23,9 +23,9 @@
 		<ImageView
 			android:id="@+id/iv_item_shcool_item"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="@dimen/x200"
 			android:adjustViewBounds="true"
-			android:scaleType="centerCrop"
+			android:scaleType="fitCenter"
 			android:src="@drawable/img_shcool_item_img" />
 		
 		<TextView

@@ -93,7 +93,7 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="不忘初心 牢记使命 忠诚担当 接续奋斗"
+				android:text="不忘初心 牢记使命 忠诚担当 继续奋斗"
 				android:textColor="@color/black_title"
 				android:textSize="@dimen/t14" />
 			

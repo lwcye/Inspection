@@ -122,7 +122,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 break;
             case R.id.tv_home_school:
                 //纪检学堂
-                start(getBaseActivity());
+                SchoolActivity.start(getBaseActivity());
                 break;
             case R.id.tv_home_regular:
                 //制度规范
@@ -150,7 +150,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 break;
             case R.id.tv_home_school_left:
                 //清风讲堂
-                start(getBaseActivity(), SchoolActivity.INTENT_INDEX_SCHOOL);
+                SchoolActivity.start(getBaseActivity(), SchoolActivity.INTENT_INDEX_SCHOOL);
                 break;
             case R.id.tv_home_school_right:
                 //业务练兵

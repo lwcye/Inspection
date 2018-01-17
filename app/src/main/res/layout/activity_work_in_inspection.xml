@@ -38,7 +38,7 @@
 			android:background="@drawable/select_tab_center"
 			android:button="@null"
 			android:gravity="center"
-			android:text="信息审查榜"
+			android:text="信息数量榜"
 			android:textColor="@color/select_tab" />
 		
 		<RadioButton
