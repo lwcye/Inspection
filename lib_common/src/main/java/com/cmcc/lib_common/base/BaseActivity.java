@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.cmcc.lib_common.mvp.BaseView;
+import com.cmcc.lib_utils.utils.LogUtils;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
@@ -85,6 +86,8 @@ public class BaseActivity extends AppCompatActivity implements BaseView, Lifecyc
         super.onCreate(savedInstanceState);
         mLifecycleSubject.onNext(ActivityEvent.CREATE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        
+        LogUtils.e(getIntent());
     }
 
     @CallSuper

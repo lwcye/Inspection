@@ -1,6 +1,7 @@
 package com.cmcc.lib_network.service;
 
 
+import com.cmcc.lib_network.model.CommentModel;
 import com.cmcc.lib_network.model.DwLianDongModel;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.MailModel;
@@ -73,5 +74,27 @@ public interface UserService {
     @POST("public/api/logintoken/getversion")
     Observable<VersionModel> getversion(
         @Field("version") String version
+    );
+    
+    @FormUrlEncoded
+    @POST("public/api/main/pinglunadd")
+    Observable<ObjectModel> pinglunadd(
+        @Field("sfid") String sfid,
+        @Field("content") String content,
+        @Field("catid") String catid,
+        @Field("sxid") String sxid
+    );
+    
+    @FormUrlEncoded
+    @POST("public/api/main/pinglunshanchu")
+    Observable<ObjectModel> pinglunshanchu(
+        @Field("id") String id
+    );
+    
+    @FormUrlEncoded
+    @POST("public/api/main/pingluninfo")
+    Observable<CommentModel> pingluninfo(
+        @Field("catid") String catid,
+        @Field("sxid") String sxid
     );
 }

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_network.model.WorkModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
@@ -117,6 +118,6 @@ public class WorkDynamicActivity extends MVPBaseActivity<WorkDynamicContract.Vie
     
     @Override
     public void onItemClick(View view, int itemType, int position) {
-        WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewContentActivity.TYPE_WORK);
+        WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewModel.TYPE_WORK);
     }
 }

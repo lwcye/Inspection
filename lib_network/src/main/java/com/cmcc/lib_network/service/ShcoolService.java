@@ -1,7 +1,7 @@
 package com.cmcc.lib_network.service;
 
-import com.cmcc.lib_network.model.SchoolDetailModel;
 import com.cmcc.lib_network.model.SchoolModel;
+import com.cmcc.lib_network.model.WebViewModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -54,7 +54,7 @@ public interface ShcoolService {
      */
     @FormUrlEncoded
     @POST("public/api/main/jiangtangview")
-    Observable<SchoolDetailModel> jiangtangview(
+    Observable<WebViewModel> jiangtangview(
         @Field("id") String id
     );
 }

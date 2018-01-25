@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.cmcc.lib_common.utils.loader.LoaderFactory;
 import com.cmcc.lib_network.model.FortressHomeModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
@@ -109,7 +110,7 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
         mBannerFortressImage.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                WebViewContentActivity.start(getContext(), mListBanner.get(position).id, WebViewContentActivity.TYPE_FORTRESS_SAN_HUI);
+                WebViewContentActivity.start(getContext(), mListBanner.get(position).id, WebViewModel.TYPE_FORTRESS_SAN_HUI);
             }
         });
     }
@@ -192,6 +193,6 @@ public class FortressHomeFragment extends MVPBaseFragment<FortressHomeContract.V
 
     @Override
     public void onItemClick(View view, int itemType, int position) {
-        WebViewContentActivity.start(getContext(), mListNews.get(position).id, WebViewContentActivity.TYPE_FORTRESS_HOME);
+        WebViewContentActivity.start(getContext(), mListNews.get(position).id, WebViewModel.TYPE_FORTRESS_HOME);
     }
 }

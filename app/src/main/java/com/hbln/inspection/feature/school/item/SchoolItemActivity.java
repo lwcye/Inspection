@@ -16,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmcc.lib_network.model.SchoolModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.hbln.inspection.R;
-import com.hbln.inspection.feature.school.detail.SchoolDetailActivity;
+import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
@@ -102,7 +103,7 @@ public class SchoolItemActivity extends MVPBaseActivity<SchoolItemContract.View,
         mAdapter.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                SchoolDetailActivity.start(getContext(), mList.get(position).id);
+                WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewModel.TYPE_SCHOOL);
             }
         });
         mRvSchoolItem.setAdapter(mAdapter);
