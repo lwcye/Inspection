@@ -41,7 +41,7 @@
 			android:button="@null"
 			android:drawableTop="@drawable/icon_main_find"
 			android:gravity="center"
-			android:text="发现"
+			android:text="签到"
 			android:textColor="@color/selector_main_tab" />
 		
 		<com.hbln.lib_views.DrawableCenterRadioButton
