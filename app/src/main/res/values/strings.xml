@@ -1,7 +1,5 @@
 <resources>
 	<string name="app_name">纪检干部管理</string>
-    <string name="activity_home">首页</string>
-    <string name="activity_main">主界面</string>
 	<string name="activity_work_arena">工作擂台</string>
     <string name="o2o_error_location_retrying">定位失败，正在重新定位</string>
     <string name="o2o_error_location">定位失败</string>

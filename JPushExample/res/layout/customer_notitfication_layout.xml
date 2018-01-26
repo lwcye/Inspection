@@ -33,8 +33,7 @@
     </LinearLayout>
 
     <DateTimeView
-        android:id="@+id/time"
-        android:layout_width="fill_parent"
+		android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
         android:textColor="#ff0000"

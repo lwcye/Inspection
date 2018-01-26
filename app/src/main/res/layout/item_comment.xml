@@ -63,7 +63,6 @@
                         tools:text="盛艳玲"/>
 
                     <TextView
-                        android:id="@+id/tv_comment_danwei"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black_hint"
@@ -76,7 +75,6 @@
                         android:layout_weight="1"/>
 
                     <TextView
-                        android:id="@+id/tv_comment_zan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black_hint"

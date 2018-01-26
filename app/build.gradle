@@ -24,7 +24,11 @@ android {
         }
         // 打包资源种类配置
         resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
-
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "b916cc14e1377fa821ae88fb", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     // 排除构建的目录
@@ -68,10 +72,10 @@ static def getReleaseTime() {
     return timestamp
 }
 
-//android.applicationVariants.all { variant ->
-//    def file = variant.outputs[0].outputFile
-//    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + releaseTime + "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
-//}
+android.applicationVariants.all { variant ->
+    def file = variant.outputs[0].outputFile
+    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + releaseTime + "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
+}
 
 /******************** 方法超65535 ********************/
 afterEvaluate {
@@ -111,4 +115,6 @@ dependencies {
     compile files('libs/umeng-analytics-7.4.0.jar')
     compile files('libs/umeng-common-1.4.0.jar')
     compile files('libs/umerror_android_1.0.0.jar')
+    compile 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
 }

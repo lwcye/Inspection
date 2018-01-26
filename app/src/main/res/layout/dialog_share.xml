@@ -14,7 +14,6 @@
 		android:paddingTop="@dimen/t20">
 		
 		<TextView
-			android:id="@+id/tv_dialog_share_sina"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
@@ -26,7 +25,6 @@
 			android:textSize="@dimen/t14" />
 		
 		<TextView
-			android:id="@+id/tv_dialog_share_weixin"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
@@ -38,7 +36,6 @@
 			android:textSize="@dimen/t14" />
 		
 		<TextView
-			android:id="@+id/tv_dialog_share_weixin_circle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
@@ -50,7 +47,6 @@
 			android:textSize="@dimen/t14" />
 		
 		<TextView
-			android:id="@+id/tv_dialog_share_qq"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
