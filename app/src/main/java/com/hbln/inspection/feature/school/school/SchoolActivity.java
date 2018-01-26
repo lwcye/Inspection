@@ -13,6 +13,12 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.cmcc.lib_network.http.HttpComplete;
+import com.cmcc.lib_network.http.HttpError;
+import com.cmcc.lib_network.http.HttpRequest;
+import com.cmcc.lib_network.http.HttpResult;
+import com.cmcc.lib_network.http.NetWorkInterceptor;
+import com.cmcc.lib_network.model.KaoShiModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.hbln.inspection.R;
@@ -23,9 +29,12 @@ import com.hbln.inspection.ui.Activity.BusnissListActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
 
 
 /**
@@ -138,7 +147,7 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
         mList_1.add(R.drawable.img_school_answer_2);
         mAdapter_1 = new RUAdapter<Integer>(getContext(), mList_1, R.layout.item_school_answer_0) {
             @Override
-            protected void onInflateData(RUViewHolder holder, Integer data, int position) {
+            protected void onInflateData(final RUViewHolder holder, Integer data, int position) {
                 holder.setImageView(R.id.iv_item_shcool_answer_1, data);
                 if (position == 1) {
                     holder.setText(R.id.tv_item_shcool_answer_1_title, "在线测试");
@@ -147,6 +156,35 @@ public class SchoolActivity extends MVPBaseActivity<SchoolContract.View, SchoolP
                     holder.setText(R.id.tv_item_shcool_answer_1_title, "体会交流");
                     //holder.setImageView(R.id.iv_item_shcool_answer_1_status, R.drawable.icon_shchool_answer_press);
                 }
+                Observable<KaoShiModel> request;
+                if (position == 0) {
+                    request = HttpRequest.getKaoShiService().index("学习资料");
+                } else if (position == 1) {
+                    request = HttpRequest.getKaoShiService().index("在线测试");
+                } else {
+                    request = HttpRequest.getKaoShiService().tihuijiaoliu();
+                }
+                request.compose(NetWorkInterceptor.<KaoShiModel>retrySessionCreator())
+                    .compose(getBaseActivity().<KaoShiModel>applySchedulers(ActivityEvent.DESTROY))
+                    .subscribe(new HttpResult<KaoShiModel>() {
+                        @Override
+                        public void result(KaoShiModel objectModel) {
+                            int nums = 0;
+                            if (objectModel != null && objectModel.info.size() > 0) {
+                                for (KaoShiModel.InfoBean infoBean : objectModel.info) {
+                                    try {
+                                        nums += Integer.valueOf(infoBean.nums);
+                                    } catch (NumberFormatException ignored) {
+                                    }
+                                }
+                            }
+                            holder.setText(R.id.tv_item_shcool_answer_1_content, nums + "人 参与答题");
+                        }
+                    }, new HttpError() {
+                        @Override
+                        public void error(int errorCode, String message) {
+                        }
+                    }, new HttpComplete());
             }
         };
         mAdapter_1.setOnItemClickListener(new RUAdapter.OnItemClickListener() {

@@ -5,9 +5,11 @@ import com.cmcc.lib_network.model.CommentModel;
 import com.cmcc.lib_network.model.DwLianDongModel;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.MailModel;
+import com.cmcc.lib_network.model.MessageModel;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_network.model.VersionModel;
+import com.cmcc.lib_network.model.ZanModel;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -96,5 +98,45 @@ public interface UserService {
     Observable<CommentModel> pingluninfo(
         @Field("catid") String catid,
         @Field("sxid") String sxid
+    );
+    
+    /**
+     * 消息列表
+     *
+     * @return
+     */
+    @POST("public/api/main/tongzhilistinfo")
+    Observable<MessageModel> tongzhilistinfo(
+    );
+    
+    /**
+     * 点赞列表
+     *
+     * @param typeid
+     * @param sxid
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("public/api/main/pinglunzanshuliang")
+    Observable<ZanModel> pinglunzanshuliang(
+        @Field("typeid") String typeid,
+        @Field("sxid") String sxid
+    );
+    
+    /**
+     * 点赞
+     *
+     * @param typeid
+     * @param sxid
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("public/api/main/dianzhanadd")
+    Observable<ObjectModel> dianzhanadd(
+        @Field("sfid") String sfid,
+        @Field("yeszan") String yeszan,
+        @Field("typeid") String typeid,
+        @Field("sxid") String sxid,
+        @Field("nozan") String nozan
     );
 }

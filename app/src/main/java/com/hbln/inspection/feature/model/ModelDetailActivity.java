@@ -21,6 +21,7 @@ import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.CommentModel;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.WebViewModel;
+import com.cmcc.lib_network.model.ZanModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
@@ -56,7 +57,7 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
     public static final String INTENT_TYPE = "type";
     public int mType = 0;
     public String mId = "";
-
+    
     private BottomPopupDialog fontDialog;
     /** 强筋骨、明纪律 铸造执纪铁军 */
     private TextView mTvWebviewTitle;
@@ -77,27 +78,28 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
     private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
     /** 评论适配器 */
     private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
-
+    
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, ModelDetailActivity.class);
         starter.putExtra(INTENT_ID, id);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model_detail);
         mId = getIntent().getStringExtra(INTENT_ID);
         mType = getIntent().getIntExtra(INTENT_TYPE, WebViewModel.TYPE_MODEL_PRIVE);
-
+        
         initView();
         initView();
         loadData(mId, mType);
         getCommentList(false);
+        getZanList(false);
     }
-
+    
     private void loadData(String id, int type) {
         if (TextUtils.isEmpty(id)) {
             ToastUtils.showShortToastSafe("数据读取错误");
@@ -110,19 +112,19 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
             observable = HttpRequest.getModelService().danweiview(id);
         }
         observable
-                .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
-                .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
-                .subscribe(new HttpResult<WebViewModel>() {
-                    @Override
-                    public void result(WebViewModel webViewModel) {
-                        setData(webViewModel.info);
-                    }
-                }, new HttpError(this), new HttpComplete(this));
+            .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
+            .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
+            .subscribe(new HttpResult<WebViewModel>() {
+                @Override
+                public void result(WebViewModel webViewModel) {
+                    setData(webViewModel.info);
+                }
+            }, new HttpError(this), new HttpComplete(this));
     }
-
+    
     private void initView() {
         TitleUtil.attach(this)
-                .setBack(true);
+            .setBack(true);
         mTvWebviewTitle = (TextView) findViewById(R.id.tv_webview_title);
         mTvWebviewDate = (TextView) findViewById(R.id.tv_webview_date);
         mWvWebview = (BridgeWebView) findViewById(R.id.wv_webview);
@@ -137,9 +139,9 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         mIbWebviewFont.setOnClickListener(this);
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
-
+        
         WebViewManager.getInstance().initWebView(mWvWebview);
-
+        
         mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
         // 评论
         mCommentAdapter = WebViewContentActivity.initCommentAdapter(getBaseActivity(), mCommentList, new Action1<ObjectModel>() {
@@ -155,13 +157,27 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
         mRvWebviewComment.setAdapter(mCommentAdapter);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_webview_zan:
+                ZanModel.handleZan(getBaseActivity(), true, mType, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getZanList(true);
+                    }
+                });
                 break;
             case R.id.tv_webview_cai:
+                ZanModel.handleZan(getBaseActivity(), false, mType, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getZanList(true);
+                    }
+                });
                 break;
             case R.id.btn_webview_submit:
                 CommentModel.handleComment(getBaseActivity(), mEtWebviewComment.getText().toString(), mType, mId, new Action1<ObjectModel>() {
@@ -190,7 +206,7 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
-
+    
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
         if (mType == WebViewModel.TYPE_MODEL_PRIVE) {
@@ -200,7 +216,7 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         }
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
     }
-
+    
     /**
      * 获取评论列表
      */
@@ -210,6 +226,19 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
             public void call(CommentModel commentModel) {
                 mCommentList = commentModel.info;
                 mCommentAdapter.setData(commentModel.info);
+            }
+        });
+    }
+    
+    /**
+     * 获取点赞列表
+     */
+    private void getZanList(boolean showProgress) {
+        ZanModel.getZanList(getBaseActivity(), mType, mId, showProgress, new Action1<ZanModel>() {
+            @Override
+            public void call(ZanModel zanModel) {
+                mTvWebviewZan.setText("当前数量：" + zanModel.info.yeszan);
+                mTvWebviewCai.setText("当前数量：" + zanModel.info.nozan);
             }
         });
     }

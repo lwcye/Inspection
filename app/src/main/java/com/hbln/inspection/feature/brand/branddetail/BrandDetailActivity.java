@@ -23,6 +23,7 @@ import com.cmcc.lib_network.model.BrandDetailModel;
 import com.cmcc.lib_network.model.CommentModel;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.WebViewModel;
+import com.cmcc.lib_network.model.ZanModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
@@ -79,7 +80,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
     private ImageView mImageView;
     private ImageView mIvBrandDetailFenguan;
     private TextView mTvBrandDetailFenguan;
-
+    
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean> mList = new ArrayList<>();
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean.ChengBan> mList0 = new ArrayList<>();
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean.ChengBan> mList1 = new ArrayList<>();
@@ -91,39 +92,40 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
     private RelativeLayout mRlBrandDetailWaixuan;
     private List<BrandDetailModel.InfoBean.WaiXuanGaoJian> mWaiXuanGaoJianList = new ArrayList<>();
     private RUAdapter<BrandDetailModel.InfoBean.WaiXuanGaoJian> mWaiXuanGaoJianRUAdapter;
-
+    
     /** 评论数据 */
     private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
     /** 评论适配器 */
     private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
     private RecyclerView mRvWebviewComment;
-
+    
     public static void start(Context context, String id) {
         Intent starter = new Intent(context, BrandDetailActivity.class);
         starter.putExtra(INTENT_ID, id);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected BrandDetailPresenter createPresenter() {
         return new BrandDetailPresenter();
     }
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_detail);
         mId = getIntent().getStringExtra(INTENT_ID);
-
+        
         initView();
-
+        
         mPresenter.loadDetail(mId);
         getCommentList(false);
+        getZanList(false);
     }
-
+    
     private void initView() {
         TitleUtil.attach(this)
-                .setBack(true);
+            .setBack(true);
         mTvBrandDetail = (TextView) findViewById(R.id.tv_brand_detail);
         mIvBrandDetail = (ImageView) findViewById(R.id.iv_brand_detail);
         mWvBrandDetail = (BridgeWebView) findViewById(R.id.wv_brand_detail);
@@ -149,12 +151,12 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
-
+        
         WebViewManager.getInstance().initWebView(mWvBrandDetail);
-
+        
         initRecylerView();
     }
-
+    
     private void initRecylerView() {
         mAdapter = new RUAdapter<BrandDetailModel.InfoBean.ChengbankeshiBean>(getContext(), mList, R.layout.item_brand_detail_chengban_group) {
             @Override
@@ -195,11 +197,11 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
                 recyclerView.setAdapter(mAdapter0);
             }
         };
-
+        
         mRvBrandDetail.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvBrandDetail.setNestedScrollingEnabled(false);
         mRvBrandDetail.setAdapter(mAdapter);
-
+        
         mWaiXuanGaoJianRUAdapter = new RUAdapter<BrandDetailModel.InfoBean.WaiXuanGaoJian>(getContext(), mWaiXuanGaoJianList, R.layout.item_brand_waixuan) {
             @Override
             protected void onInflateData(RUViewHolder holder, BrandDetailModel.InfoBean.WaiXuanGaoJian data, int position) {
@@ -216,7 +218,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
         mRvBrandDetailWaixuan.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRvBrandDetailWaixuan.setNestedScrollingEnabled(false);
         mRvBrandDetailWaixuan.setAdapter(mWaiXuanGaoJianRUAdapter);
-
+        
         // 评论
         mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
         // 评论
@@ -233,13 +235,27 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
         mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
         mRvWebviewComment.setAdapter(mCommentAdapter);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_webview_zan:
+                ZanModel.handleZan(getBaseActivity(), true, WebViewModel.TYPE_BRAND_WAIXUAN, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getZanList(true);
+                    }
+                });
                 break;
             case R.id.tv_webview_cai:
+                ZanModel.handleZan(getBaseActivity(), false, WebViewModel.TYPE_BRAND_WAIXUAN, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getZanList(true);
+                    }
+                });
                 break;
             case R.id.btn_webview_submit:
                 CommentModel.handleComment(getBaseActivity(), mEtWebviewComment.getText().toString(), WebViewModel.TYPE_BRAND_WAIXUAN, mId, new Action1<ObjectModel>() {
@@ -266,7 +282,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
                 break;
         }
     }
-
+    
     @Override
     public void setDetail(BrandDetailModel detailModel) {
         mTvBrandDetail.setText(detailModel.info.title);
@@ -277,7 +293,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             LoaderFactory.getLoader().loadNet(mIvBrandDetail, detailModel.info.pic);
         }
         mWvBrandDetail.loadDataWithBaseURL(null, detailModel.info.jianjie.content, "text/html", "utf-8", null);
-
+        
         if (detailModel.info.waixuangaojian != null && detailModel.info.waixuangaojian.size() > 0) {
             mLlBrandDetailWaixuan.setVisibility(View.VISIBLE);
             mRvBrandDetailWaixuan.setVisibility(View.VISIBLE);
@@ -289,11 +305,11 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             mRvBrandDetailWaixuan.setVisibility(View.GONE);
             mRlBrandDetailWaixuan.setVisibility(View.GONE);
         }
-
+        
         LoaderFactory.getLoader().loadNet(mIvBrandDetailFenguan, detailModel.info.fenguanlingdao.pic);
         mTvBrandDetailFenguan.setText(detailModel.info.fenguanlingdao.name);
-
-
+        
+        
         if (detailModel.info.chengbankeshi == null || detailModel.info.chengbankeshi.size() == 0) {
             mRlBrandDetail0.setVisibility(View.GONE);
             mRlBrandDetail1.setVisibility(View.GONE);
@@ -302,7 +318,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             mAdapter.setData(mList);
         }
     }
-
+    
     /**
      * 获取评论列表
      */
@@ -312,6 +328,19 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             public void call(CommentModel commentModel) {
                 mCommentList = commentModel.info;
                 mCommentAdapter.setData(commentModel.info);
+            }
+        });
+    }
+    
+    /**
+     * 获取点赞列表
+     */
+    private void getZanList(boolean showProgress) {
+        ZanModel.getZanList(getBaseActivity(), WebViewModel.TYPE_BRAND_WAIXUAN, mId, showProgress, new Action1<ZanModel>() {
+            @Override
+            public void call(ZanModel zanModel) {
+                mTvWebviewZan.setText("当前数量：" + zanModel.info.yeszan);
+                mTvWebviewCai.setText("当前数量：" + zanModel.info.nozan);
             }
         });
     }

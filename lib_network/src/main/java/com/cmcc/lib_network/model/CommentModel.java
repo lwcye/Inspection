@@ -139,7 +139,7 @@ public class CommentModel extends ResultModel {
      * @param type
      * @return catId
      */
-    private static String getCatId(int type) {
+    public static String getCatId(int type) {
         String catid = "";
         switch (type) {
             case WebViewModel.TYPE_SCHOOL:

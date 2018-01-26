@@ -45,7 +45,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/x20"
-			android:text="1230参与答题"
+			android:text="0参与答题"
 			android:textColor="@color/white"
 			android:textSize="@dimen/t12" />
 	</LinearLayout>

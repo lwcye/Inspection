@@ -62,7 +62,7 @@
 					android:layout_weight="1"
 					android:drawableTop="@drawable/icon_zan"
 					android:gravity="center"
-					android:text="当前数量：1234"
+					android:text="当前数量：0"
 					android:textColor="@color/gray20"
 					android:textSize="@dimen/t14" />
 				
