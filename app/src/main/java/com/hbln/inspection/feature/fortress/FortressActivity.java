@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 
 import com.cmcc.lib_network.model.FortressHomeModel;
 import com.cmcc.lib_network.model.JianDuModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.fortress.education.FortressHomeFragment;
@@ -124,7 +125,7 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
         mJianDuListFragment.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                WebViewContentActivity.start(getContext(), mJianDuModels.get(position).id, WebViewContentActivity.TYPE_FORTRESS_JIANDU);
+                WebViewContentActivity.start(getContext(), mJianDuModels.get(position).id, WebViewModel.TYPE_FORTRESS_JIANDU);
             }
         });
         
@@ -152,7 +153,7 @@ public class FortressActivity extends MVPBaseActivity<FortressContract.View, For
         mJiaoYuListFragment.setOnItemClickListener(new RUAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int itemType, int position) {
-                WebViewContentActivity.start(getContext(), mJiaoYuModels.get(position).id, WebViewContentActivity.TYPE_FORTRESS_HOME);
+                WebViewContentActivity.start(getContext(), mJiaoYuModels.get(position).id, WebViewModel.TYPE_FORTRESS_HOME);
             }
         });
         fragmentList.add(new FortressHomeFragment());

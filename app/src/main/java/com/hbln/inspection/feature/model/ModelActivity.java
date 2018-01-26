@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.cmcc.lib_network.model.ModelModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.ConvertUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
@@ -205,9 +206,13 @@ public class ModelActivity extends MVPBaseActivity<ModelContract.View, ModelPres
     @Override
     public void onItemClick(View view, int itemType, int position) {
         List<ModelModel.ModelInfo> list = mList0;
+        int type = WebViewModel.TYPE_MODEL_PRIVE;
         if (index == 1) {
             list = mList1;
+            type = WebViewModel.TYPE_MODEL_GROUP;
         }
-        ModelDetailActivity.start(getContext(), list.get(position).id, index);
+        
+        
+        ModelDetailActivity.start(getContext(), list.get(position).id, type);
     }
 }

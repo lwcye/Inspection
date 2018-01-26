@@ -3,6 +3,8 @@ package com.hbln.inspection.feature.model;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,18 +18,27 @@ import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
+import com.cmcc.lib_network.model.CommentModel;
+import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.ui.adapter.RUAdapter;
+import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.inspection.widget.DialogUtils;
 import com.hbln.inspection.widget.x5.utils.BridgeWebView;
 import com.hbln.inspection.widget.x5.x5.WebViewManager;
 import com.hbln.lib_views.BottomPopupDialog;
 import com.hbln.lib_views.DrawableCenterTextView;
+import com.hbln.lib_views.SimpleItemDecoration;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import rx.Observable;
+import rx.functions.Action1;
 
 /**
  * <p>DESCRIBE</p><br>
@@ -61,6 +72,11 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
     private Button mBtnWebviewSubmit;
     private ImageButton mIbWebviewFont;
     private ImageButton mIbWebviewShare;
+    private RecyclerView mRvWebviewComment;
+    /** 评论数据 */
+    private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
+    /** 评论适配器 */
+    private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
     
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, ModelDetailActivity.class);
@@ -74,11 +90,12 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model_detail);
         mId = getIntent().getStringExtra(INTENT_ID);
-        mType = getIntent().getIntExtra(INTENT_TYPE, 0);
+        mType = getIntent().getIntExtra(INTENT_TYPE, WebViewModel.TYPE_MODEL_PRIVE);
         
         initView();
         initView();
         loadData(mId, mType);
+        getCommentList(false);
     }
     
     private void loadData(String id, int type) {
@@ -89,7 +106,7 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         }
         showLoading("");
         Observable<WebViewModel> observable = HttpRequest.getModelService().gerenview(id);
-        if (type == 1) {
+        if (type == WebViewModel.TYPE_MODEL_GROUP) {
             observable = HttpRequest.getModelService().danweiview(id);
         }
         observable
@@ -122,6 +139,23 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
         mIbWebviewShare.setOnClickListener(this);
         
         WebViewManager.getInstance().initWebView(mWvWebview);
+        
+        mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
+        // 评论
+        mCommentAdapter = new RUAdapter<CommentModel.InfoBean>(getContext(), mCommentList, R.layout.item_comment) {
+            @Override
+            protected void onInflateData(RUViewHolder holder, CommentModel.InfoBean data, int position) {
+                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
+                holder.setText(R.id.tv_comment_name, data.name);
+                holder.setText(R.id.tv_comment_content, data.content);
+                holder.setText(R.id.tv_comment_answer_date, data.times);
+            }
+        };
+        mCommentAdapter.setDataEmptyLayoutId(0);
+        mRvWebviewComment.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvWebviewComment.setNestedScrollingEnabled(false);
+        mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
+        mRvWebviewComment.setAdapter(mCommentAdapter);
     }
     
     @Override
@@ -132,6 +166,14 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_webview_cai:
                 break;
             case R.id.btn_webview_submit:
+                CommentModel.handleComment(getBaseActivity(), mEtWebviewComment.getText().toString(), mType, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        mEtWebviewComment.setText("");
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getCommentList(true);
+                    }
+                });
                 break;
             case R.id.ib_webview_font:
                 DialogUtils.getInstance().showFont(getContext(), mWvWebview);
@@ -153,11 +195,24 @@ public class ModelDetailActivity extends BaseActivity implements View.OnClickLis
     
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
-        if (mType == 0) {
+        if (mType == WebViewModel.TYPE_MODEL_PRIVE) {
             mTvWebviewDate.setText(data.name);
         } else {
             mTvWebviewDate.setText(data.danweitwo);
         }
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
+    }
+    
+    /**
+     * 获取评论列表
+     */
+    private void getCommentList(boolean showProgress) {
+        CommentModel.getCommentList(getBaseActivity(), mType, mId, showProgress, new Action1<CommentModel>() {
+            @Override
+            public void call(CommentModel commentModel) {
+                mCommentList = commentModel.info;
+                mCommentAdapter.setData(commentModel.info);
+            }
+        });
     }
 }

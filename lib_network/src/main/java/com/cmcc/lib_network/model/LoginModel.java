@@ -75,7 +75,12 @@ public class LoginModel extends ResultModel {
                     public void result(UserInfoModel userInfoModel) {
                         userInfoAction1.call(userInfoModel.info);
                     }
-                }, new HttpError(), new HttpComplete());
+                }, new HttpError() {
+                    @Override
+                    public void error(int errorCode, String message) {
+                        userInfoAction1.call(null);
+                    }
+                }, new HttpComplete());
         }
     }
     

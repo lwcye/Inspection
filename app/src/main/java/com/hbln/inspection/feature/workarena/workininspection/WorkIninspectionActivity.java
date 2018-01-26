@@ -124,7 +124,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
                 setItemData(holder, data, position);
-                holder.setText(R.id.tv_item_work_in_type, "纪律数量");
+                holder.setText(R.id.tv_item_work_in_type, "纪律审查");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
                 WorkTypeModel.InfoBean infoBean = mList0.get(0);
                 if (data.nums > 0 && infoBean.nums > 0) {
@@ -142,7 +142,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
                 setItemData(holder, data, position);
-                holder.setText(R.id.tv_item_work_in_type, "案件数量");
+                holder.setText(R.id.tv_item_work_in_type, "信息数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
                 WorkTypeModel.InfoBean infoBean = mList1.get(0);
                 if (data.nums > 0 && infoBean.nums > 0) {

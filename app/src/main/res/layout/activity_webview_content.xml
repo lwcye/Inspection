@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical">
@@ -20,15 +21,16 @@
 			<TextView
 				android:id="@+id/tv_webview_title"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/view_height"
+				android:layout_height="wrap_content"
 				android:gravity="center"
+				android:minHeight="@dimen/view_height"
 				android:paddingBottom="@dimen/x12"
 				android:paddingLeft="@dimen/x12"
 				android:paddingRight="@dimen/x12"
 				android:paddingTop="@dimen/x12"
-				android:text="强筋骨、明纪律 铸造执纪铁军"
 				android:textColor="@color/black_title"
-				android:textSize="@dimen/t18" />
+				android:textSize="@dimen/t18"
+				tools:text="强筋骨、明纪律 铸造执纪铁军" />
 			
 			<TextView
 				android:id="@+id/tv_webview_date"
@@ -37,9 +39,9 @@
 				android:layout_marginBottom="@dimen/x12"
 				android:layout_marginLeft="@dimen/x12"
 				android:layout_marginRight="@dimen/x12"
-				android:text="2017-01-01    阅读量：1234"
 				android:textColor="@color/black_hint"
-				android:textSize="@dimen/t14" />
+				android:textSize="@dimen/t14"
+				tools:text="2017-01-01    阅读量：1234" />
 			
 			<View style="@style/view_line" />
 			
@@ -103,7 +105,11 @@
 					android:layout_marginRight="@dimen/x10"
 					android:layout_marginTop="@dimen/x10"
 					android:background="@drawable/shape_edittext"
-					android:minHeight="@dimen/x80" />
+					android:gravity="left|top"
+					android:minHeight="@dimen/x80"
+					android:padding="@dimen/x10"
+					android:textColor="@color/gray22"
+					android:textSize="@dimen/t14" />
 				
 				<Button
 					android:id="@+id/btn_webview_submit"
@@ -123,6 +129,14 @@
 					android:textColor="@color/white"
 					android:textSize="@dimen/t14" />
 			</LinearLayout>
+			
+			<View
+				style="@style/view_line" />
+			
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_webview_comment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 		</LinearLayout>
 	</ScrollView>
 	
@@ -131,8 +145,8 @@
 	<LinearLayout
 		android:id="@+id/ll_webview_font"
 		android:layout_width="match_parent"
-		android:background="@color/white"
-		android:layout_height="@dimen/view_height">
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white">
 		
 		<ImageButton
 			android:id="@+id/ib_webview_font"

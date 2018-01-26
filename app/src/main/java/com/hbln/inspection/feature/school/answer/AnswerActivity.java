@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_utils.utils.EmptyUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
-import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
@@ -364,18 +363,29 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
             mQuestionType = 3;
             resetWenDaData(mJfShiTiModel.info.wenda.get(resetIndex(mQuestionType)));
         }
+        int color = getCompatColor(R.color.gray22);
         mRbAnswer0.setChecked(false);
         mRbAnswer1.setChecked(false);
         mRbAnswer2.setChecked(false);
         mRbAnswer3.setChecked(false);
+        mRbAnswer0.setTextColor(color);
+        mRbAnswer1.setTextColor(color);
+        mRbAnswer2.setTextColor(color);
+        mRbAnswer3.setTextColor(color);
         
         mRbAnswerDuoxuan0.setChecked(false);
         mRbAnswerDuoxuan1.setChecked(false);
         mRbAnswerDuoxuan2.setChecked(false);
         mRbAnswerDuoxuan3.setChecked(false);
+        mRbAnswerDuoxuan0.setTextColor(color);
+        mRbAnswerDuoxuan1.setTextColor(color);
+        mRbAnswerDuoxuan2.setTextColor(color);
+        mRbAnswerDuoxuan3.setTextColor(color);
         
         mRbAnswerPanduan0.setChecked(false);
         mRbAnswerPanduan1.setChecked(false);
+        mRbAnswerPanduan0.setTextColor(color);
+        mRbAnswerPanduan1.setTextColor(color);
         
         mEtAnswerWanda.setText("");
     }
@@ -472,7 +482,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         int panduannums = TextUtils.isEmpty(mJfShiTiModel.info.panduannums) ? 0 : Integer.valueOf(mJfShiTiModel.info.panduannums);
         int wendannums = TextUtils.isEmpty(mJfShiTiModel.info.wendannums) ? 0 : Integer.valueOf(mJfShiTiModel.info.wendannums);
         count = duannums + duonums + panduannums + wendannums;
-        mTvAnswerDate.setText(TimeUtils.millis2String(Long.valueOf(mJfShiTiModel.info.create_time) * 1000, "yyyy-MM-dd") + "\t\t"
+        mTvAnswerDate.setText(mJfShiTiModel.info.times + "\t\t"
             + "答题量：共" + count + "题");
         if (!EmptyUtils.isEmpty(mJfShiTiModel.info.danxuan)) {
             nums += mJfShiTiModel.info.danxuan.size();

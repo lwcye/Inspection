@@ -37,12 +37,12 @@
 				<TextView
 					android:id="@+id/tv_webview_date"
 					android:layout_width="wrap_content"
-					android:paddingBottom="@dimen/x3"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal"
 					android:layout_marginTop="@dimen/x20"
 					android:background="@drawable/img_model_detail_name"
 					android:gravity="center"
+					android:paddingBottom="@dimen/x3"
 					android:text="场小学"
 					android:textColor="@color/white"
 					android:textSize="@dimen/t12" />
@@ -108,7 +108,11 @@
 					android:layout_marginRight="@dimen/x10"
 					android:layout_marginTop="@dimen/x10"
 					android:background="@drawable/shape_edittext"
-					android:minHeight="@dimen/x80" />
+					android:gravity="left|top"
+					android:minHeight="@dimen/x80"
+					android:padding="@dimen/x10"
+					android:textColor="@color/gray22"
+					android:textSize="@dimen/t14" />
 				
 				<Button
 					android:id="@+id/btn_webview_submit"
@@ -128,6 +132,14 @@
 					android:textColor="@color/white"
 					android:textSize="@dimen/t14" />
 			</LinearLayout>
+			
+			<View
+				style="@style/view_line" />
+			
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_webview_comment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
 		</LinearLayout>
 	</ScrollView>
 	
@@ -136,8 +148,8 @@
 	<LinearLayout
 		android:id="@+id/ll_webview_font"
 		android:layout_width="match_parent"
-		android:background="@color/white"
-		android:layout_height="@dimen/view_height">
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white">
 		
 		<ImageButton
 			android:id="@+id/ib_webview_font"

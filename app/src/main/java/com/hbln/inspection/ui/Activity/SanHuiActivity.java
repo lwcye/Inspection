@@ -16,6 +16,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.FortressHomeModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
@@ -210,13 +211,13 @@ public class SanHuiActivity extends BaseActivity implements RUAdapter.OnItemClic
     @Override
     public void onItemClick(View view, int itemType, int position) {
         if (mViewPager.getCurrentItem() == 0) {
-            WebViewContentActivity.start(getContext(), mList0.get(position).id, WebViewContentActivity.TYPE_FORTRESS_SAN_HUI);
+            WebViewContentActivity.start(getContext(), mList0.get(position).id, WebViewModel.TYPE_FORTRESS_SAN_HUI);
         } else if (mViewPager.getCurrentItem() == 1) {
-            WebViewContentActivity.start(getContext(), mList1.get(position).id, WebViewContentActivity.TYPE_FORTRESS_SAN_HUI);
+            WebViewContentActivity.start(getContext(), mList1.get(position).id, WebViewModel.TYPE_FORTRESS_SAN_HUI);
         } else if (mViewPager.getCurrentItem() == 2) {
-            WebViewContentActivity.start(getContext(), mList2.get(position).id, WebViewContentActivity.TYPE_FORTRESS_SAN_HUI);
+            WebViewContentActivity.start(getContext(), mList2.get(position).id, WebViewModel.TYPE_FORTRESS_SAN_HUI);
         } else {
-            WebViewContentActivity.start(getContext(), mList3.get(position).id, WebViewContentActivity.TYPE_FORTRESS_SAN_HUI);
+            WebViewContentActivity.start(getContext(), mList3.get(position).id, WebViewModel.TYPE_FORTRESS_SAN_HUI);
         }
     }
 }

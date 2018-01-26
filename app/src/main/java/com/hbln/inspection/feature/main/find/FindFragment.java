@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hbln.inspection.R;
-import com.hbln.inspection.feature.school.detail.SchoolDetailActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
@@ -73,6 +72,5 @@ public class FindFragment extends MVPBaseFragment<FindContract.View, FindPresent
     
     @Override
     public void onItemClick(View view, int itemType, int position) {
-        SchoolDetailActivity.start(getContext(), "" + position);
     }
 }

@@ -19,6 +19,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.FortressHomeModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
@@ -150,9 +151,9 @@ public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickL
     @Override
     public void onItemClick(View view, int itemType, int position) {
         if (mType == TYPE_WENTI || mType == TYPE_DANG_FEI) {
-            WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewContentActivity.TYPE_FORTRESS_HOME);
+            WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewModel.TYPE_FORTRESS_HOME);
         } else {
-            WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewContentActivity.TYPE_FORTRESS_QUN_ZHONG);
+            WebViewContentActivity.start(getContext(), mList.get(position).id, WebViewModel.TYPE_FORTRESS_QUN_ZHONG);
         }
     }
 }

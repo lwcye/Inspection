@@ -101,13 +101,13 @@ public class TiHuiActivity extends BaseActivity implements View.OnClickListener 
 
         WebViewManager.getInstance().initWebView(mWvWebview);
 
-        mAdapter = new RUAdapter<TiHuiModel.InfoBean.InfosBean>(getContext(), mList, R.layout.item_tihui) {
+        mAdapter = new RUAdapter<TiHuiModel.InfoBean.InfosBean>(getContext(), mList, R.layout.item_comment) {
             @Override
             protected void onInflateData(RUViewHolder holder, TiHuiModel.InfoBean.InfosBean data, int position) {
-                holder.setImageNetCircle(R.id.iv_tihui_item, data.pic);
-                holder.setText(R.id.tv_tihui_name, data.name);
-                holder.setText(R.id.tv_tihui_content, data.content);
-                holder.setText(R.id.tv_tihui_answer_date, TimeUtils.millis2String(Long.valueOf(data.create_time) * 1000, "yyyy-MM-dd"));
+                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
+                holder.setText(R.id.tv_comment_name, data.name);
+                holder.setText(R.id.tv_comment_content, data.content);
+                holder.setText(R.id.tv_comment_answer_date, TimeUtils.millis2String(Long.valueOf(data.create_time) * 1000, "yyyy-MM-dd"));
             }
         };
         mRvTihui.setLayoutManager(new LinearLayoutManager(getContext()));

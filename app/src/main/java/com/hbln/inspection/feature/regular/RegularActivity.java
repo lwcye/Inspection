@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.cmcc.lib_network.model.RegularModel;
+import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.main.MainActivity;
@@ -322,7 +323,7 @@ public class RegularActivity extends MVPBaseActivity<RegularContract.View, Regul
                 list = mList3;
                 break;
         }
-        WebViewContentActivity.start(getContext(), list.get(position).id, WebViewContentActivity.TYPE_REGULAR);
+        WebViewContentActivity.start(getContext(), list.get(position).id, WebViewModel.TYPE_REGULAR);
         WebViewContentActivity.hasComment = false;
         WebViewContentActivity.hasZan = false;
     }

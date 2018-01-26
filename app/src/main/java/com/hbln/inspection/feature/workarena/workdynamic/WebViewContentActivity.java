@@ -3,6 +3,8 @@ package com.hbln.inspection.feature.workarena.workdynamic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,20 +19,29 @@ import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
+import com.cmcc.lib_network.model.CommentModel;
+import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.ui.adapter.RUAdapter;
+import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.inspection.widget.DialogUtils;
 import com.hbln.inspection.widget.x5.utils.BridgeWebView;
 import com.hbln.inspection.widget.x5.x5.WebViewManager;
 import com.hbln.lib_views.BottomPopupDialog;
 import com.hbln.lib_views.DrawableCenterTextView;
+import com.hbln.lib_views.SimpleItemDecoration;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import rx.Observable;
+import rx.functions.Action1;
 
 /**
  * <p>DESCRIBE</p><br>
@@ -46,14 +57,6 @@ import rx.Observable;
 public class WebViewContentActivity extends BaseActivity implements View.OnClickListener {
     public static final String INTENT_ID = "ID";
     public static final String INTENT_TYPE = "type";
-    public static final int TYPE_SCHOOL = 0;
-    public static final int TYPE_WORK = 1;
-    public static final int TYPE_REGULAR = 2;
-    public static final int TYPE_FORTRESS_JIANDU = 3;
-    public static final int TYPE_FORTRESS_HOME = 4;
-    public static final int TYPE_FORTRESS_QUN_ZHONG = 5;
-    public static final int TYPE_FORTRESS_SAN_HUI = 6;
-    public static final int TYPE_BRAND_WAIXUAN = 7;
     public static boolean hasComment = true;
     public static boolean hasZan = true;
     public static boolean hasFont = true;
@@ -77,6 +80,12 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     private LinearLayout mLlWebviewZan;
     private LinearLayout mLlWebviewComment;
     private LinearLayout mLlWebviewFont;
+    /** 评论列表 */
+    private RecyclerView mRvWebviewComment;
+    /** 评论数据 */
+    private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
+    /** 评论适配器 */
+    private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
     
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, WebViewContentActivity.class);
@@ -94,6 +103,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         
         initView();
         loadData(mId, mType);
+        getCommentList(false);
     }
     
     @Override
@@ -113,21 +123,21 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         showLoading("");
         Observable<WebViewModel> observable = HttpRequest.getWorkService().jobdongtaiview(id);
         LogUtils.e(type);
-        if (type == TYPE_SCHOOL) {
+        if (type == WebViewModel.TYPE_SCHOOL) {
+            observable = HttpRequest.getShcoolService().jiangtangview(id);
+        } else if (type == WebViewModel.TYPE_WORK) {
             observable = HttpRequest.getWorkService().jobdongtaiview(id);
-        } else if (type == TYPE_WORK) {
-            observable = HttpRequest.getWorkService().jobdongtaiview(id);
-        } else if (type == TYPE_REGULAR) {
+        } else if (type == WebViewModel.TYPE_REGULAR) {
             observable = HttpRequest.getRegularService().zdview(id);
-        } else if (type == TYPE_FORTRESS_HOME) {
+        } else if (type == WebViewModel.TYPE_FORTRESS_HOME) {
             observable = HttpRequest.getFortressService().zhuzhiview(id);
-        } else if (type == TYPE_FORTRESS_QUN_ZHONG) {
+        } else if (type == WebViewModel.TYPE_FORTRESS_QUN_ZHONG) {
             observable = HttpRequest.getFortressService().qzgzview(id);
-        } else if (type == TYPE_FORTRESS_JIANDU) {
+        } else if (type == WebViewModel.TYPE_FORTRESS_JIANDU) {
             observable = HttpRequest.getFortressService().dangyuanjianduview(id);
-        } else if (type == TYPE_FORTRESS_SAN_HUI) {
+        } else if (type == WebViewModel.TYPE_FORTRESS_SAN_HUI) {
             observable = HttpRequest.getFortressService().sanhuiyikeview(id);
-        } else if (type == TYPE_BRAND_WAIXUAN) {
+        } else if (type == WebViewModel.TYPE_BRAND_WAIXUAN) {
             observable = HttpRequest.getBrandService().waixuanview(id);
         }
         observable
@@ -162,6 +172,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mLlWebviewZan = (LinearLayout) findViewById(R.id.ll_webview_zan);
         mLlWebviewComment = (LinearLayout) findViewById(R.id.ll_webview_comment);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
+        mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
         
         if (hasZan) {
             mLlWebviewZan.setVisibility(View.VISIBLE);
@@ -180,6 +191,23 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         }
         
         WebViewManager.getInstance().initWebView(mWvWebview);
+        
+        // 评论
+        mCommentAdapter = new RUAdapter<CommentModel.InfoBean>(getContext(), mCommentList, R.layout.item_comment) {
+            @Override
+            protected void onInflateData(RUViewHolder holder, CommentModel.InfoBean data, int position) {
+                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
+                holder.setText(R.id.tv_comment_name, data.name);
+                holder.setText(R.id.tv_comment_content, data.content);
+                holder.setText(R.id.tv_comment_answer_date, data.times);
+            }
+        };
+        mCommentAdapter.setDataEmptyLayoutId(0);
+        mRvWebviewComment.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvWebviewComment.setNestedScrollingEnabled(false);
+        mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
+        mRvWebviewComment.setAdapter(mCommentAdapter);
+        
     }
     
     @Override
@@ -190,6 +218,14 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
             case R.id.tv_webview_cai:
                 break;
             case R.id.btn_webview_submit:
+                CommentModel.handleComment(getBaseActivity(), mEtWebviewComment.getText().toString(), mType, mId, new Action1<ObjectModel>() {
+                    @Override
+                    public void call(ObjectModel objectModel) {
+                        mEtWebviewComment.setText("");
+                        ToastUtils.showShortToastSafe(objectModel.info.toString());
+                        getCommentList(true);
+                    }
+                });
                 break;
             case R.id.ib_webview_font:
                 DialogUtils.getInstance().showFont(getContext(), mWvWebview);
@@ -223,6 +259,18 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         }
         mTvWebviewDate.setText(times + "\t\t" + "阅读量：" + data.nums);
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
-//        mWvWebview.loadData(data.content, "text/html;charset=UTF-8", null);
+    }
+    
+    /**
+     * 获取评论列表
+     */
+    private void getCommentList(boolean showProgress) {
+        CommentModel.getCommentList(getBaseActivity(), mType, mId, showProgress, new Action1<CommentModel>() {
+            @Override
+            public void call(CommentModel commentModel) {
+                mCommentList = commentModel.info;
+                mCommentAdapter.setData(commentModel.info);
+            }
+        });
     }
 }
