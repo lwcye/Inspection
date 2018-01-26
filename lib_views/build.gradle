@@ -25,5 +25,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     // 沉浸式状态栏(status bar util)
     compile 'com.jaeger.statusbaruitl:library:1.3.5'
+    // 代码家的滑动控件
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+
     compile project(':lib_utils')
 }

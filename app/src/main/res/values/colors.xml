@@ -3,6 +3,7 @@
 	<color name="colorPrimary">#3F51B5</color>
 	<color name="colorPrimaryDark">#303F9F</color>
 	<color name="colorAccent">#0066FF</color>
+	<color name="delete_bg">#ff4954</color>
 	<color name="colorAccentRed">#E51E23</color>
 	<color name="colorAccentRedDeep">#9A2C2B</color>
 </resources>

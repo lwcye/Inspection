@@ -22,7 +22,11 @@ public class WorkTypeModel extends ResultModel {
             InfoBean infoBean = info.get(i);
             for (InfoBean bean : sinfo) {
                 if (bean.dwid.equals(infoBean.dwid)) {
-                    infoBean.diff = bean.paiming - infoBean.paiming;
+                    if (bean.paiming <= 0 || infoBean.paiming <= 0) {
+                        infoBean.diff = 0;
+                    } else {
+                        infoBean.diff = bean.paiming - infoBean.paiming;
+                    }
                     break;
                 }
             }

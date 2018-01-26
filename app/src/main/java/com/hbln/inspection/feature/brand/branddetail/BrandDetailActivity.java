@@ -79,7 +79,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
     private ImageView mImageView;
     private ImageView mIvBrandDetailFenguan;
     private TextView mTvBrandDetailFenguan;
-    
+
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean> mList = new ArrayList<>();
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean.ChengBan> mList0 = new ArrayList<>();
     private List<BrandDetailModel.InfoBean.ChengbankeshiBean.ChengBan> mList1 = new ArrayList<>();
@@ -91,39 +91,39 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
     private RelativeLayout mRlBrandDetailWaixuan;
     private List<BrandDetailModel.InfoBean.WaiXuanGaoJian> mWaiXuanGaoJianList = new ArrayList<>();
     private RUAdapter<BrandDetailModel.InfoBean.WaiXuanGaoJian> mWaiXuanGaoJianRUAdapter;
-    
+
     /** 评论数据 */
     private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
     /** 评论适配器 */
     private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
     private RecyclerView mRvWebviewComment;
-    
+
     public static void start(Context context, String id) {
         Intent starter = new Intent(context, BrandDetailActivity.class);
         starter.putExtra(INTENT_ID, id);
         context.startActivity(starter);
     }
-    
+
     @Override
     protected BrandDetailPresenter createPresenter() {
         return new BrandDetailPresenter();
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_detail);
         mId = getIntent().getStringExtra(INTENT_ID);
-        
+
         initView();
-        
+
         mPresenter.loadDetail(mId);
         getCommentList(false);
     }
-    
+
     private void initView() {
         TitleUtil.attach(this)
-            .setBack(true);
+                .setBack(true);
         mTvBrandDetail = (TextView) findViewById(R.id.tv_brand_detail);
         mIvBrandDetail = (ImageView) findViewById(R.id.iv_brand_detail);
         mWvBrandDetail = (BridgeWebView) findViewById(R.id.wv_brand_detail);
@@ -149,12 +149,12 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
-        
+
         WebViewManager.getInstance().initWebView(mWvBrandDetail);
-        
+
         initRecylerView();
     }
-    
+
     private void initRecylerView() {
         mAdapter = new RUAdapter<BrandDetailModel.InfoBean.ChengbankeshiBean>(getContext(), mList, R.layout.item_brand_detail_chengban_group) {
             @Override
@@ -195,11 +195,11 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
                 recyclerView.setAdapter(mAdapter0);
             }
         };
-        
+
         mRvBrandDetail.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvBrandDetail.setNestedScrollingEnabled(false);
         mRvBrandDetail.setAdapter(mAdapter);
-        
+
         mWaiXuanGaoJianRUAdapter = new RUAdapter<BrandDetailModel.InfoBean.WaiXuanGaoJian>(getContext(), mWaiXuanGaoJianList, R.layout.item_brand_waixuan) {
             @Override
             protected void onInflateData(RUViewHolder holder, BrandDetailModel.InfoBean.WaiXuanGaoJian data, int position) {
@@ -216,25 +216,24 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
         mRvBrandDetailWaixuan.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRvBrandDetailWaixuan.setNestedScrollingEnabled(false);
         mRvBrandDetailWaixuan.setAdapter(mWaiXuanGaoJianRUAdapter);
-        
+
         // 评论
         mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
-        mCommentAdapter = new RUAdapter<CommentModel.InfoBean>(getContext(), mCommentList, R.layout.item_comment) {
+        // 评论
+        mCommentAdapter = WebViewContentActivity.initCommentAdapter(getBaseActivity(), mCommentList, new Action1<ObjectModel>() {
             @Override
-            protected void onInflateData(RUViewHolder holder, CommentModel.InfoBean data, int position) {
-                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
-                holder.setText(R.id.tv_comment_name, data.name);
-                holder.setText(R.id.tv_comment_content, data.content);
-                holder.setText(R.id.tv_comment_answer_date, data.times);
+            public void call(ObjectModel objectModel) {
+                ToastUtils.showShortToastSafe(objectModel.info.toString());
+                getCommentList(true);
             }
-        };
+        });
         mCommentAdapter.setDataEmptyLayoutId(0);
         mRvWebviewComment.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvWebviewComment.setNestedScrollingEnabled(false);
         mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
         mRvWebviewComment.setAdapter(mCommentAdapter);
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -267,7 +266,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
                 break;
         }
     }
-    
+
     @Override
     public void setDetail(BrandDetailModel detailModel) {
         mTvBrandDetail.setText(detailModel.info.title);
@@ -278,7 +277,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             LoaderFactory.getLoader().loadNet(mIvBrandDetail, detailModel.info.pic);
         }
         mWvBrandDetail.loadDataWithBaseURL(null, detailModel.info.jianjie.content, "text/html", "utf-8", null);
-        
+
         if (detailModel.info.waixuangaojian != null && detailModel.info.waixuangaojian.size() > 0) {
             mLlBrandDetailWaixuan.setVisibility(View.VISIBLE);
             mRvBrandDetailWaixuan.setVisibility(View.VISIBLE);
@@ -290,11 +289,11 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             mRvBrandDetailWaixuan.setVisibility(View.GONE);
             mRlBrandDetailWaixuan.setVisibility(View.GONE);
         }
-        
+
         LoaderFactory.getLoader().loadNet(mIvBrandDetailFenguan, detailModel.info.fenguanlingdao.pic);
         mTvBrandDetailFenguan.setText(detailModel.info.fenguanlingdao.name);
-        
-        
+
+
         if (detailModel.info.chengbankeshi == null || detailModel.info.chengbankeshi.size() == 0) {
             mRlBrandDetail0.setVisibility(View.GONE);
             mRlBrandDetail1.setVisibility(View.GONE);
@@ -303,7 +302,7 @@ public class BrandDetailActivity extends MVPBaseActivity<BrandDetailContract.Vie
             mAdapter.setData(mList);
         }
     }
-    
+
     /**
      * 获取评论列表
      */

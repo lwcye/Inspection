@@ -33,7 +33,7 @@ public class MyApplication extends BaseApp {
         initLog();
         initX5WebView();
         SDKInitializer.initialize(getApplicationContext());
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE,null);
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
         UMConfigure.setLogEnabled(true);
 
         // 文件下载器
@@ -45,6 +45,7 @@ public class MyApplication extends BaseApp {
                         .proxy(Proxy.NO_PROXY)
                 )));
     }
+
     /**
      * 初始化X5内核
      */
@@ -66,16 +67,18 @@ public class MyApplication extends BaseApp {
         //x5内核初始化接口
         QbSdk.initX5Environment(getApplicationContext(), cb);
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
     /**
      * Log的初始化
      */
     private void initLog() {
-        // TODO: lwc 2017/12/15
-        LogUtils.init(true, false, 'v', "lwc");
+        //TODO: lwc 2017/12/15
+        LogUtils.init(false, false, 'v', "lwc");
     }
 }

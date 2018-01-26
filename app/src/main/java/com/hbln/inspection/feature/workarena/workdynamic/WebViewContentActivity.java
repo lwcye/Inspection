@@ -3,6 +3,7 @@ package com.hbln.inspection.feature.workarena.workdynamic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,11 +21,14 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.CommentModel;
+import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.ObjectModel;
+import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
+import com.daimajia.swipe.SwipeLayout;
 import com.hbln.inspection.R;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
@@ -86,26 +90,62 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
     private List<CommentModel.InfoBean> mCommentList = new ArrayList<>();
     /** 评论适配器 */
     private RUAdapter<CommentModel.InfoBean> mCommentAdapter;
-    
+
     public static void start(Context context, String id, int type) {
         Intent starter = new Intent(context, WebViewContentActivity.class);
         starter.putExtra(INTENT_ID, id);
         starter.putExtra(INTENT_TYPE, type);
         context.startActivity(starter);
     }
-    
+
+    /**
+     * 获得评论的Adapter
+     *
+     * @return 评论的Adapter
+     */
+    @NonNull
+    public static RUAdapter<CommentModel.InfoBean> initCommentAdapter(final BaseActivity baseActivity, List<CommentModel.InfoBean> commentList, final Action1<ObjectModel> action1) {
+        return new RUAdapter<CommentModel.InfoBean>(baseActivity, commentList, R.layout.item_comment) {
+            @Override
+            protected void onInflateData(final RUViewHolder holder, final CommentModel.InfoBean data, int position) {
+                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
+                holder.setText(R.id.tv_comment_name, data.name);
+                holder.setText(R.id.tv_comment_content, data.content);
+                holder.setText(R.id.tv_comment_answer_date, data.times);
+
+                LoginModel.getUserInfo(new Action1<UserInfoModel.UserInfo>() {
+                    @Override
+                    public void call(UserInfoModel.UserInfo userInfo) {
+                        SwipeLayout swipeLayout = holder.getViewById(R.id.swipe_item_webview);
+                        if (userInfo != null) {
+                            swipeLayout.setSwipeEnabled(userInfo.sfid.equals(data.sfid));
+                            holder.setOnClickListener(R.id.tv_item_webview_delete, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    CommentModel.removeComment(baseActivity, data.id, action1);
+                                }
+                            });
+                        } else {
+                            swipeLayout.setSwipeEnabled(false);
+                        }
+                    }
+                });
+            }
+        };
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_content);
         mId = getIntent().getStringExtra(INTENT_ID);
         mType = getIntent().getIntExtra(INTENT_TYPE, 0);
-        
+
         initView();
         loadData(mId, mType);
         getCommentList(false);
     }
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -113,7 +153,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         hasZan = true;
         hasFont = true;
     }
-    
+
     private void loadData(String id, int type) {
         if (TextUtils.isEmpty(id)) {
             ToastUtils.showShortToastSafe("数据读取错误");
@@ -141,19 +181,19 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
             observable = HttpRequest.getBrandService().waixuanview(id);
         }
         observable
-            .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
-            .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
-            .subscribe(new HttpResult<WebViewModel>() {
-                @Override
-                public void result(WebViewModel webViewModel) {
-                    setData(webViewModel.info);
-                }
-            }, new HttpError(this), new HttpComplete(this));
+                .compose(NetWorkInterceptor.<WebViewModel>retrySessionCreator())
+                .compose(getBaseActivity().<WebViewModel>applySchedulers(ActivityEvent.DESTROY))
+                .subscribe(new HttpResult<WebViewModel>() {
+                    @Override
+                    public void result(WebViewModel webViewModel) {
+                        setData(webViewModel.info);
+                    }
+                }, new HttpError(this), new HttpComplete(this));
     }
-    
+
     private void initView() {
         TitleUtil.attach(this)
-            .setBack(true);
+                .setBack(true);
         mTvWebviewTitle = (TextView) findViewById(R.id.tv_webview_title);
         mTvWebviewDate = (TextView) findViewById(R.id.tv_webview_date);
         mWvWebview = (BridgeWebView) findViewById(R.id.wv_webview);
@@ -168,12 +208,12 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mIbWebviewFont.setOnClickListener(this);
         mIbWebviewShare = (ImageButton) findViewById(R.id.ib_webview_share);
         mIbWebviewShare.setOnClickListener(this);
-        
+
         mLlWebviewZan = (LinearLayout) findViewById(R.id.ll_webview_zan);
         mLlWebviewComment = (LinearLayout) findViewById(R.id.ll_webview_comment);
         mLlWebviewFont = (LinearLayout) findViewById(R.id.ll_webview_font);
         mRvWebviewComment = (RecyclerView) findViewById(R.id.rv_webview_comment);
-        
+
         if (hasZan) {
             mLlWebviewZan.setVisibility(View.VISIBLE);
         } else {
@@ -189,27 +229,25 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         } else {
             mLlWebviewFont.setVisibility(View.GONE);
         }
-        
+
         WebViewManager.getInstance().initWebView(mWvWebview);
-        
+
         // 评论
-        mCommentAdapter = new RUAdapter<CommentModel.InfoBean>(getContext(), mCommentList, R.layout.item_comment) {
+        mCommentAdapter = initCommentAdapter(getBaseActivity(), mCommentList, new Action1<ObjectModel>() {
             @Override
-            protected void onInflateData(RUViewHolder holder, CommentModel.InfoBean data, int position) {
-                holder.setImageNetCircle(R.id.iv_comment_item, data.pic);
-                holder.setText(R.id.tv_comment_name, data.name);
-                holder.setText(R.id.tv_comment_content, data.content);
-                holder.setText(R.id.tv_comment_answer_date, data.times);
+            public void call(ObjectModel objectModel) {
+                ToastUtils.showShortToastSafe(objectModel.info.toString());
+                getCommentList(true);
             }
-        };
+        });
         mCommentAdapter.setDataEmptyLayoutId(0);
         mRvWebviewComment.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvWebviewComment.setNestedScrollingEnabled(false);
         mRvWebviewComment.addItemDecoration(new SimpleItemDecoration(getContext(), SimpleItemDecoration.VERTICAL_LIST));
         mRvWebviewComment.setAdapter(mCommentAdapter);
-        
+
     }
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -244,7 +282,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
-    
+
     public void setData(WebViewModel.WebViewInfo data) {
         mTvWebviewTitle.setText(data.title);
         String times;
@@ -260,7 +298,7 @@ public class WebViewContentActivity extends BaseActivity implements View.OnClick
         mTvWebviewDate.setText(times + "\t\t" + "阅读量：" + data.nums);
         mWvWebview.loadDataWithBaseURL(null, data.content, "text/html", "utf-8", null);
     }
-    
+
     /**
      * 获取评论列表
      */

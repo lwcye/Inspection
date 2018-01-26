@@ -60,11 +60,18 @@ android {
         }
     }
 }
+// 时间
+def releaseTime = getReleaseTime()
+// 生成编译时间
+static def getReleaseTime() {
+    def timestamp = new Date().format("yyyyMMddHH", TimeZone.getTimeZone("GMT+8"))
+    return timestamp
+}
 
-//android.applicationVariants.all { variant ->
-//    def file = variant.outputs[0].outputFile
-//    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+8")) + "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
-//}
+android.applicationVariants.all { variant ->
+    def file = variant.outputs[0].outputFile
+    variant.outputs[0].outputFile = new File(file.parent, file.name.replace(".apk", "-" + releaseTime + "-" + android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode + ".apk"))
+}
 
 /******************** 方法超65535 ********************/
 afterEvaluate {
