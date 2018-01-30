@@ -1,5 +1,6 @@
 package com.cmcc.lib_network.service;
 
+import com.cmcc.lib_network.model.ModelAwardModel;
 import com.cmcc.lib_network.model.ModelModel;
 import com.cmcc.lib_network.model.WebViewModel;
 
@@ -23,20 +24,32 @@ public interface ModelService {
     @POST("public/api/biaozhang/gereninfo")
     Observable<ModelModel> gereninfo(
     );
-    
+
     @FormUrlEncoded
     @POST("public/api/biaozhang/gerenview")
     Observable<WebViewModel> gerenview(
-        @Field("id") String id
+            @Field("id") String id
     );
-    
+
     @FormUrlEncoded
     @POST("public/api/biaozhang/danweiview")
     Observable<WebViewModel> danweiview(
-        @Field("id") String id
+            @Field("id") String id
     );
-    
+
     @POST("public/api/biaozhang/danweiinfo")
     Observable<ModelModel> danweiinfo(
+    );
+
+    @FormUrlEncoded
+    @POST("public/api/biaozhang/biaozhanggerenshiji")
+    Observable<ModelAwardModel> biaozhanggerenshiji(
+            @Field("sxid") String sxid
+    );
+
+    @FormUrlEncoded
+    @POST("public/api/biaozhang/biaozhangdanweishiji")
+    Observable<ModelAwardModel> biaozhangdanweishiji(
+            @Field("sxid") String sxid
     );
 }

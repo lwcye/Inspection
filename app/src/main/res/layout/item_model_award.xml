@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="@dimen/x12">
+
+    <TextView
+        android:id="@+id/tv_item_model_award_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/gray26"
+        android:textSize="@dimen/t14"
+        tools:text="2018年1月11日"/>
+
+    <TextView
+        android:id="@+id/tv_item_model_award_contnet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:textColor="@color/gray26"
+        android:textSize="@dimen/t14"
+        tools:text="2016年度优秀纪检监察干部"/>
+</LinearLayout>

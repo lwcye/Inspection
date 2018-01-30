@@ -58,5 +58,6 @@ public class WebViewModel extends ResultModel {
         public String name;
         public Object fujian;
         public String zhiwu;
+        public String geshiji;
     }
 }
