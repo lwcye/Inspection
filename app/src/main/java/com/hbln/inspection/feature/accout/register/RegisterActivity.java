@@ -115,13 +115,22 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
                         new Action0() {
                             @Override
                             public void call() {
+                                String dwid = "";
+                                if (mInfoBean1 != null) {
+                                    dwid = mInfoBean1.id;
+                                } else if (mInfoBean0 != null) {
+                                    dwid = mInfoBean0.id;
+                                } else {
+                                    ToastUtils.showShortToastSafe("请选择单位");
+                                    return;
+                                }
                                 mPresenter.requestRegist(mEtRegistPhone.getText().toString().trim(),
                                         mEtRegistPassword.getText().toString().trim(),
                                         mEtRegistRepassword.getText().toString().trim(),
                                         "",
                                         mEtRegistName.getText().toString().trim(),
                                         mEtRegistSfid.getText().toString().trim(),
-                                        mInfoBean1.id,
+                                        dwid,
                                         URLs.HTTP_TOKEN);
                             }
                         });

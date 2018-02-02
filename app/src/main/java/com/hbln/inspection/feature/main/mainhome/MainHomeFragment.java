@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
+import com.cmcc.lib_common.utils.loader.LoaderFactory;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_network.model.UserInfoModel;
 import com.hbln.inspection.R;
@@ -24,6 +25,7 @@ import com.hbln.inspection.mvp.MVPBaseFragment;
 import com.hbln.inspection.utils.BaiduMapUtils;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.inspection.widget.BeiZhuDialog;
+import com.hbln.lib_views.CircularImageView;
 import com.hbln.lib_views.DrawableCenterTextView;
 
 import rx.functions.Action1;
@@ -54,7 +56,9 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     private TextView mTvHomeDw;
     private TextView mTvHomeMobile;
     private ImageView mIvHomeSign;
-    
+    private CircularImageView mCivUserImage;
+    private BeiZhuDialog mBeiZhuDialog;
+
     /**
      * 创建Fragment实体
      *
@@ -63,23 +67,23 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
     public static MainHomeFragment newInstance() {
         return new MainHomeFragment();
     }
-    
+
     @Override
     protected MainHomePresenter createPresenter() {
         return new MainHomePresenter();
     }
-    
+
     @Override
     public void initData() {
         BaiduMapUtils.getInstance().beginLocation(null, true, new BaiduMapUtils.OnLocationListener() {
             @Override
             public void locationListener(BDLocation location) {
                 TitleUtil.attach(getView())
-                    .setLeft(location.getDistrict());
+                        .setLeft(location.getDistrict());
             }
         });
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
@@ -89,20 +93,27 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 mTvHomeNickname.setText(userInfo.nickname);
                 mTvHomeDw.setText(userInfo.danwei);
                 mTvHomeMobile.setText(userInfo.mobile);
+                if (userInfo.sfid.length() > 2) {
+                    String substring = userInfo.sfid.substring(userInfo.sfid.length() - 2, userInfo.sfid.length() - 1);
+                    if (Integer.valueOf(substring) % 2 == 0) {
+                        LoaderFactory.getLoader().loadResource(mCivUserImage, R.drawable.icon_default_famale);
+                    } else {
+                        LoaderFactory.getLoader().loadResource(mCivUserImage, R.drawable.icon_default_male);
+                    }
+                }
             }
         });
     }
-    
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
     }
-    
-    private BeiZhuDialog mBeiZhuDialog;
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            /* 20180130 签到去掉
             case R.id.iv_home_sign:
                 //签到
                 if (mBeiZhuDialog == null) {
@@ -116,6 +127,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 });
                 mBeiZhuDialog.show();
                 break;
+                */
             case R.id.tv_home_tab_work_arena:
                 //工作擂台
                 WorkArenaActivity.start(getBaseActivity());
@@ -164,16 +176,16 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
                 break;
         }
     }
-    
+
     @Override
     public void initView(View view) {
         TitleUtil.attach(view)
-            .setLeft("贾汪区").setLeftColor(Color.WHITE)
-            .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
-            .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
-            .setColor(R.color.white, 0)
-            .setShadow(false);
-        
+                .setLeft("贾汪区").setLeftColor(Color.WHITE)
+                .setLeftDrawable(R.drawable.ic_location, 0, 0, 0)
+                .setRightDrawable(R.drawable.ic_qrcode, 0, 0, 0)
+                .setColor(R.color.white, 0)
+                .setShadow(false);
+
         mTvHomeTabWorkArena = (DrawableCenterTextView) view.findViewById(R.id.tv_home_tab_work_arena);
         mTvHomeTabWorkArena.setOnClickListener(this);
         mTvHomeNickname = (TextView) view.findViewById(R.id.tv_home_nickname);
@@ -194,6 +206,7 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         view.findViewById(R.id.tv_home_school_left).setOnClickListener(this);
         view.findViewById(R.id.tv_home_school_right).setOnClickListener(this);
         view.findViewById(R.id.tv_home_track).setOnClickListener(this);
-        view.findViewById(R.id.iv_home_sign).setOnClickListener(this);
+//        view.findViewById(R.id.iv_home_sign).setOnClickListener(this);
+        mCivUserImage = (CircularImageView) view.findViewById(R.id.civ_user_image);
     }
 }
