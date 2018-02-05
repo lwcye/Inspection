@@ -1,230 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
-    <include layout="@layout/title_bar"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x100"
-                android:background="@drawable/img_model_top_bg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_webview_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/x25"
-                    android:gravity="center"
-                    android:maxWidth="@dimen/x280"
-                    android:text="2016年个人总结"
-                    android:textColor="@color/colorAccentRedDeep"
-                    android:textSize="@dimen/t18"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/tv_webview_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/x20"
-                    android:background="@drawable/img_model_detail_name"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/x3"
-                    android:text="场小学"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/t12"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_brand_detail_geren_shiji"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/x10"
-                android:adjustViewBounds="true"
-                android:background="@drawable/img_brand_detail_title"
-                android:gravity="center"
-                android:text="个人实绩"
-                android:textColor="@color/white"
-                android:textSize="@dimen/t16"
-                android:textStyle="bold"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/wv_geren_shiji"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black_title"
-                android:textSize="@dimen/t14"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/tv_brand_detail_award"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/x10"
-                android:adjustViewBounds="true"
-                android:background="@drawable/img_brand_detail_title"
-                android:gravity="center"
-                android:text="获奖情况"
-                android:textColor="@color/white"
-                android:textSize="@dimen/t16"
-                android:textStyle="bold"
-                android:visibility="gone"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_brand_detail_award"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/tv_brand_detail_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/x10"
-                android:adjustViewBounds="true"
-                android:background="@drawable/img_brand_detail_title"
-                android:gravity="center"
-                android:text="工作感言"
-                android:textColor="@color/white"
-                android:textSize="@dimen/t16"
-                android:textStyle="bold"/>
-
-            <com.hbln.inspection.widget.x5.utils.BridgeWebView
-                android:id="@+id/wv_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:id="@+id/ll_webview_zan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.hbln.lib_views.DrawableCenterTextView
-                    android:id="@+id/tv_webview_zan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_zan"
-                    android:gravity="center"
-                    android:text="当前数量：1234"
-                    android:textColor="@color/gray20"
-                    android:textSize="@dimen/t14"/>
-
-                <com.hbln.lib_views.DrawableCenterTextView
-                    android:id="@+id/tv_webview_cai"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@drawable/icon_cai"
-                    android:gravity="center"
-                    android:text="当前数量：0"
-                    android:textColor="@color/gray20"
-                    android:textSize="@dimen/t14"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_webview_comment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/layout_background_default"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/x20"
-                android:paddingTop="@dimen/x10">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/shape_red_school"
-                    android:drawablePadding="@dimen/x5"
-                    android:text="交流讨论站"
-                    android:textColor="@color/black_title"
-                    android:textSize="@dimen/t18"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/et_webview_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x10"
-                    android:layout_marginRight="@dimen/x10"
-                    android:layout_marginTop="@dimen/x10"
-                    android:background="@drawable/shape_edittext"
-                    android:gravity="left|top"
-                    android:minHeight="@dimen/x80"
-                    android:padding="@dimen/x10"
-                    android:textColor="@color/gray22"
-                    android:textSize="@dimen/t14"/>
-
-                <Button
-                    android:id="@+id/btn_webview_submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="@dimen/x10"
-                    android:layout_marginTop="@dimen/x10"
-                    android:background="@drawable/shape_btn_normal_small"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:paddingBottom="@dimen/x5"
-                    android:paddingLeft="@dimen/x10"
-                    android:paddingRight="@dimen/x10"
-                    android:paddingTop="@dimen/x5"
-                    android:text="提交"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/t14"/>
-            </LinearLayout>
-
-            <View
-                style="@style/view_line"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_webview_comment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </ScrollView>
-
-    <View style="@style/view_line"/>
-
-    <LinearLayout
-        android:id="@+id/ll_webview_font"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_height"
-        android:background="@color/white">
-
-        <ImageButton
-            android:id="@+id/ib_webview_font"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?selectableItemBackground"
-            android:src="@drawable/icon_font"/>
-
-        <ImageButton
-            android:id="@+id/ib_webview_share"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?selectableItemBackground"
-            android:src="@drawable/icon_share"/>
-    </LinearLayout>
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:orientation="vertical">
+	
+	<include layout="@layout/title_bar" />
+	
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white"
+			android:orientation="vertical">
+			
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/x100"
+				android:background="@drawable/img_model_top_bg"
+				android:gravity="center"
+				android:orientation="vertical">
+				
+				<TextView
+					android:id="@+id/tv_webview_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/x5"
+					android:layout_gravity="center"
+					android:layout_marginBottom="@dimen/x25"
+					android:ellipsize="marquee"
+					android:gravity="center"
+					android:lines="1"
+					android:maxWidth="@dimen/x280"
+					tools:text="2016年个人总结"
+					android:textColor="@color/colorAccentRedDeep"
+					android:textSize="@dimen/t18"
+					android:textStyle="bold" />
+				
+				<TextView
+					android:id="@+id/tv_webview_date"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:background="@drawable/img_model_detail_name"
+					android:gravity="center"
+					android:paddingBottom="@dimen/x3"
+					android:textColor="@color/white"
+					android:textSize="@dimen/t12" />
+			</LinearLayout>
+			
+			<TextView
+				android:id="@+id/tv_brand_detail_geren_shiji"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="@dimen/x10"
+				android:adjustViewBounds="true"
+				android:background="@drawable/img_brand_detail_title"
+				android:gravity="center"
+				android:text="个人实绩"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t16"
+				android:textStyle="bold"
+				android:visibility="gone" />
+			
+			<TextView
+				android:id="@+id/wv_geren_shiji"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="@color/black_title"
+				android:paddingLeft="@dimen/x12"
+				android:paddingRight="@dimen/x12"
+				android:textSize="@dimen/t14"
+				android:visibility="gone" />
+			
+			<TextView
+				android:id="@+id/tv_brand_detail_award"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="@dimen/x10"
+				android:adjustViewBounds="true"
+				android:background="@drawable/img_brand_detail_title"
+				android:gravity="center"
+				android:text="获奖情况"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t16"
+				android:textStyle="bold"
+				android:visibility="gone" />
+			
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_brand_detail_award"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone" />
+			
+			<TextView
+				android:id="@+id/tv_brand_detail_content"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="@dimen/x10"
+				android:adjustViewBounds="true"
+				android:background="@drawable/img_brand_detail_title"
+				android:gravity="center"
+				android:text="工作实绩"
+				android:textColor="@color/white"
+				android:textSize="@dimen/t16"
+				android:textStyle="bold" />
+			
+			<com.hbln.inspection.widget.x5.utils.BridgeWebView
+				android:id="@+id/wv_content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+			
+			<LinearLayout
+				android:id="@+id/ll_webview_zan"
+				android:layout_width="match_parent"
+				android:padding="@dimen/x12"
+				android:layout_height="wrap_content">
+				
+				<com.hbln.lib_views.DrawableCenterTextView
+					android:id="@+id/tv_webview_zan"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:drawableTop="@drawable/icon_zan"
+					android:gravity="center"
+					android:text="当前数量：1234"
+					android:textColor="@color/gray20"
+					android:textSize="@dimen/t14" />
+				
+				<com.hbln.lib_views.DrawableCenterTextView
+					android:id="@+id/tv_webview_cai"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:drawableTop="@drawable/icon_cai"
+					android:gravity="center"
+					android:text="当前数量：0"
+					android:textColor="@color/gray20"
+					android:textSize="@dimen/t14" />
+			</LinearLayout>
+			
+			<LinearLayout
+				android:id="@+id/ll_webview_comment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@color/layout_background_default"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/x20"
+				android:paddingTop="@dimen/x10">
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:drawableLeft="@drawable/shape_red_school"
+					android:drawablePadding="@dimen/x5"
+					android:text="交流讨论站"
+					android:textColor="@color/black_title"
+					android:textSize="@dimen/t18"
+					android:textStyle="bold" />
+				
+				<EditText
+					android:id="@+id/et_webview_comment"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/x10"
+					android:layout_marginRight="@dimen/x10"
+					android:layout_marginTop="@dimen/x10"
+					android:background="@drawable/shape_edittext"
+					android:gravity="left|top"
+					android:minHeight="@dimen/x80"
+					android:padding="@dimen/x10"
+					android:textColor="@color/gray22"
+					android:textSize="@dimen/t14" />
+				
+				<Button
+					android:id="@+id/btn_webview_submit"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="right"
+					android:layout_marginRight="@dimen/x10"
+					android:layout_marginTop="@dimen/x10"
+					android:background="@drawable/shape_btn_normal_small"
+					android:minHeight="0dp"
+					android:minWidth="0dp"
+					android:paddingBottom="@dimen/x5"
+					android:paddingLeft="@dimen/x10"
+					android:paddingRight="@dimen/x10"
+					android:paddingTop="@dimen/x5"
+					android:text="提交"
+					android:textColor="@color/white"
+					android:textSize="@dimen/t14" />
+			</LinearLayout>
+			
+			<View
+				style="@style/view_line" />
+			
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_webview_comment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</ScrollView>
+	
+	<View style="@style/view_line" />
+	
+	<LinearLayout
+		android:id="@+id/ll_webview_font"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/view_height"
+		android:background="@color/white">
+		
+		<ImageButton
+			android:id="@+id/ib_webview_font"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?selectableItemBackground"
+			android:src="@drawable/icon_font" />
+		
+		<ImageButton
+			android:id="@+id/ib_webview_share"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:background="?selectableItemBackground"
+			android:src="@drawable/icon_share" />
+	</LinearLayout>
 </LinearLayout>

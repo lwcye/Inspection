@@ -53,7 +53,8 @@
 			<LinearLayout
 				android:id="@+id/ll_webview_zan"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+				android:layout_height="wrap_content"
+				android:padding="@dimen/x12">
 				
 				<com.hbln.lib_views.DrawableCenterTextView
 					android:id="@+id/tv_webview_zan"

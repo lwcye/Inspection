@@ -159,7 +159,8 @@
 				android:id="@+id/ll_webview_zan"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/x10">
+				android:layout_marginTop="@dimen/x10"
+				android:layout_marginBottom="@dimen/x10">
 				
 				<com.hbln.lib_views.DrawableCenterTextView
 					android:id="@+id/tv_webview_zan"
