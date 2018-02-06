@@ -128,6 +128,7 @@ public class BrandActivity extends MVPBaseActivity<BrandContract.View, BrandPres
             }
         });
         mRvBrand.setLayoutManager(gridLayoutManager);
+        mRvBrand.setNestedScrollingEnabled(false);
         mAdapter.setOnItemClickListener(this);
         mRvBrand.setAdapter(mAdapter);
     }
