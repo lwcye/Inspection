@@ -49,7 +49,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
     /** 外宣数量 */
     private RadioButton mRbWorkInspection3;
     private RadioGroup mRgWorkInspection;
-
+    
     private RUAdapter<WorkTypeModel.InfoBean> mAdapter0;
     private List<WorkTypeModel.InfoBean> mList0 = new ArrayList<>();
     private ListFragment<WorkTypeModel.InfoBean> mFragment0 = new ListFragment<>();
@@ -62,24 +62,24 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
     private RUAdapter<WorkTypeModel.InfoBean> mAdapter3;
     private List<WorkTypeModel.InfoBean> mList3 = new ArrayList<>();
     private ListFragment<WorkTypeModel.InfoBean> mFragment3 = new ListFragment<>();
-
+    
     private ViewPager mVpWork;
     /** 索引 */
     private int index = 0;
     /** 2017年12月 */
     private TextView mTvWorkMonth;
     private String[] month;
-
+    
     public static void start(Context context) {
         Intent starter = new Intent(context, WorkInspectActivity.class);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected WorkInspectPresenter createPresenter() {
         return new WorkInspectPresenter();
     }
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,12 +90,12 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         mPresenter.loadData(2, null);
         mPresenter.loadData(3, null);
     }
-
+    
     private void initView() {
         TitleUtil.attach(this)
-                .setBack(true)
-                .setColor(Color.WHITE, 255)
-                .setTitle("巡察机构");
+            .setBack(true)
+            .setColor(Color.WHITE, 255)
+            .setTitle("巡察机构");
         mTvWorkMonth = (TextView) findViewById(R.id.tv_work_month);
         mVpWork = (ViewPager) findViewById(R.id.vp_work);
         mVpWork.addOnPageChangeListener(this);
@@ -108,11 +108,11 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         mRgWorkInspection = (RadioGroup) findViewById(R.id.rg_work_inspection);
         mRgWorkInspection.setOnCheckedChangeListener(this);
         onCheckedChanged(mRgWorkInspection, R.id.rv_work_in_0);
-
+        
         initViewPager();
-
+        
     }
-
+    
     private void initViewPager() {
         RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
             @Override
@@ -137,7 +137,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         };
         mFragment0.setItemDecoration(itemDecoration);
         mFragment0.setAdapter(mAdapter0);
-
+        
         mAdapter1 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList1, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
@@ -154,7 +154,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         };
         mFragment1.setItemDecoration(itemDecoration);
         mFragment1.setAdapter(mAdapter1);
-
+        
         mAdapter2 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList2, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
@@ -171,14 +171,14 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         };
         mFragment2.setItemDecoration(itemDecoration);
         mFragment2.setAdapter(mAdapter2);
-
+        
         mAdapter3 = new RUAdapter<WorkTypeModel.InfoBean>(getContext(), mList3, R.layout.item_work_in) {
             @Override
             protected void onInflateData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
                 setItemData(holder, data, position);
                 holder.setText(R.id.tv_item_work_in_type, "外宣数量");
                 ProgressBar bar = holder.getViewById(R.id.pb_item_work_in);
-
+                
                 WorkTypeModel.InfoBean infoBean = mList3.get(0);
                 if (data.nums > 0 && infoBean.nums > 0) {
                     bar.setProgress((data.nums * 100 / infoBean.nums));
@@ -189,7 +189,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         };
         mFragment3.setItemDecoration(itemDecoration);
         mFragment3.setAdapter(mAdapter3);
-
+        
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(mFragment0);
         fragmentList.add(mFragment1);
@@ -197,7 +197,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         fragmentList.add(mFragment3);
         mVpWork.setAdapter(new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList));
     }
-
+    
     private void setItemData(RUViewHolder holder, WorkTypeModel.InfoBean data, int position) {
         holder.setText(R.id.tv_item_work_in_name, data.danwei);
         TextView diff = holder.getViewById(R.id.tv_item_work_in_diff);
@@ -214,22 +214,26 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
             ViewUtils.setTextDrawable(diff, 0, 0, 0, 0, getContext());
         }
         holder.setText(R.id.tv_item_work_in_num, data.nums + "");
-
+        holder.setText(R.id.iv_work_in_rank, " ");
+        holder.setText(R.id.tv_item_work_paiming, " ");
+        holder.setVisibility(R.id.tv_item_work_in_one, View.INVISIBLE);
+        
         if (data.paiming == 1) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_0);
-            holder.setText(R.id.iv_work_in_rank, "");
+            holder.setText(R.id.tv_item_work_paiming, "第一名");
+            holder.setVisibility(R.id.tv_item_work_in_one, View.VISIBLE);
         } else if (data.paiming == 2) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_1);
-            holder.setText(R.id.iv_work_in_rank, "");
+            holder.setText(R.id.tv_item_work_paiming, "第二名");
         } else if (data.paiming == 3) {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_2);
-            holder.setText(R.id.iv_work_in_rank, "");
+            holder.setText(R.id.tv_item_work_paiming, "第三名");
         } else {
             holder.setBackgroundResource(R.id.iv_work_in_rank, R.drawable.img_work_in_num_3);
             holder.setText(R.id.iv_work_in_rank, data.paiming + "");
         }
     }
-
+    
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
@@ -250,13 +254,13 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         }
         mVpWork.setCurrentItem(index);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_work_month:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
+                
                 int mm = Integer.valueOf(TimeUtils.getNowTimeString("MM"));
                 month = new String[mm];
                 for (int i = 0; i < mm; i++) {
@@ -278,7 +282,7 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 break;
         }
     }
-
+    
     @Override
     public void setData(WorkTypeModel data, int type) {
         data.initModel();
@@ -296,12 +300,12 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
             mAdapter3.setData(mList3);
         }
     }
-
+    
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        
     }
-
+    
     @Override
     public void onPageSelected(int position) {
         index = position;
@@ -322,9 +326,9 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
                 break;
         }
     }
-
+    
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        
     }
 }
