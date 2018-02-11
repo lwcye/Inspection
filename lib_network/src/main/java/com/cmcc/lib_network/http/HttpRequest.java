@@ -47,7 +47,7 @@ public class HttpRequest {
     private static KaoShiService sKaoShiService;
     
     
-    private static synchronized <T> T create(final Class<T> service) {
+    private static <T> T create(final Class<T> service) {
         List<Interceptor> interceptorList = new ArrayList<>();
         interceptorList.add(new NetWorkInterceptor());
         return RetrofitWrapper.createInstance(URLs.HTTP_URL, RetrofitWrapper.CONVERTER_GSON,
@@ -59,7 +59,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized UserService getUserService() {
+    public static UserService getUserService() {
         if (null == sUserService) {
             sUserService = create(UserService.class);
         }
@@ -71,7 +71,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized WorkService getWorkService() {
+    public static WorkService getWorkService() {
         if (null == sWorkService) {
             sWorkService = create(WorkService.class);
         }
@@ -83,7 +83,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized JiaFangService getJiaFangServicee() {
+    public static JiaFangService getJiaFangServicee() {
         if (null == sJiaFangService) {
             sJiaFangService = create(JiaFangService.class);
         }
@@ -95,7 +95,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized ShcoolService getShcoolService() {
+    public static ShcoolService getShcoolService() {
         if (null == sShcoolService) {
             sShcoolService = create(ShcoolService.class);
         }
@@ -107,7 +107,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized RegularService getRegularService() {
+    public static RegularService getRegularService() {
         if (null == sRegularService) {
             sRegularService = create(RegularService.class);
         }
@@ -119,7 +119,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized ModelService getModelService() {
+    public static ModelService getModelService() {
         if (null == sModelService) {
             sModelService = create(ModelService.class);
         }
@@ -131,7 +131,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized PingPaiService getBrandService() {
+    public static PingPaiService getBrandService() {
         if (null == sPingPaiService) {
             sPingPaiService = create(PingPaiService.class);
         }
@@ -143,7 +143,7 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized TrackService getTrackService() {
+    public static TrackService getTrackService() {
         if (null == sTrackService) {
             sTrackService = create(TrackService.class);
         }
@@ -155,14 +155,14 @@ public class HttpRequest {
      *
      * @return 服务对象
      */
-    public static synchronized FortressService getFortressService() {
+    public static FortressService getFortressService() {
         if (null == sFortressService) {
             sFortressService = create(FortressService.class);
         }
         return sFortressService;
     }
     
-    public static synchronized KaoShiService getKaoShiService() {
+    public static KaoShiService getKaoShiService() {
         if (null == sKaoShiService) {
             sKaoShiService = create(KaoShiService.class);
         }

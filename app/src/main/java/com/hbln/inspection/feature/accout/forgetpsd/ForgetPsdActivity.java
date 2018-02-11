@@ -20,41 +20,35 @@ import com.hbln.inspection.utils.TitleUtil;
  */
 
 public class ForgetPsdActivity extends MVPBaseActivity<ForgetPsdContract.View, ForgetPsdPresenter> implements ForgetPsdContract.View, View.OnClickListener {
-
+    
     /** 确认 */
     private Button mTvForgetConfirm;
-
+    
     public static void start(Context context) {
         Intent starter = new Intent(context, ForgetPsdActivity.class);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected ForgetPsdPresenter createPresenter() {
         return new ForgetPsdPresenter();
     }
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_forget_next);
         initView();
     }
-
+    
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-                .setColor(Color.WHITE, 255)
-                .setLeftClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBackPressed();
-                    }
-                })
-                .setTitle("忘记密码");
+        TitleUtil.attach(this)
+            .setBack(true)
+            .setTitle("忘记密码");
         mTvForgetConfirm = (Button) findViewById(R.id.tv_forget_confirm);
         mTvForgetConfirm.setOnClickListener(this);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

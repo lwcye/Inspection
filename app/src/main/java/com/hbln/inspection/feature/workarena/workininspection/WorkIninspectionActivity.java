@@ -32,6 +32,8 @@ import com.hbln.inspection.ui.fragment.ListFragment;
 import com.hbln.inspection.utils.TitleUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -99,7 +101,9 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             .setTitle(TITLE);
         mTvWorkInMonth = (TextView) findViewById(R.id.tv_work_in_month);
         mTvWorkInMonth.setOnClickListener(this);
-        mTvWorkInMonth.setText(TimeUtils.getNowTimeString("yyyy年MM月"));
+        java.util.Calendar instance = java.util.Calendar.getInstance();
+        instance.set(Calendar.MONTH, Calendar.getInstance().get(Calendar.MONTH) - 1);
+        mTvWorkInMonth.setText(TimeUtils.date2String(instance.getTime(), "yyyy年MM月"));
         mRvWorkIn0 = (RadioButton) findViewById(R.id.rv_work_in_0);
         mRvWorkIn1 = (RadioButton) findViewById(R.id.rv_work_in_1);
         mRvWorkIn2 = (RadioButton) findViewById(R.id.rv_work_in_2);
@@ -289,16 +293,27 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
             case R.id.tv_work_in_month:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 
-                int mm = Integer.valueOf(TimeUtils.getNowTimeString("MM"));
-                month = new String[mm];
-                for (int i = 0; i < mm; i++) {
-                    month[i] = TimeUtils.getNowTimeString("yyyy年") + (i + 1) + "月";
+                int mm = Integer.valueOf(TimeUtils.getNowTimeString("MM")) - 1;
+                if (mm <= 0) {
+                    month = new String[1];
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+                    month[0] = TimeUtils.date2String(calendar.getTime(), "yyyy年MM月");
+                } else {
+                    month = new String[mm];
+                    for (int i = 0; i < mm; i++) {
+                        month[i] = TimeUtils.getNowTimeString("yyyy年") + (i + 1) + "月";
+                    }
                 }
                 builder.setItems(month, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTvWorkInMonth.setText(month[which]);
-                        String date = TimeUtils.date2String(TimeUtils.string2Date(month[which], "yyyy年MM月"), "yyyy-MM");
+                        Date selectDate = TimeUtils.string2Date(month[which], "yyyy年MM月");
+                        Calendar instance = Calendar.getInstance();
+                        instance.setTime(selectDate);
+                        instance.set(Calendar.MONTH, instance.get(Calendar.MONTH) + 1);
+                        String date = TimeUtils.date2String(instance.getTime(), "yyyy-MM");
                         mPresenter.loadData(0, date);
                         mPresenter.loadData(1, date);
                         mPresenter.loadData(2, date);

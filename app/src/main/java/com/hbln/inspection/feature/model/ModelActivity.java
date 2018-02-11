@@ -20,6 +20,7 @@ import com.cmcc.lib_network.model.ModelModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.ConvertUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
@@ -80,6 +81,12 @@ public class ModelActivity extends MVPBaseActivity<ModelContract.View, ModelPres
     
     private void initView() {
         TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_home, 0, 0, 0)
+            .setLeftClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.start(getContext());
+                }
+            })
             .setTitle("先锋模范");
         mRbModel0 = (RadioButton) findViewById(R.id.rb_model_0);
         mRbModel3 = (RadioButton) findViewById(R.id.rb_model_3);
@@ -143,7 +150,7 @@ public class ModelActivity extends MVPBaseActivity<ModelContract.View, ModelPres
                 viewById.setRotation(10f);
             }
         } else {
-            viewById.setTranslationY(ConvertUtils.dp2px(30));
+            viewById.setTranslationY(ConvertUtils.dp2px(10));
             if (position % 4 == 1) {
                 viewById.setRotation(10f);
             } else {
