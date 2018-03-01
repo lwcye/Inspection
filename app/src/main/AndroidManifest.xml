@@ -191,6 +191,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".ui.Activity.TiHuiActivity"/>
         <activity android:name=".feature.school.answer.AnswerResultActivity"/>
+        <activity android:name=".feature.accout.ModifyPsdActivity"/>
     </application>
 
 </manifest>

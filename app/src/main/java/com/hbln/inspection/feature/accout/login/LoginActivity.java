@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.cmcc.lib_network.model.LoginModel;
 import com.hbln.inspection.R;
-import com.hbln.inspection.feature.accout.loginforget.LoginForgetActivity;
+import com.hbln.inspection.feature.accout.ModifyPsdActivity;
 import com.hbln.inspection.feature.accout.register.RegisterActivity;
 import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
@@ -77,7 +77,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 RegisterActivity.start(getContext());
                 break;
             case R.id.tv_login_forget:
-                LoginForgetActivity.start(getContext());
+                ModifyPsdActivity.start(getContext());
                 break;
             default:
                 break;
@@ -90,19 +90,19 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         MainActivity.start(getContext());
         finish();
     }
-    
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        
+
     }
-    
+
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-       
+
     }
-    
+
     @Override
     public void afterTextChanged(Editable s) {
-        
+
     }
 }

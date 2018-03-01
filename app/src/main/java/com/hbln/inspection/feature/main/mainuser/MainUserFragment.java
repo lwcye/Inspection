@@ -119,9 +119,16 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
 
     @Override
     public void resultUserInfo(UserInfoModel.UserInfo userInfoModel) {
-        mTvUserName.setText(userInfoModel.nickname);
-        mTvUserSfid.setText(userInfoModel.sfid);
-        mTvUserMobile.setText(userInfoModel.mobile);
-        mTvUserDanwei.setText(userInfoModel.danwei);
+        if (userInfoModel == null) {
+            mTvUserName.setText("");
+            mTvUserSfid.setText("");
+            mTvUserMobile.setText("");
+            mTvUserDanwei.setText("");
+        } else {
+            mTvUserName.setText(userInfoModel.nickname);
+            mTvUserSfid.setText(userInfoModel.sfid);
+            mTvUserMobile.setText(userInfoModel.mobile);
+            mTvUserDanwei.setText(userInfoModel.danwei);
+        }
     }
 }

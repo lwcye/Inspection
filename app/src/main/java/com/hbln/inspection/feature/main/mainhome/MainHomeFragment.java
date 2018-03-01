@@ -90,6 +90,13 @@ public class MainHomeFragment extends MVPBaseFragment<MainHomeContract.View, Mai
         LoginModel.getUserInfo(new Action1<UserInfoModel.UserInfo>() {
             @Override
             public void call(UserInfoModel.UserInfo userInfo) {
+                if (userInfo == null) {
+                    mTvHomeNickname.setText("");
+                    mTvHomeDw.setText("");
+                    mTvHomeMobile.setText("");
+                    LoaderFactory.getLoader().loadResource(mCivUserImage, R.drawable.icon_default_male);
+                    return;
+                }
                 mTvHomeNickname.setText(userInfo.nickname);
                 mTvHomeDw.setText(userInfo.danwei);
                 mTvHomeMobile.setText(userInfo.mobile);

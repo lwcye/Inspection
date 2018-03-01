@@ -37,7 +37,7 @@ public class ForgetPsdActivity extends MVPBaseActivity<ForgetPsdContract.View, F
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_forget_next);
+        setContentView(R.layout.activity_login_forget_psd);
         initView();
     }
 

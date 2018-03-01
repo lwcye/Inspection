@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10"
-        android:text="密码"
+        android:text="请输入密码"
         android:textColor="@color/black_title"
         android:textSize="@dimen/t18"/>
 
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_height"
         android:background="@color/white"
-        android:hint="请输入再次输入您的新密码"
+        android:hint="请再次输入您的新密码"
         android:paddingLeft="@dimen/x10"
         android:textColor="@color/black_title"
         android:textColorHint="@color/black_hint"
