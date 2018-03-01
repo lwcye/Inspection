@@ -29,7 +29,7 @@ import rx.schedulers.Schedulers;
 public class LoginModel extends ResultModel {
     public String uid;
     public String access_token;
-    
+
     /**
      * 初始化数据
      */
@@ -37,7 +37,7 @@ public class LoginModel extends ResultModel {
         URLs.ACCESS_TOKEN = BaseApp.getSpUtils().getString(URLs.ACCESS_TOKEN_KEY, "");
         URLs.UID = BaseApp.getSpUtils().getString(URLs.UID_KEY, "");
     }
-    
+
     public static void logout() {
         URLs.ACCESS_TOKEN = "";
         URLs.UID = "";
@@ -47,7 +47,7 @@ public class LoginModel extends ResultModel {
         BaseApp.getSpUtils().put(URLs.PASSWORD_KEY, "");
         BaseApp.getSpUtils().put(URLs.USERINFO_KEY, "");
     }
-    
+
     public static void getUserInfo(final Action1<UserInfoModel.UserInfo> userInfoAction1) {
         if (userInfoAction1 == null) {
             return;
@@ -59,35 +59,39 @@ public class LoginModel extends ResultModel {
                 userInfoAction1.call(userInfo);
             }
         } else {
+            if (TextUtils.isEmpty(URLs.ACCESS_TOKEN) && TextUtils.isEmpty(URLs.UID)) {
+                userInfoAction1.call(null);
+                return;
+            }
             HttpRequest.getUserService().userinfo()
-                .compose(NetWorkInterceptor.<UserInfoModel>retrySessionCreator())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .doOnNext(new HttpResult<UserInfoModel>() {
-                    @Override
-                    public void result(UserInfoModel userInfoModel) {
-                        setUserInfo(userInfoModel.info);
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new HttpResult<UserInfoModel>() {
-                    @Override
-                    public void result(UserInfoModel userInfoModel) {
-                        userInfoAction1.call(userInfoModel.info);
-                    }
-                }, new HttpError() {
-                    @Override
-                    public void error(int errorCode, String message) {
-                        userInfoAction1.call(null);
-                    }
-                }, new HttpComplete());
+                    .compose(NetWorkInterceptor.<UserInfoModel>retrySessionCreator())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .doOnNext(new HttpResult<UserInfoModel>() {
+                        @Override
+                        public void result(UserInfoModel userInfoModel) {
+                            setUserInfo(userInfoModel.info);
+                        }
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new HttpResult<UserInfoModel>() {
+                        @Override
+                        public void result(UserInfoModel userInfoModel) {
+                            userInfoAction1.call(userInfoModel.info);
+                        }
+                    }, new HttpError() {
+                        @Override
+                        public void error(int errorCode, String message) {
+                            userInfoAction1.call(null);
+                        }
+                    }, new HttpComplete());
         }
     }
-    
+
     public static void setUserInfo(UserInfoModel.UserInfo userInfo) {
         BaseApp.getSpUtils().put(URLs.USERINFO_KEY, new Gson().toJson(userInfo));
     }
-    
+
     /**
      * 保存数据
      */
@@ -103,11 +107,11 @@ public class LoginModel extends ResultModel {
         getUserInfo(new Action1<UserInfoModel.UserInfo>() {
             @Override
             public void call(UserInfoModel.UserInfo userInfo) {
-                
+
             }
         });
     }
-    
+
     /**
      * 保存数据
      */
@@ -121,6 +125,6 @@ public class LoginModel extends ResultModel {
         }
         saveUserInfo();
     }
-    
-    
+
+
 }
