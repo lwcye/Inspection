@@ -3,7 +3,6 @@ package com.hbln.inspection.feature.regular;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -38,14 +37,8 @@ public class RegularDetailActivity extends BaseActivity implements View.OnClickL
     }
     
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-            .setColor(Color.WHITE, 255)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            })
+        TitleUtil.attach(this)
+            .setBack(true)
             .setTitle("制度规定");
         mIbShaoolDetailFont = (ImageButton) findViewById(R.id.ib_shaool_detail_font);
         mIbShaoolDetailFont.setOnClickListener(this);

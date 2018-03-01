@@ -3,7 +3,6 @@ package com.hbln.inspection.feature.accout.forgetpsd;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -36,14 +35,8 @@ public class ForgetResultActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_forget_result);
         initView();
         
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-            .setColor(Color.WHITE, 255)
-            .setLeftClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            })
+        TitleUtil.attach(this)
+            .setBack(true)
             .setTitle("忘记密码");
     }
     

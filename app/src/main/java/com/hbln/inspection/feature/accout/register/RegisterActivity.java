@@ -4,7 +4,6 @@ package com.hbln.inspection.feature.accout.register;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -32,7 +31,7 @@ import rx.functions.Action0;
  */
 
 public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, RegisterPresenter> implements RegisterContract.View, View.OnClickListener {
-
+    
     /** 确认 */
     private Button mTvRegisterConfirm;
     /** 请输入姓名 */
@@ -55,37 +54,31 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
     private DwLianDongModel.InfoBean mInfoBean0;
     private DwLianDongModel.InfoBean mInfoBean1;
     private AlertDialog mAlertDialog1;
-
+    
     public static void start(Context context) {
         Intent starter = new Intent(context, RegisterActivity.class);
         context.startActivity(starter);
     }
-
+    
     @Override
     protected RegisterPresenter createPresenter() {
         return new RegisterPresenter();
     }
-
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
     }
-
+    
     /**
      * 初始化
      */
     private void initView() {
-        TitleUtil.attach(this).setLeftDrawable(R.drawable.icon_back, 0, 0, 0)
-                .setColor(Color.WHITE, 255)
-                .setLeftClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBackPressed();
-                    }
-                })
-                .setTitle("注册");
+        TitleUtil.attach(this)
+            .setBack(true)
+            .setTitle("注册");
         mTvRegisterConfirm = (Button) findViewById(R.id.tv_register_confirm);
         mTvRegisterConfirm.setOnClickListener(this);
         mEtRegistName = (EditText) findViewById(R.id.et_regist_name);
@@ -100,40 +93,40 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
         mEtRegistPassword = (EditText) findViewById(R.id.et_regist_password);
         mEtRegistRepassword = (EditText) findViewById(R.id.et_regist_repassword);
     }
-
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_regist_verfi:
                 mPresenter.verificationSfid(mEtRegistName.getText().toString().trim(),
-                        mEtRegistSfid.getText().toString().trim(),
-                        null);
+                    mEtRegistSfid.getText().toString().trim(),
+                    null);
                 break;
             case R.id.tv_register_confirm:
                 mPresenter.verificationSfid(mEtRegistName.getText().toString().trim(),
-                        mEtRegistSfid.getText().toString().trim(),
-                        new Action0() {
-                            @Override
-                            public void call() {
-                                String dwid = "";
-                                if (mInfoBean1 != null) {
-                                    dwid = mInfoBean1.id;
-                                } else if (mInfoBean0 != null) {
-                                    dwid = mInfoBean0.id;
-                                } else {
-                                    ToastUtils.showShortToastSafe("请选择单位");
-                                    return;
-                                }
-                                mPresenter.requestRegist(mEtRegistPhone.getText().toString().trim(),
-                                        mEtRegistPassword.getText().toString().trim(),
-                                        mEtRegistRepassword.getText().toString().trim(),
-                                        "",
-                                        mEtRegistName.getText().toString().trim(),
-                                        mEtRegistSfid.getText().toString().trim(),
-                                        dwid,
-                                        URLs.HTTP_TOKEN);
+                    mEtRegistSfid.getText().toString().trim(),
+                    new Action0() {
+                        @Override
+                        public void call() {
+                            String dwid = "";
+                            if (mInfoBean1 != null) {
+                                dwid = mInfoBean1.id;
+                            } else if (mInfoBean0 != null) {
+                                dwid = mInfoBean0.id;
+                            } else {
+                                ToastUtils.showShortToastSafe("请选择单位");
+                                return;
                             }
-                        });
+                            mPresenter.requestRegist(mEtRegistPhone.getText().toString().trim(),
+                                mEtRegistPassword.getText().toString().trim(),
+                                mEtRegistRepassword.getText().toString().trim(),
+                                "",
+                                mEtRegistName.getText().toString().trim(),
+                                mEtRegistSfid.getText().toString().trim(),
+                                dwid,
+                                URLs.HTTP_TOKEN);
+                        }
+                    });
                 break;
             case R.id.et_regist_dw_0:
                 showDwLianList();
@@ -145,7 +138,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
                 break;
         }
     }
-
+    
     /**
      * 第二个单位
      *
@@ -174,7 +167,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
             }
         });
     }
-
+    
     /**
      * 展示单位的第一个
      */
@@ -201,7 +194,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
             mAlertDialog0.show();
         }
     }
-
+    
     @Override
     public void resultRegist(LoginModel objectModel) {
         URLs.UID = objectModel.uid;
