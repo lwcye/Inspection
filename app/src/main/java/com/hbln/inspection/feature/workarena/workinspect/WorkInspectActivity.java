@@ -264,17 +264,17 @@ public class WorkInspectActivity extends MVPBaseActivity<WorkInspectContract.Vie
         switch (v.getId()) {
             case R.id.tv_work_month:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                
-                int mm = Integer.valueOf(TimeUtils.getNowTimeString("MM")) - 1;
-                if (mm <= 0) {
-                    month = new String[1];
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
-                    month[0] = TimeUtils.date2String(calendar.getTime(), "yyyy年MM月");
-                } else {
-                    month = new String[mm];
-                    for (int i = 0; i < mm; i++) {
-                        month[i] = TimeUtils.getNowTimeString("yyyy年") + (i + 1) + "月";
+
+                int mm = Calendar.getInstance().get(Calendar.MONTH) + 2;
+                month = new String[mm];
+                for (int i = 0; i < mm; i++) {
+                    if (i == 0) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1);
+                        calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+                        month[i] = TimeUtils.date2String(calendar.getTime(), "yyyy年MM月");
+                    } else {
+                        month[i] = TimeUtils.getNowTimeString("yyyy年") + i + "月";
                     }
                 }
                 builder.setItems(month, new DialogInterface.OnClickListener() {

@@ -64,13 +64,6 @@ android {
         }
     }
 }
-// 时间
-def releaseTime = getReleaseTime()
-// 生成编译时间
-static def getReleaseTime() {
-    def timestamp = new Date().format("yyyyMMddHH", TimeZone.getTimeZone("GMT+8"))
-    return timestamp
-}
 
 android.applicationVariants.all { variant ->
     def file = variant.outputs[0].outputFile
