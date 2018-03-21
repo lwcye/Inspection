@@ -13,10 +13,10 @@ import java.util.List;
  * @date -
  * @note -
  */
-public class KaoShiModel extends ResultModel{
-    
+public class KaoShiModel extends ResultModel {
+
     public List<InfoBean> info;
-    
+
     public static class InfoBean {
         /**
          * id : 45
@@ -25,7 +25,7 @@ public class KaoShiModel extends ResultModel{
          * duonums : 20
          * panduannums : 10
          * create_time : 0
-         * pic :
+         * pic :S
          * typeid : 104
          * danxuanfenshu : null
          * duoxuanfenshu : null
@@ -33,7 +33,7 @@ public class KaoShiModel extends ResultModel{
          * times : 1970-01-01 08:00
          * nums : 0
          */
-        
+
         public String id;
         public String title;
         public String dannums;
@@ -42,10 +42,15 @@ public class KaoShiModel extends ResultModel{
         public String create_time;
         public String pic;
         public String typeid;
+        public String times;
+        public String kmid;
         public String danxuanfenshu;
         public String duoxuanfenshu;
         public String panduanfenshu;
-        public String times;
+        public long startime;
+        public long endtime;
+        public String kaishitime;
+        public String endtimes;
         public String nums;
     }
 }

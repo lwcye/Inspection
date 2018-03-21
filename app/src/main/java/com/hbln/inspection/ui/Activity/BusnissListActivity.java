@@ -18,6 +18,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.KaoShiModel;
+import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
 import com.hbln.inspection.feature.school.answer.AnswerResultActivity;
@@ -27,6 +28,7 @@ import com.hbln.inspection.utils.TitleUtil;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import rx.Observable;
@@ -111,7 +113,12 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
                     holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
                     holder.setImageNet(R.id.tv_item_fortress_name, data.pic);
                 }
-                holder.setText(R.id.tv_item_shcool_item_data, data.times);
+                if (mType == TYPE_CESHI) {
+                    holder.setText(R.id.tv_item_shcool_item_data, "开始时间："
+                            + data.kaishitime + "\n" + "结束时间：" + data.endtimes);
+                } else {
+                    holder.setText(R.id.tv_item_shcool_item_data, data.times);
+                }
             }
         };
         mAdapter.setOnItemClickListener(this);
@@ -146,13 +153,20 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
 
     @Override
     public void onItemClick(View view, int itemType, int position) {
+        KaoShiModel.InfoBean infoBean = mList.get(position);
         if (mType == TYPE_XUEXI || mType == TYPE_CESHI) {
             if (mType == TYPE_XUEXI) {
                 AnswerResultActivity.TYPE = "学习资料";
-                AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_XUEXI);
+                AnswerActivity.start(getContext(), infoBean.id, AnswerActivity.TYPE_KAOSHI_XUEXI);
             } else {
                 AnswerResultActivity.TYPE = "在线测试";
-                AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
+                if (Calendar.getInstance().getTimeInMillis() < (infoBean.startime * 1000L)) {
+                    ToastUtils.showLongToastSafe("还未到开始时间，请在" + infoBean.kaishitime + "以后进行测试");
+                } else if (Calendar.getInstance().getTimeInMillis() > (infoBean.endtime * 1000L)) {
+                    ToastUtils.showLongToastSafe("该测试已经结束");
+                } else {
+                    AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
+                }
             }
         } else {
             AnswerResultActivity.TYPE = "体会交流";
