@@ -1,6 +1,7 @@
 package com.hbln.inspection.feature.school.answer;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,14 +21,17 @@ import android.widget.TextView;
 import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_utils.utils.EmptyUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
+import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.lib_views.BottomPopupDialog;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -40,7 +44,6 @@ import rx.schedulers.Schedulers;
  * MVPPlugin
  * 邮箱 784787081@qq.com
  */
-
 public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerPresenter> implements AnswerContract.View, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     public static final int TYPE_KAOSHI_XUEXI = 10;
     public static final int TYPE_KAOSHI_CESHI = 11;
@@ -49,7 +52,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private static final String INTENT_NAME = "name";
     private static final String INTENT_GUANXI = "guanxi";
     private static final String INTENT_MOBILE = "mobile";
+    private static final String INTENT_START_TIME = "startTime";
+    private static final String INTENT_END_TIME = "endTime";
     private static final String INTENT_TYPE = "type";
+    /** 题目ID和答案的集合 */
+    HashMap<String, String> mMap = new HashMap<>();
     /** 纪检干部培训调查问卷 */
     private TextView mTvAnswerTitle;
     /** 2017-01-01    答题量：1234人 */
@@ -69,7 +76,6 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private RadioGroup mRgAnswer;
     /** 下一题 */
     private Button mBtnAnswerNext;
-
     private JfShiTiModel mJfShiTiModel;
     private int position = 1;
     private int nums = 0;
@@ -83,9 +89,8 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private String name = "";
     private String guanxi = "";
     private String moblie = "";
-
-    private List<String> stids = new ArrayList<>();
-    private List<String> daids = new ArrayList<>();
+    private long startTime = 0L;
+    private long endTime = 0L;
     private EditText mEtAnswerWanda;
     /** 提交 */
     private Button mBtnAnswerSubmit;
@@ -110,6 +115,33 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         context.startActivity(starter);
     }
 
+    /**
+     * 在线测试
+     *
+     * @param context
+     * @param sjid
+     * @param startTime 测试开始时间
+     * @param endTime 测试结束时间
+     * @param type
+     */
+    public static void start(Context context, String sjid, long startTime, long endTime, int type) {
+        Intent starter = new Intent(context, AnswerActivity.class);
+        starter.putExtra(INTENT_ID, sjid);
+        starter.putExtra(INTENT_START_TIME, startTime);
+        starter.putExtra(INTENT_END_TIME, endTime);
+        starter.putExtra(INTENT_TYPE, type);
+        context.startActivity(starter);
+    }
+
+    /**
+     * 家访
+     *
+     * @param context
+     * @param sjid
+     * @param name
+     * @param guanxi
+     * @param mobile
+     */
     public static void start(Context context, String sjid, String name, String guanxi, String mobile) {
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(guanxi) || TextUtils.isEmpty(mobile) || TextUtils.isEmpty(sjid)) {
             return;
@@ -136,11 +168,65 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         name = getIntent().getStringExtra(INTENT_NAME);
         guanxi = getIntent().getStringExtra(INTENT_GUANXI);
         moblie = getIntent().getStringExtra(INTENT_MOBILE);
+        startTime = getIntent().getLongExtra(INTENT_START_TIME, 0L);
+        endTime = getIntent().getLongExtra(INTENT_END_TIME, 0L);
         mType = getIntent().getIntExtra(INTENT_TYPE, 0);
         initView();
         TitleUtil.attach(this)
                 .setBack(true);
+        if (handleTestTime()) {
+            return;
+        }
+
+
+        //请求试题
         mPresenter.loadData(mSjid, mType);
+
+    }
+
+    /**
+     * 处理开始时间
+     *
+     * @return
+     */
+    private boolean handleTestTime() {
+        //判断开始时间
+        if (startTime > 0 && endTime > 0) {
+            long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;
+            if (timeInMillis < startTime) {
+                //未到开始时间，直接退出
+                ToastUtils.showShortToastSafe("还未到开始时间，请在" + TimeUtils.millis2String(startTime * 1000L) + "以后进行测试");
+                finish();
+                return true;
+            } else {
+                long delay = (endTime - timeInMillis) * 1000L;
+                if (delay > 0) {
+                    Observable.timer(delay, TimeUnit.MILLISECONDS)
+                            .compose(applySchedulers(ActivityEvent.DESTROY))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(Schedulers.io())
+                            .subscribe(new Action1<Object>() {
+                                @Override
+                                public void call(Object o) {
+                                    ProgressDialog progressDialog = new ProgressDialog(getContext());
+                                    progressDialog.setMessage("正在提交答案");
+                                    progressDialog.show();
+                                    performSubmit();
+                                }
+                            }, new Action1<Throwable>() {
+                                @Override
+                                public void call(Throwable throwable) {
+
+                                }
+                            });
+                } else {
+                    ToastUtils.showLongToastSafe("该测试已经结束");
+                    finish();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void initView() {
@@ -202,7 +288,9 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 shareDialog.show();
                 break;
             case R.id.btn_answer_next:
-                if (answerHandle()) return;
+                if (answerHandle()) {
+                    return;
+                }
                 LogUtils.e(position, nums);
                 showAnswer();
                 break;
@@ -217,7 +305,9 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                                 .subscribe(new Action1<Long>() {
                                     @Override
                                     public void call(Long aLong) {
-                                        if (answerHandle()) return;
+                                        if (answerHandle()) {
+                                            return;
+                                        }
                                         performSubmit();
                                     }
                                 }, new Action1<Throwable>() {
@@ -232,7 +322,9 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                     }
                     return;
                 }
-                if (answerHandle()) return;
+                if (answerHandle()) {
+                    return;
+                }
                 performSubmit();
                 break;
             default:
@@ -246,16 +338,16 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      */
     private void performSubmit() {
         StringBuilder ids = new StringBuilder();
-        for (String stid : stids) {
-            ids.append(stid);
+        StringBuilder daans = new StringBuilder();
+        Set<String> keys = mMap.keySet();
+        for (String id : keys) {
+            ids.append(id).append(",");
+            String answer = mMap.get(id);
+            daans.append(answer).append("@");
         }
         CharSequence stids = ids.toString().subSequence(0, ids.toString().length() - 1);
-
-        StringBuilder daans = new StringBuilder();
-        for (String stid : daids) {
-            daans.append(stid);
-        }
         CharSequence daids = daans.toString().subSequence(0, daans.toString().length() - 1);
+
         if (mType == TYPE_VISIT) {
             mPresenter.submit(mSjid, name, guanxi, moblie, stids.toString(), daids.toString());
         } else {
@@ -424,21 +516,19 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         //类型 0--单选 1--多选 2--判断 3--问答
         if (mQuestionType == 0) {
             //单选答案
-            stids.add(mJfShiTiModel.info.danxuan.get(indexDanxuan).id + ",");
             if (TextUtils.isEmpty(getRbIndex())) {
                 ToastUtils.showShortToastSafe("请选择一个选项");
                 return true;
             }
-            daids.add(getRbIndex() + "@");
+            mMap.put(mJfShiTiModel.info.danxuan.get(indexDanxuan).id, getRbIndex());
             indexDanxuan++;
         } else if (mQuestionType == 1) {
             //多选答案
-            stids.add(mJfShiTiModel.info.duoxuan.get(indexDuoxuan).id + ",");
             if (TextUtils.isEmpty(getRbDuoxuanIndex())) {
                 ToastUtils.showShortToastSafe("请至少选择一个选项");
                 return true;
             }
-            daids.add(getRbDuoxuanIndex() + "@");
+            mMap.put(mJfShiTiModel.info.duoxuan.get(indexDuoxuan).id, getRbDuoxuanIndex());
             indexDuoxuan++;
         } else if (mQuestionType == 2) {
             //判断答案
@@ -447,18 +537,16 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 return true;
             } else {
                 JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean = mJfShiTiModel.info.panduan.get(indexPanDuan);
-                stids.add(panduanBean.id + ",");
                 if (TextUtils.isEmpty(getRbPanDanIndex(panduanBean))) {
                     ToastUtils.showShortToastSafe("请至少选择一个选项");
                     return true;
                 }
-                daids.add(getRbPanDanIndex(panduanBean) + "@");
+                mMap.put(panduanBean.id, getRbPanDanIndex(panduanBean));
                 indexPanDuan++;
             }
         } else {
             //问答
-            stids.add(mJfShiTiModel.info.wenda.get(indexWenda).id + ",");
-            daids.add(mEtAnswerWanda.getText().toString().trim() + "@");
+            mMap.put(mJfShiTiModel.info.wenda.get(indexWenda).id, mEtAnswerWanda.getText().toString().trim());
             indexWenda++;
         }
         resetIndex(mQuestionType);
@@ -625,6 +713,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
 
     }
 
+    /**
+     * 获取位置
+     *
+     * @return
+     */
     public String getRbIndex() {
         if (mRbAnswer0.isChecked()) {
             return "A";
@@ -663,6 +756,12 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         return 0;
     }
 
+    /**
+     * 获得判断的答案
+     *
+     * @param bean
+     * @return
+     */
     public String getRbPanDanIndex(JfShiTiModel.ShiTiInfoBean.PanduanBean bean) {
         if (mRbAnswerPanduan0.isChecked()) {
             return bean.danan.get(0);
@@ -673,6 +772,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         return "";
     }
 
+    /**
+     * 获得多选的答案
+     *
+     * @return
+     */
     public String getRbDuoxuanIndex() {
         StringBuilder builder = new StringBuilder();
         if (mRbAnswerDuoxuan0.isChecked()) {

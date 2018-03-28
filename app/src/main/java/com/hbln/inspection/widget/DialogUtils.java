@@ -126,6 +126,25 @@ public class DialogUtils {
         return builder.show();
     }
 
+    public Dialog showOneBtn(Activity activity, String title, String message, String btn, final onDialogClickListener onClick) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        if (!TextUtils.isEmpty(title)) {
+            builder.setTitle(title);
+        }
+        if (!TextUtils.isEmpty(message)) {
+            builder.setMessage(message);
+        }
+        if (!TextUtils.isEmpty(btn)) {
+            builder.setPositiveButton(btn, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onClick.dialogClickListener(dialog);
+                }
+            });
+        }
+        return builder.show();
+    }
+
     public Dialog showProgress(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(R.layout.dialog_progress);

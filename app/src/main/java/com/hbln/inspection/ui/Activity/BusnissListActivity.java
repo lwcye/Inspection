@@ -113,7 +113,7 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
                     holder.setVisibility(R.id.iv_item_shcool_item, View.VISIBLE);
                     holder.setImageNet(R.id.tv_item_fortress_name, data.pic);
                 }
-                if (mType == TYPE_CESHI) {
+                if (mType == TYPE_CESHI && !TextUtils.isEmpty(data.kaishitime) && !TextUtils.isEmpty(data.endtimes)) {
                     holder.setText(R.id.tv_item_shcool_item_data, "开始时间："
                             + data.kaishitime + "\n" + "结束时间：" + data.endtimes);
                 } else {
@@ -160,12 +160,18 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
                 AnswerActivity.start(getContext(), infoBean.id, AnswerActivity.TYPE_KAOSHI_XUEXI);
             } else {
                 AnswerResultActivity.TYPE = "在线测试";
-                if (Calendar.getInstance().getTimeInMillis() < (infoBean.startime * 1000L)) {
-                    ToastUtils.showLongToastSafe("还未到开始时间，请在" + infoBean.kaishitime + "以后进行测试");
-                } else if (Calendar.getInstance().getTimeInMillis() > (infoBean.endtime * 1000L)) {
-                    ToastUtils.showLongToastSafe("该测试已经结束");
+                if (infoBean.startime > 0 && infoBean.endtime > 0) {
+                    if (Calendar.getInstance().getTimeInMillis() < (infoBean.startime * 1000L)) {
+                        ToastUtils.showLongToastSafe("还未到开始时间，请在" + infoBean.kaishitime + "以后进行测试");
+                    } else if (Calendar.getInstance().getTimeInMillis() > (infoBean.endtime * 1000L)) {
+                        ToastUtils.showLongToastSafe("该测试已经结束");
+                    } else {
+                        AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
+                    }
                 } else {
-                    AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
+                    // TODO: lwc 2018/3/26 测试用，不判断时间
+//                    ToastUtils.showLongToastSafe("考试时间设置错误");
+                    AnswerActivity.start(getContext(), infoBean.id, AnswerActivity.TYPE_KAOSHI_XUEXI);
                 }
             }
         } else {
