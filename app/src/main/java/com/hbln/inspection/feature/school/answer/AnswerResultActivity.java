@@ -20,7 +20,7 @@ import com.hbln.inspection.utils.TitleUtil;
  * @date -
  * @note -
  */
-public class AnswerResultActivity extends BaseActivity {
+public class AnswerResultActivity extends MyActivity {
     public static final String INTENT_TITLE = "title";
     public static final String INTENT_NUMS = "nums";
     public static final String INTENT_CHENG_JI = "chengji";

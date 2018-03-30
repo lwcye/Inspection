@@ -39,3 +39,8 @@
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);
 }
+
+#腾讯统计 start
+-keep class com.tencent.stat.* { ;}
+-keep class com.tencent.mid.* { ;}
+#腾讯统计 end

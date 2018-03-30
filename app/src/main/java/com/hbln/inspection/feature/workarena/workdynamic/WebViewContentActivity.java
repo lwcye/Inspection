@@ -31,6 +31,7 @@ import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.daimajia.swipe.SwipeLayout;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
@@ -59,7 +60,7 @@ import rx.functions.Action1;
  * @date -
  * @note -
  */
-public class WebViewContentActivity extends BaseActivity implements View.OnClickListener {
+public class WebViewContentActivity extends MyActivity implements View.OnClickListener {
     public static final String INTENT_ID = "ID";
     public static final String INTENT_TYPE = "type";
     public static boolean hasComment = true;

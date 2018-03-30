@@ -19,7 +19,7 @@ import com.hbln.lib_views.BottomPopupDialog;
  * 邮箱 784787081@qq.com
  */
 
-public class RegularDetailActivity extends BaseActivity implements View.OnClickListener {
+public class RegularDetailActivity extends MyActivity implements View.OnClickListener {
     
     private ImageButton mIbShaoolDetailFont;
     private ImageButton mIbShaoolDetailShare;

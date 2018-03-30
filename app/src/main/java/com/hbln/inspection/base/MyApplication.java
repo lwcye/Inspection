@@ -10,11 +10,16 @@ import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.stat.MtaSDkException;
+import com.tencent.stat.StatService;
+import com.tencent.stat.common.StatConstants;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.net.Proxy;
 
 import cn.jpush.android.api.JPushInterface;
+import rx.Observable;
+import rx.functions.Action1;
 
 /**
  * <p>describe</p><br>
@@ -50,6 +55,19 @@ public class MyApplication extends BaseApp {
         //极光推送
         JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);            // 初始化 JPush
+
+        Observable.just(null).subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                try {
+                    StatService.startStatService(getApplicationContext(), null, StatConstants.VERSION);
+                    LogUtils.e("初始化成功");
+                } catch (MtaSDkException e) {
+                    e.printStackTrace();
+                    LogUtils.e("初始化失败");
+                }
+            }
+        });
     }
 
     /**

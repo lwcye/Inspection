@@ -23,6 +23,7 @@ import com.hbln.inspection.feature.main.mainuser.MainUserFragment;
 import com.hbln.inspection.feature.main.message.MessageFragment;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.widget.DialogUtils;
+import com.tencent.stat.StatService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -80,6 +81,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             mRbMain0.setChecked(true);
             mIsKeepOut = false;
         }
+
+        // 进入首页事件,统计用户进入首页的次数
+        StatService.trackCustomKVEvent(this, "homepage", null);
     }
     
     private void initView() {

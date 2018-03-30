@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
@@ -17,6 +16,7 @@ import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.utils.TitleUtil;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
@@ -31,7 +31,7 @@ import com.trello.rxlifecycle.android.ActivityEvent;
  * @date -
  * @note -
  */
-public class ModifyPsdActivity extends BaseActivity implements View.OnClickListener {
+public class ModifyPsdActivity extends MyActivity implements View.OnClickListener {
     /** 请输入身份证号码 */
     private EditText mEtModifySfid;
     /** 请输入您的账号 */

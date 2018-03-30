@@ -11,9 +11,9 @@ import android.support.annotation.CallSuper;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.widget.x5.x5.JsBridgeWebViewWrapper;
 import com.hbln.inspection.widget.x5.x5.WebViewColorOption;
 import com.hbln.inspection.widget.x5.x5.WebViewOption;
@@ -32,7 +32,7 @@ import com.tencent.smtt.sdk.WebChromeClient;
  * @date -
  * @note -
  */
-public class JsBridgeX5WebViewActivity extends BaseActivity {
+public class JsBridgeX5WebViewActivity extends MyActivity {
     /** 选项(参数，WebViewOption) */
     public static final String EXTRA_OPTIONS = "extra_options";
     /** 颜色选项(参数，WebViewOption) */

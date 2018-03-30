@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.inspect.track.InspectTrackFragment;
 import com.hbln.inspection.feature.inspect.visit.InspectVisitFragment;
 import com.hbln.inspection.feature.main.MainActivity;
@@ -31,7 +31,7 @@ import java.util.List;
  * @date -
  * @note -
  */
-public class InspectActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class InspectActivity extends MyActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     /** 轨迹申报 */
     private RadioButton mRbInspect0;
     /** 线上家访 */

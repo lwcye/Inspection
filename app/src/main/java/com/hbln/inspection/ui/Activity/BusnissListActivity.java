@@ -18,6 +18,7 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.KaoShiModel;
+import com.cmcc.lib_utils.utils.ConstUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
@@ -44,7 +45,7 @@ import rx.Observable;
  * @date -
  * @note -
  */
-public class BusnissListActivity extends BaseActivity implements RUAdapter.OnItemClickListener {
+public class BusnissListActivity extends MyActivity implements RUAdapter.OnItemClickListener {
     public static final String INTENT_TYPE = "type";
     public static final int TYPE_XUEXI = 0;
     public static final int TYPE_CESHI = 1;
@@ -161,17 +162,15 @@ public class BusnissListActivity extends BaseActivity implements RUAdapter.OnIte
             } else {
                 AnswerResultActivity.TYPE = "在线测试";
                 if (infoBean.startime > 0 && infoBean.endtime > 0) {
-                    if (Calendar.getInstance().getTimeInMillis() < (infoBean.startime * 1000L)) {
+                    if (Calendar.getInstance().getTimeInMillis() < (infoBean.startime * ConstUtils.SEC)) {
                         ToastUtils.showLongToastSafe("还未到开始时间，请在" + infoBean.kaishitime + "以后进行测试");
-                    } else if (Calendar.getInstance().getTimeInMillis() > (infoBean.endtime * 1000L)) {
+                    } else if (Calendar.getInstance().getTimeInMillis() > (infoBean.endtime * ConstUtils.SEC)) {
                         ToastUtils.showLongToastSafe("该测试已经结束");
                     } else {
-                        AnswerActivity.start(getContext(), mList.get(position).id, AnswerActivity.TYPE_KAOSHI_CESHI);
+                        AnswerActivity.start(getContext(), mList.get(position).id, infoBean.startime, infoBean.endtime, AnswerActivity.TYPE_KAOSHI_CESHI);
                     }
                 } else {
-                    // TODO: lwc 2018/3/26 测试用，不判断时间
-//                    ToastUtils.showLongToastSafe("考试时间设置错误");
-                    AnswerActivity.start(getContext(), infoBean.id, AnswerActivity.TYPE_KAOSHI_XUEXI);
+                    ToastUtils.showLongToastSafe("考试时间设置错误");
                 }
             }
         } else {

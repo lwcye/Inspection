@@ -8,8 +8,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.accout.login.LoginActivity;
 import com.hbln.inspection.utils.TitleUtil;
 
@@ -19,7 +19,7 @@ import com.hbln.inspection.utils.TitleUtil;
  * 邮箱 784787081@qq.com
  */
 
-public class RegisterResultActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterResultActivity extends MyActivity implements View.OnClickListener {
     
     /** 返回登录界面 */
     private Button mTvRegisterConfirm;

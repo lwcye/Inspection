@@ -19,19 +19,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.cmcc.lib_network.model.JfShiTiModel;
-import com.cmcc.lib_utils.utils.EmptyUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.utils.TitleUtil;
-import com.hbln.lib_views.BottomPopupDialog;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -55,15 +53,13 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private static final String INTENT_START_TIME = "startTime";
     private static final String INTENT_END_TIME = "endTime";
     private static final String INTENT_TYPE = "type";
-    /** 题目ID和答案的集合 */
-    HashMap<String, String> mMap = new HashMap<>();
-    /** 纪检干部培训调查问卷 */
+    /** 标题 */
     private TextView mTvAnswerTitle;
     /** 2017-01-01    答题量：1234人 */
     private TextView mTvAnswerDate;
     /** 单选题 */
     private TextView mTvAnswerType;
-    /** 中央改进工作作风、密切联系群众八项规定出台后，各地严格执行公务接待制度，严格落实各项节约措施，坚决杜  绝公款浪费现象。我国政府狠杀浪费之风有利于？ */
+    /** 内容 */
     private TextView mTvAnswerContent;
     /** 践行政府宗旨，用手中权力造福人民 */
     private RadioButton mRbAnswer0;
@@ -77,13 +73,8 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     /** 下一题 */
     private Button mBtnAnswerNext;
     private JfShiTiModel mJfShiTiModel;
-    private int position = 1;
-    private int nums = 0;
-    private int indexDanxuan = 0;
-    private int indexDuoxuan = 0;
-    private int indexPanDuan = 0;
-    private int indexWenda = 0;
-    private int mQuestionType = 0;
+    private List<JfShiTiModel.ShiTiInfoBean.QuestionBean> mQuestionBeans;
+    private int position = 0;
     private int mType = 0;
     private String mSjid = "";
     private String name = "";
@@ -91,6 +82,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private String moblie = "";
     private long startTime = 0L;
     private long endTime = 0L;
+    private long delayTime = 0L;
     private EditText mEtAnswerWanda;
     /** 提交 */
     private Button mBtnAnswerSubmit;
@@ -104,9 +96,12 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private LinearLayout mRgAnswerDuoxuan;
     /** 正确答案：B */
     private TextView mTvAnswerOkDaan;
-    private boolean isLastQue = false;
-    /** 答题总数 */
-    private int count;
+    /** 上一题 */
+    private Button mBtnAnswerPre;
+    /** 正确答案 */
+    private Button mBtnAnswerOkAnswer;
+    /** 测试剩余时间： */
+    private TextView mTvAnswerCount;
 
     public static void start(Context context, String sjid, int type) {
         Intent starter = new Intent(context, AnswerActivity.class);
@@ -118,11 +113,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     /**
      * 在线测试
      *
-     * @param context
-     * @param sjid
+     * @param context 上下文
+     * @param sjid 试题ID
      * @param startTime 测试开始时间
      * @param endTime 测试结束时间
-     * @param type
+     * @param type 类型
      */
     public static void start(Context context, String sjid, long startTime, long endTime, int type) {
         Intent starter = new Intent(context, AnswerActivity.class);
@@ -136,11 +131,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     /**
      * 家访
      *
-     * @param context
-     * @param sjid
-     * @param name
-     * @param guanxi
-     * @param mobile
+     * @param context 上下文
+     * @param sjid 试题ID
+     * @param name 名字
+     * @param guanxi 关系
+     * @param mobile 手机
      */
     public static void start(Context context, String sjid, String name, String guanxi, String mobile) {
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(guanxi) || TextUtils.isEmpty(mobile) || TextUtils.isEmpty(sjid)) {
@@ -164,20 +159,15 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
-        mSjid = getIntent().getStringExtra(INTENT_ID);
-        name = getIntent().getStringExtra(INTENT_NAME);
-        guanxi = getIntent().getStringExtra(INTENT_GUANXI);
-        moblie = getIntent().getStringExtra(INTENT_MOBILE);
-        startTime = getIntent().getLongExtra(INTENT_START_TIME, 0L);
-        endTime = getIntent().getLongExtra(INTENT_END_TIME, 0L);
-        mType = getIntent().getIntExtra(INTENT_TYPE, 0);
+        handleIntent();
         initView();
         TitleUtil.attach(this)
                 .setBack(true);
+        //处理测试时间
         if (handleTestTime()) {
+            finish();
             return;
         }
-
 
         //请求试题
         mPresenter.loadData(mSjid, mType);
@@ -185,50 +175,21 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     }
 
     /**
-     * 处理开始时间
-     *
-     * @return
+     * 处理Intent
      */
-    private boolean handleTestTime() {
-        //判断开始时间
-        if (startTime > 0 && endTime > 0) {
-            long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;
-            if (timeInMillis < startTime) {
-                //未到开始时间，直接退出
-                ToastUtils.showShortToastSafe("还未到开始时间，请在" + TimeUtils.millis2String(startTime * 1000L) + "以后进行测试");
-                finish();
-                return true;
-            } else {
-                long delay = (endTime - timeInMillis) * 1000L;
-                if (delay > 0) {
-                    Observable.timer(delay, TimeUnit.MILLISECONDS)
-                            .compose(applySchedulers(ActivityEvent.DESTROY))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.io())
-                            .subscribe(new Action1<Object>() {
-                                @Override
-                                public void call(Object o) {
-                                    ProgressDialog progressDialog = new ProgressDialog(getContext());
-                                    progressDialog.setMessage("正在提交答案");
-                                    progressDialog.show();
-                                    performSubmit();
-                                }
-                            }, new Action1<Throwable>() {
-                                @Override
-                                public void call(Throwable throwable) {
-
-                                }
-                            });
-                } else {
-                    ToastUtils.showLongToastSafe("该测试已经结束");
-                    finish();
-                    return true;
-                }
-            }
-        }
-        return false;
+    private void handleIntent() {
+        mSjid = getIntent().getStringExtra(INTENT_ID);
+        name = getIntent().getStringExtra(INTENT_NAME);
+        guanxi = getIntent().getStringExtra(INTENT_GUANXI);
+        moblie = getIntent().getStringExtra(INTENT_MOBILE);
+        startTime = getIntent().getLongExtra(INTENT_START_TIME, 0L);
+        endTime = getIntent().getLongExtra(INTENT_END_TIME, 0L);
+        mType = getIntent().getIntExtra(INTENT_TYPE, 0);
     }
 
+    /**
+     * 初始化布局
+     */
     private void initView() {
         mTvAnswerTitle = (TextView) findViewById(R.id.tv_answer_title);
         mTvAnswerDate = (TextView) findViewById(R.id.tv_answer_date);
@@ -245,6 +206,10 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         mEtAnswerWanda = (EditText) findViewById(R.id.et_answer_wanda);
         mBtnAnswerSubmit = (Button) findViewById(R.id.btn_answer_submit);
         mBtnAnswerSubmit.setOnClickListener(this);
+        mBtnAnswerPre = (Button) findViewById(R.id.btn_answer_pre);
+        mBtnAnswerPre.setOnClickListener(this);
+        mBtnAnswerOkAnswer = (Button) findViewById(R.id.btn_answer_ok_answer);
+        mBtnAnswerOkAnswer.setOnClickListener(this);
         mRbAnswerPanduan0 = (RadioButton) findViewById(R.id.rb_answer_panduan_0);
         mRbAnswerPanduan1 = (RadioButton) findViewById(R.id.rb_answer_panduan_1);
         mRgAnswerPanduan = (RadioGroup) findViewById(R.id.rg_answer_panduan);
@@ -254,82 +219,93 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         mRbAnswerDuoxuan3 = (CheckBox) findViewById(R.id.rb_answer_duoxuan_3);
         mRgAnswerDuoxuan = (LinearLayout) findViewById(R.id.rg_answer_duoxuan);
         mTvAnswerOkDaan = (TextView) findViewById(R.id.tv_answer_ok_daan);
+        mTvAnswerCount = (TextView) findViewById(R.id.tv_answer_count);
 
         if (mType == TYPE_KAOSHI_XUEXI) {
-            mBtnAnswerNext.setVisibility(View.INVISIBLE);
-            mBtnAnswerSubmit.setVisibility(View.VISIBLE);
-        } else {
-            mBtnAnswerNext.setVisibility(View.VISIBLE);
-            mBtnAnswerSubmit.setVisibility(View.INVISIBLE);
+            mBtnAnswerOkAnswer.setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * 处理开始时间
+     *
+     * @return 是否退出
+     */
+    private boolean handleTestTime() {
+        //判断开始时间
+        if (startTime > 0 && endTime > 0) {
+            long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;
+            if (timeInMillis < startTime) {
+                //未到开始时间，直接退出
+                ToastUtils.showShortToastSafe("还未到开始时间，请在" + TimeUtils.millis2String(startTime * 1000L) + "以后进行测试");
+                return true;
+            } else {
+                final long delay = endTime - timeInMillis;
+                if (delay > 0) {
+                    delayTime = delay;
+                    mTvAnswerCount.setVisibility(View.VISIBLE);
+                    mTvAnswerCount.setText("测试剩余时间：" + TimeUtils.getFriendlyTimeSpan(delayTime * 1000L));
+                    Observable.interval(1, TimeUnit.SECONDS)
+                            .compose(applySchedulers(ActivityEvent.DESTROY))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Action1<Object>() {
+                                @Override
+                                public void call(Object o) {
+                                    if (delayTime == 0) {
+                                        answerHandle(position);
+                                        ProgressDialog progressDialog = new ProgressDialog(getContext());
+                                        progressDialog.setMessage("正在提交答案");
+                                        progressDialog.show();
+                                        performSubmit();
+                                    } else {
+                                        delayTime = delayTime - 1;
+                                        if (delayTime > 60) {
+                                            mTvAnswerCount.setTextColor(getCompatColor(R.color.black));
+                                        } else {
+                                            mTvAnswerCount.setTextColor(Color.RED);
+                                        }
+                                        mTvAnswerCount.setText("测试剩余时间：" + TimeUtils.getFriendlyTimeSpan(delayTime * 1000L));
+                                    }
+                                }
+                            }, new Action1<Throwable>() {
+                                @Override
+                                public void call(Throwable throwable) {
+                                    LogUtils.e(throwable);
+                                }
+                            });
+                } else {
+                    ToastUtils.showLongToastSafe("该测试已经结束");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ib_shaool_detail_font:
-                final BottomPopupDialog fontDialog = new BottomPopupDialog(getContext(), R.layout.dialog_font, true);
-                fontDialog.findViewById(R.id.btn_dialog_cancel).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        fontDialog.cancel();
-                    }
-                });
-                fontDialog.show();
-                break;
-            case R.id.ib_shaool_detail_share:
-                final BottomPopupDialog shareDialog = new BottomPopupDialog(getContext(), R.layout.dialog_share, true);
-                shareDialog.findViewById(R.id.btn_dialog_cancel).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        shareDialog.cancel();
-                    }
-                });
-                shareDialog.show();
-                break;
             case R.id.btn_answer_next:
-                if (answerHandle()) {
-                    return;
-                }
-                LogUtils.e(position, nums);
-                showAnswer();
+                answerHandle(position);
+                position++;
+                showAnswer(position);
                 break;
             case R.id.btn_answer_submit:
-                if (mType == TYPE_KAOSHI_XUEXI) {
-                    showRealAnswer();
-                    if (isLastQue) {
-                        ToastUtils.showShortToastSafe("请确认正确答案，3秒后将提交试卷");
-                        Observable.timer(3, TimeUnit.SECONDS)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Action1<Long>() {
-                                    @Override
-                                    public void call(Long aLong) {
-                                        if (answerHandle()) {
-                                            return;
-                                        }
-                                        performSubmit();
-                                    }
-                                }, new Action1<Throwable>() {
-                                    @Override
-                                    public void call(Throwable throwable) {
-                                        LogUtils.e(throwable);
-                                    }
-                                });
-                    } else {
-                        mBtnAnswerSubmit.setVisibility(View.INVISIBLE);
-                        mBtnAnswerNext.setVisibility(View.VISIBLE);
-                    }
-                    return;
-                }
-                if (answerHandle()) {
-                    return;
-                }
+                answerHandle(position);
                 performSubmit();
+                break;
+            case R.id.btn_answer_pre:
+                answerHandle(position);
+                position--;
+                showAnswer(position);
+                break;
+            case R.id.btn_answer_ok_answer:
+                showRealAnswer(position);
                 break;
             default:
                 break;
-
         }
     }
 
@@ -339,11 +315,9 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private void performSubmit() {
         StringBuilder ids = new StringBuilder();
         StringBuilder daans = new StringBuilder();
-        Set<String> keys = mMap.keySet();
-        for (String id : keys) {
-            ids.append(id).append(",");
-            String answer = mMap.get(id);
-            daans.append(answer).append("@");
+        for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mQuestionBeans) {
+            ids.append(questionBean.id).append(",");
+            daans.append(questionBean.answer).append("@");
         }
         CharSequence stids = ids.toString().subSequence(0, ids.toString().length() - 1);
         CharSequence daids = daans.toString().subSequence(0, daans.toString().length() - 1);
@@ -357,25 +331,35 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
 
     /**
      * 显示正确答案，只需要学习资料的栏目显示
+     *
+     * @param position
      */
-    private void showRealAnswer() {
+    private void showRealAnswer(int position) {
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
         //类型 0--单选 1--多选 2--判断 3--问答
-        if (mQuestionType == 0) {
+        if (JfShiTiModel.CAT_ID_DAN_XUAN == questionBean.catid) {
             //单选答案
             if (TextUtils.isEmpty(getRbIndex())) {
                 ToastUtils.showShortToastSafe("请选择一个选项");
             }
-            String okdaan = mJfShiTiModel.info.danxuan.get(indexDanxuan).okdaan.trim();
+            String okdaan = questionBean.okdaan.trim();
             mTvAnswerOkDaan.setText("正确答案：" + okdaan);
             RadioButton btn = null;
-            if (okdaan.equals("A")) {
-                btn = mRbAnswer0;
-            } else if (okdaan.equals("B")) {
-                btn = mRbAnswer1;
-            } else if (okdaan.equals("C")) {
-                btn = mRbAnswer2;
-            } else if (okdaan.equals("D")) {
-                btn = mRbAnswer3;
+            switch (okdaan) {
+                case "A":
+                    btn = mRbAnswer0;
+                    break;
+                case "B":
+                    btn = mRbAnswer1;
+                    break;
+                case "C":
+                    btn = mRbAnswer2;
+                    break;
+                case "D":
+                    btn = mRbAnswer3;
+                    break;
+                default:
+                    break;
             }
             if (getRbIndex().equals(okdaan)) {
                 mTvAnswerOkDaan.setTextColor(Color.GREEN);
@@ -402,35 +386,34 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                         break;
                 }
             }
-        } else if (mQuestionType == 1) {
+        } else if (JfShiTiModel.CAT_ID_DUO_XUAN == questionBean.catid) {
             //多选答案
             if (TextUtils.isEmpty(getRbDuoxuanIndex())) {
                 ToastUtils.showShortToastSafe("请至少选择一个选项");
             }
-            String okdaan = mJfShiTiModel.info.duoxuan.get(indexDuoxuan).okdaan.trim();
+            String okdaan = questionBean.okdaan.trim();
             mTvAnswerOkDaan.setText("正确答案：" + okdaan);
             if (getRbDuoxuanIndex().equals(okdaan)) {
                 mTvAnswerOkDaan.setTextColor(Color.GREEN);
             } else {
                 mTvAnswerOkDaan.setTextColor(Color.RED);
             }
-        } else if (mQuestionType == 2) {
+        } else if (JfShiTiModel.CAT_ID_PAN_DUAN == questionBean.catid) {
             //判断答案
-            JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean = mJfShiTiModel.info.panduan.get(indexPanDuan);
-            if (TextUtils.isEmpty(getRbPanDanIndex(panduanBean))) {
+            if (TextUtils.isEmpty(getRbPanDanIndex(questionBean))) {
                 ToastUtils.showShortToastSafe("请至少选择一个选项");
             }
-            String okdaan = panduanBean.okdaan.trim();
+            String okdaan = questionBean.okdaan.trim();
             mTvAnswerOkDaan.setText("正确答案：" + okdaan);
             RadioButton RadioButton;
-            if (panduanBean.danan.indexOf(getRbPanDanIndex(panduanBean)) == 0) {
+            if (questionBean.danan.indexOf(getRbPanDanIndex(questionBean)) == 0) {
                 RadioButton = mRbAnswerPanduan0;
             } else {
                 RadioButton = mRbAnswerPanduan1;
             }
             RadioButton.setTextColor(Color.GREEN);
 
-            if (getRbPanDanIndex(panduanBean).equals(okdaan)) {
+            if (getRbPanDanIndex(questionBean).equals(okdaan)) {
                 mTvAnswerOkDaan.setTextColor(Color.GREEN);
             } else {
                 mTvAnswerOkDaan.setTextColor(Color.RED);
@@ -445,22 +428,15 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         mTvAnswerOkDaan.setVisibility(View.VISIBLE);
     }
 
-    private void showAnswer() {
-        if (mJfShiTiModel.info.danxuan != null && indexDanxuan < mJfShiTiModel.info.danxuan.size()) {
-            mQuestionType = 0;
-            resetDanXuanData(mJfShiTiModel.info.danxuan.get(resetIndex(mQuestionType)));
-        } else if (mJfShiTiModel.info.duoxuan != null && indexDuoxuan < mJfShiTiModel.info.duoxuan.size()) {
-            mQuestionType = 1;
-            resetDuoXuanData(mJfShiTiModel.info.duoxuan.get(resetIndex(mQuestionType)));
-        } else if (mJfShiTiModel.info.panduan != null && indexPanDuan < mJfShiTiModel.info.panduan.size()) {
-            mQuestionType = 2;
-            resetPanDuanData(mJfShiTiModel.info.panduan.get(resetIndex(mQuestionType)));
-        } else {
-            mQuestionType = 3;
-            resetWenDaData(mJfShiTiModel.info.wenda.get(resetIndex(mQuestionType)));
-        }
+    /**
+     * 显示题目
+     *
+     * @param position 序号
+     */
+    private void showAnswer(int position) {
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
+        //初始化
         int color = getCompatColor(R.color.gray22);
-
         mRgAnswer.clearCheck();
         mRbAnswer0.setChecked(false);
         mRbAnswer1.setChecked(false);
@@ -487,132 +463,130 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         mRbAnswerPanduan1.setTextColor(color);
 
         mEtAnswerWanda.setText("");
-    }
+
+        //显示
+        if (questionBean.catid == JfShiTiModel.CAT_ID_DAN_XUAN) {
+            resetDanXuanData(questionBean);
+        } else if (questionBean.catid == JfShiTiModel.CAT_ID_DUO_XUAN) {
+            resetDuoXuanData(questionBean);
+        } else if (questionBean.catid == JfShiTiModel.CAT_ID_PAN_DUAN) {
+            resetPanDuanData(questionBean);
+        } else {
+            resetWenDaData(questionBean);
+        }
 
 
-    private int resetIndex(int type) {
-        position = indexDanxuan + indexDuoxuan + indexPanDuan + indexWenda + 1;
-        if (type == 0) {
-            return indexDanxuan;
+        /*
+        * 上一题：第二题开始都有前一题
+        * 下一题：最后一题没有，其他都有
+        * 提交：最后一题有
+        * 查看答案，学习资料有
+        */
+        if (position == 0) {
+            mBtnAnswerPre.setVisibility(View.GONE);
+        } else {
+            mBtnAnswerPre.setVisibility(View.VISIBLE);
         }
-        if (type == 1) {
-            return indexDuoxuan;
+        if (mType == TYPE_KAOSHI_XUEXI) {
+            mTvAnswerOkDaan.setVisibility(View.VISIBLE);
+        } else {
+            mTvAnswerOkDaan.setVisibility(View.GONE);
         }
-        if (type == 2) {
-            return indexPanDuan;
+        //判断是否是最后一题
+        if (this.position == mQuestionBeans.size() - 1) {
+            mBtnAnswerNext.setVisibility(View.GONE);
+            mBtnAnswerSubmit.setVisibility(View.VISIBLE);
+        } else {
+            mBtnAnswerNext.setVisibility(View.VISIBLE);
+            mBtnAnswerSubmit.setVisibility(View.GONE);
         }
-        if (type == 3) {
-            return indexWenda;
-        }
-        return position;
     }
 
     /**
      * 判断是否选择答案，如果是最后一题则不显示下一题
      *
-     * @return
+     * @param position 当前题号
      */
-    private boolean answerHandle() {
+    private void answerHandle(int position) {
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
         //类型 0--单选 1--多选 2--判断 3--问答
-        if (mQuestionType == 0) {
-            //单选答案
-            if (TextUtils.isEmpty(getRbIndex())) {
-                ToastUtils.showShortToastSafe("请选择一个选项");
-                return true;
-            }
-            mMap.put(mJfShiTiModel.info.danxuan.get(indexDanxuan).id, getRbIndex());
-            indexDanxuan++;
-        } else if (mQuestionType == 1) {
+        questionBean.answer = "";
+        if (JfShiTiModel.CAT_ID_DAN_XUAN == questionBean.catid) {
             //多选答案
-            if (TextUtils.isEmpty(getRbDuoxuanIndex())) {
-                ToastUtils.showShortToastSafe("请至少选择一个选项");
-                return true;
-            }
-            mMap.put(mJfShiTiModel.info.duoxuan.get(indexDuoxuan).id, getRbDuoxuanIndex());
-            indexDuoxuan++;
-        } else if (mQuestionType == 2) {
+            questionBean.answer = getRbIndex();
+        } else if (JfShiTiModel.CAT_ID_DUO_XUAN == questionBean.catid) {
+            //多选答案
+            questionBean.answer = getRbDuoxuanIndex();
+        } else if (JfShiTiModel.CAT_ID_PAN_DUAN == questionBean.catid) {
             //判断答案
-            LogUtils.e(indexPanDuan);
-            if (indexPanDuan >= mJfShiTiModel.info.panduan.size()) {
-                return true;
-            } else {
-                JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean = mJfShiTiModel.info.panduan.get(indexPanDuan);
-                if (TextUtils.isEmpty(getRbPanDanIndex(panduanBean))) {
-                    ToastUtils.showShortToastSafe("请至少选择一个选项");
-                    return true;
-                }
-                mMap.put(panduanBean.id, getRbPanDanIndex(panduanBean));
-                indexPanDuan++;
-            }
+            questionBean.answer = getRbPanDanIndex(questionBean);
         } else {
             //问答
-            mMap.put(mJfShiTiModel.info.wenda.get(indexWenda).id, mEtAnswerWanda.getText().toString().trim());
-            indexWenda++;
+            questionBean.answer = mEtAnswerWanda.getText().toString().trim();
         }
-        resetIndex(mQuestionType);
-        LogUtils.e(position, nums);
-        if (mType == TYPE_KAOSHI_XUEXI) {
-            mBtnAnswerNext.setVisibility(View.INVISIBLE);
-            mBtnAnswerSubmit.setVisibility(View.VISIBLE);
-            mTvAnswerOkDaan.setVisibility(View.INVISIBLE);
-        } else {
-            mBtnAnswerNext.setVisibility(View.VISIBLE);
-            mBtnAnswerSubmit.setVisibility(View.INVISIBLE);
-        }
-        //判断是否是最后一题
-        if (position >= nums) {
-            isLastQue = true;
-            mBtnAnswerNext.setVisibility(View.INVISIBLE);
-            mBtnAnswerSubmit.setVisibility(View.VISIBLE);
-        }
-        return false;
     }
 
     @Override
     public void setData(JfShiTiModel jfShiTiModel) {
         mJfShiTiModel = jfShiTiModel;
+        //标题
         mTvAnswerTitle.setText(mJfShiTiModel.info.title);
-        int duannums = TextUtils.isEmpty(mJfShiTiModel.info.dannums) ? 0 : Integer.valueOf(mJfShiTiModel.info.dannums);
-        int duonums = TextUtils.isEmpty(mJfShiTiModel.info.duonums) ? 0 : Integer.valueOf(mJfShiTiModel.info.duonums);
-        int panduannums = TextUtils.isEmpty(mJfShiTiModel.info.panduannums) ? 0 : Integer.valueOf(mJfShiTiModel.info.panduannums);
-        int wendannums = TextUtils.isEmpty(mJfShiTiModel.info.wendannums) ? 0 : Integer.valueOf(mJfShiTiModel.info.wendannums);
-        count = duannums + duonums + panduannums + wendannums;
+        //问题
+        mQuestionBeans = new ArrayList<>();
+        if (mJfShiTiModel.info.danxuan != null) {
+            mQuestionBeans.addAll(mJfShiTiModel.info.danxuan);
+        }
+        if (mJfShiTiModel.info.duoxuan != null) {
+            mQuestionBeans.addAll(mJfShiTiModel.info.duoxuan);
+        }
+        if (mJfShiTiModel.info.panduan != null) {
+            mQuestionBeans.addAll(mJfShiTiModel.info.panduan);
+        }
+        if (mJfShiTiModel.info.wenda != null) {
+            mQuestionBeans.addAll(mJfShiTiModel.info.wenda);
+        }
+        if (mQuestionBeans.size() <= 0) {
+            ToastUtils.showShortToastSafe("该测试没有题目，请稍后再试");
+            finish();
+            return;
+        }
+        //时间和题量
         mTvAnswerDate.setText(mJfShiTiModel.info.times + "\t\t"
-                + "答题量：共" + count + "题");
-        if (!EmptyUtils.isEmpty(mJfShiTiModel.info.danxuan)) {
-            nums += mJfShiTiModel.info.danxuan.size();
-        }
-        if (!EmptyUtils.isEmpty(mJfShiTiModel.info.duoxuan)) {
-            nums += mJfShiTiModel.info.duoxuan.size();
-        }
-        if (!EmptyUtils.isEmpty(mJfShiTiModel.info.panduan)) {
-            nums += mJfShiTiModel.info.panduan.size();
-        }
-        if (!EmptyUtils.isEmpty(mJfShiTiModel.info.wenda)) {
-            nums += mJfShiTiModel.info.wenda.size();
-        }
-
-        showAnswer();
+                + "答题量：共" + mQuestionBeans.size() + "题");
+        //显示题目
+        position = 0;
+        showAnswer(position);
     }
 
     @Override
     public void submitSuccess(String message) {
         if (!TextUtils.isEmpty(message)) {
+            int num = 0;
+            for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mQuestionBeans) {
+                if (!TextUtils.isEmpty(questionBean.answer)) {
+                    num++;
+                }
+            }
             AnswerResultActivity.start(getContext(), mJfShiTiModel.info.title,
-                    count + "",
+                    num + "/" + mQuestionBeans.size(),
                     message);
         }
         finish();
     }
 
-    public void resetDanXuanData(JfShiTiModel.ShiTiInfoBean.DanxuanBean danxuanBean) {
+    /**
+     * 重置单选数据
+     *
+     * @param danxuanBean 单选实例
+     */
+    public void resetDanXuanData(JfShiTiModel.ShiTiInfoBean.QuestionBean danxuanBean) {
         mTvAnswerType.setText("单选题");
         mRgAnswer.setVisibility(View.VISIBLE);
         mRgAnswerDuoxuan.setVisibility(View.GONE);
         mRgAnswerPanduan.setVisibility(View.GONE);
         mEtAnswerWanda.setVisibility(View.GONE);
 
-        mTvAnswerContent.setText(position + "、" + danxuanBean.title);
+        mTvAnswerContent.setText((position + 1) + "、" + danxuanBean.title);
 
         for (int i = 0; i < danxuanBean.danan.size(); i++) {
             RadioButton button;
@@ -632,16 +606,37 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 button.setText(danxuanBean.danan.get(i));
             }
         }
+
+        //已选择答案
+        if (!TextUtils.isEmpty(danxuanBean.answer)) {
+            int rbIndex = getRbIndex(danxuanBean.answer);
+            RadioButton button;
+            if (rbIndex == 0) {
+                button = mRbAnswer0;
+            } else if (rbIndex == 1) {
+                button = mRbAnswer1;
+            } else if (rbIndex == 2) {
+                button = mRbAnswer2;
+            } else {
+                button = mRbAnswer3;
+            }
+            button.setChecked(true);
+        }
     }
 
-    public void resetDuoXuanData(JfShiTiModel.ShiTiInfoBean.DuoxuanBean duoxuanBean) {
+    /**
+     * 重置多选的题目
+     *
+     * @param duoxuanBean 多选实例
+     */
+    public void resetDuoXuanData(JfShiTiModel.ShiTiInfoBean.QuestionBean duoxuanBean) {
         mTvAnswerType.setText("多选题");
         mRgAnswer.setVisibility(View.GONE);
         mRgAnswerDuoxuan.setVisibility(View.VISIBLE);
         mRgAnswerPanduan.setVisibility(View.GONE);
         mEtAnswerWanda.setVisibility(View.GONE);
 
-        mTvAnswerContent.setText(position + "、" + duoxuanBean.title);
+        mTvAnswerContent.setText((position + 1) + "、" + duoxuanBean.title);
         for (int i = 0; i < duoxuanBean.danan.size(); i++) {
             CheckBox button;
             if (i == 0) {
@@ -660,16 +655,34 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 button.setText(duoxuanBean.danan.get(i));
             }
         }
+        //已选择答案
+        if (!TextUtils.isEmpty(duoxuanBean.answer)) {
+            for (int i = 0; i < duoxuanBean.answer.length(); i++) {
+                char s1 = duoxuanBean.answer.charAt(i);
+                int rbIndex = getRbIndex(String.valueOf(s1));
+                CheckBox button;
+                if (rbIndex == 0) {
+                    button = mRbAnswerDuoxuan0;
+                } else if (rbIndex == 1) {
+                    button = mRbAnswerDuoxuan1;
+                } else if (rbIndex == 2) {
+                    button = mRbAnswerDuoxuan2;
+                } else {
+                    button = mRbAnswerDuoxuan3;
+                }
+                button.setChecked(true);
+            }
+        }
     }
 
-    private void resetPanDuanData(JfShiTiModel.ShiTiInfoBean.PanduanBean panduanBean) {
+    private void resetPanDuanData(JfShiTiModel.ShiTiInfoBean.QuestionBean panduanBean) {
         mTvAnswerType.setText("判断题");
         mRgAnswer.setVisibility(View.GONE);
         mRgAnswerDuoxuan.setVisibility(View.GONE);
         mRgAnswerPanduan.setVisibility(View.VISIBLE);
         mEtAnswerWanda.setVisibility(View.GONE);
 
-        mTvAnswerContent.setText(position + "、" + panduanBean.title);
+        mTvAnswerContent.setText((position + 1) + "、" + panduanBean.title);
         for (int i = 0; i < panduanBean.danan.size(); i++) {
             RadioButton button;
             if (i == 0) {
@@ -684,16 +697,32 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 button.setText(panduanBean.danan.get(i));
             }
         }
+        //已选择答案
+        if (!TextUtils.isEmpty(panduanBean.answer)) {
+            int rbIndex = panduanBean.danan.indexOf(panduanBean.answer);
+            RadioButton button;
+            if (rbIndex == 0) {
+                button = mRbAnswerPanduan0;
+            } else {
+                button = mRbAnswerPanduan0;
+            }
+            button.setChecked(true);
+        }
     }
 
-    public void resetWenDaData(JfShiTiModel.ShiTiInfoBean.WendaBean danxuanBean) {
+    public void resetWenDaData(JfShiTiModel.ShiTiInfoBean.QuestionBean WenDaBean) {
         mTvAnswerType.setText("问答题");
         mRgAnswer.setVisibility(View.GONE);
         mRgAnswerDuoxuan.setVisibility(View.GONE);
         mRgAnswerPanduan.setVisibility(View.GONE);
         mEtAnswerWanda.setVisibility(View.VISIBLE);
 
-        mTvAnswerContent.setText(position + "、" + danxuanBean.title);
+        mTvAnswerContent.setText((position + 1) + "、" + WenDaBean.title);
+
+        //已选择答案
+        if (!TextUtils.isEmpty(WenDaBean.answer)) {
+            mEtAnswerWanda.setText(WenDaBean.answer);
+        }
     }
 
     @Override
@@ -710,7 +739,6 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
             default:
                 break;
         }
-
     }
 
     /**
@@ -762,7 +790,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * @param bean
      * @return
      */
-    public String getRbPanDanIndex(JfShiTiModel.ShiTiInfoBean.PanduanBean bean) {
+    public String getRbPanDanIndex(JfShiTiModel.ShiTiInfoBean.QuestionBean bean) {
         if (mRbAnswerPanduan0.isChecked()) {
             return bean.danan.get(0);
         }

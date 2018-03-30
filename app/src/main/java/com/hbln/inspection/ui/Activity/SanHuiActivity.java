@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
@@ -19,6 +18,7 @@ import com.cmcc.lib_network.model.FortressHomeModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
@@ -41,7 +41,7 @@ import java.util.List;
  * @date -
  * @note -
  */
-public class SanHuiActivity extends BaseActivity implements RUAdapter.OnItemClickListener {
+public class SanHuiActivity extends MyActivity implements RUAdapter.OnItemClickListener {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
@@ -21,6 +20,7 @@ import com.cmcc.lib_network.http.NetWorkInterceptor;
 import com.cmcc.lib_network.model.FortressHomeModel;
 import com.cmcc.lib_network.model.WebViewModel;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
@@ -43,7 +43,7 @@ import rx.Observable;
  * @date -
  * @note -
  */
-public class ListActivity extends BaseActivity implements RUAdapter.OnItemClickListener {
+public class ListActivity extends MyActivity implements RUAdapter.OnItemClickListener {
     public static final String INTENT_TYPE = "type";
     public static final int TYPE_WENTI = 0;
     public static final int TYPE_DANG_FEI = 1;

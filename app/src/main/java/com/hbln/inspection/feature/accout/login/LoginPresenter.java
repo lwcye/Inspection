@@ -2,7 +2,6 @@ package com.hbln.inspection.feature.accout.login;
 
 import android.text.TextUtils;
 
-import com.hbln.inspection.mvp.BasePresenterImpl;
 import com.cmcc.lib_network.constans.URLs;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
@@ -10,6 +9,8 @@ import com.cmcc.lib_network.http.HttpRequest;
 import com.cmcc.lib_network.http.HttpResult;
 import com.cmcc.lib_network.model.LoginModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
+import com.hbln.inspection.mvp.BasePresenterImpl;
+import com.tencent.stat.StatService;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 /**
@@ -24,6 +25,9 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
         LoginModel.initUserInfo();
         if (!TextUtils.isEmpty(URLs.UID) && !TextUtils.isEmpty(URLs.ACCESS_TOKEN)) {
             getView().resultLogin(new LoginModel());
+        } else {
+            // 用户登录事件，统计用户点击登录按钮的次数
+            StatService.trackCustomKVEvent(getView().getBaseActivity(), "login", null);
         }
     }
 

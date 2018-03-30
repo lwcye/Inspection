@@ -25,9 +25,14 @@ android {
         // 打包资源种类配置
         resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
         manifestPlaceholders = [
+                //极光推送
                 JPUSH_PKGNAME : applicationId,
                 JPUSH_APPKEY : "b916cc14e1377fa821ae88fb", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+
+                //腾讯统计
+                MTA_APPKEY:"A8GQD652JVVG",
+                MTA_CHANNEL:"lwc"
         ]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -110,4 +115,7 @@ dependencies {
     compile files('libs/umerror_android_1.0.0.jar')
     compile 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
+
+    compile 'com.qq.mta:mta:3.3.1-release'
+    compile 'com.tencent.mid:mid:3.73-release'
 }

@@ -21,6 +21,7 @@ import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.utils.TitleUtil;
+import com.tencent.stat.StatService;
 
 import rx.functions.Action0;
 
@@ -70,6 +71,9 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
+
+        // 用户注册事件，统计用户点击注册按钮的次数
+        StatService.trackCustomKVEvent(this, "register", null);
     }
     
     /**

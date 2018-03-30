@@ -3,8 +3,8 @@ package com.hbln.inspection.mvp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_common.mvp.BaseView;
+import com.hbln.inspection.base.MyActivity;
 
 
 /**
@@ -18,7 +18,7 @@ import com.cmcc.lib_common.mvp.BaseView;
  * @date -
  * @note -
  */
-public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends BaseActivity implements BaseView {
+public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresenterImpl<V>> extends MyActivity implements BaseView {
     public T mPresenter;
 
     @Override

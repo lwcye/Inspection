@@ -139,6 +139,7 @@ public class CrashUtils implements UncaughtExceptionHandler {
     
     @Override
     public void uncaughtException(Thread thread, final Throwable throwable) {
+        LogUtils.e(throwable);
         String now = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         final String fullPath = crashDir + now + ".txt";
         if (!createOrExistsFile(fullPath)) {

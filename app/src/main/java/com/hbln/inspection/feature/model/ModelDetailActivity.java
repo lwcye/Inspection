@@ -54,7 +54,7 @@ import rx.functions.Action1;
  * @date -
  * @note -
  */
-public class ModelDetailActivity extends BaseActivity implements View.OnClickListener {
+public class ModelDetailActivity extends MyActivity implements View.OnClickListener {
     public static final String INTENT_ID = "ID";
     public static final String INTENT_TYPE = "type";
     public int mType = 0;

@@ -775,6 +775,20 @@ public class TimeUtils {
         }
     }
 
+    public static String getFriendlyTimeSpan(long span) {
+        if (span < 0)
+            return String.format("%tc", span);// U can read http://www.apihome.cn/api/java/Formatter.html to understand it.
+        if (span < 1000) {
+            return "0秒";
+        } else if (span < ConstUtils.MIN) {
+            return String.format("%d秒", span / ConstUtils.SEC);
+        } else if (span < ConstUtils.HOUR) {
+            return String.format("%d分钟", span / ConstUtils.MIN);
+        } else {
+            return String.format("%d小时", span / ConstUtils.HOUR);
+        }
+    }
+
     /**
      * 判断是否同一天
      * <p>time格式为yyyy-MM-dd HH:mm:ss</p>
