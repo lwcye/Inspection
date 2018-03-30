@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cmcc.lib_network.model.ObjectModel;
 import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_utils.utils.AppUtils;
 import com.hbln.inspection.R;
@@ -27,21 +28,33 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
     private TextView mRight;
     private View mVTitleBarShadow;
     private LinearLayout mLlTitle;
-    /** 李勇 */
+    /**
+     * 李勇
+     */
     private TextView mTvUserName;
-    /** 00000000000000000 */
+    /**
+     * 00000000000000000
+     */
     private TextView mTvUserSfid;
-    /** 00000000000 */
+    /**
+     * 00000000000
+     */
     private TextView mTvUserMobile;
-    /** 巡查三组--职务 */
+    /**
+     * 巡查三组--职务
+     */
     private TextView mTvUserDanwei;
     private TextView mTvUserTest;
     private LinearLayout mLlUserTest;
+    private TextView mTvUserRead;
+    private LinearLayout mLlUserRead;
     private TextView mTvUserMail;
     private LinearLayout mLlUserMail;
     private TextView mTvUserChange;
     private LinearLayout mLlUserChange;
-    /** 退出登录 */
+    /**
+     * 退出登录
+     */
     private Button mTvUserLogout;
 
     @Override
@@ -57,6 +70,7 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
     public void onResume() {
         super.onResume();
         mPresenter.loadUserInfo();
+        mPresenter.loadRead();
     }
 
     @Override
@@ -72,7 +86,9 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
         mTvUserMobile = (TextView) view.findViewById(R.id.tv_user_mobile);
         mTvUserDanwei = (TextView) view.findViewById(R.id.tv_user_danwei);
         mTvUserTest = (TextView) view.findViewById(R.id.tv_user_test);
+        mTvUserRead = (TextView) view.findViewById(R.id.tv_user_read);
         mLlUserTest = (LinearLayout) view.findViewById(R.id.ll_user_test);
+        mLlUserRead = (LinearLayout) view.findViewById(R.id.ll_user_read);
         mLlUserTest.setOnClickListener(this);
         mLlUserTest.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -129,6 +145,14 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
             mTvUserSfid.setText(userInfoModel.sfid);
             mTvUserMobile.setText(userInfoModel.mobile);
             mTvUserDanwei.setText(userInfoModel.danwei);
+        }
+    }
+
+    @Override
+    public void resultRead(ObjectModel userInfoModel) {
+        try {
+            mTvUserRead.setText(String.format("%.2f", Float.valueOf(userInfoModel.info.toString()) * 100) + "%");
+        } catch (NumberFormatException ignored) {
         }
     }
 }

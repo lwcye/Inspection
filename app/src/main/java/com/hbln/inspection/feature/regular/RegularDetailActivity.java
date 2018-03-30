@@ -8,8 +8,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.lib_views.BottomPopupDialog;
 

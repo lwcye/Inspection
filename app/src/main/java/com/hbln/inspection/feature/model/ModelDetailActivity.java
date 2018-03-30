@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
@@ -25,6 +24,7 @@ import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_network.model.ZanModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;

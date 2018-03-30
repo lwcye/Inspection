@@ -53,24 +53,42 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private static final String INTENT_START_TIME = "startTime";
     private static final String INTENT_END_TIME = "endTime";
     private static final String INTENT_TYPE = "type";
-    /** 标题 */
+    /**
+     * 标题
+     */
     private TextView mTvAnswerTitle;
-    /** 2017-01-01    答题量：1234人 */
+    /**
+     * 2017-01-01    答题量：1234人
+     */
     private TextView mTvAnswerDate;
-    /** 单选题 */
+    /**
+     * 单选题
+     */
     private TextView mTvAnswerType;
-    /** 内容 */
+    /**
+     * 内容
+     */
     private TextView mTvAnswerContent;
-    /** 践行政府宗旨，用手中权力造福人民 */
+    /**
+     * 践行政府宗旨，用手中权力造福人民
+     */
     private RadioButton mRbAnswer0;
-    /** 加强廉政建设，以清廉党风带好民风 */
+    /**
+     * 加强廉政建设，以清廉党风带好民风
+     */
     private RadioButton mRbAnswer1;
-    /** 广泛吸收民智，增强决策公众参与度 */
+    /**
+     * 广泛吸收民智，增强决策公众参与度
+     */
     private RadioButton mRbAnswer2;
-    /** 提升德行操守，树立政府威信 */
+    /**
+     * 提升德行操守，树立政府威信
+     */
     private RadioButton mRbAnswer3;
     private RadioGroup mRgAnswer;
-    /** 下一题 */
+    /**
+     * 下一题
+     */
     private Button mBtnAnswerNext;
     private JfShiTiModel mJfShiTiModel;
     private List<JfShiTiModel.ShiTiInfoBean.QuestionBean> mQuestionBeans;
@@ -84,7 +102,9 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private long endTime = 0L;
     private long delayTime = 0L;
     private EditText mEtAnswerWanda;
-    /** 提交 */
+    /**
+     * 提交
+     */
     private Button mBtnAnswerSubmit;
     private RadioButton mRbAnswerPanduan0;
     private RadioButton mRbAnswerPanduan1;
@@ -94,13 +114,21 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private CheckBox mRbAnswerDuoxuan2;
     private CheckBox mRbAnswerDuoxuan3;
     private LinearLayout mRgAnswerDuoxuan;
-    /** 正确答案：B */
+    /**
+     * 正确答案：B
+     */
     private TextView mTvAnswerOkDaan;
-    /** 上一题 */
+    /**
+     * 上一题
+     */
     private Button mBtnAnswerPre;
-    /** 正确答案 */
+    /**
+     * 正确答案
+     */
     private Button mBtnAnswerOkAnswer;
-    /** 测试剩余时间： */
+    /**
+     * 测试剩余时间：
+     */
     private TextView mTvAnswerCount;
 
     public static void start(Context context, String sjid, int type) {
@@ -113,11 +141,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     /**
      * 在线测试
      *
-     * @param context 上下文
-     * @param sjid 试题ID
+     * @param context   上下文
+     * @param sjid      试题ID
      * @param startTime 测试开始时间
-     * @param endTime 测试结束时间
-     * @param type 类型
+     * @param endTime   测试结束时间
+     * @param type      类型
      */
     public static void start(Context context, String sjid, long startTime, long endTime, int type) {
         Intent starter = new Intent(context, AnswerActivity.class);
@@ -132,10 +160,10 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * 家访
      *
      * @param context 上下文
-     * @param sjid 试题ID
-     * @param name 名字
-     * @param guanxi 关系
-     * @param mobile 手机
+     * @param sjid    试题ID
+     * @param name    名字
+     * @param guanxi  关系
+     * @param mobile  手机
      */
     public static void start(Context context, String sjid, String name, String guanxi, String mobile) {
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(guanxi) || TextUtils.isEmpty(mobile) || TextUtils.isEmpty(sjid)) {
@@ -240,8 +268,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 ToastUtils.showShortToastSafe("还未到开始时间，请在" + TimeUtils.millis2String(startTime * 1000L) + "以后进行测试");
                 return true;
             } else {
-                final long delay = endTime - timeInMillis;
+                long delay = endTime - timeInMillis;
                 if (delay > 0) {
+                    if (delay > 60 * 60) {
+                        delay = 60 * 60;
+                    }
                     delayTime = delay;
                     mTvAnswerCount.setVisibility(View.VISIBLE);
                     mTvAnswerCount.setText("测试剩余时间：" + TimeUtils.getFriendlyTimeSpan(delayTime * 1000L));
@@ -260,7 +291,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                                         performSubmit();
                                     } else {
                                         delayTime = delayTime - 1;
-                                        if (delayTime > 60) {
+                                        if (delayTime > 60 * 5) {
                                             mTvAnswerCount.setTextColor(getCompatColor(R.color.black));
                                         } else {
                                             mTvAnswerCount.setTextColor(Color.RED);

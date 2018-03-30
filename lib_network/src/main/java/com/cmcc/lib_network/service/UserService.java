@@ -153,4 +153,10 @@ public interface UserService {
             @Field("sxid") String sxid,
             @Field("nozan") String nozan
     );
+
+    /**
+     * 阅读量
+     */
+    @POST("public/api/guiji/yuedulv")
+    Observable<ObjectModel> yuedulv();
 }

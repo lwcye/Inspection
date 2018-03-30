@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.utils.TitleUtil;
 
 /**

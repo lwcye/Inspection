@@ -1,92 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/layout_background_default"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_background_default"
+    android:orientation="vertical">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar" />
 
-    <LinearLayout
-        style="@style/cell_linlay">
+    <LinearLayout style="@style/cell_linlay">
 
         <TextView
             style="@style/cell_text_left"
             android:layout_width="@dimen/x70"
             android:gravity="center_vertical|right"
             android:text="姓名"
-            android:textColor="@color/black_hint"/>
+            android:textColor="@color/black_hint" />
 
         <TextView
             android:id="@+id/tv_user_name"
             style="@style/cell_text_right"
             android:drawableRight="@null"
             android:gravity="center_vertical"
-            tools:text="李勇"/>
+            tools:text="李勇" />
     </LinearLayout>
 
-    <View style="@style/view_line"/>
+    <View style="@style/view_line" />
 
-    <LinearLayout
-        style="@style/cell_linlay">
+    <LinearLayout style="@style/cell_linlay">
 
         <TextView
             style="@style/cell_text_left"
             android:layout_width="@dimen/x70"
             android:gravity="center_vertical|right"
             android:text="身份证号码"
-            android:textColor="@color/black_hint"/>
+            android:textColor="@color/black_hint" />
 
         <TextView
             android:id="@+id/tv_user_sfid"
             style="@style/cell_text_right"
             android:drawableRight="@null"
             android:gravity="center_vertical"
-            tools:text="00000000000000000"/>
+            tools:text="00000000000000000" />
     </LinearLayout>
 
-    <View style="@style/view_line"/>
+    <View style="@style/view_line" />
 
-    <LinearLayout
-        style="@style/cell_linlay">
+    <LinearLayout style="@style/cell_linlay">
 
         <TextView
             style="@style/cell_text_left"
             android:layout_width="@dimen/x70"
             android:gravity="center_vertical|right"
             android:text="联系方式"
-            android:textColor="@color/black_hint"/>
+            android:textColor="@color/black_hint" />
 
         <TextView
             android:id="@+id/tv_user_mobile"
             style="@style/cell_text_right"
             android:drawableRight="@null"
             android:gravity="center_vertical"
-            tools:text="00000000000"/>
+            tools:text="00000000000" />
     </LinearLayout>
 
-    <View style="@style/view_line"/>
+    <View style="@style/view_line" />
 
-    <LinearLayout
-        style="@style/cell_linlay">
+    <LinearLayout style="@style/cell_linlay">
 
         <TextView
             style="@style/cell_text_left"
             android:layout_width="@dimen/x70"
             android:gravity="center_vertical|right"
             android:text="单位及职务"
-            android:textColor="@color/black_hint"/>
+            android:textColor="@color/black_hint" />
 
         <TextView
             android:id="@+id/tv_user_danwei"
             style="@style/cell_text_right"
             android:drawableRight="@null"
             android:gravity="center_vertical"
-            tools:text="巡查三组--职务"/>
+            tools:text="巡查三组--职务" />
     </LinearLayout>
 
-    <View style="@style/view_line_block"/>
+    <View style="@style/view_line_block" />
+
+    <LinearLayout
+        android:id="@+id/ll_user_read"
+        style="@style/cell_linlay">
+
+        <TextView
+            style="@style/cell_text_left"
+            android:text="阅读率" />
+
+        <TextView
+            android:id="@+id/tv_user_read"
+            android:drawableRight="@null"
+            style="@style/cell_text_right" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_user_test"
@@ -94,14 +104,14 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="我的试卷"/>
+            android:text="我的试卷" />
 
         <TextView
             android:id="@+id/tv_user_test"
-            style="@style/cell_text_right"/>
+            style="@style/cell_text_right" />
     </LinearLayout>
 
-    <View style="@style/view_line"/>
+    <View style="@style/view_line" />
 
     <LinearLayout
         android:id="@+id/ll_user_mail"
@@ -109,14 +119,14 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="通讯录"/>
+            android:text="通讯录" />
 
         <TextView
             android:id="@+id/tv_user_mail"
-            style="@style/cell_text_right"/>
+            style="@style/cell_text_right" />
     </LinearLayout>
 
-    <View style="@style/view_line_block"/>
+    <View style="@style/view_line_block" />
 
     <LinearLayout
         android:id="@+id/ll_user_change"
@@ -124,19 +134,19 @@
 
         <TextView
             style="@style/cell_text_left"
-            android:text="修改密码"/>
+            android:text="修改密码" />
 
         <TextView
             android:id="@+id/tv_user_change"
-            style="@style/cell_text_right"/>
+            style="@style/cell_text_right" />
     </LinearLayout>
 
-    <View style="@style/view_line"/>
+    <View style="@style/view_line" />
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/tv_user_logout"
@@ -147,5 +157,5 @@
         android:background="@drawable/bg_btn_answer"
         android:text="退出登录"
         android:textColor="@color/white"
-        android:textSize="@dimen/t18"/>
+        android:textSize="@dimen/t18" />
 </LinearLayout>

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.cmcc.lib_network.http.HttpComplete;
 import com.cmcc.lib_network.http.HttpError;
 import com.cmcc.lib_network.http.HttpRequest;
@@ -21,6 +20,7 @@ import com.cmcc.lib_network.model.KaoShiModel;
 import com.cmcc.lib_utils.utils.ConstUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.MyActivity;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
 import com.hbln.inspection.feature.school.answer.AnswerResultActivity;
 import com.hbln.inspection.ui.adapter.RUAdapter;
