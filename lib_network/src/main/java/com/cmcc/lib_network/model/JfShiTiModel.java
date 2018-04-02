@@ -1,5 +1,12 @@
 package com.cmcc.lib_network.model;
 
+import android.text.TextUtils;
+
+import com.cmcc.lib_utils.utils.TimeUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,6 +31,7 @@ public class JfShiTiModel extends ResultModel {
 
     public ShiTiInfoBean info;
 
+
     public static class ShiTiInfoBean {
         /**
          * id : 1
@@ -45,7 +53,7 @@ public class JfShiTiModel extends ResultModel {
         public String duonums;
         public String wendannums;
         public String panduannums;
-        public String create_time;
+        public long create_time;
         public String pic;
         public String typeid;
         public String nums;
@@ -53,10 +61,73 @@ public class JfShiTiModel extends ResultModel {
         public List<QuestionBean> duoxuan;
         public List<QuestionBean> wenda;
         public List<QuestionBean> panduan;
+        public List<QuestionBean> questionList;
         public String danxuanfenshu;
         public String duoxuanfenshu;
         public String panduanfenshu;
         public String times;
+        /** 我的试题的字段 */
+        public String uid;
+        public String name;
+        public String sjid;
+        public String stids;
+        public String daids;
+        public String fenshu;
+        public String sjtitle;
+        public List<QuestionBean> tilist;
+
+        /**
+         * 初始化问题列表
+         */
+        public void initData() {
+            questionList = new ArrayList<>();
+            if (danxuan != null) {
+                questionList.addAll(danxuan);
+            }
+            if (duoxuan != null) {
+                questionList.addAll(duoxuan);
+            }
+            if (panduan != null) {
+                questionList.addAll(panduan);
+            }
+            if (wenda != null) {
+                questionList.addAll(wenda);
+            }
+
+            //我的试题的字段
+            if (tilist != null) {
+                questionList.addAll(tilist);
+            }
+            if (questionList.size() > 0) {
+                for (QuestionBean questionBean : questionList) {
+                    if (questionBean.danan == null || questionBean.danan.size() == 0) {
+                        questionBean.danan = Arrays.asList(questionBean.daan.split("\\|"));
+                    }
+                }
+            }
+        }
+
+        /**
+         * 设置答案数据
+         */
+        public void resetAnswerData() {
+            if (questionList.size() > 0 && !TextUtils.isEmpty(stids) && !TextUtils.isEmpty(stids)) {
+                List<String> ids = Arrays.asList(stids.split(","));
+                List<String> das = Arrays.asList(daids.split("@"));
+                HashMap<String, String> map = new HashMap<>();
+                for (int i = 0; i < ids.size(); i++) {
+                    map.put(ids.get(i), das.get(i));
+                }
+                for (QuestionBean questionBean : questionList) {
+                    if (map.containsKey(questionBean.id)) {
+                        questionBean.answer = map.get(questionBean.id);
+                    }
+                }
+            }
+            title = sjtitle;
+            times = TimeUtils.millis2String(create_time * 1000L, "yyyy-MM-dd");
+        }
+
 
         public static class QuestionBean {
             public String id;
@@ -69,6 +140,7 @@ public class JfShiTiModel extends ResultModel {
             public String daanjiexi;
             public String okdaan;
             public String create_time;
+            public String leixing;
             public String answer;
         }
     }

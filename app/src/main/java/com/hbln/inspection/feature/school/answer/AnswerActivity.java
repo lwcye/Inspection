@@ -27,9 +27,7 @@ import com.hbln.inspection.mvp.MVPBaseActivity;
 import com.hbln.inspection.utils.TitleUtil;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -46,6 +44,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     public static final int TYPE_KAOSHI_XUEXI = 10;
     public static final int TYPE_KAOSHI_CESHI = 11;
     public static final int TYPE_VISIT = 1;
+    public static final int TYPE_TEST = 2;
     private static final String INTENT_ID = "sjid";
     private static final String INTENT_NAME = "name";
     private static final String INTENT_GUANXI = "guanxi";
@@ -91,7 +90,6 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      */
     private Button mBtnAnswerNext;
     private JfShiTiModel mJfShiTiModel;
-    private List<JfShiTiModel.ShiTiInfoBean.QuestionBean> mQuestionBeans;
     private int position = 0;
     private int mType = 0;
     private String mSjid = "";
@@ -141,11 +139,11 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     /**
      * 在线测试
      *
-     * @param context   上下文
-     * @param sjid      试题ID
+     * @param context 上下文
+     * @param sjid 试题ID
      * @param startTime 测试开始时间
-     * @param endTime   测试结束时间
-     * @param type      类型
+     * @param endTime 测试结束时间
+     * @param type 类型
      */
     public static void start(Context context, String sjid, long startTime, long endTime, int type) {
         Intent starter = new Intent(context, AnswerActivity.class);
@@ -160,10 +158,10 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * 家访
      *
      * @param context 上下文
-     * @param sjid    试题ID
-     * @param name    名字
-     * @param guanxi  关系
-     * @param mobile  手机
+     * @param sjid 试题ID
+     * @param name 名字
+     * @param guanxi 关系
+     * @param mobile 手机
      */
     public static void start(Context context, String sjid, String name, String guanxi, String mobile) {
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(guanxi) || TextUtils.isEmpty(mobile) || TextUtils.isEmpty(sjid)) {
@@ -346,7 +344,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     private void performSubmit() {
         StringBuilder ids = new StringBuilder();
         StringBuilder daans = new StringBuilder();
-        for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mQuestionBeans) {
+        for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mJfShiTiModel.info.questionList) {
             ids.append(questionBean.id).append(",");
             daans.append(questionBean.answer).append("@");
         }
@@ -366,7 +364,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * @param position
      */
     private void showRealAnswer(int position) {
-        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mJfShiTiModel.info.questionList.get(position);
         //类型 0--单选 1--多选 2--判断 3--问答
         if (JfShiTiModel.CAT_ID_DAN_XUAN == questionBean.catid) {
             //单选答案
@@ -465,7 +463,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * @param position 序号
      */
     private void showAnswer(int position) {
-        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mJfShiTiModel.info.questionList.get(position);
         //初始化
         int color = getCompatColor(R.color.gray22);
         mRgAnswer.clearCheck();
@@ -514,7 +512,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         * 查看答案，学习资料有
         */
         if (position == 0) {
-            mBtnAnswerPre.setVisibility(View.GONE);
+            mBtnAnswerPre.setVisibility(View.INVISIBLE);
         } else {
             mBtnAnswerPre.setVisibility(View.VISIBLE);
         }
@@ -524,12 +522,37 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
             mTvAnswerOkDaan.setVisibility(View.GONE);
         }
         //判断是否是最后一题
-        if (this.position == mQuestionBeans.size() - 1) {
-            mBtnAnswerNext.setVisibility(View.GONE);
-            mBtnAnswerSubmit.setVisibility(View.VISIBLE);
+        if (this.position == mJfShiTiModel.info.questionList.size() - 1) {
+
+            if (mType == TYPE_TEST) {
+                mBtnAnswerNext.setVisibility(View.INVISIBLE);
+                mBtnAnswerSubmit.setVisibility(View.GONE);
+            } else {
+                mBtnAnswerNext.setVisibility(View.GONE);
+                mBtnAnswerSubmit.setVisibility(View.VISIBLE);
+            }
         } else {
             mBtnAnswerNext.setVisibility(View.VISIBLE);
             mBtnAnswerSubmit.setVisibility(View.GONE);
+        }
+        //查看试题均不能点击
+        if (mType == TYPE_TEST) {
+            mRbAnswer0.setEnabled(false);
+            mRbAnswer1.setEnabled(false);
+            mRbAnswer2.setEnabled(false);
+            mRbAnswer3.setEnabled(false);
+
+            mRbAnswerDuoxuan0.setEnabled(false);
+            mRbAnswerDuoxuan1.setEnabled(false);
+            mRbAnswerDuoxuan2.setEnabled(false);
+            mRbAnswerDuoxuan3.setEnabled(false);
+
+            mRbAnswerPanduan0.setEnabled(false);
+            mRbAnswerPanduan1.setEnabled(false);
+
+            mEtAnswerWanda.setEnabled(false);
+
+//            showRealAnswer(position);
         }
     }
 
@@ -539,7 +562,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      * @param position 当前题号
      */
     private void answerHandle(int position) {
-        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mQuestionBeans.get(position);
+        JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mJfShiTiModel.info.questionList.get(position);
         //类型 0--单选 1--多选 2--判断 3--问答
         questionBean.answer = "";
         if (JfShiTiModel.CAT_ID_DAN_XUAN == questionBean.catid) {
@@ -560,30 +583,28 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     @Override
     public void setData(JfShiTiModel jfShiTiModel) {
         mJfShiTiModel = jfShiTiModel;
+        //问题
+        mJfShiTiModel.info.initData();
+        if (mType == AnswerActivity.TYPE_TEST) {
+            jfShiTiModel.info.resetAnswerData();
+        }
         //标题
         mTvAnswerTitle.setText(mJfShiTiModel.info.title);
-        //问题
-        mQuestionBeans = new ArrayList<>();
-        if (mJfShiTiModel.info.danxuan != null) {
-            mQuestionBeans.addAll(mJfShiTiModel.info.danxuan);
-        }
-        if (mJfShiTiModel.info.duoxuan != null) {
-            mQuestionBeans.addAll(mJfShiTiModel.info.duoxuan);
-        }
-        if (mJfShiTiModel.info.panduan != null) {
-            mQuestionBeans.addAll(mJfShiTiModel.info.panduan);
-        }
-        if (mJfShiTiModel.info.wenda != null) {
-            mQuestionBeans.addAll(mJfShiTiModel.info.wenda);
-        }
-        if (mQuestionBeans.size() <= 0) {
+
+        if (mJfShiTiModel.info.questionList.size() <= 0) {
             ToastUtils.showShortToastSafe("该测试没有题目，请稍后再试");
             finish();
             return;
         }
         //时间和题量
-        mTvAnswerDate.setText(mJfShiTiModel.info.times + "\t\t"
-                + "答题量：共" + mQuestionBeans.size() + "题");
+        if (mType == AnswerActivity.TYPE_TEST) {
+            mTvAnswerDate.setText("答题量：共" + mJfShiTiModel.info.questionList.size() + "题" +
+                    "\t\t" + "得分：" + mJfShiTiModel.info.fenshu + "分");
+        } else {
+            mTvAnswerDate.setText(mJfShiTiModel.info.times + "\t\t"
+                    + "答题量：共" + mJfShiTiModel.info.questionList.size() + "题");
+        }
+
         //显示题目
         position = 0;
         showAnswer(position);
@@ -593,13 +614,13 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
     public void submitSuccess(String message) {
         if (!TextUtils.isEmpty(message)) {
             int num = 0;
-            for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mQuestionBeans) {
+            for (JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean : mJfShiTiModel.info.questionList) {
                 if (!TextUtils.isEmpty(questionBean.answer)) {
                     num++;
                 }
             }
             AnswerResultActivity.start(getContext(), mJfShiTiModel.info.title,
-                    num + "/" + mQuestionBeans.size(),
+                    num + "/" + mJfShiTiModel.info.questionList.size(),
                     message);
         }
         finish();

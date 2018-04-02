@@ -13,6 +13,7 @@ import com.cmcc.lib_utils.utils.AppUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.accout.accountlist.AccountListActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.ui.Activity.UserTestListActivity;
 
 
 /**
@@ -122,6 +123,7 @@ public class MainUserFragment extends MVPBaseFragment<MainUserContract.View, Mai
                 mPresenter.logout();
                 break;
             case R.id.ll_user_test:
+                UserTestListActivity.start(getBaseActivity());
                 break;
             case R.id.ll_user_mail:
                 AccountListActivity.start(getBaseActivity());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.hbln.inspection">
+
     <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
@@ -21,7 +22,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
@@ -32,7 +32,7 @@
         android:name="com.hbln.inspection.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
-    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
     <uses-permission android:name="com.hbln.inspection.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -45,7 +45,6 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
 
     <!-- Optional for location -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
@@ -73,18 +72,24 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="lwc"/>
-        <!-- ############### 腾讯统计  开始 ###############-->
-        <!-- MID3.5(mid-sdk-3.5.jar) 以上版本请务必增加此配置-->
+        <!-- ############### 腾讯统计  开始 ############### -->
+        <!-- MID3.5(mid-sdk-3.5.jar) 以上版本请务必增加此配置 -->
         <provider
             android:name="com.tencent.mid.api.MidProvider"
             android:authorities="${applicationId}.TENCENT.MID.V3"
-            android:exported="true" >
+            android:exported="true">
         </provider>
-        <meta-data android:name="TA_APPKEY" android:value="A8GQD652JVVG"/>
+
+        <meta-data
+            android:name="TA_APPKEY"
+            android:value="A8GQD652JVVG"/>
         <!-- 请将value改为app发布对应的渠道，不同的发布渠道使用不同的名字 < -->
-        <meta-data android:name="InstallChannel" android:value="lwc"/>
+        <meta-data
+            android:name="InstallChannel"
+            android:value="lwc"/>
         <!-- 注意：若填写的渠道为纯数字字符串类型，请不要超过int表示的范围！ < -->
-        <!-- ############### 腾讯统计  结束 ###############-->
+        <!-- ############### 腾讯统计  结束 ############### -->
+
 
         <!-- provider -->
         <provider
@@ -103,8 +108,6 @@
             android:name=".feature.main.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask">
-
-
         </activity>
         <activity
             android:name=".feature.workarena.WorkArenaActivity"
@@ -117,21 +120,16 @@
         <activity
             android:name=".feature.workarena.workininspection.WorkIninspectionActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.workarena.workinspect.WorkInspectActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.workarena.workdynamic.WorkDynamicActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
-
         <activity android:name=".feature.school.school.SchoolActivity">
-
         </activity>
         <activity
             android:name=".feature.school.item.SchoolItemActivity"
@@ -140,32 +138,26 @@
         <activity
             android:name=".feature.school.detail.SchoolDetailActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.school.answer.AnswerActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.brand.BrandActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.brand.branddetail.BrandDetailActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.regular.RegularActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.regular.RegularDetailActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
-
         </activity>
         <activity
             android:name=".feature.accout.login.LoginActivity"
@@ -215,6 +207,10 @@
         <activity android:name=".ui.Activity.TiHuiActivity"/>
         <activity android:name=".feature.school.answer.AnswerResultActivity"/>
         <activity android:name=".feature.accout.ModifyPsdActivity"/>
+        <activity
+            android:name=".ui.Activity.UserTestListActivity"
+            android:label="我的试题">
+        </activity>
     </application>
 
 </manifest>

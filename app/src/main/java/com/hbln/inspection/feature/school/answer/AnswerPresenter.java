@@ -24,10 +24,12 @@ import static android.R.attr.name;
 public class AnswerPresenter extends BasePresenterImpl<AnswerContract.View> implements AnswerContract.Presenter {
 
     @Override
-    public void loadData(String sjid, int type) {
+    public void loadData(final String sjid, int type) {
         Observable<JfShiTiModel> shiti;
         if (type == AnswerActivity.TYPE_VISIT) {
             shiti = HttpRequest.getJiaFangServicee().shiti(sjid);
+        } else if (type == AnswerActivity.TYPE_TEST) {
+            shiti = HttpRequest.getKaoShiService().chengjiview(sjid);
         } else {
             shiti = HttpRequest.getKaoShiService().shiti(sjid);
         }

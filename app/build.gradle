@@ -26,13 +26,13 @@ android {
         resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
         manifestPlaceholders = [
                 //极光推送
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "b916cc14e1377fa821ae88fb", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
 
                 //腾讯统计
-                MTA_APPKEY:"A8GQD652JVVG",
-                MTA_CHANNEL:"lwc"
+                MTA_APPKEY   : "A8GQD652JVVG",
+                MTA_CHANNEL  : "lwc"
         ]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -92,6 +92,7 @@ afterEvaluate {
 /******************** 方法超65535 ********************/
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
