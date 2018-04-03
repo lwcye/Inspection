@@ -72,6 +72,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
+					android:visibility="gone"
 					android:drawableTop="@drawable/icon_cai"
 					android:gravity="center"
 					android:text="当前数量：0"
