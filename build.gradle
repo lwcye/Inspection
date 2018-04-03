@@ -42,8 +42,8 @@ ext {
     compileSdkVersion = 25
     minSdkVersion = 14
     targetSdkVersion = 25
-    versionCode = 13
-    versionName = "1.2.1"
+    versionCode = 14
+    versionName = "1.2.2"
     javaVersion = JavaVersion.VERSION_1_8
 
     // App dependencies version

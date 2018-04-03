@@ -6,4 +6,5 @@
     <string name="o2o_error_location_canot_fint">无法获取有效定位依据，定位失败</string>
     <string name="o2o_error_location_network">网络异常</string>
     <string name="o2o_error_location_permission">定位失败，请您检查是否禁用获取位置信息权限</string>
+    <string name="inspection">派驻纪检监察组</string>
 </resources>

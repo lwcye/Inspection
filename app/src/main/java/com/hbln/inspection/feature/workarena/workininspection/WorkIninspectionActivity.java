@@ -89,6 +89,10 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
     }
 
     private void initView() {
+        String title = TITLE;
+        if (TITLE.equals("派驻纪检组")) {
+            title = getString(R.string.inspection);
+        }
         TitleUtil.attach(this).setBack(true)
                 .setColor(Color.WHITE, 255)
                 .setRightDrawable(R.drawable.icon_work_dynamic, 0, 0, 0)
@@ -98,7 +102,7 @@ public class WorkIninspectionActivity extends MVPBaseActivity<WorkIninspectionCo
                         WorkDynamicActivity.start(getContext());
                     }
                 })
-                .setTitle(TITLE);
+                .setTitle(title);
         mTvWorkInMonth = (TextView) findViewById(R.id.tv_work_in_month);
         mTvWorkInMonth.setOnClickListener(this);
         java.util.Calendar instance = java.util.Calendar.getInstance();

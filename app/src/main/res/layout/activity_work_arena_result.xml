@@ -211,7 +211,7 @@
             android:layout_height="@dimen/x35"
             android:layout_marginLeft="@dimen/x25"
             android:background="@color/colorAccent"
-            android:text="派驻纪检组"
+            android:text="@string/inspection"
             android:textColor="@color/white"/>
     </LinearLayout>
 
