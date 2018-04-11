@@ -103,6 +103,6 @@ public class MyApplication extends BaseApp {
      */
     private void initLog() {
         //TODO: lwc 2017/12/15
-        LogUtils.init(false, false, 'v', "cqcity");
+        LogUtils.init(true, false, 'v', "cqcity");
     }
 }

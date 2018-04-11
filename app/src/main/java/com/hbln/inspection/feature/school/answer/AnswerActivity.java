@@ -247,7 +247,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         mTvAnswerOkDaan = (TextView) findViewById(R.id.tv_answer_ok_daan);
         mTvAnswerCount = (TextView) findViewById(R.id.tv_answer_count);
 
-        if (mType == TYPE_KAOSHI_XUEXI) {
+        if (mType == TYPE_KAOSHI_XUEXI || mType == TYPE_TEST) {
             mBtnAnswerOkAnswer.setVisibility(View.VISIBLE);
         }
     }
@@ -365,6 +365,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
      */
     private void showRealAnswer(int position) {
         JfShiTiModel.ShiTiInfoBean.QuestionBean questionBean = mJfShiTiModel.info.questionList.get(position);
+        mTvAnswerOkDaan.setVisibility(View.VISIBLE);
         //类型 0--单选 1--多选 2--判断 3--问答
         if (JfShiTiModel.CAT_ID_DAN_XUAN == questionBean.catid) {
             //单选答案
@@ -454,7 +455,6 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
                 }
             }
         }
-        mTvAnswerOkDaan.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -516,11 +516,8 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
         } else {
             mBtnAnswerPre.setVisibility(View.VISIBLE);
         }
-        if (mType == TYPE_KAOSHI_XUEXI) {
-            mTvAnswerOkDaan.setVisibility(View.VISIBLE);
-        } else {
-            mTvAnswerOkDaan.setVisibility(View.GONE);
-        }
+        //正确答案
+        mTvAnswerOkDaan.setVisibility(View.GONE);
         //判断是否是最后一题
         if (this.position == mJfShiTiModel.info.questionList.size() - 1) {
 
@@ -552,7 +549,7 @@ public class AnswerActivity extends MVPBaseActivity<AnswerContract.View, AnswerP
 
             mEtAnswerWanda.setEnabled(false);
 
-//            showRealAnswer(position);
+            //            showRealAnswer(position);
         }
     }
 
