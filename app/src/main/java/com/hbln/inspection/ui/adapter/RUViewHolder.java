@@ -15,8 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cmcc.lib_common.utils.loader.LoaderFactory;
-import com.cmcc.lib_common.utils.loader.Options;
+import com.hbln.inspection.utils.loader.LoaderFactory;
+import com.hbln.inspection.utils.loader.Options;
+
 
 /**
  * RecyclerView的通用View保存器(RecyclerView Universal View Holder)

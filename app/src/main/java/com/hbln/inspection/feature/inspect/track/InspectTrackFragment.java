@@ -5,10 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.cmcc.lib_network.model.TrackModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.inspect.trackdetail.InspectTrackDetailActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.network.model.TrackModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.widget.BeiZhuDialog;

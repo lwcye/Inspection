@@ -18,12 +18,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.JfShiTiModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.JfShiTiModel;
 import com.hbln.inspection.utils.TitleUtil;
 import com.trello.rxlifecycle.android.ActivityEvent;
 

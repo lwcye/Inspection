@@ -2,15 +2,15 @@ package com.hbln.inspection.feature.school.item;
 
 import android.text.TextUtils;
 
-import com.hbln.inspection.mvp.BasePresenterImpl;
-import com.cmcc.lib_network.constans.URLs;
-import com.cmcc.lib_network.http.HttpComplete;
-import com.cmcc.lib_network.http.HttpError;
-import com.cmcc.lib_network.http.HttpRequest;
-import com.cmcc.lib_network.http.HttpResult;
-import com.cmcc.lib_network.http.NetWorkInterceptor;
-import com.cmcc.lib_network.model.SchoolModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
+import com.hbln.inspection.constans.URLs;
+import com.hbln.inspection.mvp.BasePresenterImpl;
+import com.hbln.inspection.network.http.HttpComplete;
+import com.hbln.inspection.network.http.HttpError;
+import com.hbln.inspection.network.http.HttpRequest;
+import com.hbln.inspection.network.http.HttpResult;
+import com.hbln.inspection.network.http.NetWorkInterceptor;
+import com.hbln.inspection.network.model.SchoolModel;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 /**

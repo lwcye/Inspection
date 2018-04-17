@@ -1,10 +1,10 @@
 package com.hbln.inspection.feature.main.mainuser;
 
 
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.ObjectModel;
-import com.cmcc.lib_network.model.UserInfoModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.ObjectModel;
+import com.hbln.inspection.network.model.UserInfoModel;
 
 /**
  * MVPPlugin

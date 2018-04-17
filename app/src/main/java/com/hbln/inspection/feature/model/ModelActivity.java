@@ -16,12 +16,12 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.cmcc.lib_network.model.ModelModel;
-import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.ConvertUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.ModelModel;
+import com.hbln.inspection.network.model.WebViewModel;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;

@@ -2,9 +2,9 @@ package com.hbln.inspection.feature.fortress.education;
 
 
 import com.hbln.inspection.model.CellBean;
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.FortressHomeModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.FortressHomeModel;
 
 import java.util.List;
 

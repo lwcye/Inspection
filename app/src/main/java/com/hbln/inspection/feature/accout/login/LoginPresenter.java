@@ -2,15 +2,19 @@ package com.hbln.inspection.feature.accout.login;
 
 import android.text.TextUtils;
 
-import com.cmcc.lib_network.constans.URLs;
-import com.cmcc.lib_network.http.HttpComplete;
-import com.cmcc.lib_network.http.HttpError;
-import com.cmcc.lib_network.http.HttpRequest;
-import com.cmcc.lib_network.http.HttpResult;
-import com.cmcc.lib_network.model.LoginModel;
+import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
+import com.hbln.inspection.constans.URLs;
 import com.hbln.inspection.mvp.BasePresenterImpl;
+import com.hbln.inspection.network.http.HttpComplete;
+import com.hbln.inspection.network.http.HttpError;
+import com.hbln.inspection.network.http.HttpRequest;
+import com.hbln.inspection.network.http.HttpResult;
+import com.hbln.inspection.network.model.LoginModel;
+import com.hbln.inspection.utils.CheckUpdateTask;
 import com.tencent.stat.StatService;
+import com.tencent.tinker.lib.tinker.Tinker;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 /**
@@ -51,5 +55,27 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         getView().resultLogin(loginModel);
                     }
                 }, new HttpError(getView()), new HttpComplete(getView()));
+    }
+
+    @Override
+    public void loadPatch() {
+        Tinker tinker = Tinker.with(getView().getBaseActivity().getApplicationContext());
+        LogUtils.d("未加载补丁");
+        if (!tinker.isTinkerLoaded()) {
+            CheckUpdateTask.getInstance().downloadPatch(new CheckUpdateTask.IDownloadStatusListener() {
+                @Override
+                public void onProgress(int percent) {
+                }
+
+                @Override
+                public void onFinish(boolean error, String path) {
+                    LogUtils.d("下载" + error + "路径" + path);
+                    if (!error) {
+                        TinkerInstaller.onReceiveUpgradePatch(getView().getContext(), path);
+                    }
+                }
+            });
+        }
+
     }
 }

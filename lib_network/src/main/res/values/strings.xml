@@ -1,5 +1,0 @@
-<resources>
-	<string name="error_network_data">网络请求失败</string>
-	<string name="error_read_date">读取数据错误</string>
-	<string name="error_not_open">暂未开通，敬请期待</string>
-</resources>

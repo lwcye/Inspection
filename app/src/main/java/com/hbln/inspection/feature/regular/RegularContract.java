@@ -1,9 +1,9 @@
 package com.hbln.inspection.feature.regular;
 
 
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.RegularModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.RegularModel;
 
 /**
  * MVPPlugin

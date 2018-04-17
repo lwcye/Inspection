@@ -13,12 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.WorkArenaModel;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workininspection.WorkIninspectionActivity;
 import com.hbln.inspection.feature.workarena.workinspect.WorkInspectActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.WorkArenaModel;
 
 
 /**

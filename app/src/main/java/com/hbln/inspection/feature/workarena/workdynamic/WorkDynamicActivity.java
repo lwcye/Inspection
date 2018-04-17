@@ -14,10 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.WebViewModel;
-import com.cmcc.lib_network.model.WorkModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.WebViewModel;
+import com.hbln.inspection.network.model.WorkModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.ClickUtils;

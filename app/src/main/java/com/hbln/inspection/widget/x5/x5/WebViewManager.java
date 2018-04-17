@@ -9,10 +9,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cmcc.lib_common.base.BaseActivity;
-import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.AppUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
+import com.hbln.inspection.base.BaseActivity;
+import com.hbln.inspection.base.BaseApp;
 import com.hbln.inspection.widget.x5.bean.ActionResult;
 import com.hbln.inspection.widget.x5.utils.BridgeHandler;
 import com.hbln.inspection.widget.x5.utils.BridgeWebView;

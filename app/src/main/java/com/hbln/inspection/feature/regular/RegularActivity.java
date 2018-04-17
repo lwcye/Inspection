@@ -20,13 +20,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.RegularModel;
-import com.cmcc.lib_network.model.WebViewModel;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.RegularModel;
+import com.hbln.inspection.network.model.WebViewModel;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;

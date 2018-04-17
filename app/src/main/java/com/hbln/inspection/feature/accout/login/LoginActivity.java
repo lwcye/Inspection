@@ -4,6 +4,7 @@ package com.hbln.inspection.feature.accout.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,12 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.LoginModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.accout.ModifyPsdActivity;
-import com.hbln.inspection.feature.accout.register.RegisterActivity;
 import com.hbln.inspection.feature.main.MainActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.LoginModel;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 
 /**
@@ -53,6 +54,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         setContentView(R.layout.activity_login);
         initView();
         mPresenter.initUserInfo();
+        mPresenter.loadPatch();
     }
 
     private void initView() {
@@ -74,7 +76,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 mPresenter.requestLogin(mEtLoginUsername.getText().toString().trim(), mEtLoginPassword.getText().toString().trim());
                 break;
             case R.id.tv_login_register:
-                RegisterActivity.start(getContext());
+                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+//                RegisterActivity.start(getContext());
                 break;
             case R.id.tv_login_forget:
                 ModifyPsdActivity.start(getContext());

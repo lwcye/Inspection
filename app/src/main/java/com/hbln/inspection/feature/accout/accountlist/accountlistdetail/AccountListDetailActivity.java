@@ -12,22 +12,20 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.cmcc.lib_common.base.BaseApp;
-import com.cmcc.lib_common.utils.loader.LoaderFactory;
-import com.cmcc.lib_common.utils.loader.Options;
-import com.cmcc.lib_network.model.MailModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.BaseApp;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.MailModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;
+import com.hbln.inspection.utils.loader.LoaderFactory;
+import com.hbln.inspection.utils.loader.Options;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cmcc.lib_common.utils.loader.Options.RES_NONE;
-import static com.cmcc.lib_common.utils.loader.Options.TYPE_CIRCLE;
 
 
 /**
@@ -79,7 +77,7 @@ public class AccountListDetailActivity extends MVPBaseActivity<AccountListDetail
                 holder.setText(R.id.tv_item_account_list_detail_moblie, "联系电话：" + data.mobile);
                 if (!TextUtils.isEmpty(data.pic)) {
                     ImageView viewById = holder.getViewById(R.id.civ_item_account_list_detail);
-                    LoaderFactory.getLoader().loadNet(viewById, data.pic, new Options(RES_NONE, RES_NONE, TYPE_CIRCLE));
+                    LoaderFactory.getLoader().loadNet(viewById, data.pic, new Options(Options.RES_NONE, Options.RES_NONE, Options.TYPE_CIRCLE));
                 }
 
                 holder.setOnClickListener(R.id.iv_item_account_list_detail_moblie, new View.OnClickListener() {

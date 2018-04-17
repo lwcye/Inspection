@@ -1,9 +1,9 @@
 package com.hbln.inspection.feature.brand;
 
 
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.BrandModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.BrandModel;
 
 /**
  * MVPPlugin

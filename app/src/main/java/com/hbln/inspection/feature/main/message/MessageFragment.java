@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.http.HttpComplete;
-import com.cmcc.lib_network.http.HttpError;
-import com.cmcc.lib_network.http.HttpRequest;
-import com.cmcc.lib_network.http.HttpResult;
-import com.cmcc.lib_network.model.MessageModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.network.http.HttpComplete;
+import com.hbln.inspection.network.http.HttpError;
+import com.hbln.inspection.network.http.HttpRequest;
+import com.hbln.inspection.network.http.HttpResult;
+import com.hbln.inspection.network.model.MessageModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.lib_views.SimpleItemDecoration;

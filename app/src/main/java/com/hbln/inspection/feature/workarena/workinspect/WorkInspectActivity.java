@@ -19,11 +19,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.WorkTypeModel;
 import com.cmcc.lib_utils.utils.TimeUtils;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.WorkTypeModel;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;

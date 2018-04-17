@@ -10,10 +10,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.cmcc.lib_network.model.LoginModel;
-import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.network.model.LoginModel;
+import com.hbln.inspection.network.model.UserInfoModel;
 
 import rx.functions.Action1;
 

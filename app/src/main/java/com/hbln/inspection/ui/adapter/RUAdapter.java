@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.cmcc.lib_common.utils.loader.LoaderFactory;
 import com.hbln.inspection.R;
+import com.hbln.inspection.utils.loader.LoaderFactory;
 
 import java.util.List;
 
@@ -179,8 +179,9 @@ public abstract class RUAdapter<T> extends RecyclerView.Adapter {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItemPosition == totalItemCount - 1
                         && visibleItemCount > 0) {
-                        if (!isLoadMore)
+                        if (!isLoadMore) {
                             mLoadMoreListener.onLoadMore();
+                        }
                     }
                 }
             }

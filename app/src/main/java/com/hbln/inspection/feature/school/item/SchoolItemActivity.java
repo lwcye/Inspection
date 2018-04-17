@@ -15,11 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.SchoolModel;
-import com.cmcc.lib_network.model.WebViewModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.workarena.workdynamic.WebViewContentActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.SchoolModel;
+import com.hbln.inspection.network.model.WebViewModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.ClickUtils;

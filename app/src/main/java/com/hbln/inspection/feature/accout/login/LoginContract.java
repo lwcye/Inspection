@@ -1,9 +1,9 @@
 package com.hbln.inspection.feature.accout.login;
 
 
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.LoginModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.LoginModel;
 
 /**
  * MVPPlugin
@@ -13,11 +13,14 @@ import com.cmcc.lib_network.model.LoginModel;
 public class LoginContract {
     interface View extends BaseView {
         void resultLogin(LoginModel loginModel);
+
     }
 
     interface Presenter extends BasePresenter<View> {
         void initUserInfo();
 
         void requestLogin(String username, String password);
+
+        void loadPatch();
     }
 }

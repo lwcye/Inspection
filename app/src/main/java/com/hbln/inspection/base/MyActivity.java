@@ -1,6 +1,5 @@
 package com.hbln.inspection.base;
 
-import com.cmcc.lib_common.base.BaseActivity;
 import com.tencent.stat.StatService;
 
 /**

@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.ManagerModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.network.model.ManagerModel;
 import com.hbln.inspection.ui.adapter.PersonExpListAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.widget.ManagerDialog;

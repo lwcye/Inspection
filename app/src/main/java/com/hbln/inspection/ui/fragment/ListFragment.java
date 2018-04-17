@@ -4,8 +4,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.cmcc.lib_common.base.BaseFragment;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.BaseFragment;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.lib_views.SimpleItemDecoration;
 

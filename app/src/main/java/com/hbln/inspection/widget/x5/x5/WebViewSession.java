@@ -3,7 +3,7 @@ package com.hbln.inspection.widget.x5.x5;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.cmcc.lib_common.base.BaseApp;
+import com.hbln.inspection.base.BaseApp;
 import com.tencent.smtt.sdk.CookieManager;
 import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebView;

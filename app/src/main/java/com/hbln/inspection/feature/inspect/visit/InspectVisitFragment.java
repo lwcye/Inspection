@@ -7,14 +7,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.cmcc.lib_common.utils.loader.LoaderFactory;
-import com.cmcc.lib_network.model.JiafangModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.school.answer.AnswerActivity;
 import com.hbln.inspection.feature.school.answer.AnswerResultActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.network.model.JiafangModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
+import com.hbln.inspection.utils.loader.LoaderFactory;
 import com.hbln.inspection.widget.VisitDialog;
 
 import java.util.ArrayList;

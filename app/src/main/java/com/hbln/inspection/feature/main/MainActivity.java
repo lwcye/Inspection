@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.cmcc.lib_network.model.VersionModel;
 import com.cmcc.lib_utils.utils.AppUtils;
 import com.cmcc.lib_utils.utils.ToastUtils;
 import com.hbln.inspection.R;
@@ -22,6 +21,7 @@ import com.hbln.inspection.feature.main.mainhome.MainHomeFragment;
 import com.hbln.inspection.feature.main.mainuser.MainUserFragment;
 import com.hbln.inspection.feature.main.message.MessageFragment;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.VersionModel;
 import com.hbln.inspection.widget.DialogUtils;
 import com.tencent.stat.StatService;
 

@@ -1,7 +1,9 @@
 package com.hbln.inspection.utils;
 
 
+import com.cmcc.lib_utils.utils.AppUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
+import com.hbln.inspection.constans.ENVs;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -51,6 +53,54 @@ public class CheckUpdateTask {
         FileDownloader.getImpl()
                 .create(url)
                 .setPath(FileDownloadUtils.getDefaultSaveRootPath() + "/" + "inspection.apk")
+                .setForceReDownload(true)
+                .setListener(new FileDownloadListener() {
+                    @Override
+                    protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                    }
+
+                    @Override
+                    protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        if (listener != null) {
+                            int percent = soFarBytes * 100 / totalBytes;
+                            listener.onProgress(percent);
+                        }
+                    }
+
+                    @Override
+                    protected void completed(BaseDownloadTask task) {
+                        if (listener != null) {
+                            listener.onFinish(false, task.getPath());
+                        }
+                    }
+
+                    @Override
+                    protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                    }
+
+                    @Override
+                    protected void error(BaseDownloadTask task, Throwable e) {
+                        LogUtils.e(e.toString());
+                        if (listener != null) {
+                            listener.onFinish(true, "");
+                        }
+                    }
+
+                    @Override
+                    protected void warn(BaseDownloadTask task) {
+                    }
+                }).start();
+    }
+
+    /**
+     * 下载补丁
+     *
+     * @param listener 下载状态监听
+     */
+    public void downloadPatch(final IDownloadStatusListener listener) {
+        FileDownloader.getImpl()
+                .create(ENVs.URL_PATCH + AppUtils.getAppVersionName())
+                .setPath(FileDownloadUtils.getDefaultSaveRootPath() + "/" + AppUtils.getAppVersionName())
                 .setForceReDownload(true)
                 .setListener(new FileDownloadListener() {
                     @Override

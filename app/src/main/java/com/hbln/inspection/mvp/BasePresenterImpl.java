@@ -1,7 +1,5 @@
 package com.hbln.inspection.mvp;
 
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -42,6 +40,7 @@ public class BasePresenterImpl<I extends BaseView> implements BasePresenter<I> {
         return mViewRef != null ? mViewRef.get() : null;
     }
 
+    @Override
     public BasePresenter getPresenter() {
         return this;
     }
@@ -59,6 +58,7 @@ public class BasePresenterImpl<I extends BaseView> implements BasePresenter<I> {
     /**
      * 取消关联视图
      */
+    @Override
     public void detachView() {
         if (mViewRef != null) {
             mViewRef.clear();

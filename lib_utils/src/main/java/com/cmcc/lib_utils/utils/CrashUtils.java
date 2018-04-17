@@ -45,7 +45,7 @@ public class CrashUtils implements UncaughtExceptionHandler {
     /**
      * 构造类
      */
-    private CrashUtils() {
+    protected CrashUtils() {
     }
     
     /**

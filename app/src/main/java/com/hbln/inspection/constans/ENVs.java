@@ -14,4 +14,5 @@ package com.hbln.inspection.constans;
 public class ENVs {
     /** 点击Back退出判定间隔(秒) */
     public static final int BACK_TO_EXIT_INTERVAL = 3;
+    public static final String URL_PATCH = "http://www.lwcye.com/cqcity/files/inspection/";
 }

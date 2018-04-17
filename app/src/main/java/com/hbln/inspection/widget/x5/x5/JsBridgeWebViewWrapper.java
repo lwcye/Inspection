@@ -12,14 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cmcc.lib_common.base.BaseActivity;
-import com.cmcc.lib_common.base.BaseApp;
 import com.cmcc.lib_utils.utils.AppUtils;
 import com.cmcc.lib_utils.utils.LogUtils;
 import com.cmcc.lib_utils.utils.NetworkUtils;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.BuildConfig;
 import com.hbln.inspection.R;
+import com.hbln.inspection.base.BaseActivity;
+import com.hbln.inspection.base.BaseApp;
 import com.hbln.inspection.utils.TitleUtil;
 import com.hbln.inspection.widget.x5.utils.BridgeUtil;
 import com.hbln.inspection.widget.x5.utils.BridgeWebView;

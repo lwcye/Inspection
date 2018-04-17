@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.ManagerModel;
 import com.hbln.inspection.R;
+import com.hbln.inspection.network.model.ManagerModel;
 
 /**
  * <p>describe</p><br>

@@ -4,8 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.cmcc.lib_common.base.BaseFragment;
-import com.cmcc.lib_common.mvp.BaseView;
+import com.hbln.inspection.base.BaseFragment;
 
 
 /**

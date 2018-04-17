@@ -11,11 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.BrandModel;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.brand.branddetail.BrandDetailActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.BrandModel;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;
 import com.hbln.inspection.utils.TitleUtil;

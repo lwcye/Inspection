@@ -1,14 +1,14 @@
 package com.hbln.inspection.feature.fortress.education;
 
-import com.cmcc.lib_network.http.HttpComplete;
-import com.cmcc.lib_network.http.HttpError;
-import com.cmcc.lib_network.http.HttpRequest;
-import com.cmcc.lib_network.http.HttpResult;
-import com.cmcc.lib_network.http.NetWorkInterceptor;
-import com.cmcc.lib_network.model.FortressHomeModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.model.CellBean;
 import com.hbln.inspection.mvp.BasePresenterImpl;
+import com.hbln.inspection.network.http.HttpComplete;
+import com.hbln.inspection.network.http.HttpError;
+import com.hbln.inspection.network.http.HttpRequest;
+import com.hbln.inspection.network.http.HttpResult;
+import com.hbln.inspection.network.http.NetWorkInterceptor;
+import com.hbln.inspection.network.model.FortressHomeModel;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import java.util.ArrayList;

@@ -7,4 +7,7 @@
     <string name="o2o_error_location_network">网络异常</string>
     <string name="o2o_error_location_permission">定位失败，请您检查是否禁用获取位置信息权限</string>
     <string name="inspection">派驻纪检监察组</string>
+    <string name="error_network_data">网络请求失败</string>
+    <string name="error_read_date">读取数据错误</string>
+    <string name="error_not_open">暂未开通，敬请期待</string>
 </resources>

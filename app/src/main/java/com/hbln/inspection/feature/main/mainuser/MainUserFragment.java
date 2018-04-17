@@ -7,12 +7,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.ObjectModel;
-import com.cmcc.lib_network.model.UserInfoModel;
 import com.cmcc.lib_utils.utils.AppUtils;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.accout.accountlist.AccountListActivity;
 import com.hbln.inspection.mvp.MVPBaseFragment;
+import com.hbln.inspection.network.model.ObjectModel;
+import com.hbln.inspection.network.model.UserInfoModel;
 import com.hbln.inspection.ui.Activity.UserTestListActivity;
 
 

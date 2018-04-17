@@ -2,9 +2,9 @@ package com.hbln.inspection.feature.inspect.trackdetail;
 
 
 import com.baidu.mapapi.map.BaiduMap;
-import com.cmcc.lib_common.mvp.BasePresenter;
-import com.cmcc.lib_common.mvp.BaseView;
-import com.cmcc.lib_network.model.TrackModel;
+import com.hbln.inspection.mvp.BasePresenter;
+import com.hbln.inspection.mvp.BaseView;
+import com.hbln.inspection.network.model.TrackModel;
 
 /**
  * MVPPlugin

@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.cmcc.lib_network.model.MailModel;
 import com.hbln.inspection.R;
 import com.hbln.inspection.feature.accout.accountlist.accountlistdetail.AccountListDetailActivity;
 import com.hbln.inspection.mvp.MVPBaseActivity;
+import com.hbln.inspection.network.model.MailModel;
 import com.hbln.inspection.ui.adapter.FragmentViewPagerAdapter;
 import com.hbln.inspection.ui.adapter.RUAdapter;
 import com.hbln.inspection.ui.adapter.RUViewHolder;

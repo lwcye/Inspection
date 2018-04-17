@@ -5,10 +5,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.cmcc.lib_network.model.ManagerModel;
 import com.cmcc.lib_utils.utils.Utils;
 import com.cmcc.lib_utils.utils.ViewUtils;
 import com.hbln.inspection.R;
+import com.hbln.inspection.network.model.ManagerModel;
 
 import java.util.List;
 

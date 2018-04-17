@@ -3,7 +3,6 @@ package com.hbln.inspection.mvp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.cmcc.lib_common.mvp.BaseView;
 import com.hbln.inspection.base.MyActivity;
 
 
